@@ -13,13 +13,13 @@ export const Middle = () => {
           <div className='relative z-[1] flex w-full max-w-[44em] flex-col gap-y-[2rem]'>
             <div>
               <h2 className='mx-0 text-[4em] font-extrabold leading-[1.3] tracking-[-0.025em] text-textWhite'>
-                Join game together
+                Invite friends
               </h2>
             </div>
             <div className='relative flex items-end'>
               <img src={threePeopleImg} alt='' className='h-[30] w-[140px] items-center justify-center' />
               <h2 className='mx-0 text-[4em] font-extrabold leading-[1.3] tracking-[-0.025em] text-textWhite'>
-                with Quizzes
+                with EvenHub
               </h2>
             </div>
             <p className='my-0 inline-block text-[1.38em] leading-[1.4]'>
