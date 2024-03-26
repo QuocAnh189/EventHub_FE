@@ -1,18 +1,31 @@
-import { useState } from 'react'
+// utils
+import { lazy, Suspense } from 'react'
+
+// styles
+import '@styles/index.scss'
+import 'react-toastify/dist/ReactToastify.min.css'
+import ThemeStyles from '@styles/theme'
+
+//route
+import { Routes, Route } from 'react-router-dom'
+
+// components
+import { Loader } from '@components/common'
+
+// pages
+const Landing = lazy(() => import('@pages/Landing'))
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
+      <ThemeStyles />
+      <Suspense fallback={<Loader />}>
+        <div className='main'>
+          <Routes>
+            <Route path='/' element={<Landing />} />
+          </Routes>
+        </div>
+      </Suspense>
     </>
   )
 }
