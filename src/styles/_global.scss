@@ -1,7 +1,6 @@
 /* global template styles */
 
-// scrollbars
-* {
+scrollbars * {
   &::-webkit-scrollbar {
     @apply w-2.5;
   }

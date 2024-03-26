@@ -45,10 +45,29 @@ module.exports = {
         interFont: ['Inter', 'sans-serif'],
         CalliFont: ['Calligraffitti', 'cursive'],
         poppinsFont: ['Poppins', 'sans-serif'],
-        monsterratFont: ['Montserrat', 'sans-serif']
+        monsterratFont: ['Montserrat', 'sans-serif'],
+        body: 'var(--body-font)',
+        heading: 'var(--heading-font)'
       },
 
       colors: {
+        body: 'var(--body)',
+        'body-text': 'var(--text)',
+        widget: 'var(--widget)',
+        header: 'var(--header)',
+        border: 'var(--border)',
+        'input-border': 'var(--input-border)',
+        'input-bg': 'var(--input-bg)',
+        highlight: 'var(--highlight)',
+        'highlight-inverse': 'var(--highlight-inverse)',
+        accent: 'var(--accent)',
+        red: 'var(--red)',
+        green: 'var(--green)',
+        'green-darker': '#02A189',
+        orange: 'var(--orange)',
+        yellow: 'var(--yellow)',
+        gray: 'var(--gray)',
+        'gray-red': 'var(--text-dark)',
         lilac: 'rgb(136,84,192)',
         textGray: '#9696a5',
         textPurple: '#a157f6',
@@ -122,7 +141,17 @@ module.exports = {
         black: '0 3px 2px rgba(20,45,82,.01)',
         purple: '0 4px 24px rgba(82, 146, 232, 0.8)',
         blue: 'inset -1px -1px rgba(85,125,254,.549), inset 1px 1px rgba(101,53,185,.541)',
-        boxheaderfooter: 'inset -1px -1px #3c195c, inset 1px 1px #7d4dbc'
+        boxheaderfooter: 'inset -1px -1px #3c195c, inset 1px 1px #7d4dbc',
+        DEFAULT: 'var(--shadow)',
+        banner: '0 2px 13px rgba(0, 54, 139, 0.44)',
+        switch: 'inset 0 1px 3px rgba(170, 170, 183, 0.57)',
+        'switch-dark': 'inset 0 1px 3px rgba(2, 2, 6, 0.57)'
+      },
+
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'ping-slow': 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite'
       }
     }
   },
