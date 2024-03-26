@@ -1,6 +1,6 @@
 export const Loader = () => {
   return (
-    <div className='flex flex-1 justify-center items-center'>
+    <div className='flex h-screen justify-center items-center'>
       <div className='w-[150px] h-[150px] text-accent'>
         <svg width='100%' height='100%' viewBox='0 0 38 38' xmlns='http://www.w3.org/2000/svg' stroke='currentColor'>
           <g fill='none' fill-rule='evenodd'>

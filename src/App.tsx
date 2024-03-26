@@ -14,6 +14,8 @@ import { Loader } from '@components/common'
 
 // pages
 const Landing = lazy(() => import('@pages/Landing'))
+const SignIn = lazy(() => import('@pages/Signin'))
+const SignUp = lazy(() => import('@pages/Signup'))
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <div className='main'>
           <Routes>
             <Route path='/' element={<Landing />} />
+            <Route path='/signin' element={<SignIn />} />
+            <Route path='/signup' element={<SignUp />} />
           </Routes>
         </div>
       </Suspense>
