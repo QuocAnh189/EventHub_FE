@@ -1,6 +1,9 @@
 /* eslint-disable no-useless-escape */
 import React from 'react'
 
+//navigate
+// import { useNavigate } from 'react-router-dom'
+
 //icons
 import { WiDirectionRight } from 'react-icons/wi'
 import { RxDividerVertical } from 'react-icons/rx'
@@ -14,6 +17,8 @@ import { logoText_Img } from '@assets/images/common'
 import { motion } from 'framer-motion'
 
 export const Navbar = () => {
+  // const navigate = useNavigate()
+
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
     const href = e.currentTarget.href
@@ -54,7 +59,7 @@ export const Navbar = () => {
                   className='font-bold'
                 >
                   <div className='relative z-[900] mx-auto text-center'>
-                    <div className='min-w-auto mt-1 flex w-auto gap-2 cursor-pointer flex-row items-center justify-center rounded-xl px-1 py-1 tracking-wide hover:bg-textPurpleHover'>
+                    <div className='min-w-auto mt-1 flex w-auto gap-2 cursor-pointer flex-row items-center justify-center rounded-xl px-1 py-1 tracking-wide hover:underline'>
                       <div className='flex h-full w-full items-center justify-center'>
                         <span className='text-4xl text-textBlack'>
                           <FcHome className='w-[20px]' />
@@ -73,7 +78,7 @@ export const Navbar = () => {
                   className='font-bold'
                 >
                   <div className='relative z-[900] mx-auto text-center'>
-                    <div className='min-w-auto mt-1 flex w-auto gap-2 cursor-pointer flex-row items-center rounded-xl px-1 py-1 tracking-wide hover:bg-textPurpleHover'>
+                    <div className='min-w-auto mt-1 flex w-auto gap-2 cursor-pointer flex-row items-center rounded-xl px-1 py-1 tracking-wide hover:underline'>
                       <div className='flex h-full w-full items-center justify-center'>
                         <span className='text-4xl text-textBlack'>
                           <FcManager className='w-[20px]' />
@@ -92,7 +97,7 @@ export const Navbar = () => {
                   className='font-bold'
                 >
                   <div className='relative z-[900] mx-auto text-center'>
-                    <div className='min-w-auto mt-1 flex w-auto gap-2 cursor-pointer flex-row items-center rounded-xl px-1 py-1 tracking-wide hover:bg-textPurpleHover'>
+                    <div className='min-w-auto mt-1 flex w-auto gap-2 cursor-pointer flex-row items-center rounded-xl px-1 py-1 tracking-wide hover:underline'>
                       <div className='flex h-full w-full items-center justify-center'>
                         <span className='text-4xl text-textBlack'>
                           <FcViewDetails className='w-[20px]' />
@@ -111,7 +116,7 @@ export const Navbar = () => {
                   className='font-bold'
                 >
                   <div className='relative z-[900] mx-auto text-center'>
-                    <div className='min-w-auto mt-1 flex gap-2 w-auto cursor-pointer flex-row items-center rounded-xl px-1 py-1  tracking-wide hover:bg-textPurpleHover'>
+                    <div className='min-w-auto mt-1 flex gap-2 w-auto cursor-pointer flex-row items-center rounded-xl px-1 py-1  tracking-wide hover:underline'>
                       <div className='flex h-full w-full items-center justify-center'>
                         <span className='text-4xl text-textBlack'>
                           <FcInfo className='w-[20px]' />
@@ -128,7 +133,7 @@ export const Navbar = () => {
                 transition={{ duration: 0.1, delay: 0.5 }}
                 className='font-bold'
               >
-                <div className='relative z-[900] mx-auto mt-1 inline-block cursor-pointer rounded-xl px-1 py-2 text-center hover:bg-textPurpleHover'>
+                <div className='relative z-[900] mx-auto mt-1 inline-block cursor-pointer rounded-xl px-1 py-2 text-center hover:underline'>
                   <div className='mb-0 mt-0 text-[1em] leading-snug'>About us</div>
                 </div>
               </motion.li>
@@ -142,28 +147,28 @@ export const Navbar = () => {
                   <RxDividerVertical height={10} />
                 </span>
               </motion.li>
-              <a href={'/signIn'}>
+              <a href='/signin'>
                 <motion.li
                   initial={{ y: -10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.1, delay: 0.6 }}
                   className='font-bold'
                 >
-                  <div className='relative z-[900] mx-auto inline-block cursor-pointer rounded-xl hover:bg-textPurpleHover'>
+                  <div className='relative z-[900] mx-auto inline-block cursor-pointer rounded-xl hover:underline'>
                     <div className='min-w-auto flex w-auto flex-row items-center gap-1 px-2 py-2 tracking-wide'>
                       <div className='text-[1em] leading-snug'>Login</div>
                     </div>
                   </div>
                 </motion.li>
               </a>
-              <a href={'/signIn'}>
+              <a href='/signIn'>
                 <motion.li
                   initial={{ y: -10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.1, delay: 0.7 }}
                   className='font-bold'
                 >
-                  <div className='relative z-[900] mx-auto inline-block cursor-pointer rounded-xl hover:bg-textPurpleHover'>
+                  <div className='relative z-[900] mx-auto inline-block cursor-pointer rounded-xl hover:underline'>
                     <div className='min-w-auto flex w-auto flex-row items-center gap-1 px-2 py-2 tracking-wide'>
                       <div className='text-[1em] leading-snug'>Register</div>
                     </div>
@@ -171,7 +176,7 @@ export const Navbar = () => {
                 </motion.li>
               </a>
             </ul>
-            <a href='/signIn'>
+            <a href='/signin'>
               <button className='alight-center relative z-[1] flex max-w-full flex-row items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-6 py-1 font-black text-textWhite shadow-purple hover:bg-primary-500 hover:delay-[0s] hover:duration-[0.3s] hover:ease-ease'>
                 <motion.div
                   initial={{ y: -10, opacity: 0 }}

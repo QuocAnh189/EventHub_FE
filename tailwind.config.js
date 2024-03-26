@@ -55,7 +55,7 @@ module.exports = {
         textPurpleBorder: '#b982f8',
         textPurpleHover: '#DFCCFB ',
         textBlue: '#006dfa',
-        textBlueLight: '#1495e6',
+        blueLight: '#1495e6',
         textGreen: '#16d982',
         textYellow: '#f5b218',
         textBlack: '#081934',
