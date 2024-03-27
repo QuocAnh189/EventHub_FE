@@ -1,22 +1,11 @@
 //images
-import {
-  fourPeopleImg,
-  profileImg,
-  bgPurpleImg,
-  uitLogoImg,
-  joyWorkImg,
-  thuhienImg,
-  phuoctriImg,
-  minhnhatImg,
-  vanduyImg,
-  phuoclongImg
-} from '@assets/images/landing'
+import { fourPeopleImg, bgPurpleImg, uitLogoImg, joyWorkImg } from '@assets/images/landing'
 
 export const Header = () => {
   return (
     <div className='relative flex flex-col items-center text-center'>
       <div className='w-full'>
-        <img src={joyWorkImg} alt='' className='relative h-full w-full object-contain' />
+        <img loading='lazy' src={joyWorkImg} alt='' className='relative h-full w-full object-contain' />
       </div>
       <div className='relative flex flex-col items-center justify-center gap-y-10 text-center'>
         <h2 className='my-0 font-sans text-[2em] font-extrabold leading-[1px] tracking-[-0.025em] text-textWhite mdl:text-[4em]'>
@@ -28,6 +17,7 @@ export const Header = () => {
           </span>
           <span className=''>
             <img
+              loading='lazy'
               src={fourPeopleImg}
               alt=''
               className='mb-[-0.25em] inline-block overflow-hidden rounded-[200px] bg-contain bg-no-repeat object-contain'
@@ -41,7 +31,8 @@ export const Header = () => {
             <div className='relative flex flex-col gap-y-[1.5em] rounded-[2.5em] bg-bgDark p-[1.5em] text-left shadow-blue'>
               <div className='flex gap-x-[1em]'>
                 <img
-                  src={thuhienImg}
+                  loading='lazy'
+                  src='https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
                   alt=''
                   className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full object-cover'
                 />
@@ -54,6 +45,7 @@ export const Header = () => {
                   </div>
                 </div>
                 <img
+                  loading='lazy'
                   src={uitLogoImg}
                   alt=''
                   className='absolute right-[1.25em] top-[1em] h-[2.5em] w-auto object-contain text-white'
@@ -69,7 +61,8 @@ export const Header = () => {
             <div className='relative flex flex-col gap-y-[1.5em] rounded-[2.5em] bg-bgDark p-[1.5em] text-left shadow-blue'>
               <div className='flex gap-x-[1em]'>
                 <img
-                  src={profileImg}
+                  loading='lazy'
+                  src='https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
                   alt=''
                   className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full object-cover    '
                 />
@@ -82,6 +75,7 @@ export const Header = () => {
                   </div>
                 </div>
                 <img
+                  loading='lazy'
                   src={uitLogoImg}
                   alt=''
                   className='absolute right-[1.25em] top-[1em] h-[2.5em] w-auto object-contain text-white'
@@ -97,7 +91,12 @@ export const Header = () => {
           <div className='min-w-[400px] mdl:max-w-[32%]'>
             <div className='relative flex flex-col gap-y-[1.5em] rounded-[2.5em] bg-bgDark p-[1.5em] text-left shadow-blue'>
               <div className='flex gap-x-[1em]'>
-                <img src={phuoctriImg} alt='' className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full' />
+                <img
+                  loading='lazy'
+                  src='https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
+                  alt=''
+                  className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full'
+                />
                 <div className='block text-left'>
                   <div className='my-0 inline-block text-[1.38em] font-bold leading-[1.45] text-textWhite'>
                     Nguyễn Phước Trí
@@ -107,6 +106,7 @@ export const Header = () => {
                   </div>
                 </div>
                 <img
+                  loading='lazy'
                   src={uitLogoImg}
                   alt=''
                   className='absolute right-[1.25em] top-[1em] h-[2.5em] w-auto object-contain text-white'
@@ -122,16 +122,22 @@ export const Header = () => {
           <div className='min-w-[400px] mdl:max-w-[32%]'>
             <div className='relative flex flex-col gap-y-[1.5em] rounded-[2.5em] bg-bgDark p-[1.5em] text-left shadow-blue'>
               <div className='flex gap-x-[1em]'>
-                <img src={vanduyImg} alt='' className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full' />
+                <img
+                  loading='lazy'
+                  src='https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
+                  alt=''
+                  className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full'
+                />
                 <div className='block text-left'>
                   <div className='my-0 inline-block text-[1.38em] font-bold leading-[1.45] text-textWhite'>
-                    Lê Văn Duy
+                    Trần Vương Duy
                   </div>
                   <div className='my-0 font-sans leading-[1.45] text-[0.88] text-textWhite'>
                     University Of Information Technology
                   </div>
                 </div>
                 <img
+                  loading='lazy'
                   src={uitLogoImg}
                   alt=''
                   className='absolute right-[1.25em] top-[1em] h-[2.5em] w-auto object-contain text-white'
@@ -147,16 +153,22 @@ export const Header = () => {
           <div className='min-w-[400px] mdl:max-w-[32%]'>
             <div className='relative flex flex-col gap-y-[1.5em] rounded-[2.5em] bg-bgDark p-[1.5em] text-left shadow-blue'>
               <div className='flex gap-x-[1em]'>
-                <img src={phuoclongImg} alt='' className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full' />
+                <img
+                  loading='lazy'
+                  src='https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
+                  alt=''
+                  className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full'
+                />
                 <div className='block text-left'>
                   <div className='my-0 inline-block text-[1.38em] font-bold leading-[1.45] text-textWhite'>
-                    Trần Phước Long
+                    Lê Thị Thanh Thảo
                   </div>
                   <div className='my-0 font-sans leading-[1.45] text-[0.88] text-textWhite'>
                     University Of Information Technology
                   </div>
                 </div>
                 <img
+                  loading='lazy'
                   src={uitLogoImg}
                   alt=''
                   className='absolute right-[1.25em] top-[1em] h-[2.5em] w-auto object-contain text-white'
@@ -171,16 +183,22 @@ export const Header = () => {
           <div className='min-w-[400px] mdl:max-w-[32%]'>
             <div className='relative flex flex-col gap-y-[1.5em] rounded-[2.5em] bg-bgDark p-[1.5em] text-left shadow-blue'>
               <div className='flex gap-x-[1em]'>
-                <img src={minhnhatImg} alt='' className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full' />
+                <img
+                  loading='lazy'
+                  src='https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
+                  alt=''
+                  className='inline-block h-[3.75em] w-[3.75em] max-w-full rounded-full'
+                />
                 <div className='block text-left'>
                   <div className='my-0 inline-block text-[1.38em] font-bold leading-[1.45] text-textWhite'>
-                    Nguyễn Minh Nhật
+                    Mai Đình Khôi
                   </div>
                   <div className=' my-0 font-sans leading-[1.45] text-[0.88] text-textWhite'>
                     University Of Information Technology
                   </div>
                 </div>
                 <img
+                  loading='lazy'
                   src={uitLogoImg}
                   alt=''
                   className='absolute right-[1.25em] top-[1em] h-[2.5em] w-auto object-contain text-white'
@@ -194,6 +212,7 @@ export const Header = () => {
           </div>
         </div>
         <img
+          loading='lazy'
           src={bgPurpleImg}
           alt=''
           className='absolute bottom-[-20%] inline-block h-auto w-[47em] max-w-full opacity-[0.65]'
