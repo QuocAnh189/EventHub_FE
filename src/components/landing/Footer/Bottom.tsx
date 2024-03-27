@@ -26,28 +26,28 @@ export function Bottom() {
         </div>
         <div className='flex items-center gap-20'>
           <div className='flex flex-col items-start text-gray500 gap-1'>
-            <h1 className='text-special pb-2 font-semibold'>My Account</h1>
+            <p className='text-special pb-2 font-semibold'>My Account</p>
             <p className='hover:underline hover:cursor-pointer'>My Account</p>
             <p className='hover:underline hover:cursor-pointer'>Reviews</p>
             <p className='hover:underline hover:cursor-pointer'>Status</p>
             <p className='hover:underline hover:cursor-pointer'>Wishlist</p>
           </div>
           <div className='flex flex-col items-start text-gray500 gap-1'>
-            <h1 className='text-special pb-2 font-semibold'>Helps</h1>
+            <p className='text-special pb-2 font-semibold'>Helps</p>
             <p className='hover:underline hover:cursor-pointer'>Contact</p>
             <p className='hover:underline hover:cursor-pointer'>Faqs</p>
             <p className='hover:underline hover:cursor-pointer'>Terms & Condition</p>
             <p className='hover:underline hover:cursor-pointer'>Privacy Policy</p>
           </div>
           <div className='flex flex-col items-start text-gray500 gap-1'>
-            <h1 className='text-special pb-2 font-semibold'>FEATURES</h1>
+            <p className='text-special pb-2 font-semibold'>FEATURES</p>
             <p className='hover:underline hover:cursor-pointer'>Gantt Chart</p>
             <p className='hover:underline hover:cursor-pointer'>Dashboards</p>
             <p className='hover:underline hover:cursor-pointer'>Mind Maps</p>
             <p className='hover:underline hover:cursor-pointer'>Automations</p>
           </div>
           <div className='flex flex-col items-start text-gray500 gap-1'>
-            <h1 className='text-special pb-2 font-semibold'>Compare</h1>
+            <p className='text-special pb-2 font-semibold'>Compare</p>
             <p className='hover:underline hover:cursor-pointer'>vs Jira</p>
             <p className='hover:underline hover:cursor-pointer'>vs Notion</p>
             <p className='hover:underline hover:cursor-pointer'>vs Trello</p>
