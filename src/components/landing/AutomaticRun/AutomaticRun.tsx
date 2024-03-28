@@ -19,7 +19,7 @@ export const AutomaticRun = () => {
           <img src={gradientPurpleImg} alt='' className='w-[70em] h-auto absolute inline-block max-w-full z-[1]' />
           <div className='flex flex-col gap-y-[2.75em]'>
             {/* <div className='flex text-center'> */}
-            <Marquee autoFill loop={0} speed={100}>
+            <Marquee loop={0}>
               <div className='w-[35.38em] rounded-xl flex flex-none mx-4'>
                 <img src={imageRunImg} alt='' className='w-full h-full max-w-full relative inline-block object-cover' />
               </div>
@@ -38,7 +38,7 @@ export const AutomaticRun = () => {
             </Marquee>
             {/* </div> */}
             {/* <div className='flex text-center'> */}
-            <Marquee direction='right' autoFill loop={0} speed={100}>
+            <Marquee direction='right' loop={0}>
               <div className='w-[35.38em] rounded-xl flex flex-none mx-4'>
                 <img src={imageRunImg} alt='' className='relative w-full h-full max-w-full inline-block object-cover' />
               </div>
