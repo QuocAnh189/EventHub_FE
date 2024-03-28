@@ -31,9 +31,9 @@ export default defineConfig({
       }
     }
   },
-  server: {
-    port: 3000
-  },
+  // server: {
+  //   port: 3000
+  // },
   resolve: {
     alias: {
       '@components': '/src/components',
@@ -44,6 +44,7 @@ export default defineConfig({
       '@styles': '/src/styles',
       '@db': '/src/db',
       '@hooks': '/src/hooks',
+      '@layouts': '/src/layouts',
       '@fonts': '/src/fonts',
       '@utils': '/src/utils',
       '@widgets': '/src/widgets',

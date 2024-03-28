@@ -3,7 +3,7 @@ import { logoText_Img } from '@assets/images/common'
 
 export function Bottom() {
   return (
-    <footer className='px-32 py-8 bg-neutral-900 flex justify-between items-center text-white'>
+    <footer className='px-32 py-8 flex justify-between items-center text-white'>
       <div className='w-full flex items-center justify-between'>
         <div className='flex flex-col items-start justify-between'>
           <div className='flex items-center gap-2'>

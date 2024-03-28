@@ -29,6 +29,7 @@
       "@styles/*": ["styles/*"],
       "@db/*": ["db/*"],
       "@hooks/*": ["hooks/*"],
+      "@layouts/*": ["layouts/*"],
       "@fonts/*": ["fonts/*"],
       "@utils/*": ["utils/*"],
       "@widgets/*": ["widgets/*"],
