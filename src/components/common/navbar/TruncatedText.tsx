@@ -8,8 +8,8 @@ import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 const TruncatedText = ({ text, lines = 2, className, width }: any) => {
-  const [truncated, setTruncated] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  const [truncated, setTruncated] = useState<boolean>(false)
+  const [mounted, setMounted] = useState<boolean>(false)
 
   useEffect(() => {
     setMounted(true)

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState, useContext } from 'react'
 
 type Context =
   | {
@@ -63,4 +63,4 @@ export const ThemeProvider = ({ children }: any) => {
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
 }
 
-// export const useTheme = () => useContext(ThemeContext)
+export const useTheme = () => useContext(ThemeContext)
