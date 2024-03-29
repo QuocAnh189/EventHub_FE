@@ -119,9 +119,8 @@ const AppBar = () => {
             </div>
             <div className='relative'>
               <button
-                className='h-8 w-8 rounded-full bg-accent text-widget text-sm flex items-center
-                                    justify-center relative xl:w-11 xl:h-11 xl:text-lg'
-                onClick={() => navigate('/general-settings')}
+                className='h-8 w-8 rounded-full bg-accent text-widget text-sm flex items-center justify-center relative xl:w-11 xl:h-11 xl:text-lg'
+                onClick={() => navigate('profile')}
                 aria-label='Account menu'
               >
                 <i className='icon-user-solid' />

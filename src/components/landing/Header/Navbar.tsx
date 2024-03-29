@@ -2,7 +2,7 @@
 import React from 'react'
 
 //navigate
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 //icons
 import { WiDirectionRight } from 'react-icons/wi'
@@ -17,7 +17,7 @@ import { logoText_Img } from '@assets/images/common'
 import { motion } from 'framer-motion'
 
 export const Navbar = () => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
@@ -161,7 +161,7 @@ export const Navbar = () => {
                   </div>
                 </motion.li>
               </a>
-              <a href='/signIn'>
+              <a href='/signun'>
                 <motion.li
                   initial={{ y: -10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -176,29 +176,33 @@ export const Navbar = () => {
                 </motion.li>
               </a>
             </ul>
-            <a href='/signin'>
-              <button className='alight-center relative z-[1] flex max-w-full flex-row items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-6 py-1 font-black text-textWhite shadow-purple hover:bg-primary-500 hover:delay-[0s] hover:duration-[0.3s] hover:ease-ease'>
-                <motion.div
-                  initial={{ y: -10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.1, delay: 0.8 }}
-                  className='relative -ml-3 h-10 w-10'
-                >
-                  <div className='absolute z-[-1] h-10 w-10 rounded-full bg-primary-500' />
-                  <div className='flex h-full w-full items-center justify-center  text-4xl text-textWhite hover:text-[70px]'>
-                    <WiDirectionRight />
-                  </div>
-                </motion.div>
-                <motion.div
-                  className='font-sans'
-                  initial={{ y: -10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.1, delay: 0.9 }}
-                >
-                  Get Started
-                </motion.div>
-              </button>
-            </a>
+
+            <button
+              onClick={() => {
+                navigate('home')
+              }}
+              className='alight-center relative z-[1] flex max-w-full flex-row items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-6 py-1 font-black text-textWhite shadow-purple hover:bg-primary-500 hover:delay-[0s] hover:duration-[0.3s] hover:ease-ease'
+            >
+              <motion.div
+                initial={{ y: -10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.1, delay: 0.8 }}
+                className='relative -ml-3 h-10 w-10'
+              >
+                <div className='absolute z-[-1] h-10 w-10 rounded-full bg-primary-500' />
+                <div className='flex h-full w-full items-center justify-center  text-4xl text-textWhite hover:text-[70px]'>
+                  <WiDirectionRight />
+                </div>
+              </motion.div>
+              <motion.div
+                className='font-sans'
+                initial={{ y: -10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.1, delay: 0.9 }}
+              >
+                Get Started
+              </motion.div>
+            </button>
           </nav>
           <button className='xl:hidden'>
             <div className='relative z-[5] rounded-[50%] bg-white p-5 font-extrabold'>

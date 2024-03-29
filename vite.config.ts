@@ -36,20 +36,20 @@ export default defineConfig({
   // },
   resolve: {
     alias: {
-      '@components': '/src/components',
-      '@layout': '/src/layout',
-      '@ui': '/src/ui',
-      '@pages': '/src/pages',
       '@assets': '/src/assets',
-      '@styles': '/src/styles',
+      '@components': '/src/components',
+      '@constants': '/src/constants',
+      '@contexts': '/src/contexts',
       '@db': '/src/db',
+      '@fonts': '/src/fonts',
       '@hooks': '/src/hooks',
       '@layouts': '/src/layouts',
-      '@fonts': '/src/fonts',
+      '@model': 'src/model',
+      '@pages': '/src/pages',
+      '@styles': '/src/styles',
+      '@ui': '/src/ui',
       '@utils': '/src/utils',
-      '@widgets': '/src/widgets',
-      '@contexts': '/src/contexts',
-      '@constants': '/src/constants'
+      '@widgets': '/src/widgets'
     }
   },
   define: {

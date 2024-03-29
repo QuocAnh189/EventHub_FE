@@ -15,6 +15,9 @@ import { useWindowSize } from 'react-use'
 // constants
 import ROUTES from '@constants/routes'
 
+//image
+import { logoText_Img } from '@assets/images/common'
+
 const Sidebar = () => {
   const { width } = useWindowSize()
   const { open, setOpen } = useSidebar()
@@ -42,8 +45,10 @@ const Sidebar = () => {
       variant={isPermanent ? 'permanent' : 'temporary'}
       onOpen={() => setOpen(true)}
       onClose={() => setOpen(false)}
+      className='overflow-hidden'
     >
       {/* <Logo /> */}
+      <img src={logoText_Img} alt='' className='h-[40px] w-full object-contain' />
       <nav className='menu'>
         {ROUTES.map((route: any, index: any) => {
           return (

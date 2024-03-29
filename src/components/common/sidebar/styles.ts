@@ -14,7 +14,7 @@ const Drawer = styled(SwipeableDrawer)`
 
     // iPhone XR
     @media screen and (min-width: 414px) {
-      width: 374px;
+      width: 320px;
     }
 
     .menu {

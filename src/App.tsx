@@ -18,13 +18,15 @@ import { ThemeContext } from './contexts'
 // components
 import { Loader } from '@components/common'
 import { ToastContainer } from 'react-toastify'
-import { MainLayout } from './layouts'
+import MainLayout from '@layouts/main'
 
 // pages
 const Landing = lazy(() => import('@pages/Landing'))
 const SignIn = lazy(() => import('@pages/Signin'))
 const SignUp = lazy(() => import('@pages/Signup'))
 const Home = lazy(() => import('@pages/Home'))
+const Profile = lazy(() => import('@pages/Profile'))
+const Events = lazy(() => import('@pages/Event'))
 
 function App() {
   const { theme }: any = useContext(ThemeContext)
@@ -42,7 +44,9 @@ function App() {
             <Route path='/signin' element={<SignIn />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/home' element={<MainLayout />}>
-              <Route index element={<Home />} />
+              <Route path='/home/' element={<Home />} />
+              <Route path='/home/profile' element={<Profile />} />
+              <Route path='/home/event' element={<Events />} />
             </Route>
           </Routes>
         </div>
