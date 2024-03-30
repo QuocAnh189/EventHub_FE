@@ -1,62 +1,63 @@
 const ROUTES = [
   {
     name: 'Home',
-    icon: 'rectangle-history-circle-user-regular'
+    icon: 'rectangle-history-circle-user-regular',
+    path: '/organization'
   },
   {
     name: 'Dashboard',
     icon: 'rectangle-history-circle-user-regular',
     links: [
-      { name: 'Overview', path: '/' },
-      { name: 'Event Analysis', path: '/sellers-list' },
-      { name: 'Category Analysis', path: '/sellers-table' },
-      { name: 'Customer', path: '/sellers-grid' },
-      { name: 'Payment', path: '/seller-profile' },
-      { name: 'Ticket Sales', path: '/revenue-by-period' }
+      { name: 'Overview', path: '/organization/dashboard/overview' },
+      { name: 'Event Analysis', path: '/organization/dashboard/event-analysis' },
+      { name: 'Category Analysis', path: '/organization/dashboard/category-analysis' },
+      { name: 'Customer', path: '/organization/dashboard/customer' },
+      { name: 'Payment', path: '/organization/dashboard/payment' },
+      { name: 'Ticket Sales', path: '/organization/dashboard/ticket-sale' }
     ]
   },
   {
     name: 'Event',
     icon: 'boxes-stacked-regular',
     links: [
-      { name: 'Top Events', path: '/top-products' },
-      { name: 'My Events', path: '/products-grid' },
-      { name: 'Create Event', path: '/products-management' },
-      { name: 'My Tickets', path: '/product-editor' }
+      { name: 'Top Events', path: '/organization/event/top-event' },
+      { name: 'My Events', path: '/organization/event/my-event' },
+      { name: 'Create Event', path: '/organization/event/create-event' },
+      { name: 'My Tickets', path: '/organization/event/my-ticket' }
     ]
   },
   {
     name: 'Calendar',
     icon: 'chart-simple-regular',
-    path: '/statistics'
+    path: '/organization/calendar'
   },
   {
     name: 'Orders',
     icon: 'cart-shopping-regular',
-    path: '/orders'
+    path: '/organization/order'
   },
   {
     name: 'Reviews',
     icon: 'star-half-stroke-solid',
-    path: '/reviews'
+    path: '/organization/review'
   },
   {
     name: 'Report',
     icon: 'money-check-dollar-pen-regular',
-    path: '/transactions',
+    path: '/organization/report',
     qty: 279
   },
   {
     name: 'Help',
     icon: 'money-check-dollar-pen-regular',
-    path: '/transactions',
+    path: '/organization/help',
     qty: 279
   },
   {
     name: 'Settings',
     icon: 'gear-regular',
     links: [
-      { name: 'Profile', path: '/home/profile' },
+      { name: 'Profile', path: '/organization/settings/profile' },
       { name: 'Connected Apps', path: '/connected-apps' }
     ]
   }
