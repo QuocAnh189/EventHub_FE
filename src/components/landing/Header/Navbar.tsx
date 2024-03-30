@@ -179,7 +179,7 @@ export const Navbar = () => {
 
             <button
               onClick={() => {
-                navigate('home')
+                navigate('organization')
               }}
               className='alight-center relative z-[1] flex max-w-full flex-row items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-6 py-1 font-black text-textWhite shadow-purple hover:bg-primary-500 hover:delay-[0s] hover:duration-[0.3s] hover:ease-ease'
             >
