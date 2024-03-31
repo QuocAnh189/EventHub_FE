@@ -18,7 +18,13 @@ const placeholder = {
   }
 }
 
-const NotificationItem = ({ notification = placeholder, index }: any) => {
+interface Props {
+  notification: any
+  index: number
+}
+
+const NotificationItem = (props: Props) => {
+  const { notification = placeholder, index } = props
   const fullName = `${notification.user.firstName} ${notification.user.lastName}`
 
   return (

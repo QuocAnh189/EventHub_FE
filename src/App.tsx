@@ -26,6 +26,7 @@ const SignIn = lazy(() => import('@pages/auth/Signin'))
 const SignUp = lazy(() => import('@pages/auth/Signup'))
 const Home = lazy(() => import('@pages/Home'))
 const Overview = lazy(() => import('@pages/dashboard/Overview'))
+const OverviewDetail = lazy(() => import('@pages/dashboard/Overview-Detail'))
 const EventAnalysis = lazy(() => import('@pages/dashboard/Event-Analysis'))
 const CategoryAnalysis = lazy(() => import('@pages/dashboard/Category-Analysis'))
 const Customer = lazy(() => import('@pages/dashboard/Customer'))
@@ -41,6 +42,7 @@ const Reviews = lazy(() => import('@pages/Review'))
 const Report = lazy(() => import('@pages/Report'))
 const Help = lazy(() => import('@pages/Help'))
 const Profile = lazy(() => import('@pages/setting/Profile'))
+const ConnectedApps = lazy(() => import('@pages/setting/ConnectedApp'))
 
 function App() {
   const { theme }: any = useContext(ThemeContext)
@@ -60,6 +62,7 @@ function App() {
             <Route path='/organization' element={<MainLayout />}>
               <Route path='/organization/' element={<Home />} />
               <Route path='/organization/dashboard/overview' element={<Overview />} />
+              <Route path='/organization/dashboard/overview-detail' element={<OverviewDetail />} />
               <Route path='/organization/dashboard/event-analysis' element={<EventAnalysis />} />
               <Route path='/organization/dashboard/category-analysis' element={<CategoryAnalysis />} />
               <Route path='/organization/dashboard/customer' element={<Customer />} />
@@ -75,6 +78,7 @@ function App() {
               <Route path='/organization/report' element={<Report />} />
               <Route path='/organization/help' element={<Help />} />
               <Route path='/organization/settings/profile' element={<Profile />} />
+              <Route path='/organization/settings/connect' element={<ConnectedApps />} />
             </Route>
           </Routes>
         </div>

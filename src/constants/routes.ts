@@ -58,7 +58,7 @@ const ROUTES = [
     icon: 'gear-regular',
     links: [
       { name: 'Profile', path: '/organization/settings/profile' },
-      { name: 'Connected Apps', path: '/connected-apps' }
+      { name: 'Connected Apps', path: '/organization/settings/connect' }
     ]
   }
 ]

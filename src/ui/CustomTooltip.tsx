@@ -2,6 +2,11 @@
 import Tooltip from '@mui/material/Tooltip'
 import Fade from '@mui/material/Fade'
 
+// interface Props {
+//   children: ReactNode,
+//   withArrow:boolean,
+
+// }
 const CustomTooltip = ({ children, withArrow = true, ...props }: any) => {
   return (
     <Tooltip

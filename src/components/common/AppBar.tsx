@@ -1,3 +1,10 @@
+// hooks
+import { ThemeContext } from '@contexts/themeContext'
+import { useSidebar } from '@contexts/sidebarContext'
+import { useWindowSize } from 'react-use'
+import { useState, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 // components
 import Headroom from 'react-headroom'
 import Search from '@ui/Search'
@@ -6,17 +13,17 @@ import CustomTooltip from '@ui/CustomTooltip'
 import NotificationsPanel from './navbar/NotificationsPanel'
 import MessagesPanel from './navbar/MessagesPanel'
 
-// hooks
-import { ThemeContext } from '@contexts/themeContext'
-import { useSidebar } from '@contexts/sidebarContext'
-import { useWindowSize } from 'react-use'
-import { useState, useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-
 // constants
 import { LOCALES } from '@constants/options'
 
-const LocaleMenu = ({ active, setActive }: any) => {
+interface Props {
+  active: string
+  // eslint-disable-next-line no-unused-vars
+  setActive: (value: any) => void
+}
+
+const LocaleMenu = (props: Props) => {
+  const { active, setActive } = props
   return (
     <div className='flex flex-col gap-4 p-4'>
       {LOCALES.map((locale: any) => (
@@ -120,7 +127,7 @@ const AppBar = () => {
             <div className='relative'>
               <button
                 className='h-8 w-8 rounded-full bg-accent text-widget text-sm flex items-center justify-center relative xl:w-11 xl:h-11 xl:text-lg'
-                onClick={() => navigate('profile')}
+                onClick={() => navigate('settings/profile')}
                 aria-label='Account menu'
               >
                 <i className='icon-user-solid' />

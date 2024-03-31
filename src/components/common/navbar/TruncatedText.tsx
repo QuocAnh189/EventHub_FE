@@ -1,7 +1,15 @@
 // utils
 import PropTypes from 'prop-types'
 
-const TruncatedText = ({ text, lines = 2, className, width }: any) => {
+interface Props {
+  text: string
+  lines?: number
+  className?: string
+  width?: number
+}
+
+const TruncatedText = (props: Props) => {
+  const { text, lines = 2, className, width } = props
   return (
     <span className={className ? className : ''}>
       <p className={`truncate w-${width} line-clamp-${lines}`}>{text}</p>

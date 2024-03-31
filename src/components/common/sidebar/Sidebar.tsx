@@ -1,16 +1,15 @@
-// styled components
-import Drawer from './styles'
-
-// components
-// import Logo from '@components/Logo'
-import { NavLink } from 'react-router-dom'
-import Collapse from '@mui/material/Collapse'
-import { Fragment } from 'react'
-
 // hooks
 import { useSidebar } from '@contexts/sidebarContext'
 import { useState, useEffect } from 'react'
 import { useWindowSize } from 'react-use'
+
+// styled components
+import Drawer from './styles'
+
+// components
+import { NavLink } from 'react-router-dom'
+import Collapse from '@mui/material/Collapse'
+import { Fragment } from 'react'
 
 // constants
 import ROUTES from '@constants/routes'

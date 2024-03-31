@@ -10,16 +10,16 @@ import { components } from 'react-select'
 import { memo } from 'react'
 
 interface Props {
-  id: any
-  options: any
-  value: any
-  onChange: any
-  variant: any
-  placeholder: any
-  isSearchable: any
-  innerRef: any
-  isInvalid: any
-  isDisable: any
+  id?: any
+  options?: any
+  value?: any
+  onChange?: any
+  variant?: any
+  placeholder?: any
+  isSearchable?: any
+  innerRef?: any
+  isInvalid?: any
+  isDisable?: any
 }
 
 const Select = (props: Props) => {

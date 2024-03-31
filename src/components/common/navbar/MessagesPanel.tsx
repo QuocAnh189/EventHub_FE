@@ -18,7 +18,14 @@ import messages from '@db/messages'
 
 const step = 6
 
-const MessagesPanel = ({ open, onOpen, onClose }: any) => {
+interface Props {
+  open: boolean
+  onOpen: () => void
+  onClose: () => void
+}
+
+const MessagesPanel = (props: Props) => {
+  const { open, onOpen, onClose } = props
   const [headerRef, { height: headerHeight }] = useMeasure()
   const [footerRef, { height: footerHeight }] = useMeasure()
   const [filter, setFilter] = useState('all')
@@ -70,7 +77,7 @@ const MessagesPanel = ({ open, onOpen, onClose }: any) => {
               text={item.label}
               value={item.value}
               active={filter}
-              qty={getQty(item.value)}
+              qty={getQty(item.value)!}
               onClick={() => setFilter(item.value)}
             />
           ))}

@@ -4,8 +4,16 @@ import Grow from '@mui/material/Grow'
 
 // utils
 import PropTypes from 'prop-types'
+import { ReactElement } from 'react'
 
-const ModalBase = ({ open, onClose, children }: any) => {
+interface Props {
+  open: boolean
+  onClose: () => void
+  children: ReactElement
+}
+const ModalBase = (props: Props) => {
+  const { open, onClose, children } = props
+
   return (
     <Modal
       open={open}

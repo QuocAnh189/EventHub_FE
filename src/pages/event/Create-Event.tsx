@@ -1,5 +1,14 @@
+// components
+import { PageHeader } from '@layouts/components'
+import ProductEditor from '@widgets/EventEditor'
+
 const CreateEvent = () => {
-  return <div>CreateEvent</div>
+  return (
+    <>
+      <PageHeader title='Event Creator' />
+      <ProductEditor />
+    </>
+  )
 }
 
 export default CreateEvent
