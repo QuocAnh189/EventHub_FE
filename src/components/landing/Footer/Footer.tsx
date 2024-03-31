@@ -13,7 +13,7 @@ export const Footer = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.1, delay: 1.2 }}
       id='information'
-      className='w-screen rounded-t-[32px] bg-bgBlack'
+      className='w-screen rounded-t-[32px] bg-bgBlack px-8'
     >
       <Header />
       <Middle />

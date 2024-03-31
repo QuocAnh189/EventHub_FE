@@ -15,7 +15,15 @@ import notifications from '@db/notifications'
 
 const step = 6
 
-const NotificationsPanel = ({ open, onOpen, onClose }: any) => {
+interface Props {
+  open: boolean
+  onOpen: () => void
+  onClose: () => void
+}
+
+const NotificationsPanel = (props: Props) => {
+  const { open, onOpen, onClose } = props
+
   const [headerRef, { height: headerHeight }] = useMeasure()
   const [footerRef, { height: footerHeight }] = useMeasure()
   const [filter, setFilter] = useState('all')

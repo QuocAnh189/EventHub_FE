@@ -1,3 +1,4 @@
+//hook
 import { useMemo, useState } from 'react'
 
 //navigate
@@ -43,7 +44,7 @@ const SessionOne = (props: SessionOneProps) => {
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
           className='relative mb-6'
           data-te-input-wrapper-init
         >
@@ -60,7 +61,7 @@ const SessionOne = (props: SessionOneProps) => {
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
           className='relative mb-6'
           data-te-input-wrapper-init
         >
@@ -155,7 +156,7 @@ const SessionTwo = (props: SessionTwoProps) => {
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
           className='relative mb-6'
           data-te-input-wrapper-init
         >
@@ -184,7 +185,7 @@ const SessionTwo = (props: SessionTwoProps) => {
         <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
+          transition={{ duration: 0.4, delay: 0.6 }}
           className='mb-4 flex w-full items-center justify-start text-right'
         >
           <Switch
@@ -204,7 +205,7 @@ const SessionTwo = (props: SessionTwoProps) => {
         <motion.button
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.6 }}
+          transition={{ duration: 0.4, delay: 0.7 }}
           className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
           onClick={() => {}}
         >

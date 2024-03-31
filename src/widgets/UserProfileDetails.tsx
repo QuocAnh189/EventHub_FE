@@ -1,3 +1,8 @@
+// hooks
+import { useForm, Controller } from 'react-hook-form'
+import { useTheme } from '@contexts/themeContext'
+import { useState } from 'react'
+
 // components
 import Spring from '@components/common/navbar/Spring'
 import Select from '@ui/Select'
@@ -5,11 +10,6 @@ import { PasswordInput } from '@components/common'
 import { NavLink } from 'react-router-dom'
 import { PatternFormat } from 'react-number-format'
 import { toast } from 'react-toastify'
-
-// hooks
-import { useForm, Controller } from 'react-hook-form'
-import { useTheme } from '@contexts/themeContext'
-import { useState } from 'react'
 
 // utils
 import classNames from 'classnames'
@@ -26,10 +26,10 @@ const UserProfileDetails = () => {
     control
   } = useForm({
     defaultValues: {
-      firstName: 'Maria',
-      lastName: 'Smith',
-      email: 'maria@email.com',
-      phone: '',
+      firstName: 'Quoc',
+      lastName: 'Anh',
+      email: 'anhquoc18092003@gmail.com',
+      phone: '0702465814',
       password: 'password',
       country: null,
       city: null,
@@ -38,10 +38,10 @@ const UserProfileDetails = () => {
       address: ''
     }
   })
-  // eslint-disable-next-line no-unused-vars
-  const [selectedCountry, setSelectedCountry] = useState()
-  // eslint-disable-next-line no-unused-vars
-  const [selectedCity, setSelectedCity] = useState<any>()
+  // // eslint-disable-next-line no-unused-vars
+  // const [selectedCountry, setSelectedCountry] = useState()
+  // // eslint-disable-next-line no-unused-vars
+  // const [selectedCity, setSelectedCity] = useState<any>()
   const [cities, setCities] = useState([])
 
   const getCountriesOptions = () => {
@@ -55,8 +55,8 @@ const UserProfileDetails = () => {
   }
 
   const handleCountryChange = (country: any) => {
-    setSelectedCountry(country)
-    setSelectedCity(null)
+    // setSelectedCountry(country)
+    // setSelectedCity(null)
     let options: any = []
     const rawData = City.getCitiesOfCountry(country.value)
     rawData?.map((item) => options.push({ value: item.name, label: item.name }))
@@ -196,7 +196,7 @@ const UserProfileDetails = () => {
                         value={field.value}
                         onChange={(value: any) => {
                           field.onChange(value)
-                          setSelectedCity(value)
+                          // setSelectedCity(value)
                         }}
                         placeholder='City'
                         isInvalid={false}

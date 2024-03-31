@@ -1,15 +1,9 @@
-import { createContext, useEffect, useState, useContext } from 'react'
+//hook
+import { ReactNode, createContext, useEffect, useState, useContext } from 'react'
 
-type Context =
-  | {
-      theme: string
-      toggleTheme: () => void
-    }
-  | undefined
+export const ThemeContext = createContext<any>(undefined)
 
-export const ThemeContext = createContext<Context>(undefined)
-
-export const ThemeProvider = ({ children }: any) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const page = document.documentElement
   const browserTheme = window.matchMedia('(prefers-color-scheme: light)')
   const persisted = JSON.parse(localStorage.getItem('preferences') || '{}')
@@ -63,4 +57,5 @@ export const ThemeProvider = ({ children }: any) => {
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => useContext(ThemeContext)

@@ -33,7 +33,7 @@ export const PasswordInput = (props: Props) => {
       </label>
       <div className='relative'>
         <input
-          id={id}
+          // id={id}
           className={classNames('field-input !pr-10', { 'field-input--error': isInvalid })}
           type={isPasswordVisible ? 'text' : 'password'}
           ref={innerRef}

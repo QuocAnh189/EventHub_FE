@@ -9,7 +9,12 @@ import { useWindowSize } from 'react-use'
 import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
-export const PageHeader = ({ title }: any) => {
+interface Props {
+  title: string
+}
+
+export const PageHeader = (props: Props) => {
+  const { title } = props
   const [currentTime, setCurrentTime] = useState(new Date())
   const { width } = useWindowSize()
   const dateFormat = width < 768 ? 'MM.DD.YYYY' : 'MMMM DD, YYYY'

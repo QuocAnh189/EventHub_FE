@@ -22,7 +22,13 @@ const placeholder = {
   }
 }
 
-const MessageItem = ({ message = placeholder, index }: any) => {
+interface Props {
+  message: any
+  index: number
+}
+
+const MessageItem = (props: Props) => {
+  const { message = placeholder, index } = props
   const fullName = `${message.sender.firstName} ${message.sender.lastName}`
   const [ref, { width }] = useMeasure()
 

@@ -1,10 +1,20 @@
+/* eslint-disable no-unused-vars */
 // styling
 import styles from './styles.module.scss'
 
 // utils
 import PropTypes from 'prop-types'
 
-const FilterItem = ({ text, qty = 0, value, active, onClick }: any) => {
+interface Props {
+  text: string
+  qty: number
+  value: string
+  active: string
+  onClick: (value: string) => void
+}
+
+const FilterItem = (props: Props) => {
+  const { text, qty = 0, value, active, onClick } = props
   return (
     <button className={`${styles.button} ${value === active ? styles.active : ''}`} onClick={() => onClick(value)}>
       <span className={`${styles.text} subheading-2`}>{text}</span>

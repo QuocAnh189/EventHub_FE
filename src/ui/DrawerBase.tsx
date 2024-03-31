@@ -1,10 +1,21 @@
+import { ReactNode } from 'react'
+
 // components
 import SwipeableDrawer from '@mui/material/SwipeableDrawer'
 
 // utils
 import PropTypes from 'prop-types'
 
-const DrawerBase = ({ open, onOpen, onClose, anchor = 'left', children }: any) => {
+interface Props {
+  open: boolean
+  onOpen: () => void
+  onClose: () => void
+  anchor: 'left' | 'right' | 'top' | 'bottom'
+  children: ReactNode
+}
+
+const DrawerBase = (props: Props) => {
+  const { open, onOpen, onClose, anchor = 'left', children } = props
   return (
     <SwipeableDrawer
       anchor={anchor}

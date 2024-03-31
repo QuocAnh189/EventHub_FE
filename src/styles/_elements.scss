@@ -46,10 +46,10 @@
   }
 
   &--primary {
-    background-color: #00ba9d;
-    border: 1px solid #01c8a9;
+    background-color: #3d56f0;
+    border: 1px solid #6366f1;
     color: #fff;
-    box-shadow: 0 1px 10px rgba(2, 202, 171, 0.35);
+    box-shadow: 0 1px 10px rgba(82, 146, 232, 0.8);
 
     i {
       font-size: 14px;
@@ -57,7 +57,7 @@
 
     &:hover,
     &:focus {
-      background-color: #02a189;
+      background-color: #818cf8;
     }
   }
 
