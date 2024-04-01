@@ -1,10 +1,18 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 
 // utils
 import { numFormatter } from '@utils/helpers'
 
-const WalletBadge = ({ value = 0, label = 'Lorem ipsum', image = 'https://placehold.co/52', imgClass }: any) => {
+interface Props {
+  value: number
+  label: string
+  image: string
+  imgClass: string
+}
+
+const WalletBadge = (props: Props) => {
+  const { value, label, image, imgClass } = props
   return (
     <Spring className='card flex items-center !py-[13px] !pl-[18px] !pr-6'>
       <div className={`w-[52px] h-[52px] mr-8 hidden xs:flex items-center ${imgClass || ''}`}>

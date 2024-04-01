@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 
 // utils

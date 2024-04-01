@@ -1,11 +1,11 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import SubmenuTrigger from '@ui/SubmenuTrigger'
 import Trend from '@ui/Trend'
 import Submenu from '@ui/Submenu'
 
 // hooks
-import useSubmenu from '@hooks/useSubmenu'
+import { useSubmenu } from '@hooks/useSubmenu'
 
 // utils
 import PropTypes from 'prop-types'

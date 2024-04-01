@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import StatsHighlightTable from '@components/common/StatsHighlightTable'
 import Counter from '@components/common/Counter'
 import Trend from '@ui/Trend'

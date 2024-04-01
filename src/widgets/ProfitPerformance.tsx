@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import InfoBtn from '@ui/InfoBtn'
 import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 

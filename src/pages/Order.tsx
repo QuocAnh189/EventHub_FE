@@ -10,10 +10,10 @@ import OrdersTable from '@widgets/OrdersTable'
 import { useState } from 'react'
 
 // constants
-import { PRODUCT_CATEGORIES, ORDER_SORT_OPTIONS } from '@constants/options'
+import { EVENT_CATEGORIES, ORDER_SORT_OPTIONS } from '@constants/options'
 
 const Orders = () => {
-  const [category, setCategory] = useState(PRODUCT_CATEGORIES[0])
+  const [category, setCategory] = useState(EVENT_CATEGORIES[0])
   const [sort, setSort] = useState(ORDER_SORT_OPTIONS[0])
 
   return (
@@ -23,12 +23,7 @@ const Orders = () => {
         <div className='w-full grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[26px] lg:grid-cols-4 lg:items-end xl:grid-cols-6'>
           <CalendarSelector wrapperClass='lg:max-w-[275px] lg:col-span-2 xl:col-span-4' id='ordersPeriodSelector' />
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[26px] md:col-span-2'>
-            <Select
-              value={category}
-              options={PRODUCT_CATEGORIES}
-              onChange={setCategory}
-              placeholder='Product category'
-            />
+            <Select value={category} options={EVENT_CATEGORIES} onChange={setCategory} placeholder='Product category' />
             <Select value={sort} options={ORDER_SORT_OPTIONS} onChange={setSort} placeholder='Default sorting' />
           </div>
         </div>

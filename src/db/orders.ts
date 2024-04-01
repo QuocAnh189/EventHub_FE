@@ -1,18 +1,7 @@
-// import img1 from '@assets/products/electronics/1.webp';
-// import img2 from '@assets/products/fashion/1.webp';
-// import img3 from '@assets/products/electronics/3.webp';
-// import img4 from '@assets/products/services/1.webp';
-// import img5 from '@assets/products/fashion/12.webp';
-// import img6 from '@assets/products/food/11.webp';
-// import img7 from '@assets/products/food/16.webp';
-// import img8 from '@assets/products/fashion/9.webp';
-// import img9 from '@assets/products/services/3.webp';
-// import img10 from '@assets/products/electronics/11.webp';
-
 const orders = [
   {
     orderNumber: 123456,
-    sku: '123456FR',
+    ticket: '123456FR',
     status: 'completed',
     rating: 3.5,
     category: 'electronics',
@@ -29,7 +18,7 @@ const orders = [
   },
   {
     orderNumber: 154844,
-    sku: '598741FR',
+    ticket: '598741FR',
     status: 'confirmed',
     rating: 4.5,
     category: 'fashion',
@@ -45,7 +34,7 @@ const orders = [
   },
   {
     orderNumber: 202587,
-    sku: '485912TY',
+    ticket: '485912TY',
     status: 'cancelled',
     rating: 4.5,
     category: 'electronics',
@@ -62,7 +51,7 @@ const orders = [
   },
   {
     orderNumber: 300411,
-    sku: '365487RT',
+    ticket: '365487RT',
     status: 'confirmed',
     rating: 4.5,
     category: 'services',
@@ -78,7 +67,7 @@ const orders = [
   },
   {
     orderNumber: 785241,
-    sku: '002315ES',
+    ticket: '002315ES',
     status: 'confirmed',
     rating: 4.5,
     category: 'fashion',
@@ -95,7 +84,7 @@ const orders = [
   },
   {
     orderNumber: 458745,
-    sku: '541125FR',
+    ticket: '541125FR',
     status: 'completed',
     rating: 0,
     category: 'food',
@@ -111,7 +100,7 @@ const orders = [
   },
   {
     orderNumber: 105488,
-    sku: '252596FR',
+    ticket: '252596FR',
     status: 'confirmed',
     rating: 5,
     category: 'food',
@@ -128,7 +117,7 @@ const orders = [
   },
   {
     orderNumber: 900541,
-    sku: '002315BN',
+    ticket: '002315BN',
     status: 'cancelled',
     rating: 0,
     category: 'fashion',
@@ -145,7 +134,7 @@ const orders = [
   },
   {
     orderNumber: 121844,
-    sku: '814315LP',
+    ticket: '814315LP',
     status: 'refunded',
     rating: 0,
     category: 'services',
@@ -161,7 +150,7 @@ const orders = [
   },
   {
     orderNumber: 240412,
-    sku: '361087RT',
+    ticket: '361087RT',
     status: 'completed',
     rating: 4.5,
     category: 'electronics',

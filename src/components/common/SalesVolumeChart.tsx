@@ -1,5 +1,5 @@
 // components
-import Spring from './navbar/Spring'
+import Spring from './Spring'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import Trend from '@ui/Trend'
 

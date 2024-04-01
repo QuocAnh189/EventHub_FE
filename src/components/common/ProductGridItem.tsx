@@ -1,5 +1,5 @@
 // components
-import Spring from './navbar/Spring'
+import Spring from './Spring'
 import SubmenuTrigger from '@ui/SubmenuTrigger'
 import RatingStars from '@ui/RatingStars'
 import { NavLink } from 'react-router-dom'

@@ -1,8 +1,6 @@
 //hook
 import { ReactNode, useState, createContext, useContext, useEffect } from 'react'
 import { useScrollLock } from '@hooks/useScrollLock'
-
-//route
 import { useLocation } from 'react-router-dom'
 
 const SidebarContext = createContext<any>(undefined)

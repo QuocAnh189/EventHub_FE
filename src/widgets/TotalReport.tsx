@@ -1,12 +1,12 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import InfoBtn from '@ui/InfoBtn'
 import ReportItem from '@components/common/ReportItem'
 import { NavLink } from 'react-router-dom'
 import Submenu from '@ui/Submenu'
 
 // hooks
-import useSubmenu from '@hooks/useSubmenu'
+import { useSubmenu } from '@hooks/useSubmenu'
 
 const data = [
   { dataKey: 'revenue', title: 'Revenue', amount: 176120, trend: 45 },
@@ -24,7 +24,7 @@ const TotalReport = () => {
           <h4>Total Report</h4>
           <InfoBtn onClick={handleClick} />
         </div>
-        <p className='mt-1.5 mb-4 text-sm md:text-base'>All Periods per 01/01/2022 - 08/28/2023</p>
+        <p className='mt-1.5 mb-4 text-sm md:text-base'>All Periods per 01/01/2024 - 01/04/2024</p>
       </div>
       <div className='flex flex-col flex-1 gap-6 mb-6'>
         {data.map((item, index) => (

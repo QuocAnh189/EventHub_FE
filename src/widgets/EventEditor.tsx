@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import Select from '@ui/Select'
 import RangeDatePicker from '@ui/RangeDatePicker'
 import DropFiles from '@components/common/DropFiles'
@@ -12,7 +12,7 @@ import { useForm, Controller } from 'react-hook-form'
 
 // constants
 import {
-  PRODUCT_CATEGORIES,
+  EVENT_CATEGORIES,
   PAYMENT_OPTIONS,
   PRODUCT_TYPE_OPTIONS,
   PROMOTIONAL_OPTIONS,
@@ -24,8 +24,8 @@ import {
 import classNames from 'classnames'
 import dayjs from 'dayjs'
 
-const ProductEditor = () => {
-  const categories = PRODUCT_CATEGORIES.filter((category) => category.value !== 'all')
+const EventCreate = () => {
+  const categories = EVENT_CATEGORIES.filter((category) => category.value !== 'all')
   const productDescription = `Ut tortor ex, pellentesque nec volutpat vel, congue eu nibh. Sed posuere ipsum ut ornare ultrices. Aliquam condimentum ultricies lacinia. Aenean ac dolor mauris. Curabitur cursus mi ac urna vestibulum consectetur. Praesent vulputate eleifend ipsum at ultrices. Proin sed elementum diam, in ullamcorper risus`
   const defaultValues = {
     image1: '',
@@ -71,7 +71,7 @@ const ProductEditor = () => {
 
   return (
     <Spring className='card flex-1 xl:py-10'>
-      <h5 className='mb-[15px]'>Product Settings</h5>
+      <h5 className='mb-[15px]'>New Event</h5>
       <form className='grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,550px)] xl:gap-10'>
         <div>
           <div>
@@ -470,4 +470,4 @@ const ProductEditor = () => {
   )
 }
 
-export default ProductEditor
+export default EventCreate

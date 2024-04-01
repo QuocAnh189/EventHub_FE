@@ -8,7 +8,16 @@ import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
-const RangeDatePicker = ({ id, value, onChange, innerRef, disableFuture = true }: any) => {
+interface Props {
+  id: string
+  value: any
+  onChange: any
+  innerRef: any
+  disableFuture?: boolean
+}
+
+const RangeDatePicker = (props: Props) => {
+  const { id, value, onChange, innerRef, disableFuture = true } = props
   const [open, setOpen] = useState(false)
 
   useEffect(() => {

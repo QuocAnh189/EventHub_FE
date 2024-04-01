@@ -1,7 +1,11 @@
-import { PRODUCT_CATEGORIES } from '@constants/options'
+import { EVENT_CATEGORIES } from '@constants/options'
 
-const CategoryHeader = ({ category }: any) => {
-  const { label, icon, color }: any = PRODUCT_CATEGORIES.find((c) => c.value === category)
+interface Props {
+  category: string
+}
+const CategoryHeader = (props: Props) => {
+  const { category } = props
+  const { label, icon, color }: any = EVENT_CATEGORIES.find((c) => c.value === category)
 
   return (
     <div className='flex items-center gap-4'>

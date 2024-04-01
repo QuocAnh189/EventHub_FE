@@ -4,7 +4,7 @@ import { useTheme } from '@contexts/themeContext'
 import { useState } from 'react'
 
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import Select from '@ui/Select'
 import { PasswordInput } from '@components/common'
 import { NavLink } from 'react-router-dom'

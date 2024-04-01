@@ -47,8 +47,6 @@ const ConnectedApps = lazy(() => import('@pages/setting/ConnectedApp'))
 function App() {
   const { theme }: any = useContext(ThemeContext)
 
-  console.log(theme)
-
   return (
     <ThemeProvider theme={{ theme: theme }}>
       <ThemeStyles />

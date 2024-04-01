@@ -19,6 +19,7 @@ const CustomTooltip = ({ children, withArrow = true, ...props }: any) => {
       }}
       enterTouchDelay={0}
       leaveTouchDelay={5000}
+      title='haha'
       {...props}
     >
       {children}

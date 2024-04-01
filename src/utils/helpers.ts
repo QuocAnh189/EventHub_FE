@@ -1,4 +1,4 @@
-import { PRODUCT_CATEGORIES } from '@constants/options'
+import { EVENT_CATEGORIES } from '@constants/options'
 
 /**
  *
@@ -96,7 +96,7 @@ export const sortSellers = (data: any, sortOption: any) => {
 }
 
 export const getCategory = (value: any) => {
-  return PRODUCT_CATEGORIES.find((category) => category.value === value)
+  return EVENT_CATEGORIES.find((category) => category.value === value)
 }
 
 export const getStatusColor = (status: any) => {

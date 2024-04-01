@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import InfoBtn from '@ui/InfoBtn'
 import Submenu from '@ui/Submenu'
 import StatsHighlightTable from '@components/common/StatsHighlightTable'
@@ -8,7 +8,7 @@ import Counter from '@components/common/Counter'
 import Trend from '@ui/Trend'
 
 // hooks
-import useSubmenu from '@hooks/useSubmenu'
+import { useSubmenu } from '@hooks/useSubmenu'
 
 const ConversionRateWithChart = () => {
   const { anchorEl, open, handleClick, handleClose } = useSubmenu()

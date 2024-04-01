@@ -1,11 +1,4 @@
 import { faker } from '@faker-js/faker'
-import img1 from '@assets/reviews/1.webp'
-import img2 from '@assets/reviews/2.webp'
-import img3 from '@assets/reviews/3.webp'
-import img4 from '@assets/reviews/4.webp'
-import img5 from '@assets/reviews/5.webp'
-import img6 from '@assets/reviews/6.webp'
-import img7 from '@assets/reviews/7.webp'
 
 const notifications = [
   {
@@ -17,7 +10,7 @@ const notifications = [
     user: {
       firstName: 'J.',
       lastName: 'Davidson',
-      avatar: img1
+      avatar: ''
     }
   },
   {
@@ -29,7 +22,7 @@ const notifications = [
     user: {
       firstName: 'Mark',
       lastName: 'Dowers',
-      avatar: img2
+      avatar: ''
     }
   },
   {
@@ -41,7 +34,7 @@ const notifications = [
     user: {
       firstName: 'Parker',
       lastName: 'Johnson',
-      avatar: img3
+      avatar: ''
     }
   },
   {
@@ -53,7 +46,7 @@ const notifications = [
     user: {
       firstName: 'Mary',
       lastName: 'Wilson',
-      avatar: img4
+      avatar: ''
     }
   },
   {
@@ -65,7 +58,7 @@ const notifications = [
     user: {
       firstName: 'Helen',
       lastName: 'Miller',
-      avatar: img5
+      avatar: ''
     }
   },
   {
@@ -77,7 +70,7 @@ const notifications = [
     user: {
       firstName: 'Victor',
       lastName: 'Stevens',
-      avatar: img6
+      avatar: ''
     }
   },
   {
@@ -89,7 +82,7 @@ const notifications = [
     user: {
       firstName: 'Rita',
       lastName: 'Fisher',
-      avatar: img7
+      avatar: ''
     }
   }
 ]

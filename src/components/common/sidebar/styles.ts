@@ -43,7 +43,7 @@ const Drawer = styled(SwipeableDrawer)`
         &:focus,
         &.active {
           background-color: var(--body);
-          color: var(--header);
+          color: #3d56f0;
           border-color: var(--border);
 
           .icon {

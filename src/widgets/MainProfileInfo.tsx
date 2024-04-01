@@ -1,13 +1,12 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import InfoBtn from '@ui/InfoBtn'
 import Counter from '@components/common/Counter'
 import Trend from '@ui/Trend'
 import Submenu from '@ui/Submenu'
 
 // hooks
-// import { useTheme } from '@contexts/themeContext'
-import useSubmenu from '@hooks/useSubmenu'
+import { useSubmenu } from '@hooks/useSubmenu'
 
 // assets
 import { logoImg } from '@assets/images/common'
@@ -29,7 +28,7 @@ const MainProfileInfo = () => {
       <div className='flex flex-1 flex-col gap-8'>
         <div className='flex flex-col gap-2'>
           <h3>My Events</h3>
-          <p>Aliquam erat volutpat. Duis molestie ultrices tempus. Mauris sem orci, euismod sit amet.</p>
+          <p>Below are general statistics for your organization over time.</p>
         </div>
         <div className='flex flex-col gap-6'>
           <div className='flex items-center gap-4'>
