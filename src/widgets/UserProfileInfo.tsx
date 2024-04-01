@@ -1,4 +1,4 @@
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 
 const UserProfileInfo = () => {
   return (

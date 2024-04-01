@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types'
 
-const Trend = ({ value = 0, wrapperClass }: any) => {
+interface Props {
+  value?: number
+  wrapperClass?: string
+}
+const Trend = (props: Props) => {
+  const { value = props.value || 0, wrapperClass } = props
   const isPositive = value > 0
 
   return (

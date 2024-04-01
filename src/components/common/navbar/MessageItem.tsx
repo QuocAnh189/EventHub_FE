@@ -1,5 +1,5 @@
 // components
-import Spring from './Spring'
+import Spring from '../Spring'
 import TruncatedText from './TruncatedText'
 
 // hooks

@@ -1,5 +1,5 @@
 // components
-import Spring from './navbar/Spring'
+import Spring from './Spring'
 
 interface Props {
   text?: string

@@ -1,16 +1,3 @@
-// import img1 from '@assets/apps/1.webp'
-// import img2 from '@assets/apps/2.webp'
-// import img3 from '@assets/apps/3.webp'
-// import img4 from '@assets/apps/4.webp'
-// import img5 from '@assets/apps/5.webp'
-// import img6 from '@assets/apps/6.webp'
-// import img7 from '@assets/apps/7.webp'
-// import img8 from '@assets/apps/8.webp'
-// import img9 from '@assets/apps/9.webp'
-// import img10 from '@assets/apps/10.webp'
-// import img11 from '@assets/apps/11.webp'
-// import img12 from '@assets/apps/12.webp'
-
 const apps = [
   {
     id: 'app-1',

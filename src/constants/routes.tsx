@@ -1,12 +1,23 @@
-const ROUTES = [
+import { Route } from 'interfaces'
+import { IoHomeOutline } from 'react-icons/io5'
+import { MdDashboard } from 'react-icons/md'
+import { MdEventAvailable } from 'react-icons/md'
+import { FaRegCalendarAlt } from 'react-icons/fa'
+import { MdOutlinePreview } from 'react-icons/md'
+import { MdOutlineReport } from 'react-icons/md'
+import { MdMenuBook } from 'react-icons/md'
+import { BiHelpCircle } from 'react-icons/bi'
+import { IoSettingsOutline } from 'react-icons/io5'
+
+const ROUTES: Route[] = [
   {
     name: 'Home',
-    icon: 'rectangle-history-circle-user-regular',
+    icon: <IoHomeOutline size={20} />,
     path: '/organization'
   },
   {
     name: 'Dashboard',
-    icon: 'rectangle-history-circle-user-regular',
+    icon: <MdDashboard size={20} />,
     links: [
       { name: 'Overview', path: '/organization/dashboard/overview' },
       { name: 'Event Analysis', path: '/organization/dashboard/event-analysis' },
@@ -18,7 +29,7 @@ const ROUTES = [
   },
   {
     name: 'Event',
-    icon: 'boxes-stacked-regular',
+    icon: <MdEventAvailable size={20} />,
     links: [
       { name: 'Top Events', path: '/organization/event/top-event' },
       { name: 'My Events', path: '/organization/event/my-event' },
@@ -28,34 +39,32 @@ const ROUTES = [
   },
   {
     name: 'Calendar',
-    icon: 'chart-simple-regular',
+    icon: <FaRegCalendarAlt size={20} />,
     path: '/organization/calendar'
   },
   {
     name: 'Orders',
-    icon: 'cart-shopping-regular',
+    icon: <MdMenuBook size={20} />,
     path: '/organization/order'
   },
   {
     name: 'Reviews',
-    icon: 'star-half-stroke-solid',
+    icon: <MdOutlinePreview size={20} />,
     path: '/organization/review'
   },
   {
     name: 'Report',
-    icon: 'money-check-dollar-pen-regular',
-    path: '/organization/report',
-    qty: 279
+    icon: <MdOutlineReport size={20} />,
+    path: '/organization/report'
   },
   {
     name: 'Help',
-    icon: 'money-check-dollar-pen-regular',
-    path: '/organization/help',
-    qty: 279
+    icon: <BiHelpCircle size={20} />,
+    path: '/organization/help'
   },
   {
     name: 'Settings',
-    icon: 'gear-regular',
+    icon: <IoSettingsOutline size={20} />,
     links: [
       { name: 'Profile', path: '/organization/settings/profile' },
       { name: 'Connected Apps', path: '/organization/settings/connect' }

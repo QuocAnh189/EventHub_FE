@@ -7,7 +7,7 @@ import Empty from '@components/common/Empty'
 
 // hooks
 import { useState, useEffect } from 'react'
-import usePagination from '@hooks/usePagination'
+import { usePagination } from '@hooks/usePagination'
 
 // constants
 import { APPS_OPTIONS } from '@constants/options'

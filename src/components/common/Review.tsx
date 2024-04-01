@@ -3,7 +3,7 @@ import SubmenuTrigger from '@ui/SubmenuTrigger'
 import RatingStars from '@ui/RatingStars'
 import Timestamp from '@ui/Timestamp'
 import TruncatedText from './navbar/TruncatedText'
-import Spring from './navbar/Spring'
+import Spring from './Spring'
 import ModalBase from '@ui/ModalBase'
 
 // hooks
@@ -30,7 +30,7 @@ const User = ({ data = placeholder, wrapperClass }: any) => {
     <div className={`flex items-center ${wrapperClass}`}>
       <img
         className='bg-input-border shrink-0 w-10 h-10 rounded-md md:w-[63px] md:h-[63px]'
-        src={data.img}
+        src='https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
         alt={`${data.firstName} ${data.lastName}`}
         width={63}
         height={63}

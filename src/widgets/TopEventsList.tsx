@@ -2,7 +2,7 @@
 import 'swiper/css'
 
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import CategoryHeader from '@ui/CategoryHeader'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ProductGridItem from '@components/common/ProductGridItem'
@@ -11,7 +11,12 @@ import { Pagination } from 'swiper/modules'
 // data placeholder
 import products from '@db/products'
 
-const TopEventsByCategories = ({ category = 'electronics' }) => {
+interface Props {
+  category: string
+}
+
+const TopEventsByCategories = (props: Props) => {
+  const { category } = props
   const categoryProducts = products.filter((product) => product.category === category).slice(0, 6)
 
   return (

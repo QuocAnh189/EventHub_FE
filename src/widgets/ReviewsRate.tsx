@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import ReviewsRateItem from '@components/common/ReviewsRateItem'
 
 // utils

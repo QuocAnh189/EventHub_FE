@@ -1,12 +1,4 @@
 import { faker } from '@faker-js/faker'
-import img1 from '@assets/reviews/1.webp'
-import img2 from '@assets/reviews/2.webp'
-import img3 from '@assets/reviews/3.webp'
-import img4 from '@assets/reviews/4.webp'
-import img5 from '@assets/reviews/5.webp'
-import img6 from '@assets/reviews/6.webp'
-import img7 from '@assets/reviews/7.webp'
-import img8 from '@assets/reviews/8.webp'
 
 const messages = [
   {
@@ -16,7 +8,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img1
+      avatar: ''
     },
     archived: false
   },
@@ -27,7 +19,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img2
+      avatar: ''
     },
     archived: false
   },
@@ -38,7 +30,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img3
+      avatar: ''
     },
     archived: false
   },
@@ -49,7 +41,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img4
+      avatar: ''
     },
     archived: true
   },
@@ -60,7 +52,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img5
+      avatar: ''
     },
     archived: true
   },
@@ -71,7 +63,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img6
+      avatar: ''
     },
     archived: false
   },
@@ -82,7 +74,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img7
+      avatar: ''
     },
     archived: false
   },
@@ -93,7 +85,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img8
+      avatar: ''
     },
     archived: false
   },
@@ -104,7 +96,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img1
+      avatar: ''
     },
     archived: true
   },
@@ -115,7 +107,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: img2
+      avatar: ''
     },
     archived: true
   }

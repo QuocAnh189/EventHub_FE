@@ -1,7 +1,5 @@
 import eng from '@assets/flags/eng.webp'
-import de from '@assets/flags/de.webp'
-import dk from '@assets/flags/dk.webp'
-import ua from '@assets/flags/ua.webp'
+import vn from '@assets/flags/vn.webp'
 import mc from '@assets/payment/mc.svg'
 import visa from '@assets/payment/visa.svg'
 import googlepay from '@assets/payment/googlepay.svg'
@@ -9,8 +7,8 @@ import applepay from '@assets/payment/applepay.svg'
 import paypal from '@assets/payment/paypal.svg'
 import bitpay from '@assets/payment/bitpay.svg'
 
-export const PRODUCT_CATEGORIES = [
-  { value: 'all', label: 'All Products' },
+export const EVENT_CATEGORIES = [
+  { value: 'all', label: 'All Category' },
   { value: 'electronics', label: 'Electronics', icon: 'icon-laptop-mobile-solid', color: 'accent' },
   { value: 'food', label: 'Groceries', icon: 'icon-burger-soda-solid', color: 'header' },
   { value: 'fashion', label: 'Fashion', icon: 'icon-shirt-solid', color: 'red' },
@@ -41,9 +39,7 @@ export const REVIEW_SORT_OPTIONS = [
 
 export const LOCALES = [
   { value: 'en-EN', label: 'English (EN)', icon: eng },
-  { value: 'de-DE', label: 'Deutsch (DE)', icon: de },
-  { value: 'dk-DK', label: 'Dansk (DK)', icon: dk },
-  { value: 'ua-UA', label: 'Українська (UA)', icon: ua }
+  { value: 'vn-VN', label: 'VietNam (VN)', icon: vn }
 ]
 
 export const APPS_OPTIONS = [
@@ -56,7 +52,7 @@ export const APPS_OPTIONS = [
 export const PRODUCT_MANAGEMENT_OPTIONS = [
   { value: 'all', label: 'All' },
   { value: 'publish', label: 'Published' },
-  { value: 'draft', label: 'Drafts' },
+  { value: 'private', label: 'Privated' },
   { value: 'trash', label: 'Trash' }
 ]
 
@@ -127,7 +123,7 @@ export const PRODUCT_ADDITIONAL_OPTIONS = [
 ]
 
 export const PRODUCT_SELECT_OPTIONS = [
-  { value: 'to-draft', label: 'Move to Drafts' },
+  { value: 'to-private', label: 'Move to privates' },
   { value: 'to-trash', label: 'Move to Trash' },
   { value: 'delete', label: 'Delete Permanently' }
 ]

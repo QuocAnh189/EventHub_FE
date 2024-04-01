@@ -10,7 +10,7 @@ import Counter from '@components/common/Counter'
 import { getCategory, getStatusColor, numFormatter } from '@utils/helpers'
 import dayjs from 'dayjs'
 
-export const ORDERS_COLUMN_DEFS = [
+export const ORDERS_COLUMN_DEFS: any = [
   {
     title: '# order',
     dataIndex: 'orderNumber',
@@ -18,7 +18,7 @@ export const ORDERS_COLUMN_DEFS = [
     render: (text: any) => <span className='subheading-2'>#{text}</span>
   },
   {
-    title: 'Product',
+    title: 'Event',
     dataIndex: 'product',
     className: 'product-cell',
     render: (product: any) => (
@@ -38,8 +38,8 @@ export const ORDERS_COLUMN_DEFS = [
     responsive: ['lg']
   },
   {
-    title: 'SKU',
-    dataIndex: 'sku'
+    title: 'Ticket',
+    dataIndex: 'ticket'
   },
   {
     title: 'Category',
@@ -275,7 +275,7 @@ export const SELLERS_COLUMN_DEFS = [
   }
 ]
 
-export const PRODUCTS_MANAGEMENT_COLUMN_DEFS = [
+export const PRODUCTS_MANAGEMENT_COLUMN_DEFS: any = [
   {
     title: (
       <div className='flex items-center justify-center'>

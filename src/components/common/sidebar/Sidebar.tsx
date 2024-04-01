@@ -17,10 +17,13 @@ import ROUTES from '@constants/routes'
 //image
 import { logoText_Img } from '@assets/images/common'
 
+//interface
+import { Route } from 'interfaces'
+
 const Sidebar = () => {
   const { width } = useWindowSize()
   const { open, setOpen } = useSidebar()
-  const [active, setActive] = useState('Dashboard')
+  const [active, setActive] = useState<string>('')
   const isPermanent = width >= 1920
 
   useEffect(() => {
@@ -49,7 +52,7 @@ const Sidebar = () => {
       {/* <Logo /> */}
       <img src={logoText_Img} alt='' className='h-[40px] w-full object-contain' />
       <nav className='menu'>
-        {ROUTES.map((route: any, index: any) => {
+        {ROUTES.map((route: Route, index: number) => {
           return (
             <Fragment key={route.name}>
               {route.links && (
@@ -60,7 +63,8 @@ const Sidebar = () => {
                       onClick={() => setActive(active === route.name ? '' : route.name)}
                     >
                       <div className='flex items-center gap-2.5'>
-                        <i className={`icon icon-${route.icon}`} />
+                        {/* <i className={`icon icon-${route.icon}`} /> */}
+                        {route.icon}
                         <span className='text'>{route.name}</span>
                       </div>
                       <button className='xl:hidden 4xl:block' aria-label='Toggle submenu'>
@@ -87,12 +91,12 @@ const Sidebar = () => {
               )}
               {!route.links && (
                 <>
-                  <NavLink className='menu_item' to={route.path}>
+                  <NavLink className='menu_item' to={route.path!}>
                     <div className='flex items-center gap-2.5'>
-                      <i className={`icon icon-${route.icon}`} />
+                      {/* <i className={`icon icon-${route.icon}`} /> */}
+                      {route.icon}
                       <span className='text'>{route.name}</span>
                     </div>
-                    {route.qty && <span className='badge rounded bg-green xl:hidden'>{route.qty}</span>}
                   </NavLink>
                   {index === ROUTES.length - 2 && <span className='menu_divider' />}
                 </>

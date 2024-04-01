@@ -1,12 +1,12 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import Select from '@ui/Select'
 import Review from '@components/common/Review'
 import Pagination from '@ui/Pagination'
 
 // hooks
 import { useState } from 'react'
-import usePagination from '@hooks/usePagination'
+import { usePagination } from '@hooks/usePagination'
 
 // constants
 import { REVIEW_SORT_OPTIONS } from '@constants/options'

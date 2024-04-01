@@ -1,7 +1,7 @@
 import { ReactElement } from 'react'
 
 // components
-import Spring from './navbar/Spring'
+import Spring from './Spring'
 import Counter from './Counter'
 import SubmenuTrigger from '@ui/SubmenuTrigger'
 

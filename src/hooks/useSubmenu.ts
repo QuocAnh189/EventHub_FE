@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const useSubmenu = () => {
+export const useSubmenu = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: any) => {
@@ -16,5 +16,3 @@ const useSubmenu = () => {
 
   return { anchorEl, open, handleClick, handleClose }
 }
-
-export default useSubmenu

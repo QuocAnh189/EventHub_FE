@@ -17,7 +17,7 @@ const TopEvent = () => {
           <TopRetail />
         </div>
         <div className='widgets-grid grid-cols-1 lg:grid-cols-2'>
-          <TopEventsByCategories />
+          <TopEventsByCategories category='fashion' />
           <TopEventsByCategories category='fashion' />
         </div>
         <div className='widgets-grid grid-cols-1 lg:grid-cols-2'>

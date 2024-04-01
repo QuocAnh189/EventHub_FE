@@ -1,6 +1,12 @@
 import dayjs from 'dayjs'
 
-const Timestamp = ({ date, wrapperClass }: any) => {
+interface Props {
+  date: any
+  wrapperClass?: string
+}
+const Timestamp = (props: Props) => {
+  const { date, wrapperClass } = props
+
   return (
     <div className={`flex gap-2 ${wrapperClass || ''}`}>
       <i className='icon icon-clock-solid text-sm -mt-[1px]' />

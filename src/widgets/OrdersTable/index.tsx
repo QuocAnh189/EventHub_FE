@@ -1,12 +1,12 @@
 // components
-import Spring from '@components/common/navbar/Spring'
+import Spring from '@components/common/Spring'
 import StyledTable from './styles'
 import Pagination from '@ui/Pagination'
 import OrderCollapseItem from '@components/common/OrderCollapseItem'
 import Empty from '@components/common/Empty'
 
 // hooks
-import usePagination from '@hooks/usePagination'
+import { usePagination } from '@hooks/usePagination'
 import { useEffect, useState } from 'react'
 import { useWindowSize } from 'react-use'
 

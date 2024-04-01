@@ -15,6 +15,7 @@ interface Props {
 
 const FilterItem = (props: Props) => {
   const { text, qty = 0, value, active, onClick } = props
+
   return (
     <button className={`${styles.button} ${value === active ? styles.active : ''}`} onClick={() => onClick(value)}>
       <span className={`${styles.text} subheading-2`}>{text}</span>

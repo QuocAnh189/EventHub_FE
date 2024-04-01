@@ -1,17 +1,32 @@
 // components
-import Spring from './navbar/Spring'
+import Spring from './Spring'
 import SubmenuTrigger from '@ui/SubmenuTrigger'
 import Trend from '@ui/Trend'
 import Submenu from '@ui/Submenu'
 
 // hooks
-import useSubmenu from '@hooks/useSubmenu'
+import { useSubmenu } from '@hooks/useSubmenu'
 
 // utils
 import PropTypes from 'prop-types'
 import { numFormatter } from '@utils/helpers'
 
-const RevenueInfobox = ({ icon = 'diamond', color = 'accent', label = 'Lorem', trend = 0, value = 99 }: any) => {
+interface Props {
+  icon?: string
+  color?: string
+  label: string
+  trend: number
+  value: number
+}
+
+const RevenueInfobox = (props: Props) => {
+  const {
+    icon = props.icon || 'diamond',
+    color = props.color || 'accent',
+    label = props.label || 'Lorem',
+    trend,
+    value
+  } = props
   const { anchorEl, open, handleClick, handleClose } = useSubmenu()
 
   return (

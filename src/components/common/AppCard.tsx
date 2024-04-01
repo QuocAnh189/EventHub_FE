@@ -1,5 +1,5 @@
 // components
-import Spring from './navbar/Spring'
+import Spring from './Spring'
 import Switch from '@ui/Switch'
 import TruncatedText from './navbar/TruncatedText'
 
