@@ -4,10 +4,10 @@ import { MdDashboard } from 'react-icons/md'
 import { MdEventAvailable } from 'react-icons/md'
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { MdOutlinePreview } from 'react-icons/md'
-import { MdOutlineReport } from 'react-icons/md'
 import { MdMenuBook } from 'react-icons/md'
 import { BiHelpCircle } from 'react-icons/bi'
 import { IoSettingsOutline } from 'react-icons/io5'
+import { FcTodoList } from 'react-icons/fc'
 
 const ROUTES: Route[] = [
   {
@@ -53,14 +53,14 @@ const ROUTES: Route[] = [
     path: '/organization/review'
   },
   {
-    name: 'Report',
-    icon: <MdOutlineReport size={20} />,
-    path: '/organization/report'
+    name: 'Todo List',
+    icon: <FcTodoList size={20} />,
+    path: '/organization/todo-list'
   },
   {
-    name: 'Help',
+    name: 'FAQ',
     icon: <BiHelpCircle size={20} />,
-    path: '/organization/help'
+    path: '/organization/faq'
   },
   {
     name: 'Settings',

@@ -1,5 +1,5 @@
 // utils
-import { lazy, Suspense, useContext } from 'react'
+import { lazy, Suspense, useContext, useEffect } from 'react'
 
 // styles
 import '@styles/index.scss'
@@ -20,6 +20,10 @@ import { Loader } from '@components/common'
 import { ToastContainer } from 'react-toastify'
 import MainLayout from '@layouts/main'
 
+//aos
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
 // pages
 const Landing = lazy(() => import('@pages/Landing'))
 const SignIn = lazy(() => import('@pages/auth/Signin'))
@@ -34,18 +38,29 @@ const Payment = lazy(() => import('@pages/dashboard/Payment'))
 const TicketSale = lazy(() => import('@pages/dashboard/Ticket-Sale'))
 const TopEvent = lazy(() => import('@pages/event/Top-Event'))
 const MyEvent = lazy(() => import('@pages/event/My-Event'))
+const EventDetail = lazy(() => import('@pages/event/Event-Detail'))
 const CreateEvent = lazy(() => import('@pages/event/Create-Event'))
 const MyTicket = lazy(() => import('@pages/event/My-Ticket'))
 const Calendar = lazy(() => import('@pages/Calendar'))
 const Order = lazy(() => import('@pages/Order'))
 const Reviews = lazy(() => import('@pages/Review'))
-const Report = lazy(() => import('@pages/Report'))
-const Help = lazy(() => import('@pages/Help'))
+const Todo = lazy(() => import('@pages/Todo'))
+const FAQ = lazy(() => import('@pages/Faq'))
 const Profile = lazy(() => import('@pages/setting/Profile'))
 const ConnectedApps = lazy(() => import('@pages/setting/ConnectedApp'))
 
 function App() {
   const { theme }: any = useContext(ThemeContext)
+
+  useEffect(() => {
+    AOS.init({
+      offset: 100,
+      duration: 900,
+      easing: 'ease-in-sine',
+      delay: 100
+    })
+    AOS.refresh()
+  }, [])
 
   return (
     <ThemeProvider theme={{ theme: theme }}>
@@ -68,13 +83,14 @@ function App() {
               <Route path='/organization/dashboard/ticket-sale' element={<TicketSale />} />
               <Route path='/organization/event/top-event' element={<TopEvent />} />
               <Route path='/organization/event/my-event' element={<MyEvent />} />
+              <Route path='/organization/event/:id' element={<EventDetail />} />
               <Route path='/organization/event/create-event' element={<CreateEvent />} />
               <Route path='/organization/event/my-ticket' element={<MyTicket />} />
               <Route path='/organization/calendar' element={<Calendar />} />
               <Route path='/organization/order' element={<Order />} />
               <Route path='/organization/review' element={<Reviews />} />
-              <Route path='/organization/report' element={<Report />} />
-              <Route path='/organization/help' element={<Help />} />
+              <Route path='/organization/todo-list' element={<Todo />} />
+              <Route path='/organization/faq' element={<FAQ />} />
               <Route path='/organization/settings/profile' element={<Profile />} />
               <Route path='/organization/settings/connect' element={<ConnectedApps />} />
             </Route>

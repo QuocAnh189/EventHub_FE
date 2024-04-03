@@ -12,7 +12,7 @@ export const DocumentTitle = (props: Props) => {
   const { title } = props
   return (
     <Helmet>
-      <title>{title} | React E-commerce Dashboard Template</title>
+      <title>{title} | Event Hub</title>
     </Helmet>
   )
 }
