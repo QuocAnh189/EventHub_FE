@@ -16,6 +16,17 @@ module.exports = {
         xl: '1280px'
       },
 
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+          sm: '2rem',
+          lg: '4rem',
+          xl: '5rem',
+          '2xl': '6rem'
+        }
+      },
+
       maxWidth: {
         container: '1440px',
         contentContainer: '1260px',
@@ -145,7 +156,9 @@ module.exports = {
         DEFAULT: 'var(--shadow)',
         banner: '0 2px 13px rgba(0, 54, 139, 0.44)',
         switch: 'inset 0 1px 3px rgba(170, 170, 183, 0.57)',
-        'switch-dark': 'inset 0 1px 3px rgba(2, 2, 6, 0.57)'
+        'switch-dark': 'inset 0 1px 3px rgba(2, 2, 6, 0.57)',
+        bannerHome: '0px 10px 25px rgb(114, 114, 114)',
+        bannerHomeTwo: '0px 20px 25px -10px rgb(165, 165, 165)'
       },
 
       animation: {

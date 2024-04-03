@@ -10,7 +10,7 @@ const notifications = [
     user: {
       firstName: 'J.',
       lastName: 'Davidson',
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
   {
@@ -22,7 +22,7 @@ const notifications = [
     user: {
       firstName: 'Mark',
       lastName: 'Dowers',
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
   {
@@ -34,7 +34,7 @@ const notifications = [
     user: {
       firstName: 'Parker',
       lastName: 'Johnson',
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
   {
@@ -46,7 +46,7 @@ const notifications = [
     user: {
       firstName: 'Mary',
       lastName: 'Wilson',
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
   {
@@ -58,7 +58,7 @@ const notifications = [
     user: {
       firstName: 'Helen',
       lastName: 'Miller',
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
   {
@@ -70,7 +70,7 @@ const notifications = [
     user: {
       firstName: 'Victor',
       lastName: 'Stevens',
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
   {
@@ -82,7 +82,7 @@ const notifications = [
     user: {
       firstName: 'Rita',
       lastName: 'Fisher',
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   }
 ]

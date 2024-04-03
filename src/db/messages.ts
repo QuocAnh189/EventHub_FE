@@ -8,7 +8,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
@@ -19,7 +19,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
@@ -30,7 +30,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
@@ -41,7 +41,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: true
   },
@@ -52,7 +52,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: true
   },
@@ -63,7 +63,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
@@ -74,7 +74,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
@@ -85,7 +85,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
@@ -96,7 +96,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: true
   },
@@ -107,7 +107,7 @@ const messages = [
     sender: {
       firstName: faker.person.firstName(),
       lastName: faker.person.lastName(),
-      avatar: ''
+      avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: true
   }

@@ -1,6 +1,6 @@
 // components
 import Spring from '@components/common/Spring'
-import StatsHighlightTable from '@components/common/StatsHighlightTable'
+import StatsHighlightTable from '@components/common/stats-highlight-table'
 import Counter from '@components/common/Counter'
 import Trend from '@ui/Trend'
 
