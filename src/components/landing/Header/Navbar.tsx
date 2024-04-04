@@ -147,7 +147,11 @@ export const Navbar = () => {
                   <RxDividerVertical height={10} />
                 </span>
               </motion.li>
-              <a href='/signin'>
+              <button
+                onClick={() => {
+                  navigate('signin')
+                }}
+              >
                 <motion.li
                   initial={{ y: -10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -160,8 +164,12 @@ export const Navbar = () => {
                     </div>
                   </div>
                 </motion.li>
-              </a>
-              <a href='/signun'>
+              </button>
+              <button
+                onClick={() => {
+                  navigate('signup')
+                }}
+              >
                 <motion.li
                   initial={{ y: -10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -174,7 +182,7 @@ export const Navbar = () => {
                     </div>
                   </div>
                 </motion.li>
-              </a>
+              </button>
             </ul>
 
             <button
