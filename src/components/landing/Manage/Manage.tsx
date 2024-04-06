@@ -13,7 +13,7 @@ export const Manage = () => {
       id='manager'
       className='mx-auto block w-full max-w-[1440px] rounded bg-transparent px-[3.13rem] pb-[4em] pt-20'
     >
-      <div className='relative z-[1] flex flex-col items-center rounded-[2.5em] bg-white px-0 pt-[5.63em]'>
+      <div className='relative z-[1] flex flex-col items-center rounded-[2.5em] bg-white pt-[5.63em]'>
         <div className='absolute left-0 right-0 top-0 my-[-3.13em] flex h-[60em] flex-col justify-center overflow-hidden md:flex-row'>
           <div className='bottom-20 w-[22.69em] md:absolute'>
             <img

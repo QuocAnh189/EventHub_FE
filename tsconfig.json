@@ -33,6 +33,7 @@
       "@layouts/*": ["layouts/*"],
       "@locales/*": ["locales/*"],
       "@pages/*": ["pages/*"],
+      "@redux/*": ["redux/*"],
       "@styles/*": ["styles/*"],
       "@ui/*": ["ui/*"],
       "@utils/*": ["utils/*"],

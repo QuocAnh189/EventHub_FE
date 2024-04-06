@@ -19,6 +19,7 @@ import { GrSubtract } from 'react-icons/gr'
 import { IoAdd } from 'react-icons/io5'
 import { SiZalo } from 'react-icons/si'
 import { BiPurchaseTagAlt } from 'react-icons/bi'
+import ConfirmDialog from '../Dialog'
 
 const images = [
   'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg',
@@ -30,6 +31,7 @@ const images = [
 export const EventModal = () => {
   const natigate = useNavigate()
   const [activeThumb, setActiveThumb] = useState<any>()
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
   const [quality, setQuality] = useState<number>(1)
 
   const handleIncreaseQuantity = () => {
@@ -37,9 +39,7 @@ export const EventModal = () => {
   }
 
   const handleDecreaseQuantity = () => {
-    if (quality > 1) {
-      setQuality((pre) => pre - 1)
-    }
+    return quality > 1 ? setQuality((pre) => pre - 1) : setOpenDialog(true)
   }
 
   return (
@@ -99,7 +99,10 @@ export const EventModal = () => {
 
         <div className='flex items-center gap-2'>
           <div className='flex items-center gap-1'>
-            <p className='text-xl text-gray500'>$48.00</p>
+            <div className='relative flex items-center justify-center'>
+              <p className='text-xl text-gray500'>$48.00</p>
+              <Divider color='black' sx={{ height: '2px', width: '100%', position: 'absolute' }} />
+            </div>
             <p className='text-xl text-primary font-semibold'>$17.28</p>
           </div>
           <div className='py-1 px-2 text-error bg-error/10 rounded-2xl'>20% Discount</div>
@@ -188,6 +191,16 @@ export const EventModal = () => {
           View Detail
         </button>
       </div>
+      {openDialog && (
+        <ConfirmDialog
+          title='Buy Ticket'
+          description='Sorry, The minimum number of tickets must be 1'
+          open={openDialog}
+          setOpen={(value) => {
+            setOpenDialog(value)
+          }}
+        />
+      )}
     </div>
   )
 }

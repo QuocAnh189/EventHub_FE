@@ -129,6 +129,7 @@ module.exports = {
         bgAnswerDiamond: '#2E64D1',
         bgAnswerCircle: '#EFA920',
         bgAnswerSquare: '#00D164',
+        bgSearchHome: 'rgb(241, 241, 241, 0.7)',
 
         special: {
           DEFAULT: '#00F8FF'
@@ -158,7 +159,8 @@ module.exports = {
         switch: 'inset 0 1px 3px rgba(170, 170, 183, 0.57)',
         'switch-dark': 'inset 0 1px 3px rgba(2, 2, 6, 0.57)',
         bannerHome: '0px 10px 25px rgb(114, 114, 114)',
-        bannerHomeTwo: '0px 20px 25px -10px rgb(165, 165, 165)'
+        bannerHomeTwo: '0px 20px 25px -10px rgb(165, 165, 165)',
+        searchHome: '0px 20px 25px -10px rgb(165, 165, 165)'
       },
 
       animation: {
