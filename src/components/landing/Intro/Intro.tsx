@@ -1,3 +1,6 @@
+//hooks
+import { useNavigate } from 'react-router-dom'
+
 //images
 import { directImg, threePeopleImg } from '@assets/images/landing'
 import { logoImg } from '@assets/images/common'
@@ -6,8 +9,13 @@ import { logoImg } from '@assets/images/common'
 import { motion } from 'framer-motion'
 
 export const Intro = () => {
+  const navigate = useNavigate()
+
   return (
-    <motion.section id='intro' className='relative flex min-h-screen items-center justify-center overflow-hidden'>
+    <motion.section
+      id='intro'
+      className='relative flex min-h-screen m-auto items-center justify-center overflow-hidden'
+    >
       <div className='flex max-w-[1440px] flex-1 items-center justify-center rounded-[4px] bg-transparent'>
         <div className='flex flex-col items-center'>
           <div className='-mb-2 flex w-full flex-col items-center justify-center'>
@@ -70,8 +78,10 @@ export const Intro = () => {
               transition={{ duration: 0.5, delay: 1.1 }}
               className='mt-[1em] flex w-[10em] flex-col gap-y-3 self-center xl:mt-[3.25em]'
             >
-              <a
-                href='/signIn'
+              <button
+                onClick={() => {
+                  navigate('signin')
+                }}
                 className='z-[1] flex min-h-[3.13em] cursor-pointer items-center justify-center gap-x-[0.5rem] overflow-hidden rounded-xl bg-primary px-4 py-2 text-center font-black text-white shadow-purple hover:bg-primary-500  hover:delay-[0s] hover:duration-300'
               >
                 <div className='relative z-[-1] -ml-3 block h-9 w-9'>
@@ -81,7 +91,7 @@ export const Intro = () => {
                   </div>
                 </div>
                 <div className='my-0 block text-[1.13em] leading-[1.45]'>Try now</div>
-              </a>
+              </button>
             </motion.div>
           </div>
         </div>

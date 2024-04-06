@@ -101,7 +101,9 @@ const SessionOne = (props: SessionOneProps) => {
 
         <button
           className='block w-full py-4 text-sm font-bold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
-          onClick={() => navigate('/signin')}
+          onClick={() => {
+            navigate(-1)
+          }}
         >
           Back
         </button>

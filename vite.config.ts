@@ -48,6 +48,7 @@ export default defineConfig({
       '@layouts': '/src/layouts',
       '@locales': '/src/locales',
       '@pages': '/src/pages',
+      '@redux': '/src/redux',
       '@styles': '/src/styles',
       '@ui': '/src/ui',
       '@utils': '/src/utils',
