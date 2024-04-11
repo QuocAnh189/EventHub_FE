@@ -1,3 +1,6 @@
+//router
+import { NavLink } from 'react-router-dom'
+
 // components
 import Spring from '@components/common/Spring'
 import InfoBtn from '@ui/InfoBtn'
@@ -9,8 +12,7 @@ import Submenu from '@ui/Submenu'
 import { useSubmenu } from '@hooks/useSubmenu'
 
 // assets
-import { logoImg } from '@assets/images/common'
-import { NavLink } from 'react-router-dom'
+import logoImg from '@assets/common/logo.png'
 
 const MainProfileInfo = () => {
   //   const { theme }: any = useTheme()

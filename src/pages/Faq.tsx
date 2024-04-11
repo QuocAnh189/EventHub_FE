@@ -1,9 +1,12 @@
+//component
 import { Box } from '@mui/material'
 import { PageHeader } from '@layouts/components'
 import Accordion from '@mui/material/Accordion'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
+
+//icon
 import { MdExpandMore } from 'react-icons/md'
 
 const FAQ = () => {

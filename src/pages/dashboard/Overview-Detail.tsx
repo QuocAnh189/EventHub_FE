@@ -9,11 +9,6 @@ import RevenueInfobox from '@components/common/RevenueInfobox'
 import ConversionRateWithChart from '@widgets/ConversionRateWithChart'
 import WalletBadge from '@widgets/WalletBadge'
 
-// assets
-// import credit from '@assets/credit-card.webp'
-// import wallet from '@assets/wallet.webp'
-// import coins from '@assets/coins.webp'
-
 const OverviewDetail = () => {
   return (
     <>

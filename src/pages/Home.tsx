@@ -9,8 +9,8 @@ import BannerPic from '@components/common/BannerPic'
 import LocationHome from '@components/common/Location'
 
 //assets
-import BannerOne from '@assets/images/common/event-poster.png'
-import BannerTwo from '@assets/images/common/sub-poster.png'
+import PosterOne from '@assets/event/event-poster.png'
+import PosterTwo from '@assets/event/event-subposter.png'
 
 const Home = () => {
   const [orderPopup, setOrderPopup] = useState<boolean>(false)
@@ -22,9 +22,9 @@ const Home = () => {
     <div>
       <SearchHome />
       <Places handleOrderPopup={handleOrderPopup} />
-      <BannerPic img={BannerOne} />
+      <BannerPic img={PosterOne} />
       <BlogsComp />
-      <BannerPic img={BannerTwo} />
+      <BannerPic img={PosterTwo} />
       <div className='container pt-14'>
         <div className='py-10'>
           <h1 className=' my-8 border-l-8 border-primary/50 py-2 pl-2 text-3xl font-bold'>About us</h1>

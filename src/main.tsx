@@ -2,9 +2,15 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 // import './i18n/i18n.ts'
 import { BrowserRouter } from 'react-router-dom'
+
+//context
 import { ThemeProvider } from '@contexts/themeContext.tsx'
+
+//slick
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+
+//component
 import { ConfirmProvider } from 'material-ui-confirm'
 
 //redux

@@ -2,8 +2,9 @@
 import { useNavigate } from 'react-router-dom'
 
 //images
-import { directImg, threePeopleImg } from '@assets/images/landing'
-import { logoImg } from '@assets/images/common'
+import directImg from '@assets/landing/direct.svg'
+import threePeopleImg from '@assets/landing/three-people.webp'
+import logoImg from '@assets/common/logo.png'
 
 //animation
 import { motion } from 'framer-motion'

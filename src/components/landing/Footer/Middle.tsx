@@ -1,5 +1,6 @@
 //images
-import { threePeopleImg, likeHandImg } from '@assets/images/landing'
+import threePeopleImg from '@assets/landing/three-people.webp'
+import likeHandImg from '@assets/landing/hand-like.webp'
 
 export const Middle = () => {
   return (

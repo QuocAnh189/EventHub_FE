@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom'
 //icons
 import { AiFillEye } from 'react-icons/ai'
 import { AiFillEyeInvisible } from 'react-icons/ai'
-import { googleIcon, facebookIcon } from '@assets/icons'
+import googleIcon from '@assets/icons/google.png'
+import facebookIcon from '@assets/icons/facebook.png'
 
 //motion
 import { motion } from 'framer-motion'

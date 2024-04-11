@@ -1,5 +1,5 @@
 //images
-import { logoText_Img } from '@assets/images/common'
+import logoText_Img from '@assets/common/logo-text.png'
 
 export const Bottom = () => {
   return (
