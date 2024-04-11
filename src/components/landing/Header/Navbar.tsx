@@ -11,7 +11,7 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import { FcHome, FcManager, FcViewDetails, FcInfo } from 'react-icons/fc'
 
 //image
-import { logoText_Img } from '@assets/images/common'
+import logoText_Img from '@assets/common/logo-text.png'
 
 //animation
 import { motion } from 'framer-motion'

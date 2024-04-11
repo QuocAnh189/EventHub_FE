@@ -1,5 +1,8 @@
 //images
-import { fourPeopleImg, bgPurpleImg, uitLogoImg, joyWorkImg } from '@assets/images/landing'
+import fourPeopleImg from '@assets/landing/four-people.webp'
+import bgPurpleImg from '@assets/landing/bg-gradient.webp'
+import uitLogoImg from '@assets/landing/logo-uit.webp'
+import joyWorkImg from '@assets/landing/joy-work.webp'
 
 export const Header = () => {
   return (

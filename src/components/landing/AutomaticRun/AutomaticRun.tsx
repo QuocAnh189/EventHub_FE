@@ -1,5 +1,8 @@
 //images
-import { gradientPurpleImg, heartImg, imageRunImg, raiseHandImg } from '@assets/images/landing'
+import gradientPurpleImg from '@assets/landing/bg-gradient-two.webp'
+import heartImg from '@assets/landing/heart.png'
+import imageRunImg from '@assets/landing/image-automation.png'
+import raiseHandImg from '@assets/landing/hand-raise.webp'
 
 //animation
 import Marquee from 'react-fast-marquee'

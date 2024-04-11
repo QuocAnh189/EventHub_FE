@@ -1,5 +1,5 @@
 //assets
-import NatureVid from '@assets/video/main.mp4'
+import NatureVid from '@assets/event/main.mp4'
 
 const SearchHome = () => {
   return (

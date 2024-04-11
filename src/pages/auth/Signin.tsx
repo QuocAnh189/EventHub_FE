@@ -5,8 +5,8 @@ import { useWindowSize } from 'react-use'
 import { FormSignIn } from '@components/auth'
 
 // assets
-import { authImg } from '@assets/images/auth'
-import { logoText_Img } from '@assets/images/common'
+import authImg from '@assets/auth/bg-auth.png'
+import logoText_Img from '@assets/common/logo-text.png'
 
 const SignIn = () => {
   const { width } = useWindowSize()

@@ -5,8 +5,7 @@ import Spring from './Spring'
 import { useTheme } from '@contexts/themeContext'
 
 // assets
-// import balance from '@assets/banners/balance.webp'
-import coin from '@assets/images/common/coin.png'
+import coin from '@assets/dashboard/coin.png'
 
 const TotalBalance = ({ wrapperClass, imgClass }: any) => {
   const { theme } = useTheme()

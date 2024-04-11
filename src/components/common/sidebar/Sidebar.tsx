@@ -15,7 +15,7 @@ import { Fragment } from 'react'
 import ROUTES from '@constants/routes'
 
 //image
-import { logoText_Img } from '@assets/images/common'
+import logoText_Img from '@assets/common/logo-text.png'
 
 //interface
 import { Route } from 'interfaces'

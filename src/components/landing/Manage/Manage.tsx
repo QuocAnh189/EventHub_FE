@@ -1,5 +1,7 @@
 //image
-import { CarlaImg, LisaImg, PhillipImg } from '@assets/images/landing'
+import CarlaImg from '@assets/landing/manager-carla.webp'
+import LisaImg from '@assets/landing/manager-lisa.webp'
+import PhillipImg from '@assets/landing/manager-phillip.webp'
 
 //animation
 import { motion } from 'framer-motion'
