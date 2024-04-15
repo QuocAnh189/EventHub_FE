@@ -11,9 +11,9 @@ export const Header = () => {
         <img loading='lazy' src={joyWorkImg} alt='' className='relative h-full w-full object-contain' />
       </div>
       <div className='relative flex flex-col items-center justify-center gap-y-10 text-center'>
-        <h2 className='my-0 font-sans text-[2em] font-extrabold leading-[1px] tracking-[-0.025em] text-textWhite mdl:text-[4em]'>
+        <h3 className='my-0 font-sans text-[2em] font-extrabold leading-[1px] tracking-[-0.025em] text-textWhite mdl:text-[4em]'>
           Trusted by more than
-        </h2>
+        </h3>
         <div className='flex flex-col items-center gap-4 mdl:flex-row'>
           <span className='relative bg-gradient-titleheaderfooter bg-clip-text text-center font-sans text-[3em] font-bold text-transparent'>
             2,500 membership

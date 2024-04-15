@@ -46,7 +46,7 @@ export const Navbar = () => {
               transition={{ duration: 0.5 }}
               className='flex h-full w-full items-center justify-center rounded-xl px-2'
             >
-              <img src={logoText_Img} alt='' className='h-[40px] w-full object-contain' />
+              <img loading='lazy' src={logoText_Img} alt='' className='h-[40px] w-full object-contain' />
             </motion.a>
           </div>
           <nav className='relative float-right hidden flex-1 flex-row items-center justify-end gap-[1em] xl:flex'>

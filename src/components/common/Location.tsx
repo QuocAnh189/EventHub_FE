@@ -1,4 +1,4 @@
-const LocationHome = () => {
+const LocationUs = () => {
   return (
     <>
       <span id='location'></span>
@@ -25,4 +25,4 @@ const LocationHome = () => {
   )
 }
 
-export default LocationHome
+export default LocationUs

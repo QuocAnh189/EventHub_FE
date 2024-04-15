@@ -6,10 +6,10 @@ import LabeledProgressBar from '@components/common/LabeledProgressBar'
 import { getPercentage, numFormatter } from '@utils/helpers'
 
 const data = [
-  { label: 'Electronics', value: 7541, color: 'accent' },
-  { label: 'Fashion', value: 3897, color: 'red' },
-  { label: 'Food & Drinks', value: 9874, color: 'header' },
-  { label: 'Services', value: 6548, color: 'yellow' }
+  { label: 'Game', value: 7541, color: 'accent' },
+  { label: 'Music', value: 3897, color: 'red' },
+  { label: 'Sport', value: 9874, color: 'header' },
+  { label: 'Carrer', value: 6548, color: 'yellow' }
 ]
 
 const TopSalesByCategories = () => {

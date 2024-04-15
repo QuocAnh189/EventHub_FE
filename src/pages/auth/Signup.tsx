@@ -16,12 +16,12 @@ const SignUp = () => {
       {width >= 1024 && (
         <div className='flex flex-col justify-center items-center lg:p-[60px]'>
           <a className='logo' href='/'>
-            <img src={logoText_Img} alt='EventHub' className='w-[200px] object-cover' />
+            <img loading='lazy' src={logoText_Img} alt='EventHub' className='w-[200px] object-cover' />
           </a>
           <p className='text-center tracking-[0.2px] font-semibold text-lg leading-6 max-w-[540px] my-7 mx-auto'>
             Where every event finds its perfect audience, creating unforgettable moments and lasting connections
           </p>
-          <img className='max-w-[780px]' src={authImg} alt='media' />
+          <img loading='lazy' className='max-w-[780px]' src={authImg} alt='media' />
         </div>
       )}
       <div className='relative w-full h-screen flex justify-center items-center'>

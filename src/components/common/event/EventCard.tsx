@@ -1,5 +1,6 @@
 //hook
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //icon
 import { FaCalendarAlt } from 'react-icons/fa'
@@ -11,20 +12,39 @@ import Modal from '@mui/material/Modal'
 import Backdrop from '@mui/material/Backdrop'
 import Fade from '@mui/material/Fade'
 
-const EventCard = ({ img, title, location, time, description, price, type }: any) => {
+interface ICard {
+  img: any
+  title: string
+  location: string
+  time: any
+  description: string
+  price: number
+  type: string
+  modal?: boolean
+}
+
+const EventCard = (props: ICard) => {
+  const { img, title, location, time, description, price, type, modal } = props
+
+  const navigate = useNavigate()
   const [open, setOpen] = useState<boolean>(false)
 
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  const handleSelectEvent = () => {
+    return modal ? handleOpen() : navigate('event/123')
+  }
+
   return (
     <>
       <div
         className='shadow-lg transition-all duration-500 hover:shadow-xl dark:bg-slate-950 dark:text-white cursor-pointer'
-        onClick={handleOpen}
+        onClick={handleSelectEvent}
       >
         <div className='overflow-hidden'>
           <img
+            loading='lazy'
             src={img}
             alt='No image'
             className='mx-auto h-[220px] w-full object-cover transition duration-700 hover:skew-x-2 hover:scale-110'
@@ -54,25 +74,27 @@ const EventCard = ({ img, title, location, time, description, price, type }: any
           </div>
         </div>
       </div>
-      <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500
-          }
-        }}
-      >
-        <Fade in={open}>
-          <div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[1000px] shadow-md bg-body p-4'>
-            <EventModal />
-          </div>
-        </Fade>
-      </Modal>
+      {modal && (
+        <Modal
+          aria-labelledby='transition-modal-title'
+          aria-describedby='transition-modal-description'
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          slots={{ backdrop: Backdrop }}
+          slotProps={{
+            backdrop: {
+              timeout: 500
+            }
+          }}
+        >
+          <Fade in={open}>
+            <div className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[1000px] shadow-md bg-body p-4'>
+              <EventModal />
+            </div>
+          </Fade>
+        </Modal>
+      )}
     </>
   )
 }

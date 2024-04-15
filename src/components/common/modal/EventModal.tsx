@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 //component
 import Divider from '@mui/material/Divider'
+import ConfirmDialog from '../Dialog'
 
 //swiper
 import './event.scss'
@@ -19,7 +20,6 @@ import { GrSubtract } from 'react-icons/gr'
 import { IoAdd } from 'react-icons/io5'
 import { SiZalo } from 'react-icons/si'
 import { BiPurchaseTagAlt } from 'react-icons/bi'
-import ConfirmDialog from '../Dialog'
 
 const images = [
   'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg',
@@ -177,8 +177,8 @@ export const EventModal = () => {
           </div>
 
           <p className='text-gray500'>
-            <span className='text-black font-semibold'>Description:</span>Vegetables Healthy Chinese Cabbage Green
-            Cabbage
+            <span className='text-black font-semibold'>Description:</span>I love you babe , I am alone , I am student at
+            University
           </p>
         </div>
 

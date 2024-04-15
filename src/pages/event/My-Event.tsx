@@ -16,7 +16,7 @@ const csvData = [
 const MyEvent = () => {
   const navigate = useNavigate()
   return (
-    <>
+    <div className='min-h-screen'>
       <PageHeader title='My Event' />
       <div className='flex flex-col-reverse gap-4 mb-5 md:flex-col lg:flex-row lg:justify-between'>
         <div className='flex flex-col gap-4 md:flex-row md:gap-[14px]'>
@@ -35,7 +35,7 @@ const MyEvent = () => {
         <Search wrapperClass='lg:w-[326px]' placeholder='Search Event' />
       </div>
       <ProductManagementTable />
-    </>
+    </div>
   )
 }
 

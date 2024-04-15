@@ -9,6 +9,7 @@ export const Middle = () => {
         <div className='relative z-[1] flex flex-col items-center mdl:items-end justify-center rounded-[2.5em] py-[1rem] mdl:py-[5rem] text-textWhite'>
           <div className='absolute left-[-4em] w-[14em] mdl:left-[-23em] mdl:mt-[2.5rem] mdl:w-[50em]'>
             <img
+              loading='lazy'
               src={likeHandImg}
               alt=''
               className='relative hidden mdl:inline-block h-full w-full max-w-full object-cover'
@@ -22,7 +23,12 @@ export const Middle = () => {
               </h2>
             </div>
             <div className='relative flex items-end'>
-              <img src={threePeopleImg} alt='' className='h-[30] w-10 mdl:w-[140px] items-center justify-center' />
+              <img
+                loading='lazy'
+                src={threePeopleImg}
+                alt=''
+                className='h-[30] w-10 mdl:w-[140px] items-center justify-center'
+              />
               <h2 className='mx-0 text-[1em] mdl:text-[4em] font-extrabold leading-[1.3] tracking-[-0.025em] text-textWhite'>
                 with EvenHub
               </h2>

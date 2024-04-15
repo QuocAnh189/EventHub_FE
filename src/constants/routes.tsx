@@ -33,8 +33,7 @@ const ROUTES: Route[] = [
     links: [
       { name: 'Top Events', path: '/organization/event/top-event' },
       { name: 'My Events', path: '/organization/event/my-event' },
-      { name: 'Create Event', path: '/organization/event/create-event' },
-      { name: 'My Tickets', path: '/organization/event/my-ticket' }
+      { name: 'Create Event', path: '/organization/event/create-event' }
     ]
   },
   {

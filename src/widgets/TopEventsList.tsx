@@ -8,16 +8,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import ProductGridItem from '@components/common/ProductGridItem'
 import { Pagination } from 'swiper/modules'
 
-// data placeholder
-import products from '@db/products'
-
 interface Props {
   category: string
 }
 
 const TopEventsByCategories = (props: Props) => {
   const { category } = props
-  const categoryProducts = products.filter((product) => product.category === category).slice(0, 6)
 
   return (
     <Spring className='flex flex-col gap-5'>
@@ -41,9 +37,9 @@ const TopEventsByCategories = (props: Props) => {
           rewind={false}
           loop
         >
-          {categoryProducts.map((product) => (
-            <SwiperSlide className='!h-auto' key={product.id}>
-              <ProductGridItem product={product} isSlide />
+          {[0, 1, 2, 3, 4].map((item) => (
+            <SwiperSlide className='!h-auto' key={item}>
+              <ProductGridItem />
             </SwiperSlide>
           ))}
         </Swiper>

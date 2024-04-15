@@ -17,12 +17,12 @@ const TopEvent = () => {
           <TopRetail />
         </div>
         <div className='widgets-grid grid-cols-1 lg:grid-cols-2'>
-          <TopEventsByCategories category='fashion' />
-          <TopEventsByCategories category='fashion' />
+          <TopEventsByCategories category='Game' />
+          <TopEventsByCategories category='Music' />
         </div>
         <div className='widgets-grid grid-cols-1 lg:grid-cols-2'>
-          <TopEventsByCategories category='food' />
-          <TopEventsByCategories category='services' />
+          <TopEventsByCategories category='Carrer' />
+          <TopEventsByCategories category='Sport' />
         </div>
       </div>
     </>
