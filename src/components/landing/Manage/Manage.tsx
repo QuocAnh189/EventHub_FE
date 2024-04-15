@@ -19,6 +19,7 @@ export const Manage = () => {
         <div className='absolute left-0 right-0 top-0 my-[-3.13em] flex h-[60em] flex-col justify-center overflow-hidden md:flex-row'>
           <div className='bottom-20 w-[22.69em] md:absolute'>
             <img
+              loading='lazy'
               src={PhillipImg}
               alt=''
               className='relative inline-block h-full w-full max-w-full object-contain md:object-fill'
@@ -26,6 +27,7 @@ export const Manage = () => {
           </div>
           <div className='left-0  top-[5em] w-[26.88em] md:absolute'>
             <img
+              loading='lazy'
               src={LisaImg}
               alt=''
               className='relative inline-block h-full w-full max-w-full object-contain md:object-fill'
@@ -33,6 +35,7 @@ export const Manage = () => {
           </div>
           <div className='right-0 top-0 w-[26.13em] md:absolute'>
             <img
+              loading='lazy'
               src={CarlaImg}
               alt=''
               className='relative inline-block h-full w-full max-w-full object-contain md:object-fill'

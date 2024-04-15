@@ -1,33 +1,16 @@
-import Input from '@mui/material/Input'
+//component
 import FormControl from '@mui/material/FormControl'
-
-import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api'
 
 //icons
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { IoLocationOutline } from 'react-icons/io5'
 import { IoMdTime } from 'react-icons/io'
 import { FaUsers } from 'react-icons/fa'
+import { IoMdAdd } from 'react-icons/io'
 
-const containerStyle = {
-  width: '100%',
-  height: '400px'
-}
-
-const center = {
-  lat: 10.8713134,
-  lng: 106.8025164,
-  text: 'University of Information Technology'
-}
+import classNames from 'classnames'
 
 const Infomation = () => {
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    // eslint-disable-next-line no-undef
-    googleMapsApiKey: 'AIzaSyDNUAbz1SHrSJ7M0pFlV-8xxCSg53lOVmM',
-    libraries: ['places']
-  })
-
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex justify-center bg-body'>
@@ -56,7 +39,42 @@ const Infomation = () => {
         </div>
       </div>
 
-      <div className='flex px-[150px] gap-8'>
+      <div className='flex flex-col px-[100px] gap-8'>
+        <div className='space-y-2'>
+          <h5>Organization By</h5>
+          <div className='flex items-center gap-3'>
+            <img
+              src='https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
+              alt=''
+              className='w-[50px] h-[50px] object-cover rounded-full'
+            />
+            <div>
+              <p className='font-semibold'>Anh Quoc</p>
+              <button className='flex items-center gap-1 bg-primary px-2 py-1 rounded-md'>
+                <IoMdAdd color='white' size={24} />
+                <p className='text-white'>Follow</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className='space-y-1'>
+          <h5>Event Description</h5>
+          <p>
+            Get ready to kick off the Christmas season in Mumbai with SOUND OF CHRISTMAS - your favourite LIVE Christmas
+            concert!.City Youth Movement invites you to the 4th edition of our annual Christmas festivities - by the
+            youth and for the youth! Feat. your favourite worship leaders, carols, quizzes and some exciting
+            surprises!.Bring your family and friends and sing along your favourite Christmas carols on the 2nd of
+            December, 6:30 PM onwards at the Balgandharva Rang Mandir, Bandra West. Book your tickets now!
+          </p>
+          <h6>3 Reasons to attend the event:</h6>
+          <p>1. The FIRST Christmas concert of Mumbai!</p>
+          <p>2. A special Christmas Choir!</p>
+          <p>3. Special Dance performances and many more surprises!</p>
+        </div>
+      </div>
+
+      <div className='flex px-[100px] gap-8'>
         <div className='flex flex-col flex-auto gap-5 p-8 bg-body shadow-xl rounded-md'>
           <h1 className='text-header font-bold text-2xl'>Contact Info</h1>
           <p>
@@ -66,11 +84,31 @@ const Infomation = () => {
           </p>
           <FormControl>
             <div className='flex flex-col gap-3'>
-              <div className='flex items-center gap-4'>
-                <Input value='Anh Quoc' />
-                <Input value='anhquoc18092003@gmal.com' />
+              <div className='flex items-center gap-4 text-header'>
+                <div className='field-wrapper'>
+                  <label className='field-label' htmlFor='qty'>
+                    Name
+                  </label>
+                  <input className={classNames('field-input')} id='qty' placeholder='0' defaultValue='Anh Quoc' />
+                </div>
+                <div className='field-wrapper'>
+                  <label className='field-label' htmlFor='qty'>
+                    Email
+                  </label>
+                  <input
+                    className={classNames('field-input')}
+                    id='qty'
+                    placeholder='0'
+                    defaultValue='anhquoc18092003@gmail.com'
+                  />
+                </div>
               </div>
-              <Input placeholder='Say something' defaultValue='' />
+              <div className='field-wrapper'>
+                <label className='field-label' htmlFor='qty'>
+                  Email
+                </label>
+                <input className={classNames('field-input')} id='qty' placeholder='Say something' />
+              </div>
             </div>
           </FormControl>
           <button className='px-4 py-3 rounded-3xl bg-primary font-semibold text-white w-[200px] hover:bg-primary-500'>
@@ -78,26 +116,6 @@ const Infomation = () => {
           </button>
         </div>
       </div>
-      {isLoaded ? (
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={14}
-          options={{
-            // zoomControlL: false,
-            streetViewControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false
-          }}
-          // onLoad={onLoad}
-          // onUnmount={onUnmount}
-        >
-          {/* Child components, such as markers, info windows, etc. */}
-          <Marker position={center} title='UIT' />
-        </GoogleMap>
-      ) : (
-        <></>
-      )}
     </div>
   )
 }
