@@ -1,9 +1,9 @@
 // components
 import Search from '@ui/Search'
-import AppCard from '@components/common/AppCard'
+import AppCard from '@components/AppCard'
 import FilterItem from '@ui/FilterItem'
 import Pagination from '@ui/Pagination'
-import Empty from '@components/common/Empty'
+import Empty from '@components/Empty'
 
 // hooks
 import { useState, useEffect } from 'react'

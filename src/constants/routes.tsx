@@ -1,4 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Route } from 'interfaces'
+
+//icon
 import { IoHomeOutline } from 'react-icons/io5'
 import { MdDashboard } from 'react-icons/md'
 import { MdEventAvailable } from 'react-icons/md'
@@ -23,8 +26,7 @@ const ROUTES: Route[] = [
       { name: 'Event Analysis', path: '/organization/dashboard/event-analysis' },
       { name: 'Category Analysis', path: '/organization/dashboard/category-analysis' },
       { name: 'Customer', path: '/organization/dashboard/customer' },
-      { name: 'Payment', path: '/organization/dashboard/payment' },
-      { name: 'Ticket Sales', path: '/organization/dashboard/ticket-sale' }
+      { name: 'Payment', path: '/organization/dashboard/payment' }
     ]
   },
   {

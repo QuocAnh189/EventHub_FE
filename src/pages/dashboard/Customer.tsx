@@ -3,7 +3,7 @@ import { PageHeader } from '@layouts/components'
 import CustomerRetentionRate from '@widgets/CustomerRetentionRate'
 import DemographicSegmentation from '@widgets/DemographicSegmentation'
 import ConversionRate from '@widgets/ConversionRate'
-import CustomersInfobox from '@components/common/CustomersInfobox'
+import CustomersInfobox from '@components/CustomersInfobox'
 
 const Customers = () => {
   return (

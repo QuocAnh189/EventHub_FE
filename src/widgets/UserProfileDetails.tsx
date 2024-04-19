@@ -4,9 +4,9 @@ import { useTheme } from '@contexts/themeContext'
 import { useState } from 'react'
 
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import Select from '@ui/Select'
-import { PasswordInput } from '@components/common'
+import { PasswordInput } from '@components/index'
 import { NavLink } from 'react-router-dom'
 import { PatternFormat } from 'react-number-format'
 import { toast } from 'react-toastify'

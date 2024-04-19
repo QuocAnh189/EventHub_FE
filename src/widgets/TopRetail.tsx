@@ -1,5 +1,5 @@
 // components
-import TopRetailCard from '@components/common/TopRetailCard'
+import TopRetailCard from '@components/TopRetailCard'
 
 const TopRetail = () => {
   return (

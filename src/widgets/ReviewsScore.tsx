@@ -1,7 +1,7 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import RatingStars from '@ui/RatingStars'
-import Counter from '@components/common/Counter'
+import Counter from '@components/Counter'
 
 interface Props {
   score: number

@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 
 // utils
 import { numFormatter } from '@utils/helpers'

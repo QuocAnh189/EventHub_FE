@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import svgrPlugin from 'vite-plugin-svgr'
 import macrosPlugin from 'vite-plugin-babel-macros'
@@ -6,6 +6,10 @@ import macrosPlugin from 'vite-plugin-babel-macros'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgrPlugin(), macrosPlugin()],
+  define: {
+    // eslint-disable-next-line no-undef
+    'process.env': process.env
+  },
   build: {
     outDir: 'build',
     rollupOptions: {
@@ -50,13 +54,10 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@redux': '/src/redux',
       '@styles': '/src/styles',
+      '@type': '/src/type',
       '@ui': '/src/ui',
       '@utils': '/src/utils',
       '@widgets': '/src/widgets'
     }
-  },
-  define: {
-    // eslint-disable-next-line no-undef
-    'process.env': process.env
   }
 })

@@ -8,10 +8,10 @@ import Tabs from '@mui/material/Tabs'
 import TabPanel from '@mui/lab/TabPanel'
 import Divider from '@mui/material/Divider'
 import TabContext from '@mui/lab/TabContext'
-import { Comments } from '@components/common/Comments'
-import Infomation from '@components/common/Infomation'
-import EventCard from '@components/common/event/EventCard'
-import ConfirmDialog from '@components/common/Dialog'
+import { Comments } from '@components/Comments'
+import Infomation from '@components/Infomation'
+import EventCard from '@components/event/EventCard'
+import ConfirmDialog from '@components/Dialog'
 
 //icons
 import { MdStarRate } from 'react-icons/md'
@@ -212,6 +212,7 @@ const EventDetail = () => {
           setOpen={(value) => {
             setOpenDialog(value)
           }}
+          action='Ok'
         />
       )}
     </div>

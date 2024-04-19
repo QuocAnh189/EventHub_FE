@@ -16,36 +16,35 @@ import { ThemeProvider } from 'styled-components'
 import { ThemeContext } from './contexts'
 
 // components
-import { Loader } from '@components/common'
-import { ToastContainer } from 'react-toastify'
 import MainLayout from '@layouts/main'
+import { Loader } from '@components/index'
+import { ToastContainer } from 'react-toastify'
 
 //aos
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 // pages
-const Landing = lazy(() => import('@pages/Landing'))
+const Landing = lazy(() => import('@pages/landing/Landing'))
 const SignIn = lazy(() => import('@pages/auth/Signin'))
 const SignUp = lazy(() => import('@pages/auth/Signup'))
-const Home = lazy(() => import('@pages/Home'))
-const Explore = lazy(() => import('@pages/Explore'))
+const Home = lazy(() => import('@pages/home/Home'))
+const Explore = lazy(() => import('@pages/explore/Explore'))
 const Overview = lazy(() => import('@pages/dashboard/Overview'))
 const OverviewDetail = lazy(() => import('@pages/dashboard/Overview-Detail'))
 const EventAnalysis = lazy(() => import('@pages/dashboard/Event-Analysis'))
 const CategoryAnalysis = lazy(() => import('@pages/dashboard/Category-Analysis'))
 const Customer = lazy(() => import('@pages/dashboard/Customer'))
 const Payment = lazy(() => import('@pages/dashboard/Payment'))
-const TicketSale = lazy(() => import('@pages/dashboard/Ticket-Sale'))
 const TopEvent = lazy(() => import('@pages/event/Top-Event'))
 const MyEvent = lazy(() => import('@pages/event/My-Event'))
 const EventDetail = lazy(() => import('@pages/event/Event-Detail'))
 const CreateEvent = lazy(() => import('@pages/event/Create-Event'))
-const Calendar = lazy(() => import('@pages/Calendar'))
-const Order = lazy(() => import('@pages/Order'))
-const Reviews = lazy(() => import('@pages/Review'))
-const Todo = lazy(() => import('@pages/Todo'))
-const FAQ = lazy(() => import('@pages/Faq'))
+const Calendar = lazy(() => import('@pages/calendar/Calendar'))
+const Order = lazy(() => import('@pages/order/Order'))
+const Reviews = lazy(() => import('@pages/review/Review'))
+const Todo = lazy(() => import('@pages/todo/Todo'))
+const FAQ = lazy(() => import('@pages/faq/Faq'))
 const Profile = lazy(() => import('@pages/setting/Profile'))
 const ConnectedApps = lazy(() => import('@pages/setting/ConnectedApp'))
 const NotFound = lazy(() => import('@pages/NotFound'))
@@ -82,7 +81,6 @@ function App() {
               <Route path='/organization/dashboard/category-analysis' element={<CategoryAnalysis />} />
               <Route path='/organization/dashboard/customer' element={<Customer />} />
               <Route path='/organization/dashboard/payment' element={<Payment />} />
-              <Route path='/organization/dashboard/ticket-sale' element={<TicketSale />} />
               <Route path='/organization/event/top-event' element={<TopEvent />} />
               <Route path='/organization/event/my-event' element={<MyEvent />} />
               <Route path='/organization/event/:id' element={<EventDetail />} />

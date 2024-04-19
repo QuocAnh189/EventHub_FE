@@ -1,3 +1,4 @@
+//assets
 import eng from '@assets/flags/eng.webp'
 import vn from '@assets/flags/vn.webp'
 import mc from '@assets/payment/mc.svg'
@@ -8,11 +9,66 @@ import paypal from '@assets/payment/paypal.svg'
 import bitpay from '@assets/payment/bitpay.svg'
 
 export const EVENT_CATEGORIES = [
-  { value: 'all', label: 'All Category' },
-  { value: 'electronics', label: 'Electronics', icon: 'icon-laptop-mobile-solid', color: 'accent' },
-  { value: 'food', label: 'Groceries', icon: 'icon-burger-soda-solid', color: 'header' },
-  { value: 'fashion', label: 'Fashion', icon: 'icon-shirt-solid', color: 'red' },
-  { value: 'services', label: 'Services', icon: 'icon-user-gear-solid', color: 'yellow' }
+  {
+    value: 'workshop',
+    label: 'Workshop',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505725/eventhub/category/hhganbll8tt2wofqdsn2.png',
+    backgroundColor: '#F27BBD'
+  },
+  {
+    value: 'exhibition',
+    label: 'Exhibition',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505724/eventhub/category/dze7rcjxmhbiyuxp0nms.png',
+    backgroundColor: '#A3FFD6'
+  },
+  {
+    value: 'music',
+    label: 'Music',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505724/eventhub/category/ltf9kjwcm9flsr9kava1.png',
+    backgroundColor: '#F3D0D7'
+  },
+  {
+    value: 'sport',
+    label: 'Sport',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505726/eventhub/category/zs0q5wmitcvihqjgm0ov.png',
+    backgroundColor: '#EE4266'
+  },
+  {
+    value: 'culture',
+    label: 'Culture',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505727/eventhub/category/cvpt43b4aqxcjdgoezoc.png',
+    backgroundColor: '#D1BB9E'
+  },
+  {
+    value: 'party',
+    label: 'Party',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505729/eventhub/category/mqx4ehibcschz59jd81t.png',
+    backgroundColor: '#FFFAB7'
+  },
+  {
+    value: 'education',
+    label: 'Education',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505730/eventhub/category/fvbuvcl1yetyimeh6v40.png',
+    backgroundColor: '#BC7FCD'
+  },
+  {
+    value: 'fair',
+    label: 'Fair',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505731/eventhub/category/xngndezflobwdhyds2dl.png',
+    backgroundColor: '#AFD198'
+  },
+  {
+    value: 'festival',
+    label: 'Festival',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505732/eventhub/category/fj0qbybujspr8crybhez.png',
+    backgroundColor: '#F7C566'
+  },
+  {
+    value: 'enviroment',
+    label: 'Enviroment',
+    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505734/eventhub/category/nubvqwxlqcu2suwgbas1.png',
+    backgroundColor: '#5DEBD7'
+  }
 ]
 
 export const PRODUCT_SORT_OPTIONS = [
@@ -49,7 +105,7 @@ export const APPS_OPTIONS = [
   { value: 'finances', label: 'Financial Accounting' }
 ]
 
-export const PRODUCT_MANAGEMENT_OPTIONS = [
+export const EVENT_MANAGEMENT_OPTIONS = [
   { value: 'all', label: 'All' },
   { value: 'publish', label: 'Published' },
   { value: 'private', label: 'Privated' },
@@ -85,12 +141,10 @@ export const MESSAGE_OPTIONS = [
   { value: 'archived', label: 'Archive' }
 ]
 
-export const STOCK_STATUS_OPTIONS = [
-  { value: 'in-stock', label: 'In Stock' },
-  { value: 'low-inventory', label: 'Low Inventory' },
-  { value: 'out-of-stock', label: 'Out of Stock' },
-  { value: 'on-demand', label: 'On Demand' },
-  { value: 'unavailable', label: 'Temporarily Unavailable' }
+export const EVENT_STATUS_OPTIONS = [
+  { value: 'upcoming', label: 'Upcoming' },
+  { value: 'happenning', label: 'Happenning' },
+  { value: 'end', label: 'End' }
 ]
 
 export const PRODUCT_TYPE_OPTIONS = [
@@ -107,11 +161,9 @@ export const TRANSACTIONS_SORT_OPTIONS = [
   { value: 'amount-low-to-high', label: 'Amount: Low to High' }
 ]
 
-export const PRODUCT_SELLER_OPTIONS = [
-  { value: 'best-seller', label: 'Best Seller' },
-  { value: 'new-seller', label: 'New Seller' },
-  { value: 'top-rated', label: 'Top Rated' },
-  { value: 'featured-seller', label: 'Featured Seller' }
+export const EVENT_SELLER_OPTIONS = [
+  { value: 'free', label: 'Free' },
+  { value: 'notfree', label: 'Buy Ticket' }
 ]
 
 export const PRODUCT_ADDITIONAL_OPTIONS = [

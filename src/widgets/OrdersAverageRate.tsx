@@ -1,6 +1,6 @@
 // components
-import Spring from '@components/common/Spring'
-import LabeledProgressBar from '@components/common/LabeledProgressBar'
+import Spring from '@components/Spring'
+import LabeledProgressBar from '@components/LabeledProgressBar'
 
 const OrdersAverageRate = () => {
   return (

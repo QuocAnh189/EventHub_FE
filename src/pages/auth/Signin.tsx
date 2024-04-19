@@ -1,15 +1,26 @@
 // hooks
+import { useState } from 'react'
 import { useWindowSize } from 'react-use'
 
 // components
-import { FormSignIn } from '@components/auth'
+import ForgotPassword from './components/ForgotPassword-SignIn'
+import FormSignIn from './components/FormSignIn'
 
 // assets
 import authImg from '@assets/auth/bg-auth.png'
 import logoText_Img from '@assets/common/logo-text.png'
 
+//motion
+import { motion } from 'framer-motion'
+
 const SignIn = () => {
   const { width } = useWindowSize()
+
+  const [forgotPassword, setforgotPassword] = useState<boolean>(false)
+
+  const handleForgotPassword = (value: boolean) => {
+    setforgotPassword(value)
+  }
 
   return (
     <div className='flex-1 grid grid-cols-1 lg:grid-cols-2 4xl:grid-cols-[minmax(0,_1030px)_minmax(0,_1fr)] min-h-screen'>
@@ -25,7 +36,33 @@ const SignIn = () => {
         </div>
       )}
       <div className='relative w-full h-screen flex justify-center items-center'>
-        <FormSignIn />
+        <motion.main
+          initial={{ y: -10, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.1 }}
+          className='mx-auto mt-auto flex min-h-screen w-full max-w-full flex-col overflow-hidden bg-bgPink'
+        >
+          <div className='absolute left-[50%] top-[50%] min-h-full w-[600px] translate-x-[-50%] translate-y-[-50%] overflow-hidden rounded-[50px] bg-white px-[100px] py-[60px] mdl:min-h-[600px]'>
+            <motion.div
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className='mb-[30px] flex flex-row items-center justify-center gap-x-4'
+            >
+              <h1 className='text-4xl font-semibold'>{forgotPassword ? 'Forgot password' : 'Login'}</h1>
+            </motion.div>
+            {forgotPassword ? (
+              <ForgotPassword handleForgotPassword={handleForgotPassword} />
+            ) : (
+              <FormSignIn handleForgotPassword={handleForgotPassword} />
+            )}
+            <div className='absolute bottom-0 left-[50%] min-h-[70px] w-full translate-x-[-50%] text-center'>
+              <p className='font-semibold text-textGray'>
+                ©2024 event Hub -<span className='font-bold text-textBlack'>Imprint & Privacy Policy</span>
+              </p>
+            </div>
+          </div>
+        </motion.main>
       </div>
     </div>
   )

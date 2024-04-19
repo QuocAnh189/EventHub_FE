@@ -1,6 +1,6 @@
 // components
-import Spring from '@components/common/Spring'
-import ReviewsRateItem from '@components/common/ReviewsRateItem'
+import Spring from '@components/Spring'
+import ReviewsRateItem from '@components/ReviewsRateItem'
 
 // utils
 import { getPercentage } from '@utils/helpers'

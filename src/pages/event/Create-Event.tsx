@@ -7,10 +7,10 @@ import Box from '@mui/material/Box'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
-import InfomationEvent from '@components/common/event/InfomationEventCreate'
-import BannerEvent from '@components/common/event/BannerEventCreate'
-import TicketEventCreate from '@components/common/event/TicketEventCreate'
-import ReviewEventCreate from '@components/common/event/ReviewEventCreate'
+import InfomationEvent from '@components/event/InfomationEventCreate'
+import BannerEvent from '@components/event/BannerEventCreate'
+import TicketEventCreate from '@components/event/TicketEventCreate'
+import ReviewEventCreate from '@components/event/ReviewEventCreate'
 
 const CreateEvent = () => {
   const steps = ['Infomation', 'Banner Image', 'Set Ticket', 'Review']

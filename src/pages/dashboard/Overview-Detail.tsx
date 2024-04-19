@@ -1,11 +1,11 @@
 // components
 import { PageHeader } from '@layouts/components'
-import CalendarSelector from '@components/common/CalendarSelector'
-import PopularTags from '@components/common/PopularTags'
-import SalesVolumeChart from '@components/common/SalesVolumeChart'
+import CalendarSelector from '@components/CalendarSelector'
+import PopularTags from '@components/PopularTags'
+import SalesVolumeChart from '@components/SalesVolumeChart'
 import ReferralRate from '@widgets/ReferralRate'
 import ProfitPerformance from '@widgets/ProfitPerformance'
-import RevenueInfobox from '@components/common/RevenueInfobox'
+import RevenueInfobox from '@components/RevenueInfobox'
 import ConversionRateWithChart from '@widgets/ConversionRateWithChart'
 import WalletBadge from '@widgets/WalletBadge'
 

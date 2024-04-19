@@ -1,7 +1,7 @@
 // components
-import Spring from '@components/common/Spring'
-import StatsHighlightTable from '@components/common/stats-highlight-table'
-import Counter from '@components/common/Counter'
+import Spring from '@components/Spring'
+import StatsHighlightTable from '@components/stats-highlight-table'
+import Counter from '@components/Counter'
 import Trend from '@ui/Trend'
 
 const ConversionRate = () => {

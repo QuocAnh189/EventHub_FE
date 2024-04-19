@@ -4,7 +4,7 @@ import SubmenuTrigger from '@ui/SubmenuTrigger'
 import Timestamp from '@ui/Timestamp'
 import { NavLink } from 'react-router-dom'
 import Trend from '@ui/Trend'
-import Counter from '@components/common/Counter'
+import Counter from '@components/Counter'
 
 // utils
 import { getCategory, getStatusColor, numFormatter } from '@utils/helpers'
@@ -46,7 +46,7 @@ export const ORDERS_COLUMN_DEFS: any = [
     dataIndex: 'category',
     render: (category: any) => (
       <div className='flex items-center gap-4'>
-        <div className={`badge-icon badge-icon--sm bg-${getCategory(category)?.color}`}>
+        <div className={`badge-icon badge-icon--sm bg-${getCategory(category)?.backgroundColor}`}>
           <i className={`${getCategory(category)?.icon} text-base`} />
         </div>
         <span className='label-text'>{getCategory(category)?.label}</span>

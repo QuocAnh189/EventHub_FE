@@ -1,24 +1,19 @@
 // components
 import FilterItem from '@ui/FilterItem'
 import Select from '@ui/Select'
-// import StyledTable from './styles'
-// import Empty from '@components/common/Empty'
-// import Pagination from '@ui/Pagination'
-// import EventManagementCollapseItem from '@components/common/EventManagementCollapseItem'
+import CardMyEvent from '@components/event/CardMyEvent'
+import Pagination from '@ui/Pagination'
 
 // hooks
 import { useState } from 'react'
 import { usePagination } from '@hooks/usePagination'
-// import { useWindowSize } from 'react-use'
 
 // constants
 import {
-  PRODUCT_MANAGEMENT_OPTIONS,
+  EVENT_MANAGEMENT_OPTIONS,
   EVENT_CATEGORIES,
-  STOCK_STATUS_OPTIONS,
-  PRODUCT_TYPE_OPTIONS,
-  PRODUCT_SELLER_OPTIONS,
-  PRODUCT_ADDITIONAL_OPTIONS,
+  EVENT_STATUS_OPTIONS,
+  EVENT_SELLER_OPTIONS,
   PRODUCT_SELECT_OPTIONS
 } from '@constants/options'
 // import { PRODUCTS_MANAGEMENT_COLUMN_DEFS } from '@constants/columnDefs'
@@ -26,8 +21,7 @@ import {
 // data placeholder
 import products_management from '@db/products_management'
 
-const ProductManagementTable = () => {
-  // const { width } = useWindowSize()
+const EventManagement = () => {
   const defaultFilters = {
     Status: null,
     Category: null,
@@ -38,9 +32,8 @@ const ProductManagementTable = () => {
   const [category, setCategory] = useState('all')
   const [filters, setFilters] = useState(defaultFilters)
   const [selectedAction, setSelectedAction] = useState(null)
-  // const [activeCollapse, setActiveCollapse] = useState('')
 
-  const getQty = (category: any) => {
+  const getQty = (category: string) => {
     if (category === 'all') return products_management.length
     return products_management.filter((product) => product.status === category).length
   }
@@ -63,27 +56,14 @@ const ProductManagementTable = () => {
     return products_management.filter((product) => product.status === category)
   }
 
-  const pagination = usePagination(dataByStatus(), 8)
-
-  // reset active collapse when page or window width changes
-  // useEffect(() => {
-  //   setActiveCollapse('')
-  // }, [pagination.currentPage, width])
-
-  // const handleCollapse = (sku: any) => {
-  //   if (activeCollapse === sku) {
-  //     setActiveCollapse('')
-  //   } else {
-  //     setActiveCollapse(sku)
-  //   }
-  // }
+  const pagination = usePagination(dataByStatus(), 4)
 
   return (
     <div className='flex flex-col flex-1'>
       <div className='flex flex-wrap gap-2 mb-4'>
         <span className='text-header'>Events:</span>
         <div>
-          {PRODUCT_MANAGEMENT_OPTIONS.map((option, index) => (
+          {EVENT_MANAGEMENT_OPTIONS.map((option, index) => (
             <FilterItem
               key={`filter-${index}`}
               text={option.label}
@@ -97,7 +77,7 @@ const ProductManagementTable = () => {
       </div>
       <div className='grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-x-6 xl:grid-cols-6'>
         <Select
-          options={STOCK_STATUS_OPTIONS}
+          options={EVENT_STATUS_OPTIONS}
           value={filters.Status}
           placeholder='Status'
           onChange={(e) => handleFilterSelect(e, 'Status')}
@@ -109,25 +89,13 @@ const ProductManagementTable = () => {
           onChange={(e) => handleFilterSelect(e, 'Category')}
         />
         <Select
-          options={PRODUCT_SELLER_OPTIONS}
+          options={EVENT_SELLER_OPTIONS}
           value={filters.Price}
           placeholder='Price'
           onChange={(e) => handleFilterSelect(e, 'Price')}
         />
-        <Select
-          options={PRODUCT_TYPE_OPTIONS}
-          value={filters.Quality}
-          placeholder='Quality'
-          onChange={(e) => handleFilterSelect(e, 'Quality')}
-        />
-        <Select
-          options={PRODUCT_ADDITIONAL_OPTIONS}
-          value={filters.additionalOptions}
-          placeholder='Additional Options'
-          onChange={(e) => handleFilterSelect(e, 'additionalOptions')}
-        />
         <div className='grid grid-cols-2 gap-3'>
-          <button className='btn btn--secondary !gap-[5px]' onClick={handleApplyFilters}>
+          <button className='btn bg-primary text-white !gap-[5px]' onClick={handleApplyFilters}>
             Apply <i className='icon-chevron-right-regular text-sm' />
           </button>
           <button className='btn btn--outline blue !h-[44px]' onClick={handleClearFilters}>
@@ -146,8 +114,8 @@ const ProductManagementTable = () => {
           />
         </div>
       </div>
-      {/* <div className='flex flex-1 flex-col gap-[22px]'>
-        {width >= 768 ? (
+      <div className='flex flex-col gap-[22px]'>
+        {/* {width >= 768 ? (
           <StyledTable
             columns={PRODUCTS_MANAGEMENT_COLUMN_DEFS}
             dataSource={pagination.currentItems()}
@@ -171,11 +139,17 @@ const ProductManagementTable = () => {
               />
             ))}
           </div>
-        )}
+        )} */}
+        <div className='w-full grid grid-cols-2 gap-10'>
+          <CardMyEvent />
+          <CardMyEvent />
+          <CardMyEvent />
+          <CardMyEvent />
+        </div>
         {pagination.maxPage > 1 && <Pagination pagination={pagination} />}
-      </div> */}
+      </div>
     </div>
   )
 }
 
-export default ProductManagementTable
+export default EventManagement

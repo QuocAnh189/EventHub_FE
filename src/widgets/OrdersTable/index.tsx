@@ -1,9 +1,9 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import StyledTable from './styles'
 import Pagination from '@ui/Pagination'
-import OrderCollapseItem from '@components/common/OrderCollapseItem'
-import Empty from '@components/common/Empty'
+import OrderCollapseItem from '@components/OrderCollapseItem'
+import Empty from '@components/Empty'
 
 // hooks
 import { usePagination } from '@hooks/usePagination'

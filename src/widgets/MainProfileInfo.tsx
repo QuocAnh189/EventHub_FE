@@ -2,9 +2,9 @@
 import { NavLink } from 'react-router-dom'
 
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import InfoBtn from '@ui/InfoBtn'
-import Counter from '@components/common/Counter'
+import Counter from '@components/Counter'
 import Trend from '@ui/Trend'
 import Submenu from '@ui/Submenu'
 

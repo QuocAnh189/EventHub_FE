@@ -1,5 +1,0 @@
-export * from './AutomaticRun/AutomaticRun'
-export * from './Footer/Footer'
-export * from './Header/Navbar'
-export * from './Intro/Intro'
-export * from './Manage/Manage'

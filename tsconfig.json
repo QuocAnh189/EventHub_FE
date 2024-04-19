@@ -35,6 +35,7 @@
       "@pages/*": ["pages/*"],
       "@redux/*": ["redux/*"],
       "@styles/*": ["styles/*"],
+      "@type/*": ["type/*"],
       "@ui/*": ["ui/*"],
       "@utils/*": ["utils/*"],
       "@widgets/*": ["widgets/*"]

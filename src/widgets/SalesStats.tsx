@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 // hooks

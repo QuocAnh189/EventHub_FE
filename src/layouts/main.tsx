@@ -2,10 +2,10 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { SidebarProvider } from '@contexts/sidebarContext'
 
 //component
-import Sidebar from '@components/common/sidebar/Sidebar'
-import AppBar from '@components/common/AppBar'
-import ScrollToTop from '@components/common/ScrollToTop'
-import { Bottom } from '@components/landing/Footer/Bottom'
+import Sidebar from '@components/sidebar/Sidebar'
+import AppBar from '@components/AppBar'
+import ScrollToTop from '@components/ScrollToTop'
+import { Bottom } from '@components/Bottom'
 
 // hooks
 import { useRef, useEffect } from 'react'

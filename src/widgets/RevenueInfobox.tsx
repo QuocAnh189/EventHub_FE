@@ -1,5 +1,5 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import SubmenuTrigger from '@ui/SubmenuTrigger'
 import Trend from '@ui/Trend'
 import Submenu from '@ui/Submenu'

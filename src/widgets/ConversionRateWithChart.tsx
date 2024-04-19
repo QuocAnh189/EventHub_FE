@@ -1,10 +1,10 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import InfoBtn from '@ui/InfoBtn'
 import Submenu from '@ui/Submenu'
-import StatsHighlightTable from '@components/common/stats-highlight-table'
+import StatsHighlightTable from '@components/stats-highlight-table'
 import GaugeChart from 'react-gauge-chart'
-import Counter from '@components/common/Counter'
+import Counter from '@components/Counter'
 import Trend from '@ui/Trend'
 
 // hooks

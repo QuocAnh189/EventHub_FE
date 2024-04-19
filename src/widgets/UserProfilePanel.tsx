@@ -1,5 +1,5 @@
 //components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 
 const UserProfilePanel = () => {
   return (

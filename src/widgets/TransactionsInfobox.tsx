@@ -1,9 +1,10 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import Trend from '@ui/Trend'
 // import Counter from '@components/common/Counter'
 
 interface Props {
+  item: any
   trend?: number
 }
 const TransactionsInfobox = (props: Props) => {

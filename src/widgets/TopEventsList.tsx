@@ -2,10 +2,10 @@
 import 'swiper/css'
 
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import CategoryHeader from '@ui/CategoryHeader'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import ProductGridItem from '@components/common/ProductGridItem'
+import ProductGridItem from '@components/ProductGridItem'
 import { Pagination } from 'swiper/modules'
 
 interface Props {

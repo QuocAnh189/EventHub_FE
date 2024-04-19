@@ -3,7 +3,7 @@ import { PageHeader } from '@layouts/components'
 import MainProfileInfo from '@widgets/MainProfileInfo'
 import SalesStats from '@widgets/SalesStats'
 import TotalReport from '@widgets/TotalReport'
-import TotalBalance from '@components/common/TotalBalance'
+import TotalBalance from '@components/TotalBalance'
 
 // hooks
 import { useWindowSize } from 'react-use'

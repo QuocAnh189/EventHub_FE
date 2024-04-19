@@ -2,7 +2,7 @@
 import { PageHeader } from '@layouts/components'
 import Search from '@ui/Search'
 import { CSVLink } from 'react-csv'
-import ProductManagementTable from '@widgets/EventManagementTable'
+import EventManagement from '@widgets/EventManagementTable'
 
 //route
 import { useNavigate } from 'react-router-dom'
@@ -34,7 +34,7 @@ const MyEvent = () => {
         </div>
         <Search wrapperClass='lg:w-[326px]' placeholder='Search Event' />
       </div>
-      <ProductManagementTable />
+      <EventManagement />
     </div>
   )
 }

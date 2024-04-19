@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ReactNode, ReactElement } from 'react'
 
 export interface Route {
@@ -12,6 +13,5 @@ export interface LayoutProps {
 }
 
 export interface NextPageWithLayout {
-  // eslint-disable-next-line no-unused-vars
   Layout?: (props: LayoutProps) => ReactElement
 }

@@ -3,16 +3,17 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-//api
-// import { apiAuth } from './services/authApi'
-// import { apiQuiz } from './services/quizApi'
-// import { apiUser } from './services/userApi'
-// import { apiGame } from './services/gameApi'
-// import { apiLeaderBoard } from './services/leaderBoardApi'
-// import { apiPlayerResult } from './services/playerResultApi'
-// import { apiCommunity } from './services/communityApi'
-// import { apiCategory } from './services/categoryApi'
-// import { apiGrade } from './services/gradeApi'
+//service
+import { apiAuth } from './services/authApi'
+import { apiCategory } from './services/categoryApi'
+import { apiCommand } from './services/commandApi'
+import { apiEvent } from './services/eventApi'
+import { apiMessage } from './services/messageService'
+import { apiPayment } from './services/paymentApt'
+import { apiPermission } from './services/permissionApi'
+import { apiRole } from './services/rolesApi'
+import { apiTicket } from './services/ticketApi'
+import { apiUser } from './services/userApi'
 
 // Slices
 
@@ -22,15 +23,16 @@ const persistConfig = {
 }
 
 const combinedReducer = combineReducers({
-  // [apiAuth.reducerPath]: apiAuth.reducer,
-  // [apiQuiz.reducerPath]: apiQuiz.reducer,
-  // [apiUser.reducerPath]: apiUser.reducer,
-  // [apiGame.reducerPath]: apiGame.reducer,
-  // [apiLeaderBoard.reducerPath]: apiLeaderBoard.reducer,
-  // [apiPlayerResult.reducerPath]: apiPlayerResult.reducer,
-  // [apiCommunity.reducerPath]: apiCommunity.reducer,
-  // [apiCategory.reducerPath]: apiCategory.reducer,
-  // [apiGrade.reducerPath]: apiGrade.reducer
+  [apiAuth.reducerPath]: apiAuth.reducer,
+  [apiCategory.reducerPath]: apiCategory.reducer,
+  [apiCommand.reducerPath]: apiCommand.reducer,
+  [apiEvent.reducerPath]: apiEvent.reducer,
+  [apiMessage.reducerPath]: apiMessage.reducer,
+  [apiPayment.reducerPath]: apiPayment.reducer,
+  [apiPermission.reducerPath]: apiPermission.reducer,
+  [apiRole.reducerPath]: apiRole.reducer,
+  [apiTicket.reducerPath]: apiTicket.reducer,
+  [apiUser.reducerPath]: apiUser.reducer
 })
 
 const rootReducer = (state: any, action: any) => {
@@ -65,15 +67,16 @@ const store = configureStore({
         ignoredPaths: ['ignoredPath', 'ignoredNested.one', 'ignoredNested.two', 'items.data']
       }
     }).concat([
-      // apiAuth.middleware,
-      // apiCategory.middleware,
-      // apiGrade.middleware,
-      // apiQuiz.middleware,
-      // apiUser.middleware,
-      // apiGame.middleware,
-      // apiLeaderBoard.middleware,
-      // apiPlayerResult.middleware,
-      // apiCommunity.middleware
+      apiAuth.middleware,
+      apiCategory.middleware,
+      apiCommand.middleware,
+      apiEvent.middleware,
+      apiMessage.middleware,
+      apiPayment.middleware,
+      apiPermission.middleware,
+      apiRole.middleware,
+      apiTicket.middleware,
+      apiUser.middleware
     ])
 })
 

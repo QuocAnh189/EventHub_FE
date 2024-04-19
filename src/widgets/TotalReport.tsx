@@ -1,7 +1,7 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import InfoBtn from '@ui/InfoBtn'
-import ReportItem from '@components/common/ReportItem'
+import ReportItem from '@components/ReportItem'
 import { NavLink } from 'react-router-dom'
 import Submenu from '@ui/Submenu'
 

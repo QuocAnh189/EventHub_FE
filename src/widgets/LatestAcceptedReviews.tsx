@@ -1,7 +1,7 @@
 // components
-import Spring from '@components/common/Spring'
+import Spring from '@components/Spring'
 import Select from '@ui/Select'
-import Review from '@components/common/Review'
+import Review from '@components/Review'
 import Pagination from '@ui/Pagination'
 
 // hooks
