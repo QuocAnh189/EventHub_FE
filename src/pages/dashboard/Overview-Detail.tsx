@@ -8,10 +8,11 @@ import ProfitPerformance from '@widgets/ProfitPerformance'
 import RevenueInfobox from '@components/RevenueInfobox'
 import ConversionRateWithChart from '@widgets/ConversionRateWithChart'
 import WalletBadge from '@widgets/WalletBadge'
+import ProtectedLayout from '@layouts/protected'
 
 const OverviewDetail = () => {
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Revenue By Period' />
       <div>
         <div className='flex flex-col gap-4 mb-5 md:mb-[26px] md:gap-5 lg:flex-row lg:justify-between'>
@@ -54,7 +55,7 @@ const OverviewDetail = () => {
           </div>
         </div>
       </div>
-    </>
+    </ProtectedLayout>
   )
 }
 

@@ -1,4 +1,5 @@
 //component
+import ProtectedLayout from '@layouts/protected'
 import { PageHeader } from '@layouts/components'
 import Invoice from './components/Invoice'
 import CardPayment from './components/CardPayment'
@@ -35,7 +36,7 @@ const cardsData = [
 
 const Payment = () => {
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Billing' />
       <div className='w-full flex'>
         <div className='w-2/3 grid grid-cols-2'>
@@ -48,7 +49,7 @@ const Payment = () => {
           <Invoice />
         </div>
       </div>
-    </>
+    </ProtectedLayout>
   )
 }
 

@@ -5,6 +5,7 @@ import Select from '@ui/Select'
 import OrdersAverageRate from '@widgets/OrdersAverageRate'
 import OrdersInfobox from '@components/OrdersInfobox'
 import OrdersTable from '@widgets/OrdersTable'
+import ProtectedLayout from '@layouts/protected'
 
 // hooks
 import { useState } from 'react'
@@ -17,7 +18,7 @@ const Orders = () => {
   const [sort, setSort] = useState(ORDER_SORT_OPTIONS[0])
 
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Orders' />
       <div className='flex flex-col flex-1 gap-5 md:gap-[26px]'>
         <div className='w-full grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[26px] lg:grid-cols-4 lg:items-end xl:grid-cols-6'>
@@ -45,7 +46,7 @@ const Orders = () => {
         </div>
         <OrdersTable category={category} sort={sort} />
       </div>
-    </>
+    </ProtectedLayout>
   )
 }
 

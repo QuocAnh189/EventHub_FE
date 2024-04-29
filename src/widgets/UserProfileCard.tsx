@@ -1,5 +1,6 @@
 //hook
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '@hooks/useRedux'
 
 // components
 import Spring from '@components/Spring'
@@ -9,6 +10,7 @@ import dayjs from 'dayjs'
 
 //redux
 import { useSignOutMutation } from '@redux/services/authApi'
+import { setUser } from '@redux/slices/userSlice'
 
 interface Props {
   avatar: string
@@ -17,6 +19,7 @@ interface Props {
 }
 const UserProfileCard = (props: Props) => {
   const { avatar, userName, roles } = props
+  const dispatch = useAppDispatch()
 
   const navigate = useNavigate()
   const [signOut, { isLoading }] = useSignOutMutation()
@@ -25,6 +28,7 @@ const UserProfileCard = (props: Props) => {
     const result = await signOut().unwrap()
     if (result) {
       localStorage.removeItem('token')
+      dispatch(setUser(null))
       navigate('/')
     }
   }

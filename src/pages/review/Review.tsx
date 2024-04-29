@@ -4,10 +4,11 @@ import CustomersInfobox from '@components/CustomersInfobox'
 import ReviewsRate from '@widgets/ReviewsRate'
 import LatestAcceptedReviews from '@widgets/LatestAcceptedReviews'
 import ReviewsScore from '@widgets/ReviewsScore'
+import ProtectedLayout from '@layouts/protected'
 
 const Review = () => {
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Reviews' />
       <div className='flex flex-col flex-1 gap-5 md:gap-[26px]'>
         <div className='grid grid-cols-1 gap-y-5 md:gap-y-[26px] xl:grid-cols-6 xl:gap-x-[26px]'>
@@ -21,7 +22,7 @@ const Review = () => {
         </div>
         <LatestAcceptedReviews />
       </div>
-    </>
+    </ProtectedLayout>
   )
 }
 

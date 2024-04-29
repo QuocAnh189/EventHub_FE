@@ -4,10 +4,11 @@ import CustomerRetentionRate from '@widgets/CustomerRetentionRate'
 import DemographicSegmentation from '@widgets/DemographicSegmentation'
 import ConversionRate from '@widgets/ConversionRate'
 import CustomersInfobox from '@components/CustomersInfobox'
+import ProtectedLayout from '@layouts/protected'
 
 const Customers = () => {
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Customers' />
       <div className='widgets-grid grid-cols-1 xl:grid-cols-6'>
         <div className='widgets-grid grid-cols-1 md:grid-cols-3 xl:col-span-3'>
@@ -19,7 +20,7 @@ const Customers = () => {
         <CustomerRetentionRate />
         <DemographicSegmentation />
       </div>
-    </>
+    </ProtectedLayout>
   )
 }
 

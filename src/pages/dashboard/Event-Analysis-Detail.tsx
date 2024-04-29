@@ -14,6 +14,7 @@ import { useWindowSize } from 'react-use'
 // assets
 import credit from '@assets/dashboard/credit-card.webp'
 import wallet from '@assets/dashboard/wallet.webp'
+import ProtectedLayout from '@layouts/protected'
 
 const Boxes = ({ wrapperClass }: any) => {
   return (
@@ -29,7 +30,7 @@ const EventAnalysisDetail = () => {
   const { width } = useWindowSize()
 
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Seller Profile Details' />
       <div className='widgets-grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-6'>
         <EventProfilePreview />
@@ -50,7 +51,7 @@ const EventAnalysisDetail = () => {
         </div>
         {width >= 1024 && width < 1440 && <Boxes wrapperClass='col-span-3' />}
       </div>
-    </>
+    </ProtectedLayout>
   )
 }
 

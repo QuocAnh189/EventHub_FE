@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
@@ -48,9 +48,8 @@ const FormSignIn = (props: SignInProps) => {
   const [signIn, { isLoading }] = useSignInMutation()
   const { data: user, refetch } = useGetProfileQuery()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (user) {
-      console.log(user)
       navigate('/organization')
       dispatch(setUser(user))
     }
