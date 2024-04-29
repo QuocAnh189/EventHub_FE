@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { ITicketType } from 'interfaces/contents/ticketType'
 
 export const apiTicket = createApi({
   reducerPath: 'apiTicket',
@@ -6,48 +7,54 @@ export const apiTicket = createApi({
     baseUrl: import.meta.env.VITE_API_URL
   }),
   keepUnusedDataFor: 20,
+  tagTypes: ['Ticket'],
   endpoints: (builder) => ({
-    getTickets: builder.query<any, any>({
+    getTickets: builder.query<ITicketType[], void>({
       query: () => ({
-        url: '/api/tickets',
+        url: '/tickets',
         method: 'GET'
-      })
+      }),
+      providesTags: ['Ticket']
     }),
 
-    getTicket: builder.query<any, string>({
+    getTicketById: builder.query<ITicketType, string>({
       query: (ticketId) => ({
-        url: `/api/tickets/${ticketId}`,
+        url: `/tickets/${ticketId}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Ticket']
     }),
 
-    createTicket: builder.mutation<any, any>({
+    createTicket: builder.mutation<ITicketType, Partial<ITicketType>>({
       query: (data) => ({
-        url: '/api/tickets',
+        url: '/tickets',
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['Ticket']
     }),
 
-    updateTicket: builder.mutation<any, any>({
+    updateTicket: builder.mutation<ITicketType, Partial<ITicketType>>({
       query: (data) => ({
-        url: `/api/tickets/${data.id}`,
+        url: `/tickets/${data.id}`,
         method: 'PUT',
         body: data
-      })
+      }),
+      invalidatesTags: ['Ticket']
     }),
 
     deleteTicket: builder.mutation<any, string>({
       query: (ticketId) => ({
-        url: `/api/tickets/${ticketId}`,
+        url: `/tickets/${ticketId}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['Ticket']
     })
   })
 })
 
 export const {
-  useGetTicketQuery,
+  useGetTicketByIdQuery,
   useGetTicketsQuery,
   useCreateTicketMutation,
   useUpdateTicketMutation,

@@ -33,8 +33,10 @@ interface Props {
   children?: ReactElement
   onChange?: any
 }
+
 const DropFiles = (props: Props) => {
   const { wrapperClass, type = 'image', multiple = false, children, onChange } = props
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: type === 'image' ? { ...imgTypes } : { ...docTypes },
     multiple: multiple,

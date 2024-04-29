@@ -1,35 +1,37 @@
+// hooks
+import { useState } from 'react'
+import { usePagination } from '@hooks/usePagination'
+
 // components
 import FilterItem from '@ui/FilterItem'
 import Select from '@ui/Select'
 import CardMyEvent from '@components/event/CardMyEvent'
 import Pagination from '@ui/Pagination'
 
-// hooks
-import { useState } from 'react'
-import { usePagination } from '@hooks/usePagination'
-
 // constants
 import {
   EVENT_MANAGEMENT_OPTIONS,
-  EVENT_CATEGORIES,
   EVENT_STATUS_OPTIONS,
   EVENT_SELLER_OPTIONS,
   PRODUCT_SELECT_OPTIONS
 } from '@constants/options'
-// import { PRODUCTS_MANAGEMENT_COLUMN_DEFS } from '@constants/columnDefs'
 
 // data placeholder
 import products_management from '@db/products_management'
+import { useAppSelector } from '@hooks/useRedux'
+import { ICategory } from 'interfaces/contents/category'
+import { IFilterEvent } from '@type/event'
 
 const EventManagement = () => {
-  const defaultFilters = {
-    Status: null,
-    Category: null,
-    Price: null,
-    Quality: null,
-    additionalOptions: null
+  const defaultFilters: IFilterEvent = {
+    status: '',
+    category: '',
+    eventTicketType: ''
   }
   const [category, setCategory] = useState('all')
+
+  const categories = useAppSelector((state) => state.category.categories)
+
   const [filters, setFilters] = useState(defaultFilters)
   const [selectedAction, setSelectedAction] = useState(null)
 
@@ -39,13 +41,16 @@ const EventManagement = () => {
   }
 
   const handleFilterSelect = ({ value, label }: any, name: any) => {
+    console.log(value, label)
     setFilters((prevState) => ({
       ...prevState,
-      [name]: { label, value }
+      [name]: value
     }))
   }
 
-  const handleApplyFilters = () => {}
+  const handleApplyFilters = () => {
+    console.log(filters)
+  }
 
   const handleClearFilters = () => {
     setFilters(defaultFilters)
@@ -67,8 +72,8 @@ const EventManagement = () => {
             <FilterItem
               key={`filter-${index}`}
               text={option.label}
-              qty={getQty(option.value)}
-              value={option.value}
+              qty={getQty(option?.value)}
+              value={option?.value}
               active={category}
               onClick={setCategory}
             />
@@ -78,21 +83,23 @@ const EventManagement = () => {
       <div className='grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-x-6 xl:grid-cols-6'>
         <Select
           options={EVENT_STATUS_OPTIONS}
-          value={filters.Status}
+          value={filters?.status?.value}
           placeholder='Status'
-          onChange={(e) => handleFilterSelect(e, 'Status')}
+          onChange={(e) => handleFilterSelect(e, 'status')}
         />
         <Select
-          options={EVENT_CATEGORIES}
-          value={filters.Category}
+          options={categories.map((category: ICategory) => {
+            return { value: category.id, label: category.name }
+          })}
+          value={filters?.category?.value}
           placeholder='Category'
-          onChange={(e) => handleFilterSelect(e, 'Category')}
+          onChange={(e) => handleFilterSelect(e, 'category')}
         />
         <Select
           options={EVENT_SELLER_OPTIONS}
-          value={filters.Price}
+          value={filters.eventTicketType.value}
           placeholder='Price'
-          onChange={(e) => handleFilterSelect(e, 'Price')}
+          onChange={(e) => handleFilterSelect(e, 'eventTicketType')}
         />
         <div className='grid grid-cols-2 gap-3'>
           <button className='btn bg-primary text-white !gap-[5px]' onClick={handleApplyFilters}>

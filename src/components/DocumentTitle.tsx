@@ -10,6 +10,7 @@ interface Props {
 
 export const DocumentTitle = (props: Props) => {
   const { title } = props
+
   return (
     <Helmet>
       <title>{title} | Event Hub</title>

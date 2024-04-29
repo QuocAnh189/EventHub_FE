@@ -20,6 +20,7 @@ interface Props {
 
 const Counter = (props: Props) => {
   const { num, className, isFormatted, decimals, suffix, prefix } = props
+
   const [countFinished, setCountFinished] = useState(false)
 
   return (

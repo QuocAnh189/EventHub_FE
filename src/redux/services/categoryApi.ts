@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { CategoryPayload } from '@type/category'
+import { ICategory } from 'interfaces/contents/category'
 
 export const apiCategory = createApi({
   reducerPath: 'apiCategory',
@@ -6,44 +8,57 @@ export const apiCategory = createApi({
     baseUrl: import.meta.env.VITE_API_URL
   }),
   keepUnusedDataFor: 20,
+  tagTypes: ['Category'],
   endpoints: (builder) => ({
-    createCategory: builder.mutation<any, any>({
+    createCategory: builder.mutation<ICategory, CategoryPayload>({
       query: (data) => ({
-        url: '/api/categories',
+        url: '/categories',
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['Category']
     }),
 
-    getCategories: builder.query<any, any>({
+    getCategories: builder.query<ICategory[], void>({
       query: () => ({
-        url: '/api/categories',
+        url: '/categories',
         method: 'GET'
-      })
+      }),
+      providesTags: ['Category'],
+      transformResponse: (response: any) => response.data.items
     }),
 
-    getCategory: builder.query<any, string>({
-      query: (id) => ({
-        url: `/api/categories/${id}`,
+    getCategoryById: builder.query<ICategory, string>({
+      query: (categoryId) => ({
+        url: `/categories/${categoryId}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Category']
     }),
 
-    updateCategory: builder.mutation<any, any>({
+    updateCategory: builder.mutation<ICategory, Partial<ICategory>>({
       query: (data) => ({
-        url: `/api/categories/${data.id}`,
+        url: `/categories/${data.id}`,
         method: 'PUT',
         body: data
-      })
+      }),
+      invalidatesTags: ['Category']
     }),
 
     deleteCategory: builder.mutation<any, string>({
-      query: (id) => ({
-        url: `/api/categories/${id}`,
+      query: (categoryId) => ({
+        url: `/categories/${categoryId}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['Category']
     })
   })
 })
 
-export const { useCreateCategoryMutation } = apiCategory
+export const {
+  useCreateCategoryMutation,
+  useGetCategoriesQuery,
+  useLazyGetCategoryByIdQuery,
+  useUpdateCategoryMutation,
+  useDeleteCategoryMutation
+} = apiCategory

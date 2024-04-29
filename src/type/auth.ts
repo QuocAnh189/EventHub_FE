@@ -7,12 +7,12 @@ export enum Provider {
 }
 
 export interface LoginPayload {
-  email: string
+  identity: string
   password: string
 }
 
 export const InitLogin = {
-  email: '',
+  identity: '',
   password: ''
 } as LoginPayload
 

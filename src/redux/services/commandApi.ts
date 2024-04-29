@@ -9,7 +9,7 @@ export const apiCommand = createApi({
   endpoints: (builder) => ({
     getCommand: builder.query<any, void>({
       query: () => ({
-        url: '/api/commands',
+        url: '/commands',
         method: 'GET'
       })
     })

@@ -1,11 +1,11 @@
+// hooks
+import { useState, useEffect } from 'react'
+import useMeasure from 'react-use-measure'
+
 // components
 import NotificationItem from './NotificationItem'
 import FilterItem from '@ui/FilterItem'
 import DrawerBase from '@ui/DrawerBase'
-
-// hooks
-import { useState, useEffect } from 'react'
-import useMeasure from 'react-use-measure'
 
 // constants
 import { NOTIFICATION_OPTIONS } from '@constants/options'

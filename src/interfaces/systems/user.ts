@@ -1,5 +1,4 @@
-import { Gender, UserStatus } from 'interfaces/constants/enum'
-
+import { EGender, EUserStatus } from '@constants/enum'
 export interface IUser {
   id: string
   userName: string
@@ -7,10 +6,10 @@ export interface IUser {
   phoneNumber: number
   dob: Date
   fullName: string
-  gender: Gender
+  gender: EGender
   bio: string
   avatar: string
-  status: UserStatus
+  status: EUserStatus
   numberOfFollowers: number
   numberOfFolloweds: number
   numberOfFavourites: number

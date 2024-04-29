@@ -14,10 +14,16 @@ import logoText_Img from '@assets/common/logo-text.png'
 import { motion } from 'framer-motion'
 
 //type
-import { SignUpPayload, InitSignUpOne, InitSignUpTwo, SignUpPayloadOne, SignUpPayloadTwo } from '@type/auth'
+import { SignUpPayload, SignUpPayloadOne, SignUpPayloadTwo, InitSignUpOne, InitSignUpTwo } from '@type/auth'
+
+//redux
+import { useSignUpMutation } from '@redux/services/authApi'
+import { toast } from 'react-toastify'
 
 const SignUp = () => {
   const { width } = useWindowSize()
+
+  const [signUp, { isLoading }] = useSignUpMutation()
 
   const [formDataSessionOne, setFormDataSessionOne] = useState<SignUpPayloadOne>(InitSignUpOne)
   const [formDataSessionTwo, setFormDataSessionTwo] = useState<SignUpPayloadTwo>(InitSignUpTwo)
@@ -47,9 +53,27 @@ const SignUp = () => {
     setFormDataSessionTwo({ ...formDataSessionTwo, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formData: SignUpPayload = { ...formDataSessionOne, ...formDataSessionTwo }
-    console.log(formData)
+
+    try {
+      const result = await signUp(formData).unwrap()
+      if (result) {
+        nextSession()
+      }
+    } catch (error: any) {
+      const message = error.data.message
+      switch (message) {
+        case 'Email already exists':
+          toast.error('Email already exists')
+          break
+        case 'Phone already exists':
+          toast.error('Phone already exists')
+          break
+        default:
+          break
+      }
+    }
   }
 
   return (
@@ -95,6 +119,7 @@ const SignUp = () => {
                   formDataSessionTwo={formDataSessionTwo}
                   setFormDataSessionTwo={handleChangeFormSessionTwo}
                   handleSubmit={handleSubmit}
+                  disabled={isLoading}
                 />
               )}
             </div>

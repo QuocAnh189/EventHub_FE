@@ -24,7 +24,7 @@ const ROUTES: Route[] = [
     links: [
       { name: 'Overview', path: '/organization/dashboard/overview' },
       { name: 'Event Analysis', path: '/organization/dashboard/event-analysis' },
-      { name: 'Category Analysis', path: '/organization/dashboard/category-analysis' },
+      // { name: 'Category Analysis', path: '/organization/dashboard/category-analysis' },
       { name: 'Customer', path: '/organization/dashboard/customer' },
       { name: 'Payment', path: '/organization/dashboard/payment' }
     ]

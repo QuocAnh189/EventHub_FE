@@ -16,6 +16,8 @@ import { apiTicket } from './services/ticketApi'
 import { apiUser } from './services/userApi'
 
 // Slices
+import categoryReducer, { CategorySliceKey } from './slices/categorySlice'
+import userReducer, { UserSliceKey } from './slices/userSlice'
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +25,9 @@ const persistConfig = {
 }
 
 const combinedReducer = combineReducers({
+  [CategorySliceKey]: categoryReducer,
+  [UserSliceKey]: userReducer,
+
   [apiAuth.reducerPath]: apiAuth.reducer,
   [apiCategory.reducerPath]: apiCategory.reducer,
   [apiCommand.reducerPath]: apiCommand.reducer,

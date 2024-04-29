@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IRole } from 'interfaces/systems/role'
 
 export const apiRole = createApi({
   reducerPath: 'apiRole',
@@ -6,64 +7,72 @@ export const apiRole = createApi({
     baseUrl: import.meta.env.VITE_API_URL
   }),
   keepUnusedDataFor: 20,
+  tagTypes: ['Role'],
   endpoints: (builder) => ({
-    getRoles: builder.query<any, any>({
+    getRoles: builder.query<IRole, void>({
       query: () => ({
-        url: '/api/roles',
+        url: '/roles',
         method: 'GET'
-      })
+      }),
+      providesTags: ['Role']
     }),
 
-    getRole: builder.query<any, string>({
+    getRoleById: builder.query<IRole, string>({
       query: (roleId) => ({
-        url: `/api/roles/${roleId}`,
+        url: `/roles/${roleId}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Role']
     }),
 
-    createRole: builder.mutation<any, any>({
+    createRole: builder.mutation<IRole, Partial<IRole>>({
       query: (data) => ({
-        url: '/api/roles',
+        url: '/roles',
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['Role']
     }),
 
-    updateRole: builder.mutation<any, any>({
+    updateRole: builder.mutation<IRole, Partial<IRole>>({
       query: (data) => ({
-        url: `/api/roles/${data.id}`,
+        url: `/roles/${data.id}`,
         method: 'PUT',
         body: data
-      })
+      }),
+      invalidatesTags: ['Role']
     }),
 
     deleteRole: builder.mutation<any, string>({
       query: (roleId) => ({
-        url: `/api/roles/${roleId}`,
+        url: `/roles/${roleId}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['Role']
     }),
 
     getPermissionByRoleId: builder.query<any, string>({
       query: (roleId) => ({
-        url: `/api/roles/${roleId}`,
+        url: `/roles/${roleId}/permesstions`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Role']
     }),
 
     updatePermissionByRoleId: builder.query<any, { roleId: string; data: any }>({
       query: ({ roleId, data }) => ({
-        url: `/api/roles/${roleId}`,
+        url: `/roles/${roleId}/permesstions`,
         method: 'PUT',
         body: data
-      })
+      }),
+      providesTags: ['Role']
     })
   })
 })
 
 export const {
   useGetRolesQuery,
-  useGetRoleQuery,
+  useGetRoleByIdQuery,
   useCreateRoleMutation,
   useUpdateRoleMutation,
   useDeleteRoleMutation,

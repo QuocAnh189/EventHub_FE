@@ -1,5 +1,4 @@
-import { Gender } from 'interfaces/constants/enum'
-
+import { EGender } from '@constants/enum'
 export interface ICreator {
   id: string
   userName: string
@@ -7,6 +6,6 @@ export interface ICreator {
   phomeNumber: string
   dob: Date
   fullName: string
-  gender: Gender
+  gender: EGender
   avatar: string
 }

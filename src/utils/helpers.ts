@@ -96,7 +96,7 @@ export const sortSellers = (data: any, sortOption: any) => {
 }
 
 export const getCategory = (value: any) => {
-  return EVENT_CATEGORIES.find((category) => category.value === value)
+  return EVENT_CATEGORIES.find((category: any) => category.value === value)
 }
 
 export const getStatusColor = (status: any) => {

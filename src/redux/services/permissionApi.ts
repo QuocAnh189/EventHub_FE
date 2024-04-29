@@ -6,12 +6,14 @@ export const apiPermission = createApi({
     baseUrl: import.meta.env.VITE_API_URL
   }),
   keepUnusedDataFor: 20,
+  tagTypes: ['PERMISSION'],
   endpoints: (builder) => ({
     getPermissions: builder.query<any, any>({
       query: () => ({
-        url: '/api/permissions',
+        url: '/permissions',
         method: 'GET'
-      })
+      }),
+      providesTags: ['PERMISSION']
     })
   })
 })

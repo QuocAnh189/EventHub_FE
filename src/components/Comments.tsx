@@ -1,4 +1,4 @@
-//chakra
+//component
 import Divider from '@mui/material/Divider'
 
 //icons
@@ -32,7 +32,7 @@ const Item = () => {
   )
 }
 
-export const Comments = () => {
+const Comments = () => {
   return (
     <div className='w-1/2 space-y-4 pl-[150px]'>
       <Item />
@@ -46,3 +46,5 @@ export const Comments = () => {
     </div>
   )
 }
+
+export default Comments

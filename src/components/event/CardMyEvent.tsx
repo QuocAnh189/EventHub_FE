@@ -1,5 +1,6 @@
 //hook
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //component
 import { Link } from 'react-router-dom'
@@ -11,9 +12,13 @@ import { FaCalendarAlt } from 'react-icons/fa'
 import { IoLocationSharp } from 'react-icons/io5'
 
 const CardMyEvent = () => {
+  const navigate = useNavigate()
   const [openDialog, setOpenDialog] = useState<boolean>(false)
 
-  const handleEdit = () => {}
+  const handleEdit = () => {
+    navigate('modify-event/123')
+  }
+
   const handleDelete = () => {
     setOpenDialog(true)
   }

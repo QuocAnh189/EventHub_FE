@@ -11,7 +11,15 @@ import { useWindowSize } from 'react-use'
 import PropTypes from 'prop-types'
 import { getStatusColor } from '@utils/helpers'
 
-const OrderCollapseItem = ({ order, activeCollapse, handleCollapse }: any) => {
+interface Props {
+  order?: any
+  activeCollapse?: any
+  handleCollapse?: any
+}
+
+const OrderCollapseItem = (props: Props) => {
+  const { order, activeCollapse, handleCollapse } = props
+
   const isExtraSmall = useWindowSize().width < 375
 
   const status =

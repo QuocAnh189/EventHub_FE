@@ -1,11 +1,11 @@
+// hooks
+import useMeasure from 'react-use-measure'
+import { useState, useEffect } from 'react'
+
 // components
 import MessageItem from './MessageItem'
 import FilterItem from '@ui/FilterItem'
 import DrawerBase from '@ui/DrawerBase'
-
-// hooks
-import useMeasure from 'react-use-measure'
-import { useState, useEffect } from 'react'
 
 // constants
 import { MESSAGE_OPTIONS } from '@constants/options'

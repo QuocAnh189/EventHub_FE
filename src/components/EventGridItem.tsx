@@ -1,8 +1,8 @@
 // components
-import RatingStars from '@ui/RatingStars'
 import { NavLink } from 'react-router-dom'
+import RatingStars from '@ui/RatingStars'
 
-const ProductGridItem = () => {
+const EventGridItem = () => {
   return (
     <NavLink to='/organization/event/123' className='card flex flex-col h-full hover:cursor-pointer'>
       <div className='flex items-start gap-[14px] mb-2.5'>
@@ -23,4 +23,4 @@ const ProductGridItem = () => {
   )
 }
 
-export default ProductGridItem
+export default EventGridItem

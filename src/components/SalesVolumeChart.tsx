@@ -1,10 +1,10 @@
+// hooks
+import { useTheme } from '@contexts/themeContext'
+
 // components
 import Spring from './Spring'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import Trend from '@ui/Trend'
-
-// hooks
-import { useTheme } from '@contexts/themeContext'
 
 // utils
 import { generateGridPoints, numFormatter } from '@utils/helpers'

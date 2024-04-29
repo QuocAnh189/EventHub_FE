@@ -1,8 +1,8 @@
-// components
-import Spring from './Spring'
-
 // hooks
 import { useTheme } from '@contexts/themeContext'
+
+// components
+import Spring from './Spring'
 
 // assets
 import coin from '@assets/dashboard/coin.png'

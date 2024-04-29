@@ -1,13 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
+
+//component
+import CircularProgress from '@mui/material/CircularProgress'
 
 //validate
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-
-//navigate
-import { useNavigate } from 'react-router-dom'
 
 //icons
 import { AiFillEye } from 'react-icons/ai'
@@ -18,24 +20,41 @@ import facebookIcon from '@assets/icons/facebook.png'
 //type
 import { LoginPayload, InitLogin } from '@type/auth'
 
-const formSchema = z.object({
-  email: z.string().min(1, 'Email is not empty'),
-  password: z.string().min(1, 'Password is not emty')
-})
+//redux
+import { useAppDispatch } from '@hooks/useRedux'
+import { useSignInMutation, useGetProfileQuery } from '@redux/services/authApi'
+import { setUser } from '@redux/slices/userSlice'
 
 //motion
 import { motion } from 'framer-motion'
+import { toast } from 'react-toastify'
+
+const formSchema = z.object({
+  identity: z.string().min(1, 'Identity is not empty'),
+  password: z.string().min(1, 'Password is not emty')
+})
 
 interface SignInProps {
   handleForgotPassword: (value: boolean) => void
 }
 
 const FormSignIn = (props: SignInProps) => {
+  const dispatch = useAppDispatch()
   const { handleForgotPassword } = props
 
   const navigate = useNavigate()
 
   const [showPassWord, setShowPassWord] = useState<boolean>(false)
+  const [signIn, { isLoading }] = useSignInMutation()
+  const { data: user, refetch } = useGetProfileQuery()
+
+  useEffect(() => {
+    if (user) {
+      console.log(user)
+      navigate('/organization')
+      dispatch(setUser(user))
+    }
+  }, [user])
 
   const {
     register,
@@ -48,9 +67,20 @@ const FormSignIn = (props: SignInProps) => {
 
   const onSubmit: SubmitHandler<LoginPayload> = async (data: LoginPayload) => {
     try {
-      alert(data.email)
-    } catch (error) {
-      console.log(error)
+      const result = await signIn(data).unwrap()
+      if (result) {
+        localStorage.setItem('token', JSON.stringify(result))
+        refetch()
+      }
+    } catch (error: any) {
+      const message = error.data.message
+      switch (message) {
+        case 'Invalid credentials':
+          toast.error('Your account or password is wrong')
+          break
+        default:
+          break
+      }
     }
   }
 
@@ -64,13 +94,13 @@ const FormSignIn = (props: SignInProps) => {
           className='relative mb-6'
         >
           <input
-            {...register('email')}
-            type='email'
-            name='email'
+            {...register('identity')}
+            type='text'
+            name='identity'
             className='block min-h-[auto] w-full rounded-2xl border-[2px] px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Enter email'
+            placeholder='Enter account (email or username)'
           />
-          {errors.email && <p className='mt-1 text-textError'>{errors.email.message}</p>}
+          {errors.identity && <p className='mt-1 text-textError'>{errors.identity.message}</p>}
         </motion.div>
 
         <motion.div
@@ -88,6 +118,7 @@ const FormSignIn = (props: SignInProps) => {
           />
           {errors.password && <p className='mt-1 text-textError'>{errors.password.message}</p>}
           <button
+            type='button'
             className='absolute right-4 top-[50%] translate-y-[-50%] cursor-pointer'
             onClick={() => {
               setShowPassWord(!showPassWord)
@@ -102,13 +133,14 @@ const FormSignIn = (props: SignInProps) => {
         </motion.div>
 
         <motion.button
+          disabled={isLoading}
           type='submit'
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.5 }}
           className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
         >
-          Sign In
+          {isLoading ? <CircularProgress size={28} color='info' /> : 'Sign In'}
         </motion.button>
       </form>
       <div className='mt-3 flex w-full flex-col gap-y-2'>
@@ -132,7 +164,6 @@ const FormSignIn = (props: SignInProps) => {
         </motion.button>
 
         <motion.button
-          type='submit'
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.8 }}

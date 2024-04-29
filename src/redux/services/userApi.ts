@@ -1,37 +1,53 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IChangePasswordPayload, IFollowPayload } from '@type/user'
+import { IUser } from 'interfaces/systems/user'
 
 export const apiUser = createApi({
   reducerPath: 'apiUser',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL
+    baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers) => {
+      const token = JSON.parse(localStorage.getItem('token')!).accessToken
+
+      headers.set('Content-Type', 'application/json')
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+
+      return headers
+    }
   }),
   keepUnusedDataFor: 20,
+  tagTypes: ['User'],
   endpoints: (builder) => ({
-    getUsers: builder.query<any, void>({
+    getUsers: builder.query<IUser[], void>({
       query: () => ({
-        url: '/api/users',
+        url: '/users',
         method: 'GET'
-      })
+      }),
+      providesTags: ['User']
     }),
 
-    getUser: builder.query<any, string>({
+    getUserById: builder.query<any, string>({
       query: (userId) => ({
-        url: `/api/users/${userId}`,
+        url: `/users/${userId}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['User']
     }),
 
-    createUser: builder.mutation<any, any>({
+    createUser: builder.mutation<IUser, Partial<IUser>>({
       query: (data) => ({
-        url: '/api/users',
+        url: '/users',
         method: 'GET',
         body: data
-      })
+      }),
+      invalidatesTags: ['User']
     }),
 
-    updateUser: builder.mutation<any, any>({
+    updateUser: builder.mutation<IUser, Partial<IUser>>({
       query: (data) => ({
-        url: `/api/users/${data.id}`,
+        url: `/users/${data.id}`,
         method: 'PUT',
         body: data
       })
@@ -39,60 +55,67 @@ export const apiUser = createApi({
 
     deleteUser: builder.mutation<any, string>({
       query: (userId) => ({
-        url: `/api/users/${userId}`,
+        url: `/users/${userId}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['User']
     }),
 
-    changePassword: builder.mutation<any, { userId: string; data: any }>({
-      query: ({ userId, data }) => ({
-        url: `/api/users/${userId}/change-password`,
+    changePassword: builder.mutation<any, IChangePasswordPayload>({
+      query: (data) => ({
+        url: `/users/${data.userId}/change-password`,
         method: 'PATCH',
         body: data
-      })
+      }),
+      invalidatesTags: ['User']
     }),
 
     getMenuByUserId: builder.query<any, string>({
       query: (userId) => ({
-        url: `/api/users/${userId}/menu`,
+        url: `/users/${userId}/menu`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['User']
     }),
 
     getReviewsByUserId: builder.query<any, string>({
       query: (userId) => ({
-        url: `/api/users/${userId}/reviews`,
+        url: `/users/${userId}/reviews`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['User']
     }),
 
     getEventsFavouriteByUserId: builder.query<any, string>({
       query: (userId) => ({
-        url: `/api/users/${userId}/events/favourites`,
+        url: `/users/${userId}/events/favourites`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['User']
     }),
 
-    followUser: builder.mutation<any, any>({
+    followUser: builder.mutation<any, IFollowPayload>({
       query: (data) => ({
-        url: `/api/users/followers/follow`,
+        url: `/users/followers/follow`,
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['User']
     }),
 
-    unfollowUser: builder.mutation<any, any>({
+    unfollowUser: builder.mutation<any, IFollowPayload>({
       query: (data) => ({
-        url: `/api/users/followers/unfollow`,
+        url: `/users/followers/unfollow`,
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['User']
     })
   })
 })
 
 export const {
-  useGetUserQuery,
+  useGetUserByIdQuery,
   useGetUsersQuery,
   useCreateUserMutation,
   useUpdateUserMutation,

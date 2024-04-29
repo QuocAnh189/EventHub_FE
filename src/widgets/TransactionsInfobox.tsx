@@ -4,7 +4,7 @@ import Trend from '@ui/Trend'
 // import Counter from '@components/common/Counter'
 
 interface Props {
-  item: any
+  item?: any
   trend?: number
 }
 const TransactionsInfobox = (props: Props) => {

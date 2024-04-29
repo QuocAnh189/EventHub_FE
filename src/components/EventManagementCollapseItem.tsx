@@ -7,7 +7,14 @@ import { Checkbox } from 'antd'
 // utils
 import PropTypes from 'prop-types'
 
-const EventManagementCollapseItem = ({ product, activeCollapse, handleCollapse }: any) => {
+interface Props {
+  product?: any
+  activeCollapse?: any
+  handleCollapse?: any
+}
+
+const EventManagementCollapseItem = (props: Props) => {
+  const { product, activeCollapse, handleCollapse } = props
   const { stock } = product
 
   return (

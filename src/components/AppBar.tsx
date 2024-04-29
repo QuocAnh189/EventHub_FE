@@ -18,7 +18,6 @@ import { LOCALES } from '@constants/options'
 
 interface Props {
   active: string
-  // eslint-disable-next-line no-unused-vars
   setActive: (value: any) => void
 }
 

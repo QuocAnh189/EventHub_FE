@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { ICreateEventPayload, IFavouriteEventPayload, IReviewEventPayload } from '@type/event'
+import { IEvent } from 'interfaces/contents/event'
 
 export const apiEvent = createApi({
   reducerPath: 'apiEvent',
@@ -6,108 +8,121 @@ export const apiEvent = createApi({
     baseUrl: import.meta.env.VITE_API_URL
   }),
   keepUnusedDataFor: 20,
+  tagTypes: ['Event', 'Review'],
   endpoints: (builder) => ({
-    getEvents: builder.query<any, any>({
+    getEvents: builder.query<Partial<IEvent>[], any>({
       query: () => ({
-        url: '/api/events',
+        url: '/events',
         method: 'GET'
-      })
+      }),
+      providesTags: ['Event']
     }),
 
-    getEvent: builder.query<any, string>({
+    getEventById: builder.query<IEvent, string>({
       query: (eventId) => ({
-        url: `/api/events/${eventId}`,
+        url: `/events/${eventId}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Event']
     }),
 
-    createEvent: builder.mutation<any, any>({
+    createEvent: builder.mutation<IEvent, ICreateEventPayload>({
       query: (data) => ({
-        url: '/api/events',
+        url: '/events',
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['Event']
     }),
 
-    updateEvent: builder.mutation<any, any>({
+    updateEvent: builder.mutation<IEvent, Partial<IEvent>>({
       query: (data) => ({
-        url: `/api/events/${data.id}`,
+        url: `/events/${data.id}`,
         method: 'PUT',
         body: data
-      })
+      }),
+      invalidatesTags: ['Event']
     }),
 
     deleteEvent: builder.mutation<any, string>({
       query: (eventId) => ({
-        url: `/api/events/${eventId}`,
+        url: `/events/${eventId}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['Event']
     }),
 
-    addReview: builder.mutation<any, { eventId: string; review: any }>({
-      query: ({ eventId, review }) => ({
-        url: `/api/events/${eventId}/reviews`,
+    addReview: builder.mutation<any, IReviewEventPayload>({
+      query: (data) => ({
+        url: `/events/${data.eventId}/reviews`,
         method: 'POST',
-        body: review
-      })
+        body: data
+      }),
+      invalidatesTags: ['Review']
     }),
 
-    getReviews: builder.query<any, string>({
+    getReviewsByEventId: builder.query<any, string>({
       query: (eventId) => ({
-        url: `/api/events/${eventId}/reviews`,
+        url: `/events/${eventId}/reviews`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Review']
     }),
 
-    getReview: builder.query<any, { eventId: string; reviewId: string }>({
+    getReviewById: builder.query<any, { eventId: string; reviewId: string }>({
       query: ({ eventId, reviewId }) => ({
-        url: `/api/events/${eventId}/reviews/${reviewId}`,
+        url: `/events/${eventId}/reviews/${reviewId}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Review']
     }),
 
-    updateReview: builder.mutation<any, { eventId: string; reviewId: string; data: any }>({
-      query: ({ eventId, reviewId, data }) => ({
-        url: `/api/events/${eventId}/reviews/${reviewId}`,
+    updateReview: builder.mutation<any, { reviewId: string; data: IReviewEventPayload }>({
+      query: ({ reviewId, data }) => ({
+        url: `/events/${data.eventId}/reviews/${reviewId}`,
         method: 'PUT',
         body: data
-      })
+      }),
+      invalidatesTags: ['Review']
     }),
 
     deleteReview: builder.mutation<any, { eventId: string; reviewId: string }>({
       query: ({ eventId, reviewId }) => ({
-        url: `/api/events/${eventId}/reviews/${reviewId}`,
+        url: `/events/${eventId}/reviews/${reviewId}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['Review']
     }),
 
-    favouriteEvent: builder.mutation<any, { eventId: string; data: any }>({
-      query: ({ eventId, data }) => ({
-        url: `/api/events/${eventId}/favourites/subscribe`,
+    favouriteEvent: builder.mutation<any, IFavouriteEventPayload>({
+      query: (data) => ({
+        url: `/events/${data.eventId}/favourites/subscribe`,
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['Event']
     }),
 
-    unfavouriteEvent: builder.mutation<any, { eventId: string; data: any }>({
-      query: ({ eventId, data }) => ({
-        url: `/api/events/${eventId}/favourites/unsubscribe`,
+    unfavouriteEvent: builder.mutation<any, IFavouriteEventPayload>({
+      query: (data) => ({
+        url: `/events/${data.eventId}/favourites/unsubscribe`,
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['Event']
     })
   })
 })
 
 export const {
   useGetEventsQuery,
-  useGetEventQuery,
+  useGetEventByIdQuery,
   useCreateEventMutation,
   useUpdateEventMutation,
   useDeleteEventMutation,
   useAddReviewMutation,
-  useGetReviewsQuery,
-  useGetReviewQuery,
+  useGetReviewsByEventIdQuery,
+  useGetReviewByIdQuery,
   useUpdateReviewMutation,
   useDeleteReviewMutation,
   useFavouriteEventMutation,

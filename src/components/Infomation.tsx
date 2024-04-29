@@ -8,6 +8,7 @@ import { IoMdTime } from 'react-icons/io'
 import { FaUsers } from 'react-icons/fa'
 import { IoMdAdd } from 'react-icons/io'
 
+//style
 import classNames from 'classnames'
 
 const Infomation = () => {

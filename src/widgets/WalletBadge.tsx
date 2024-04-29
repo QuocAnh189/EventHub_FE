@@ -8,7 +8,7 @@ interface Props {
   value: number
   label: string
   image: string
-  imgClass: string
+  imgClass?: string
 }
 
 const WalletBadge = (props: Props) => {

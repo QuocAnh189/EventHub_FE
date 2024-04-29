@@ -1,9 +1,9 @@
+// hooks
+import useMeasure from 'react-use-measure'
+
 // components
 import Spring from '../Spring'
 import TruncatedText from './TruncatedText'
-
-// hooks
-import useMeasure from 'react-use-measure'
 
 // utils
 import dayjs from 'dayjs'

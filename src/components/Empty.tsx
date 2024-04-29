@@ -4,6 +4,7 @@ import Spring from './Spring'
 interface Props {
   text?: string
 }
+
 const Empty = (props: Props) => {
   const { text = props.text || 'Nothing found' } = props
 

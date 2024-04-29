@@ -19,6 +19,7 @@ interface PriceProps {
   price: number
   setCondition: (value: number) => void
 }
+
 const Price = (props: PriceProps) => {
   const { price, setCondition } = props
 

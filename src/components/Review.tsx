@@ -1,3 +1,9 @@
+// hooks
+import { useTheme } from '@contexts/themeContext'
+import { useWindowSize } from 'react-use'
+import useMeasure from 'react-use-measure'
+import { useState, useEffect } from 'react'
+
 // components
 import SubmenuTrigger from '@ui/SubmenuTrigger'
 import RatingStars from '@ui/RatingStars'
@@ -5,12 +11,6 @@ import Timestamp from '@ui/Timestamp'
 import TruncatedText from './navbar/TruncatedText'
 import Spring from './Spring'
 import ModalBase from '@ui/ModalBase'
-
-// hooks
-import { useTheme } from '@contexts/themeContext'
-import { useWindowSize } from 'react-use'
-import useMeasure from 'react-use-measure'
-import { useState, useEffect } from 'react'
 
 // utils
 import dayjs from 'dayjs'
@@ -25,7 +25,14 @@ const placeholder = {
   timestamp: new Date()
 }
 
-const User = ({ data = placeholder, wrapperClass }: any) => {
+interface Props {
+  data: any
+  wrapperClass: string
+}
+
+const User = (props: Props) => {
+  const { data = placeholder, wrapperClass } = props
+
   return (
     <div className={`flex items-center ${wrapperClass}`}>
       <img

@@ -15,6 +15,7 @@ interface Props {
 
 const LabeledProgressBar = (props: Props) => {
   const { label, value, displayValue, color, withBar = true, wrapperClass } = props
+
   return (
     <div className={`flex flex-col gap-[5px] ${wrapperClass || ''}`}>
       <div className='flex items-center justify-between'>

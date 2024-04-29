@@ -10,8 +10,8 @@ interface Props {
   value: string
   label: string
   innerRef: any
-  isInvalid: any
-  onChange: () => void
+  isInvalid?: any
+  onChange?: () => void
 }
 export const PasswordInput = (props: Props) => {
   const { innerRef, value, id, label, isInvalid } = props

@@ -18,6 +18,10 @@ import { motion } from 'framer-motion'
 //type
 import { SignUpPayloadOne } from '@type/auth'
 
+//redux
+import { useValidateUserMutation } from '@redux/services/authApi'
+import { toast } from 'react-toastify'
+
 const formSchema = z.object({
   email: z
     .string()
@@ -42,6 +46,7 @@ const SessionOne = (props: SessionOneProps) => {
 
   const navigate = useNavigate()
 
+  const [validateUser, { isLoading }] = useValidateUserMutation()
   const {
     register,
     handleSubmit,
@@ -53,10 +58,22 @@ const SessionOne = (props: SessionOneProps) => {
 
   const onSubmit: SubmitHandler<SignUpPayloadOne> = async (data: SignUpPayloadOne) => {
     try {
-      console.log(data)
-      nextSession()
-    } catch (error) {
-      console.log(error)
+      const result = await validateUser(data).unwrap()
+      if (result) {
+        nextSession()
+      }
+    } catch (error: any) {
+      const message = error.data.message
+      switch (message) {
+        case 'Email already exists':
+          toast.error('Email already exists')
+          break
+        case 'Phone already exists':
+          toast.error('Phone already exists')
+          break
+        default:
+          break
+      }
     }
   }
 
@@ -115,6 +132,7 @@ const SessionOne = (props: SessionOneProps) => {
         </motion.div>
 
         <motion.button
+          disabled={isLoading}
           type='submit'
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}

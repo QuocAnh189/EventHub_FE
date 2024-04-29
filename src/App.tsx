@@ -33,13 +33,14 @@ const Explore = lazy(() => import('@pages/explore/Explore'))
 const Overview = lazy(() => import('@pages/dashboard/Overview'))
 const OverviewDetail = lazy(() => import('@pages/dashboard/Overview-Detail'))
 const EventAnalysis = lazy(() => import('@pages/dashboard/Event-Analysis'))
-const CategoryAnalysis = lazy(() => import('@pages/dashboard/Category-Analysis'))
+const EventAnalysisDetail = lazy(() => import('@pages/dashboard/Event-Analysis-Detail'))
 const Customer = lazy(() => import('@pages/dashboard/Customer'))
 const Payment = lazy(() => import('@pages/dashboard/Payment'))
 const TopEvent = lazy(() => import('@pages/event/Top-Event'))
 const MyEvent = lazy(() => import('@pages/event/My-Event'))
 const EventDetail = lazy(() => import('@pages/event/Event-Detail'))
 const CreateEvent = lazy(() => import('@pages/event/Create-Event'))
+const ModifyEvent = lazy(() => import('@pages/event/Modify-Event'))
 const Calendar = lazy(() => import('@pages/calendar/Calendar'))
 const Order = lazy(() => import('@pages/order/Order'))
 const Reviews = lazy(() => import('@pages/review/Review'))
@@ -78,13 +79,14 @@ function App() {
               <Route path='/organization/dashboard/overview' element={<Overview />} />
               <Route path='/organization/dashboard/overview-detail' element={<OverviewDetail />} />
               <Route path='/organization/dashboard/event-analysis' element={<EventAnalysis />} />
-              <Route path='/organization/dashboard/category-analysis' element={<CategoryAnalysis />} />
+              <Route path='/organization/dashboard/event-analysis/:id' element={<EventAnalysisDetail />} />
               <Route path='/organization/dashboard/customer' element={<Customer />} />
               <Route path='/organization/dashboard/payment' element={<Payment />} />
               <Route path='/organization/event/top-event' element={<TopEvent />} />
               <Route path='/organization/event/my-event' element={<MyEvent />} />
               <Route path='/organization/event/:id' element={<EventDetail />} />
               <Route path='/organization/event/create-event' element={<CreateEvent />} />
+              <Route path='/organization/event/my-event/modify-event/:id' element={<ModifyEvent />} />
               <Route path='/organization/calendar' element={<Calendar />} />
               <Route path='/organization/order' element={<Order />} />
               <Route path='/organization/review' element={<Reviews />} />

@@ -9,7 +9,7 @@ export const apiMessage = createApi({
   endpoints: (builder) => ({
     getMessage: builder.query<any, void>({
       query: () => ({
-        url: '/api/commands',
+        url: '/messsages',
         method: 'GET'
       })
     })

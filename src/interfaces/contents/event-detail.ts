@@ -1,4 +1,4 @@
-import { EventStatus } from 'interfaces/constants/enum'
+import { EventStatus } from '@constants/enum'
 import { ICategory } from './category'
 import { ICreator } from './creator'
 import { ILocation } from './location'

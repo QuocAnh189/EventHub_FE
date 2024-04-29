@@ -8,10 +8,10 @@ import Tabs from '@mui/material/Tabs'
 import TabPanel from '@mui/lab/TabPanel'
 import Divider from '@mui/material/Divider'
 import TabContext from '@mui/lab/TabContext'
-import { Comments } from '@components/Comments'
 import Infomation from '@components/Infomation'
 import EventCard from '@components/event/EventCard'
 import ConfirmDialog from '@components/Dialog'
+import Comments from '@components/Comments'
 
 //icons
 import { MdStarRate } from 'react-icons/md'

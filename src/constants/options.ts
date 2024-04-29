@@ -8,65 +8,68 @@ import applepay from '@assets/payment/applepay.svg'
 import paypal from '@assets/payment/paypal.svg'
 import bitpay from '@assets/payment/bitpay.svg'
 
+//enum
+import { EEventType } from './enum'
+
 export const EVENT_CATEGORIES = [
   {
-    value: 'workshop',
-    label: 'Workshop',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505725/eventhub/category/hhganbll8tt2wofqdsn2.png',
+    name: 'Workshop',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505725/eventhub/category/hhganbll8tt2wofqdsn2.png',
     backgroundColor: '#F27BBD'
   },
   {
-    value: 'exhibition',
-    label: 'Exhibition',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505724/eventhub/category/dze7rcjxmhbiyuxp0nms.png',
+    name: 'Exhibition',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505724/eventhub/category/dze7rcjxmhbiyuxp0nms.png',
     backgroundColor: '#A3FFD6'
   },
   {
-    value: 'music',
-    label: 'Music',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505724/eventhub/category/ltf9kjwcm9flsr9kava1.png',
+    name: 'Music',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505724/eventhub/category/ltf9kjwcm9flsr9kava1.png',
     backgroundColor: '#F3D0D7'
   },
   {
-    value: 'sport',
-    label: 'Sport',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505726/eventhub/category/zs0q5wmitcvihqjgm0ov.png',
+    name: 'Sport',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505726/eventhub/category/zs0q5wmitcvihqjgm0ov.png',
     backgroundColor: '#EE4266'
   },
   {
-    value: 'culture',
-    label: 'Culture',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505727/eventhub/category/cvpt43b4aqxcjdgoezoc.png',
+    name: 'Culture',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505727/eventhub/category/cvpt43b4aqxcjdgoezoc.png',
     backgroundColor: '#D1BB9E'
   },
   {
-    value: 'party',
-    label: 'Party',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505729/eventhub/category/mqx4ehibcschz59jd81t.png',
+    name: 'Party',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505729/eventhub/category/mqx4ehibcschz59jd81t.png',
     backgroundColor: '#FFFAB7'
   },
   {
-    value: 'education',
-    label: 'Education',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505730/eventhub/category/fvbuvcl1yetyimeh6v40.png',
+    name: 'Education',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505730/eventhub/category/fvbuvcl1yetyimeh6v40.png',
     backgroundColor: '#BC7FCD'
   },
   {
-    value: 'fair',
-    label: 'Fair',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505731/eventhub/category/xngndezflobwdhyds2dl.png',
+    name: 'Fair',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505731/eventhub/category/xngndezflobwdhyds2dl.png',
     backgroundColor: '#AFD198'
   },
   {
-    value: 'festival',
-    label: 'Festival',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505732/eventhub/category/fj0qbybujspr8crybhez.png',
+    name: 'Festival',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505732/eventhub/category/fj0qbybujspr8crybhez.png',
     backgroundColor: '#F7C566'
   },
   {
-    value: 'enviroment',
-    label: 'Enviroment',
-    icon: 'https://res.cloudinary.com/dadvtny30/image/upload/v1713505734/eventhub/category/nubvqwxlqcu2suwgbas1.png',
+    name: 'Enviroment',
+    iconImage:
+      'https://res.cloudinary.com/dadvtny30/image/upload/v1713505734/eventhub/category/nubvqwxlqcu2suwgbas1.png',
     backgroundColor: '#5DEBD7'
   }
 ]
@@ -142,9 +145,9 @@ export const MESSAGE_OPTIONS = [
 ]
 
 export const EVENT_STATUS_OPTIONS = [
-  { value: 'upcoming', label: 'Upcoming' },
-  { value: 'happenning', label: 'Happenning' },
-  { value: 'end', label: 'End' }
+  { value: EEventType.UPCOMING, label: 'Upcoming' },
+  { value: EEventType.OPENING, label: 'Openning' },
+  { value: EEventType.CLOSED, label: 'Closed' }
 ]
 
 export const PRODUCT_TYPE_OPTIONS = [
@@ -162,8 +165,8 @@ export const TRANSACTIONS_SORT_OPTIONS = [
 ]
 
 export const EVENT_SELLER_OPTIONS = [
-  { value: 'free', label: 'Free' },
-  { value: 'notfree', label: 'Buy Ticket' }
+  { value: 'FREE', label: 'Free' },
+  { value: 'FEE', label: 'Buy Ticket' }
 ]
 
 export const PRODUCT_ADDITIONAL_OPTIONS = [

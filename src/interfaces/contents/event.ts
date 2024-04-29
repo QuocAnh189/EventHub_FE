@@ -1,8 +1,7 @@
-import { EventStatus } from 'interfaces/constants/enum'
-import { ICategory } from './category'
+import { EventStatus } from '@constants/enum'
 import { IPriceRange } from 'interfaces/systems/price-range'
 
-export interface IEventDetail {
+export interface IEvent {
   id: string
   creatorId: string
   creatorName: string
@@ -15,7 +14,7 @@ export interface IEventDetail {
   PriceRange: IPriceRange
   startTime: Date
   endTime: Date
-  categories: ICategory
+  categories: string[]
   promotion: number
   numberOfFavourites: number
   numberOfShares: number

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IPayment } from 'interfaces/contents/payment'
 
 export const apiPayment = createApi({
   reducerPath: 'apiPayment',
@@ -6,42 +7,48 @@ export const apiPayment = createApi({
     baseUrl: import.meta.env.VITE_API_URL
   }),
   keepUnusedDataFor: 20,
+  tagTypes: ['Payment'],
   endpoints: (builder) => ({
-    getPayments: builder.query<any, any>({
+    getPayments: builder.query<any, void>({
       query: () => ({
-        url: '/api/payments',
+        url: '/payments',
         method: 'GET'
-      })
+      }),
+      providesTags: ['Payment']
     }),
 
     getPayment: builder.query<any, string>({
       query: (paymentId) => ({
-        url: `/api/payments/${paymentId}`,
+        url: `/payments/${paymentId}`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['Payment']
     }),
 
-    createPayment: builder.mutation<any, any>({
+    createPayment: builder.mutation<IPayment, IPayment>({
       query: (data) => ({
-        url: '/api/payments',
+        url: '/payments',
         method: 'POST',
         body: data
-      })
+      }),
+      invalidatesTags: ['Payment']
     }),
 
-    updatePayment: builder.mutation<any, any>({
+    updatePayment: builder.mutation<IPayment, Partial<IPayment>>({
       query: (data) => ({
-        url: `/api/payments/${data.id}`,
-        method: 'POST',
+        url: `/payments/${data.id}`,
+        method: 'PUT',
         body: data
-      })
+      }),
+      invalidatesTags: ['Payment']
     }),
 
     deletePayment: builder.mutation<any, string>({
       query: (paymentId) => ({
-        url: `/api/payments/${paymentId}`,
+        url: `/payments/${paymentId}`,
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: ['Payment']
     })
   })
 })

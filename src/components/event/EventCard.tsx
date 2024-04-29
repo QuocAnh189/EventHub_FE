@@ -2,15 +2,15 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-//icon
-import { FaCalendarAlt } from 'react-icons/fa'
-import { IoLocationSharp } from 'react-icons/io5'
-
 //component
 import { EventModal } from '../modal/EventModal'
 import Modal from '@mui/material/Modal'
 import Backdrop from '@mui/material/Backdrop'
 import Fade from '@mui/material/Fade'
+
+//icon
+import { FaCalendarAlt } from 'react-icons/fa'
+import { IoLocationSharp } from 'react-icons/io5'
 
 interface ICard {
   img: any

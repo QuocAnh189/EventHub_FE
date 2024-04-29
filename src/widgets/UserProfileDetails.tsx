@@ -1,7 +1,6 @@
 // hooks
 import { useForm, Controller } from 'react-hook-form'
 import { useTheme } from '@contexts/themeContext'
-import { useState } from 'react'
 
 // components
 import Spring from '@components/Spring'
@@ -13,60 +12,52 @@ import { toast } from 'react-toastify'
 
 // utils
 import classNames from 'classnames'
-import countryList from 'react-select-country-list'
-import { City } from 'country-state-city'
 
-const UserProfileDetails = () => {
+//redux
+import { useUpdateUserMutation } from '@redux/services/userApi'
+import dayjs from 'dayjs'
+interface Props {
+  user: any
+}
+
+const UserProfileDetails = (props: Props) => {
+  const { user } = props
+
+  const [updateUser, { isLoading }] = useUpdateUserMutation()
+
   const { theme, toggleTheme }: any = useTheme()
   const {
     register,
-    setValue,
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    setValue,
+    watch
   } = useForm({
     defaultValues: {
-      firstName: 'Quoc',
-      lastName: 'Anh',
-      email: 'anhquoc18092003@gmail.com',
-      phone: '0702465814',
+      id: user?.id,
+      userName: user?.userName,
+      fullName: user?.fullName,
+      email: user?.email,
+      phoneNumber: user?.phoneNumber,
       password: 'password',
-      country: null,
-      city: null,
-      state: '',
-      zip: '',
-      address: ''
+      gender: user?.gender,
+      dob: dayjs(user?.dob).format('YYYY-MM-DD'),
+      bio: user?.bio
     }
   })
-  // // eslint-disable-next-line no-unused-vars
-  // const [selectedCountry, setSelectedCountry] = useState()
-  // // eslint-disable-next-line no-unused-vars
-  // const [selectedCity, setSelectedCity] = useState<any>()
-  const [cities, setCities] = useState([])
 
-  const getCountriesOptions = () => {
-    let countries = countryList().getData()
-    for (let i = 0; i < countries.length; i++) {
-      if (countries[i].value === 'RU') {
-        countries[i].label = 'Russia [terrorist state]'
+  const onSubmit = async (data: any) => {
+    try {
+      delete data.password
+      const result = await updateUser(data).unwrap()
+      if (result) {
+        console.log(result)
+        toast.success('Profile updated successfully')
       }
+    } catch (err) {
+      console.log(err)
     }
-    return countries
-  }
-
-  const handleCountryChange = (country: any) => {
-    // setSelectedCountry(country)
-    // setSelectedCity(null)
-    let options: any = []
-    const rawData = City.getCitiesOfCountry(country.value)
-    rawData?.map((item) => options.push({ value: item.name, label: item.name }))
-    setCities(options)
-  }
-
-  // do something with the data
-  const onSubmit = (data: any) => {
-    console.log(data)
-    toast.success('Profile updated successfully')
   }
 
   return (
@@ -81,28 +72,28 @@ const UserProfileDetails = () => {
             <div className='grid gap-4'>
               <div className='field-wrapper'>
                 <label className='field-label' htmlFor='firstName'>
-                  First Name
+                  User Name
                 </label>
                 <input
-                  className={classNames('field-input', { 'field-input--error': errors.firstName })}
+                  className={classNames('field-input', { 'field-input--error': errors.userName })}
                   type='text'
-                  id='firstName'
-                  placeholder='First Name'
+                  id='userName'
+                  placeholder='User Name'
                   defaultValue='Maria'
-                  {...register('firstName', { required: true })}
+                  {...register('userName', { required: true })}
                 />
               </div>
               <div className='field-wrapper'>
                 <label className='field-label' htmlFor='lastName'>
-                  Last Name
+                  Full Name
                 </label>
                 <input
-                  className={classNames('field-input', { 'field-input--error': errors.lastName })}
+                  className={classNames('field-input', { 'field-input--error': errors.fullName })}
                   type='text'
-                  id='lastName'
-                  placeholder='Last Name'
+                  id='fullName'
+                  placeholder='Full Name'
                   defaultValue='Smith'
-                  {...register('lastName', { required: true })}
+                  {...register('fullName', { required: true })}
                 />
               </div>
               <div className='field-wrapper'>
@@ -123,14 +114,14 @@ const UserProfileDetails = () => {
                   Phone Number
                 </label>
                 <Controller
-                  name='phone'
+                  name='phoneNumber'
                   control={control}
                   render={({ field }) => (
                     <PatternFormat
                       value={field.value}
                       format='+#-###-###-####'
                       placeholder='(123) 456-7890'
-                      className={classNames('field-input', { 'field-input--error': errors.phone })}
+                      className={classNames('field-input', { 'field-input--error': errors.phoneNumber })}
                       getInputRef={field.ref}
                     />
                   )}
@@ -154,89 +145,60 @@ const UserProfileDetails = () => {
             </div>
             <div className='grid gap-4'>
               <div className='field-wrapper'>
-                <label className='field-label' htmlFor='country'>
-                  Country
-                </label>
-                <Controller
-                  name='country'
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <Select
-                        id='country'
-                        options={getCountriesOptions()}
-                        value={field.value}
-                        onChange={(value: any) => {
-                          field.onChange(value)
-                          handleCountryChange(value)
-                          setValue('city', null)
-                        }}
-                        placeholder='Country'
-                        isSearchable={true}
-                        innerRef={field.ref}
-                        isInvalid={false}
-                        isDisable={false}
-                      />
-                    )
-                  }}
-                />
-              </div>
-              <div className='field-wrapper'>
                 <label className='field-label' htmlFor='city'>
-                  City
+                  Gender
                 </label>
-                <Controller
-                  name='city'
-                  control={control}
-                  render={({ field }) => {
-                    return (
-                      <Select
-                        id='city'
-                        options={cities}
-                        value={field.value}
-                        onChange={(value: any) => {
-                          field.onChange(value)
-                          // setSelectedCity(value)
-                        }}
-                        placeholder='City'
-                        isInvalid={false}
-                        isSearchable={true}
-                        innerRef={field.ref}
-                        isDisable={false}
-                      />
-                    )
+                <Select
+                  placeholder='Gender'
+                  id='gender'
+                  options={[
+                    { value: 'MALE', label: 'MALE' },
+                    { value: 'FEMALE', label: 'FEMALE' },
+                    { value: 'OTHER', label: 'OTHER' }
+                  ]}
+                  value={{ value: watch().gender, label: watch().gender }}
+                  onChange={(e: any) => {
+                    setValue('gender', e.value)
                   }}
                 />
               </div>
               <div className='field-wrapper'>
                 <label className='field-label' htmlFor='state'>
-                  State
+                  Day of birth
                 </label>
-                <input className='field-input' type='text' id='state' placeholder='State' {...register('state')} />
+                <input className='field-input' type='date' id='state' placeholder='State' {...register('dob')} />
               </div>
               <div className='field-wrapper'>
                 <label className='field-label' htmlFor='zip'>
-                  Zip Code
+                  Status
                 </label>
                 <input
+                  readOnly
                   className='field-input'
                   type='text'
-                  id='zip'
-                  placeholder='Zip Code'
-                  {...register('zip', { pattern: /^\d{5}(?:[-\s]\d{4})?$/i })}
+                  id='Status'
+                  placeholder='Status'
+                  value={user.status}
+                />
+              </div>
+              <div className='field-wrapper'>
+                <label className='field-label' htmlFor='firstName'>
+                  Role
+                </label>
+                <input
+                  readOnly
+                  className={classNames('field-input')}
+                  type='text'
+                  id='role'
+                  placeholder='Role'
+                  value={user.roles.join(',')}
                 />
               </div>
               <div className='field-wrapper'>
                 <label className='field-label' htmlFor='address'>
-                  Address
+                  Bio
                 </label>
-                <input
-                  className='field-input'
-                  type='text'
-                  id='address'
-                  placeholder='Address'
-                  {...register('address')}
-                />
+                <input className='field-input' type='text' id='Bio' placeholder='Bio' {...register('bio')} />
               </div>
             </div>
           </div>
@@ -244,7 +206,7 @@ const UserProfileDetails = () => {
             <button className='text-btn' type='button'>
               Change password
             </button>
-            <button className='btn btn--primary w-full mt-5 md:w-fit md:px-[70px]' type='submit'>
+            <button disabled={isLoading} className='btn btn--primary w-full mt-5 md:w-fit md:px-[70px]' type='submit'>
               Update information
             </button>
           </div>

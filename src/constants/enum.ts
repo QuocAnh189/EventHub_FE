@@ -1,47 +1,55 @@
-/* eslint-disable no-unused-vars */
-
 export enum EventStatus {
   OPENING = 'OPENING',
   UPCOMING = 'UPCOMING',
   CLOSED = 'CLOSED'
 }
 
-export enum EventType {
+export enum EEventType {
   ALL = 'ALL',
   UPCOMING = 'UPCOMING',
   OPENING = 'OPENING',
   CLOSED = 'CLOSED'
 }
 
-export enum Gender {
+export enum EEventStyle {
+  SINGLE = 'SINGLE',
+  RECURRING = 'RECURRING'
+}
+
+export enum EEventTicket {
+  FEE = 'FEE',
+  FREE = 'FREE'
+}
+
+export enum EGender {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
   OTHER = 'OTHER'
 }
 
-export enum PageOrder {
+export enum EPageOrder {
   ASC = 'ASC',
   DESC = 'DESC'
 }
 
-export enum PaymentMethod {
+export enum EPaymentMethod {
   BANKING = 'BANKING',
   MOMO = 'MOMO'
 }
 
-export enum PaymentStatus {
+export enum EPaymentStatus {
   PAID = 'PAID',
   PENDING = 'PEDING',
   FAILED = 'FAILED'
 }
 
-export enum TicketStatus {
+export enum ETicketStatus {
   ACTIVE = 'ACTIVE',
   CHECKEDIN = 'CHECKEDIN',
   INACTIVE = 'INACTIVE'
 }
 
-export enum UserStatus {
+export enum EUserStatus {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE'
 }

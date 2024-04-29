@@ -16,7 +16,7 @@ const data = [
   { name: 'Q4', a: 10455, b: 12584, trend: 50.14 }
 ]
 
-const CustomTooltip = ({ active, payload }) => {
+const CustomTooltip = ({ active, payload }: any) => {
   if (active) {
     return (
       <div className='chart-tooltip py-4 px-5'>
@@ -35,7 +35,7 @@ const CustomTooltip = ({ active, payload }) => {
 
 const SalesVolumeChart = () => {
   const { theme } = useTheme()
-  const gridPoints = generateGridPoints('salesVolumeChart', 40, 'x')
+  const gridPoints = generateGridPoints(40, 'x')
 
   return (
     <Spring className='card flex flex-col h-[425px] lg:h-full md:col-span-2 lg:col-span-1'>
@@ -68,7 +68,7 @@ const SalesVolumeChart = () => {
               axisLine={false}
             />
             <YAxis
-              tickFormatter={(value) => numFormatter(value, 0, '$')}
+              tickFormatter={(value) => numFormatter(value, 0, '$')!}
               tickMargin={10}
               tickCount={5}
               tick={{ fill: 'var(--text)' }}

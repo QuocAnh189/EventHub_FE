@@ -7,7 +7,7 @@ import Trend from '@ui/Trend'
 import Counter from '@components/Counter'
 
 // utils
-import { getCategory, getStatusColor, numFormatter } from '@utils/helpers'
+import { getStatusColor, numFormatter } from '@utils/helpers'
 import dayjs from 'dayjs'
 
 export const ORDERS_COLUMN_DEFS: any = [
@@ -44,14 +44,6 @@ export const ORDERS_COLUMN_DEFS: any = [
   {
     title: 'Category',
     dataIndex: 'category',
-    render: (category: any) => (
-      <div className='flex items-center gap-4'>
-        <div className={`badge-icon badge-icon--sm bg-${getCategory(category)?.backgroundColor}`}>
-          <i className={`${getCategory(category)?.icon} text-base`} />
-        </div>
-        <span className='label-text'>{getCategory(category)?.label}</span>
-      </div>
-    ),
     responsive: ['lg']
   },
   {

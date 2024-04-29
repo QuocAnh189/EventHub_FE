@@ -1,57 +1,77 @@
-/* eslint-disable no-unused-vars */
+//hook
+import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
+
+//component
+import LocationEvent from '@components/Location'
+import Switch from 'react-switch'
+
 //icons
-import { MdStarRate } from 'react-icons/md'
-import { IoShareSocialOutline, IoLocationOutline } from 'react-icons/io5'
+import { IoLocationOutline } from 'react-icons/io5'
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { IoMdTime, IoMdAdd } from 'react-icons/io'
 import { IoTicketOutline } from 'react-icons/io5'
 
+//type
+import { ICreateEventPayload } from '@type/event'
+
+//assets
+import eventDefault from '@assets/event/event-poster.png'
+
+//day
+import dayjs from 'dayjs'
+
 //map
-import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api'
-
-const containerStyle = {
-  width: '80%',
-  height: '300px',
-  borderRadius: '10px'
-}
-
-const center = {
-  lat: 10.8713134,
-  lng: 106.8025164,
-  text: 'University of Information Technology'
-}
+import { fromAddress, setLanguage, setRegion, setKey } from 'react-geocode'
+import { useEffect, useState } from 'react'
+setKey(import.meta.env.VITE_MAP_API_KEY)
+setLanguage('en')
+setRegion('vn')
 
 interface Props {
+  watch: UseFormWatch<ICreateEventPayload>
+  setValue: UseFormSetValue<ICreateEventPayload>
   setActive: (value: number) => void
+  disabled: boolean
 }
 const ReviewEventCreate = (props: Props) => {
-  const { setActive } = props
+  const { setActive, watch, setValue, disabled } = props
 
-  const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    // eslint-disable-next-line no-undef
-    googleMapsApiKey: 'AIzaSyDNUAbz1SHrSJ7M0pFlV-8xxCSg53lOVmM',
-    libraries: ['places']
-  })
+  const [position, setPosition] = useState(null)
 
-  const handlePublishEvent = () => {}
+  useEffect(() => {
+    if (watch().location) {
+      fromAddress(watch().location)
+        .then(({ results }) => {
+          const result = results[0].geometry.location
+          setPosition(result)
+        })
+        .catch(() => {
+          setPosition(null)
+        })
+    }
+  }, [])
 
   return (
     <div className='w-full px-40 mt-10'>
       <div className='flex flex-col gap-6 border-[3px] border-textGray rounded-2xl p-10'>
         <div className='h-[500px]'>
           <img
-            src='https://res.cloudinary.com/dadvtny30/image/upload/v1712409118/eventhub/event/infflklkudlatzvf8gsz.jpg'
+            src={watch().coverImage ? watch().coverImage : eventDefault}
             alt=''
             loading='lazy'
             className='w-full h-full object-cover rounded-xl'
           />
         </div>
         <div className='w-full flex items-center justify-between'>
-          <h1>Sound Of Chrismus 2024</h1>
+          <h1>{watch().name}</h1>
           <div className='flex items-center gap-2'>
-            <MdStarRate color='gray' size='36px' />
-            <IoShareSocialOutline color='gray' size='36px' />
+            <p className='text-xl font-bold'>Public:</p>
+            <Switch
+              onChange={() => {
+                setValue('isPublic', !watch().isPublic)
+              }}
+              checked={watch().isPublic === undefined ? true : watch().isPublic}
+            />
           </div>
         </div>
         <div className='flex justify-between'>
@@ -61,19 +81,31 @@ const ReviewEventCreate = (props: Props) => {
                 <h4>Date and Time</h4>
                 <div className='flex items-center gap-1'>
                   <FaRegCalendarAlt color='gray' size='24px' />
-                  <p>Saturday, 2 December 2023</p>
+
+                  <p>{dayjs(watch().startDate).format('dddd, DD MMMM YYYY')?.toString()}</p>
                 </div>
                 <div className='flex items-center gap-1'>
                   <IoMdTime color='gray' size='24px' />
-                  <p>6h30 PM - 9:30 PM</p>
+
+                  <p>
+                    {watch().startTime?.toString()} - {watch().endTime?.toString()}
+                  </p>
                 </div>
               </div>
               <div className='flex flex-col gap-2'>
                 <h3 className='text-black text-xl font-bold mb-4'>Ticket Information</h3>
                 <div className='flex items-center gap-2'>
                   <IoTicketOutline />
-                  <p>Ticket type: Price/Ticket</p>
+                  <p>Ticket type: {watch().eventTicketType}/Ticket</p>
                 </div>
+                {watch().tickets.map((ticket, index) => (
+                  <p className='w-full  flex justify-between'>
+                    <span>
+                      {index + 1}. <span className='font-bold'>{ticket.name}:</span>
+                    </span>
+                    <span className='text-primary font-bold'>{ticket.price}</span>
+                  </p>
+                ))}
               </div>
             </div>
 
@@ -81,31 +113,9 @@ const ReviewEventCreate = (props: Props) => {
               <h4>Location</h4>
               <div className='flex gap-1'>
                 <IoLocationOutline color='gray' size='24px' />
-                <p className='max-w-[500px]'>
-                  Bal Gandharva Rang Mandir, Near Junction Of 24th & 32nd Road & Patwardhan Park,Off Linking Road,
-                  Bandra West., Mumbai, India.
-                </p>
+                <p className='max-w-[500px]'>{watch().location}</p>
               </div>
-              {isLoaded ? (
-                <GoogleMap
-                  mapContainerStyle={containerStyle}
-                  center={center}
-                  zoom={14}
-                  options={{
-                    // zoomControlL: false,
-                    streetViewControl: false,
-                    mapTypeControl: false,
-                    fullscreenControl: false
-                  }}
-                  // onLoad={onLoad}
-                  // onUnmount={onUnmount}
-                >
-                  {/* Child components, such as markers, info windows, etc. */}
-                  <Marker position={center} title='UIT' />
-                </GoogleMap>
-              ) : (
-                <></>
-              )}
+              {position && <LocationEvent position={position} />}
             </div>
             <div className='flex flex-col gap-8'>
               <div className='space-y-2'>
@@ -128,19 +138,29 @@ const ReviewEventCreate = (props: Props) => {
 
               <div className='space-y-1'>
                 <h5>Event Description</h5>
-                <p>
-                  Get ready to kick off the Christmas season in Mumbai with SOUND OF CHRISTMAS - your favourite LIVE
-                  Christmas concert!.City Youth Movement invites you to the 4th edition of our annual Christmas
-                  festivities - by the youth and for the youth! Feat. your favourite worship leaders, carols, quizzes
-                  and some exciting surprises!.Bring your family and friends and sing along your favourite Christmas
-                  carols on the 2nd of December, 6:30 PM onwards at the Balgandharva Rang Mandir, Bandra West. Book your
-                  tickets now!
-                </p>
-                <h6>3 Reasons to attend the event:</h6>
-                <p>1. The FIRST Christmas concert of Mumbai!</p>
-                <p>2. A special Christmas Choir!</p>
-                <p>3. Special Dance performances and many more surprises!</p>
+                <p>{watch().description}</p>
+                <h6>{watch().reasons.length} Reasons to attend the event:</h6>
+                {watch().reasons.map((reason, index) => (
+                  <p>
+                    {index + 1}. {reason}.
+                  </p>
+                ))}
               </div>
+            </div>
+
+            <div className='w-full flex items-center gap-8 justify-center'>
+              {watch().subImage.map(
+                (image: string, index: number) =>
+                  image && (
+                    <img
+                      key={`subimage-${index}`}
+                      loading='lazy'
+                      className='h-[200px] w-[200px] rounded-lg'
+                      src={image}
+                      alt=''
+                    />
+                  )
+              )}
             </div>
           </div>
         </div>
@@ -154,8 +174,9 @@ const ReviewEventCreate = (props: Props) => {
         >
           Go back
         </button>
-        <button className=' btn btn--primary ' onClick={handlePublishEvent}>
-          Publish Event
+
+        <button disabled={disabled} type='submit' className='btn btn--primary'>
+          Create Event
         </button>
       </div>
     </div>

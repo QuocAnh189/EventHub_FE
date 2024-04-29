@@ -2,6 +2,7 @@
 import { useSidebar } from '@contexts/sidebarContext'
 import { useState, useEffect } from 'react'
 import { useWindowSize } from 'react-use'
+import { useNavigate } from 'react-router-dom'
 
 // styled components
 import Drawer from './styles'
@@ -21,6 +22,7 @@ import logoText_Img from '@assets/common/logo-text.png'
 import { Route } from 'interfaces'
 
 const Sidebar = () => {
+  const navigate = useNavigate()
   const { width } = useWindowSize()
   const { open, setOpen } = useSidebar()
   const [active, setActive] = useState<string>('')
@@ -50,7 +52,13 @@ const Sidebar = () => {
       className='overflow-hidden'
     >
       {/* <Logo /> */}
-      <img src={logoText_Img} alt='' className='h-[40px] w-full object-contain' />
+      <button
+        onClick={() => {
+          navigate('/')
+        }}
+      >
+        <img src={logoText_Img} alt='' className='h-[40px] w-full object-contain' />
+      </button>
       <nav className='menu'>
         {ROUTES.map((route: Route, index: number) => {
           return (
