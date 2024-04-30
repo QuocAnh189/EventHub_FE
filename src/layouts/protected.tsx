@@ -15,8 +15,6 @@ const ProtectedLayout = ({ children }: any) => {
     }
   }, [user])
 
-  console.log(user)
-
   return <div>{children}</div>
 }
 

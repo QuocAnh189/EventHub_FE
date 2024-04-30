@@ -51,7 +51,7 @@ const EventDetail = () => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     // eslint-disable-next-line no-undef
-    googleMapsApiKey: 'AIzaSyDNUAbz1SHrSJ7M0pFlV-8xxCSg53lOVmM',
+    googleMapsApiKey: import.meta.env.VITE_MAP_API_KEY,
     libraries: ['places']
   })
 

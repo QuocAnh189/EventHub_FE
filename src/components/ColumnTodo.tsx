@@ -25,7 +25,7 @@ import AddCardIcon from '@mui/icons-material/AddCard'
 import DragHandleIcon from '@mui/icons-material/DragHandle'
 import CloseIcon from '@mui/icons-material/Close'
 
-export const ColumnTodo = () => {
+const ColumnTodo = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const open = Boolean(anchorEl)
 
@@ -232,3 +232,5 @@ export const ColumnTodo = () => {
     </Box>
   )
 }
+
+export default ColumnTodo

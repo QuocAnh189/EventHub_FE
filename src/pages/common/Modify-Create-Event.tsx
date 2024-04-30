@@ -15,13 +15,15 @@ import ReviewEventCreate from '@components/event/ReviewEventCreate'
 
 //type
 import { ICreateEventPayload, InitCreateEventPayload } from '@type/event'
+
+// icons
 import { IoCreate } from 'react-icons/io5'
 import { BiImport } from 'react-icons/bi'
 
 //file
 import readXlsxFile from 'read-excel-file'
 
-//date
+//util
 import dayjs from 'dayjs'
 
 //redux

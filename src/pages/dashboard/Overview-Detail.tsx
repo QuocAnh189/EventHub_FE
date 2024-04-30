@@ -1,5 +1,6 @@
 // components
 import { PageHeader } from '@layouts/components'
+import ProtectedLayout from '@layouts/protected'
 import CalendarSelector from '@components/CalendarSelector'
 import PopularTags from '@components/PopularTags'
 import SalesVolumeChart from '@components/SalesVolumeChart'
@@ -8,7 +9,6 @@ import ProfitPerformance from '@widgets/ProfitPerformance'
 import RevenueInfobox from '@components/RevenueInfobox'
 import ConversionRateWithChart from '@widgets/ConversionRateWithChart'
 import WalletBadge from '@widgets/WalletBadge'
-import ProtectedLayout from '@layouts/protected'
 
 const OverviewDetail = () => {
   return (

@@ -3,7 +3,8 @@ import { useState } from 'react'
 
 //component
 import { PageHeader } from '@layouts/components'
-import { ColumnTodo } from '@components/ColumnTodo'
+import Spring from '@components/Spring'
+import ColumnTodo from '@components/ColumnTodo'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
@@ -11,7 +12,6 @@ import TextField from '@mui/material/TextField'
 //icon
 import { MdOutlineNoteAdd } from 'react-icons/md'
 import { IoMdClose } from 'react-icons/io'
-import Spring from '@components/Spring'
 
 const Todo = () => {
   const [openNewColumnForm, setOpenNewColumnForm] = useState<boolean>(false)

@@ -1,7 +1,7 @@
-//hook
+// hooks
 import { useState } from 'react'
 
-//component
+// components
 import { PageHeader } from '@layouts/components'
 import { Box, List, Typography } from '@mui/material'
 import TransactionsInfobox from '@widgets/TransactionsInfobox'

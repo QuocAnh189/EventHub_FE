@@ -89,8 +89,6 @@ const InfomationEvent = (props: Props) => {
     }
   }, [])
 
-  console.log(categories)
-
   const handleLocation = async () => {
     fromAddress(watch().location)
       .then(({ results }) => {

@@ -17,6 +17,7 @@ import { ConfirmProvider } from 'material-ui-confirm'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import store, { persistor } from '@redux/store.ts'
+import AppLayout from '@layouts/app.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -31,7 +32,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               confirmationButtonProps: { color: 'secondary' }
             }}
           >
-            <App />
+            <AppLayout>
+              <App />
+            </AppLayout>
           </ConfirmProvider>
         </ThemeProvider>
       </PersistGate>

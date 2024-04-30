@@ -48,8 +48,7 @@ const Card = (props: CardProp) => {
 
   const maskCardNumber = (cardNumber: string) => {
     const cardNumberArr = cardNumber.split('')
-    cardNumberArr.forEach((val, index) => {
-      console.log(val)
+    cardNumberArr.forEach((_, index) => {
       if (index > 4 && index < 14) {
         if (cardNumberArr[index] !== ' ') {
           cardNumberArr[index] = '*'

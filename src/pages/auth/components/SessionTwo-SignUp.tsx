@@ -1,21 +1,19 @@
 //hook
 import { useState, ChangeEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //component
 import Switch from 'react-switch'
 import CircularProgress from '@mui/material/CircularProgress'
 
-//navigate
-import { useNavigate } from 'react-router-dom'
-
-//motion
+// motion
 import { motion } from 'framer-motion'
 
-//icons
+// icons
 import { AiFillEye } from 'react-icons/ai'
 import { AiFillEyeInvisible } from 'react-icons/ai'
 
-//type
+// type
 import { SignUpPayloadTwo } from '@type/auth'
 
 interface SessionTwoProps {
@@ -72,7 +70,6 @@ const SessionTwo = (props: SessionTwoProps) => {
           data-te-input-wrapper-init
         >
           <input
-            // value={props.password}
             type={showConfirmPassWord ? 'text' : 'password'}
             name='confirmPassword'
             className='min-h-[auto] w-full rounded-2xl border bg-transparent px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'

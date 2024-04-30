@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
+
 //hook
 import { useEffect, useState } from 'react'
 

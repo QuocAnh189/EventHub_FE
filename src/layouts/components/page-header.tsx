@@ -1,9 +1,9 @@
-// components
-import { DocumentTitle } from '@components/index'
-
 // hooks
 import { useState, useEffect } from 'react'
 import { useWindowSize } from 'react-use'
+
+// components
+import { DocumentTitle } from '@components/index'
 
 // utils
 import PropTypes from 'prop-types'

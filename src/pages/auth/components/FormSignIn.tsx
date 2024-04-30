@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 //component
+import { toast } from 'react-toastify'
 import CircularProgress from '@mui/material/CircularProgress'
 
 //validate
@@ -27,7 +28,6 @@ import { setUser } from '@redux/slices/userSlice'
 
 //motion
 import { motion } from 'framer-motion'
-import { toast } from 'react-toastify'
 
 const formSchema = z.object({
   identity: z.string().min(1, 'Identity is not empty'),

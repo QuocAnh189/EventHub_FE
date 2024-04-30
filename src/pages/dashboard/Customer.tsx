@@ -1,10 +1,10 @@
 // components
 import { PageHeader } from '@layouts/components'
+import ProtectedLayout from '@layouts/protected'
 import CustomerRetentionRate from '@widgets/CustomerRetentionRate'
 import DemographicSegmentation from '@widgets/DemographicSegmentation'
 import ConversionRate from '@widgets/ConversionRate'
 import CustomersInfobox from '@components/CustomersInfobox'
-import ProtectedLayout from '@layouts/protected'
 
 const Customers = () => {
   return (

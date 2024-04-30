@@ -127,7 +127,7 @@ module.exports = {
         brandLinear: '#868CFF',
         bgAnswerTriangle: '#F03440',
         bgAnswerDiamond: '#2E64D1',
-        bgAnswerCircle: '#EFA920',
+        textOrange: '#EFA920',
         bgAnswerSquare: '#00D164',
         bgSearchHome: 'rgb(241, 241, 241, 0.7)',
 
@@ -170,5 +170,5 @@ module.exports = {
       }
     }
   },
-  plugins: [require('tailwind-scrollbar')({ nocompatible: true })]
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true }), require('daisyui')]
 }

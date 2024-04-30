@@ -1,13 +1,13 @@
+// hooks
+import { useWindowSize } from 'react-use'
+
 // components
+import ProtectedLayout from '@layouts/protected'
 import { PageHeader } from '@layouts/components'
 import MainProfileInfo from '@widgets/MainProfileInfo'
 import SalesStats from '@widgets/SalesStats'
 import TotalReport from '@widgets/TotalReport'
 import TotalBalance from '@components/TotalBalance'
-
-// hooks
-import { useWindowSize } from 'react-use'
-import ProtectedLayout from '@layouts/protected'
 
 const Overview = () => {
   const { width } = useWindowSize()

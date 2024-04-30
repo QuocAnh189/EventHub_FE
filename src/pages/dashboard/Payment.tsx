@@ -5,8 +5,6 @@ import Invoice from './components/Invoice'
 import CardPayment from './components/CardPayment'
 import AddCartPayment from './components/AddCardPayment'
 
-//icon
-
 const cardsData = [
   {
     cardNumber: '0702465814111111',

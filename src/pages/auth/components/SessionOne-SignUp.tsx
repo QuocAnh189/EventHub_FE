@@ -1,6 +1,7 @@
 //hook
 import { ChangeEvent } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 //constant
 import { PHONE_REGEX } from '@constants/regex'
@@ -9,8 +10,8 @@ import { PHONE_REGEX } from '@constants/regex'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-//navigate
-import { useNavigate } from 'react-router-dom'
+// components
+import { toast } from 'react-toastify'
 
 //motion
 import { motion } from 'framer-motion'
@@ -20,7 +21,6 @@ import { SignUpPayloadOne } from '@type/auth'
 
 //redux
 import { useValidateUserMutation } from '@redux/services/authApi'
-import { toast } from 'react-toastify'
 
 const formSchema = z.object({
   email: z

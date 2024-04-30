@@ -40,8 +40,7 @@ const EventManagement = () => {
     return products_management.filter((product) => product.status === category).length
   }
 
-  const handleFilterSelect = ({ value, label }: any, name: any) => {
-    console.log(value, label)
+  const handleFilterSelect = ({ value }: any, name: any) => {
     setFilters((prevState) => ({
       ...prevState,
       [name]: value

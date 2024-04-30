@@ -1,15 +1,16 @@
+// hooks
+import { useRef, useEffect } from 'react'
+import { useWindowSize } from 'react-use'
 import { Outlet, useLocation } from 'react-router-dom'
+
+//context
 import { SidebarProvider } from '@contexts/sidebarContext'
 
-//component
+// components
 import Sidebar from '@components/sidebar/Sidebar'
 import AppBar from '@components/AppBar'
 import ScrollToTop from '@components/ScrollToTop'
 import { Bottom } from '@components/Bottom'
-
-// hooks
-import { useRef, useEffect } from 'react'
-import { useWindowSize } from 'react-use'
 
 // GA
 import ReactGA from 'react-ga4'

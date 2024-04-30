@@ -1,3 +1,6 @@
+// hooks
+import { useWindowSize } from 'react-use'
+
 // components
 import { PageHeader } from '@layouts/components'
 import EventProfilePreview from '@widgets/EventProfilePreview'
@@ -7,9 +10,6 @@ import SalesProfitByCategory from '@widgets/SalesProfitByCategory'
 import PeriodSalesRevenue from '@widgets/PeriodSalesRevenue'
 import EventProfileInfobox from '@components/EventProfileInfobox'
 import WalletBadge from '@widgets/WalletBadge'
-
-// hooks
-import { useWindowSize } from 'react-use'
 
 // assets
 import credit from '@assets/dashboard/credit-card.webp'
