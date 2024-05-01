@@ -1,14 +1,19 @@
 /* eslint-disable no-unused-vars */
 import PropTypes from 'prop-types'
+import { useState } from 'react'
 
 interface Props {
   placeholder?: string
-  query?: any
-  setQuery?: (e: any) => void
   wrapperClass?: string
 }
 const Search = (props: Props) => {
-  const { placeholder = 'Search...', query, wrapperClass } = props
+  const { placeholder = 'Search...', wrapperClass } = props
+
+  const [query, setQuery] = useState<string>('')
+
+  const handleSearchQueryEvent = () => {
+    console.log(query)
+  }
 
   return (
     <div className={`relative ${wrapperClass || ''}`}>
@@ -17,16 +22,9 @@ const Search = (props: Props) => {
         type='search'
         placeholder={placeholder}
         value={query}
-        // onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
       />
-      <button
-        className={`field-btn text-red !right-[40px] transition ${query ? 'opacity-100' : 'opacity-0'}`}
-        // onClick={() => setQuery('')}
-        aria-label='Clear all'
-      >
-        <i className='icon-xmark-regular' />
-      </button>
-      <button className='field-btn icon' aria-label='Search'>
+      <button className='field-btn icon' aria-label='Search' onClick={handleSearchQueryEvent}>
         <i className='icon-magnifying-glass-solid' />
       </button>
     </div>

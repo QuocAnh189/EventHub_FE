@@ -12,12 +12,12 @@ import 'slick-carousel/slick/slick-theme.css'
 
 //component
 import { ConfirmProvider } from 'material-ui-confirm'
+import AppLayout from '@layouts/app.tsx'
 
 //redux
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import store, { persistor } from '@redux/store.ts'
-import AppLayout from '@layouts/app.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>

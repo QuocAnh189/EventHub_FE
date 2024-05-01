@@ -1,22 +1,47 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 //component
 import { Link } from 'react-router-dom'
 import ConfirmDialog from '@components/Dialog'
+import Checkbox from '@mui/material/Checkbox'
 
 //icons
 import { HiPencilAlt, HiTrash } from 'react-icons/hi'
 import { FaCalendarAlt } from 'react-icons/fa'
 import { IoLocationSharp } from 'react-icons/io5'
+import { IEvent } from 'interfaces/contents/event'
 
-const CardMyEvent = () => {
+//util
+import dayjs from 'dayjs'
+
+import event_Default from '@assets/event/event-poster.png'
+
+interface Props {
+  event: IEvent
+  checkedAll: boolean
+  onChecked: (id: string) => void
+}
+
+const CardMyEvent = (props: Props) => {
+  const { event, checkedAll, onChecked } = props
   const navigate = useNavigate()
   const [openDialog, setOpenDialog] = useState<boolean>(false)
+  const [select, setSelect] = useState<boolean>(checkedAll)
+
+  useEffect(() => {
+    setSelect(checkedAll)
+  }, [checkedAll])
+
+  const handleChange = () => {
+    setSelect(!select)
+    onChecked(event.id)
+  }
 
   const handleEdit = () => {
-    navigate('modify-event/123')
+    navigate(`modify-event/${event.id}`)
   }
 
   const handleDelete = () => {
@@ -28,8 +53,9 @@ const CardMyEvent = () => {
       <div className='flex w-full h-full rounded-lg bg-body shadow-2xl transition-transform hover:scale-[1.005] dark:bg-gray-800 sm:h-40'>
         <div className='relative flex min-w-[320px] items-center justify-between max-md:hidden'>
           <img
+            loading='lazy'
             className='w-full h-full rounded-l-lg object-cover'
-            src='https://res.cloudinary.com/dadvtny30/image/upload/v1712409123/eventhub/event/w3xvrrue35iu1gncudsa.jpg'
+            src={event.coverImage ? event.coverImage : event_Default}
             alt=''
           />
         </div>
@@ -38,43 +64,39 @@ const CardMyEvent = () => {
         <div className='w-full flex-col justify-between p-5'>
           <div>
             <Link
-              className='mb-2 line-clamp-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white max-md:text-base'
+              className='mb-2 line-clamp-1 text-2xl truncate font-bold tracking-tight text-gray-900 dark:text-white max-md:text-base'
               to='/'
             >
-              UIT Jobfair
+              {event.name}
             </Link>
-            {/* <p className='mb-3 line-clamp-2 font-normal text-gray-700 dark:text-gray-400 max-md:text-sm'>
-              Get ready to kick off the Christmas season in Mumbai with SOUND OF CHRISTMAS - your favourite LIVE
-              Christmas concert!.City Youth Movement invites you to the 4th edition of our annual Christmas festivities
-              - by the youth and for the youth! Feat. your favourite worship leaders, carols, quizzes and some exciting
-              surprises!.Bring your family and friends and sing along your favourite Christmas carols on the 2nd of
-              December, 6:30 PM onwards at the Balgandharva Rang Mandir, Bandra West. Book your tickets now!
-            </p> */}
             <div className='flex items-center gap-2 opacity-70'>
               <FaCalendarAlt />
-              <span>01/04/2003 Wednesday - 02:00 AM</span>
+              <span>{dayjs(event.startTime).format('DD/MM/YYYY dddd - h:m A').toString()}</span>
             </div>
             <div className='flex items-center gap-2 opacity-70'>
               <IoLocationSharp />
-              <span>UIT - Linh Trung, Thu Duc, HCM City</span>
+              <span>{event.locationString}</span>
             </div>
           </div>
-          <div className='w-full justify-end flex gap-4 pt-2'>
-            <button
-              onClick={handleEdit}
-              className='flex items-center justify-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-            >
-              Edit
-              <HiPencilAlt className='ml-2 h-6 w-6 text-white' />
-            </button>
+          <div className='flex items-center justify-between'>
+            <Checkbox checked={select} onChange={handleChange} />
+            <div className='w-full justify-end flex gap-4 pt-2'>
+              <button
+                onClick={handleEdit}
+                className='flex items-center justify-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+              >
+                Edit
+                <HiPencilAlt className='ml-2 h-6 w-6 text-white' />
+              </button>
 
-            <button
-              onClick={handleDelete}
-              className='flex items-center justify-center rounded-lg bg-textError px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
-            >
-              <span>Delete</span>
-              <HiTrash className='ml-1 h-6 w-6 text-white' />
-            </button>
+              <button
+                onClick={handleDelete}
+                className='flex items-center justify-center rounded-lg bg-textError px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
+              >
+                <span>Delete</span>
+                <HiTrash className='ml-1 h-6 w-6 text-white' />
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
+import CircularProgress from '@mui/material/CircularProgress'
 
 interface DialogProps {
   title: string
@@ -17,10 +18,12 @@ interface DialogProps {
   open: boolean
   setOpen: (value: boolean) => void
   action: string
+  onHandle?: () => void
+  disabled?: boolean
 }
 
 const ConfirmDialog = (props: DialogProps) => {
-  const { title, description, open, setOpen, action } = props
+  const { title, description, open, setOpen, action, onHandle, disabled } = props
 
   return (
     <React.Fragment>
@@ -36,7 +39,7 @@ const ConfirmDialog = (props: DialogProps) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancle</Button>
-          <Button onClick={() => {}}>{action}</Button>
+          <Button onClick={onHandle}>{disabled ? <CircularProgress /> : action}</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

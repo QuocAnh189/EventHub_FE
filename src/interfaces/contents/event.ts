@@ -1,4 +1,4 @@
-import { EventStatus } from '@constants/enum'
+import { EEventStatus } from '@constants/enum'
 import { IPriceRange } from 'interfaces/systems/price-range'
 
 export interface IEvent {
@@ -19,7 +19,7 @@ export interface IEvent {
   numberOfFavourites: number
   numberOfShares: number
   numberOfSoldTickets: number
-  status: EventStatus
+  status: EEventStatus
   createdAt: Date
   updatedAt: Date
 }

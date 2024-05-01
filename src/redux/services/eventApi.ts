@@ -18,6 +18,14 @@ export const apiEvent = createApi({
       providesTags: ['Event']
     }),
 
+    getEventsByCreatorId: builder.query<Partial<IEvent>[], string>({
+      query: (userId) => ({
+        url: `/events/users/${userId}`,
+        method: 'GET'
+      }),
+      providesTags: ['Event']
+    }),
+
     getEventById: builder.query<IEvent, string>({
       query: (eventId) => ({
         url: `/events/${eventId}`,
@@ -48,6 +56,15 @@ export const apiEvent = createApi({
       query: (eventId) => ({
         url: `/events/${eventId}`,
         method: 'DELETE'
+      }),
+      invalidatesTags: ['Event']
+    }),
+
+    deleteEvents: builder.mutation<any, string[]>({
+      query: (ids) => ({
+        url: `/events/delele-events`,
+        method: 'PATCH',
+        body: ids
       }),
       invalidatesTags: ['Event']
     }),
@@ -110,21 +127,53 @@ export const apiEvent = createApi({
         body: data
       }),
       invalidatesTags: ['Event']
+    }),
+
+    moveEventPublic: builder.mutation<any, string[]>({
+      query: (ids) => ({
+        url: `/events/move-public`,
+        method: 'PATCH',
+        body: ids
+      }),
+      invalidatesTags: ['Event']
+    }),
+
+    moveEventPrivate: builder.mutation<any, string[]>({
+      query: (ids) => ({
+        url: `/events/move-private`,
+        method: 'PATCH',
+        body: ids
+      }),
+      invalidatesTags: ['Event']
+    }),
+
+    moveEventTrash: builder.mutation<any, string[]>({
+      query: (ids) => ({
+        url: `/events/move-trash`,
+        method: 'PATCH',
+        body: ids
+      }),
+      invalidatesTags: ['Event']
     })
   })
 })
 
 export const {
   useGetEventsQuery,
+  useGetEventsByCreatorIdQuery,
   useGetEventByIdQuery,
   useCreateEventMutation,
   useUpdateEventMutation,
   useDeleteEventMutation,
+  useDeleteEventsMutation,
   useAddReviewMutation,
   useGetReviewsByEventIdQuery,
   useGetReviewByIdQuery,
   useUpdateReviewMutation,
   useDeleteReviewMutation,
   useFavouriteEventMutation,
-  useUnfavouriteEventMutation
+  useUnfavouriteEventMutation,
+  useMoveEventPublicMutation,
+  useMoveEventPrivateMutation,
+  useMoveEventTrashMutation
 } = apiEvent

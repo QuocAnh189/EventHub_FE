@@ -1,4 +1,13 @@
-export enum EventStatus {
+export enum EEventAction {
+  ALL = 'ALL',
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE',
+  TRASH = 'TRASH',
+  DELETE = 'DELETE'
+}
+
+export enum EEventStatus {
+  ALL = 'ALL',
   OPENING = 'OPENING',
   UPCOMING = 'UPCOMING',
   CLOSED = 'CLOSED'

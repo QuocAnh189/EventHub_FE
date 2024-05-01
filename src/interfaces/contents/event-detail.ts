@@ -1,4 +1,4 @@
-import { EventStatus } from '@constants/enum'
+import { EEventStatus } from '@constants/enum'
 import { ICategory } from './category'
 import { ICreator } from './creator'
 import { ILocation } from './location'
@@ -23,7 +23,7 @@ export interface IEventDetail {
   numberOfFavourites: number
   numberOfShares: number
   numberOfSoldTickets: number
-  status: EventStatus
+  status: EEventStatus
   createdAt: Date
   updatedAt: Date
 }

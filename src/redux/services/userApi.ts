@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IParamsEvent } from '@type/event'
 import { IChangePasswordPayload, IFollowPayload } from '@type/user'
 import { IUser } from 'interfaces/systems/user'
 
@@ -9,7 +10,6 @@ export const apiUser = createApi({
     prepareHeaders: (headers) => {
       const token = JSON.parse(localStorage.getItem('token')!).accessToken
 
-      headers.set('Content-Type', 'application/json')
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)
       }
@@ -36,6 +36,18 @@ export const apiUser = createApi({
       providesTags: ['User']
     }),
 
+    getEventsByUserId: builder.query<any, { userId: string; params: IParamsEvent }>({
+      query: ({ userId, params }) => ({
+        url: `/users/${userId}/events`,
+        method: 'GET',
+        params
+      }),
+      providesTags: ['User'],
+      transformResponse: (response: any) => {
+        return response.data
+      }
+    }),
+
     createUser: builder.mutation<IUser, Partial<IUser>>({
       query: (data) => ({
         url: '/users',
@@ -45,11 +57,15 @@ export const apiUser = createApi({
       invalidatesTags: ['User']
     }),
 
-    updateUser: builder.mutation<IUser, Partial<IUser>>({
-      query: (data) => ({
-        url: `/users/${data.id}`,
+    updateUser: builder.mutation<IUser, { userId: string; data: any }>({
+      query: ({ userId, data }) => ({
+        url: `/users/${userId}`,
         method: 'PUT',
         body: data
+        // headers: {
+        //   Accept: '*/*',
+        //   'Content-Type': 'multipart/form-data;'
+        // }
       })
     }),
 
@@ -116,6 +132,7 @@ export const apiUser = createApi({
 
 export const {
   useGetUserByIdQuery,
+  useGetEventsByUserIdQuery,
   useGetUsersQuery,
   useCreateUserMutation,
   useUpdateUserMutation,

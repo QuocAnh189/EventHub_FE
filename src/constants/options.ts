@@ -109,10 +109,10 @@ export const APPS_OPTIONS = [
 ]
 
 export const EVENT_MANAGEMENT_OPTIONS = [
-  { value: 'all', label: 'All' },
-  { value: 'publish', label: 'Published' },
-  { value: 'private', label: 'Privated' },
-  { value: 'trash', label: 'Trash' }
+  { value: 'ALL', label: 'All' },
+  { value: 'PUBLIC', label: 'Published' },
+  { value: 'PRIVATE', label: 'Privated' },
+  { value: 'TRASH', label: 'Trash' }
 ]
 
 export const ORDER_SORT_OPTIONS = [
@@ -177,9 +177,10 @@ export const PRODUCT_ADDITIONAL_OPTIONS = [
   { value: 'popularity', label: 'Popularity' }
 ]
 
-export const PRODUCT_SELECT_OPTIONS = [
-  { value: 'to-private', label: 'Move to privates' },
-  { value: 'to-trash', label: 'Move to Trash' },
+export const EVENT_SELECT_OPTIONS = [
+  { value: 'publish', label: 'Move to Publics' },
+  { value: 'private', label: 'Move to Privates' },
+  { value: 'trash', label: 'Move to Trash' },
   { value: 'delete', label: 'Delete Permanently' }
 ]
 

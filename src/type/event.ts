@@ -1,4 +1,4 @@
-import { EEventStyle, EEventTicket } from '@constants/enum'
+import { EEventAction, EEventStatus, EEventStyle, EEventTicket, EPageOrder } from '@constants/enum'
 
 export interface ICreateTicketPayload {
   name: string
@@ -65,4 +65,35 @@ export interface IFilterEvent {
   status: any
   category: any
   eventTicketType: any
+}
+
+export const initFilterEvent = {
+  status: null,
+  category: null,
+  eventTicketType: null
+} as IFilterEvent
+
+export interface IParamsEvent {
+  type?: EEventStatus
+  location?: string | null
+  categoryIds?: string[] | null
+  eventPrivacy?: EEventAction
+  page?: number
+  size?: number
+  takeAll?: boolean
+  order?: EPageOrder
+  search?: string
+}
+
+export interface IMetadataEventReponse {
+  currentPage: number
+  hasNext: boolean
+  hasPrevious: boolean
+  pageSize: number
+  takeAll: boolean
+  totalCount: number
+  totalPages: number
+  totalPrivate: number
+  totalPublic: number
+  totalTrash: number
 }

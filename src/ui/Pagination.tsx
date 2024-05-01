@@ -3,9 +3,9 @@ import classNames from 'classnames'
 interface Props {
   pagination: any
 }
+
 const Pagination = (props: Props) => {
   const { pagination } = props
-  const total = pagination.maxPage
 
   return (
     <div className='flex flex-wrap items-center gap-[18px] pb-6 border-b border-input-border'>
@@ -15,7 +15,7 @@ const Pagination = (props: Props) => {
         </button>
       )}
       <div className='flex flex-wrap gap-2.5'>
-        {[...Array(total)].map((_, i) => {
+        {[...Array(pagination.maxPage)].map((_, i) => {
           return (
             <button
               className={classNames('page-btn subheading-2', { active: i === pagination.currentPage })}
@@ -29,7 +29,7 @@ const Pagination = (props: Props) => {
           )
         })}
       </div>
-      {pagination.currentPage < total - 1 && (
+      {pagination.currentPage < pagination.maxPage - 1 && (
         <button
           onClick={pagination.next}
           disabled={pagination.currentPage + 1 === pagination.maxPage}

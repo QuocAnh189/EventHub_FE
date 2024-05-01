@@ -1,66 +1,35 @@
 // hooks
-import { useForm, Controller } from 'react-hook-form'
+import { Controller, UseFormRegister, UseFormWatch, UseFormSetValue, Control } from 'react-hook-form'
 import { useTheme } from '@contexts/themeContext'
 
 // components
 import Spring from '@components/Spring'
 import Select from '@ui/Select'
-import { PasswordInput } from '@components/index'
 import { NavLink } from 'react-router-dom'
 import { PatternFormat } from 'react-number-format'
-import { toast } from 'react-toastify'
 
 // utils
 import classNames from 'classnames'
 
-//redux
-import { useUpdateUserMutation } from '@redux/services/userApi'
+import { IUser } from 'interfaces/systems/user'
+import { CircularProgress } from '@mui/material'
+import { EUserStatus } from '@constants/enum'
 
-//day
-import dayjs from 'dayjs'
 interface Props {
-  user: any
+  register: UseFormRegister<IUser>
+  watch: UseFormWatch<IUser>
+  setValue: UseFormSetValue<IUser>
+  control: Control<IUser>
+  errors: any
+  isLoading: boolean
+  roles: string[]
+  status: EUserStatus
 }
 
 const UserProfileDetails = (props: Props) => {
-  const { user } = props
-
-  const [updateUser, { isLoading }] = useUpdateUserMutation()
+  const { register, watch, setValue, control, errors, isLoading, roles, status } = props
 
   const { theme, toggleTheme }: any = useTheme()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-    setValue,
-    watch
-  } = useForm({
-    defaultValues: {
-      id: user?.id,
-      userName: user?.userName,
-      fullName: user?.fullName,
-      email: user?.email,
-      phoneNumber: user?.phoneNumber,
-      password: 'password',
-      gender: user?.gender,
-      dob: dayjs(user?.dob).format('YYYY-MM-DD'),
-      bio: user?.bio
-    }
-  })
-
-  const onSubmit = async (data: any) => {
-    try {
-      delete data.password
-      const result = await updateUser(data).unwrap()
-      if (result) {
-        console.log(result)
-        toast.success('Profile updated successfully')
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   return (
     <Spring
@@ -69,150 +38,140 @@ const UserProfileDetails = (props: Props) => {
     >
       <div className='flex flex-col gap-5'>
         <h5>My Profile</h5>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='grid gap-4 md:grid-cols-2 md:gap-5'>
-            <div className='grid gap-4'>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='firstName'>
-                  User Name
-                </label>
-                <input
-                  className={classNames('field-input', { 'field-input--error': errors.userName })}
-                  type='text'
-                  id='userName'
-                  placeholder='User Name'
-                  defaultValue='Maria'
-                  {...register('userName', { required: true })}
-                />
-              </div>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='lastName'>
-                  Full Name
-                </label>
-                <input
-                  className={classNames('field-input', { 'field-input--error': errors.fullName })}
-                  type='text'
-                  id='fullName'
-                  placeholder='Full Name'
-                  defaultValue='Smith'
-                  {...register('fullName', { required: true })}
-                />
-              </div>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='email'>
-                  Email
-                </label>
-                <input
-                  className={classNames('field-input', { 'field-input--error': errors.email })}
-                  type='text'
-                  id='email'
-                  placeholder='Email'
-                  defaultValue='maria@email.com'
-                  {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-                />
-              </div>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='phone'>
-                  Phone Number
-                </label>
-                <Controller
-                  name='phoneNumber'
-                  control={control}
-                  render={({ field }) => (
-                    <PatternFormat
-                      value={field.value}
-                      format='+#-###-###-####'
-                      placeholder='(123) 456-7890'
-                      className={classNames('field-input', { 'field-input--error': errors.phoneNumber })}
-                      getInputRef={field.ref}
-                    />
-                  )}
-                />
-              </div>
+
+        <div className='grid gap-4 md:grid-cols-2 md:gap-5'>
+          <div className='grid gap-4'>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='firstName'>
+                User Name
+              </label>
+              <input
+                className={classNames('field-input', { 'field-input--error': errors.userName })}
+                type='text'
+                id='userName'
+                placeholder='User Name'
+                defaultValue='Maria'
+                {...register('userName', { required: true })}
+              />
+            </div>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='lastName'>
+                Full Name
+              </label>
+              <input
+                className={classNames('field-input', { 'field-input--error': errors.fullName })}
+                type='text'
+                id='fullName'
+                placeholder='Full Name'
+                defaultValue='Smith'
+                {...register('fullName', { required: true })}
+              />
+            </div>
+
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='email'>
+                Email
+              </label>
+              <input
+                className={classNames('field-input', { 'field-input--error': errors.email })}
+                type='text'
+                id='email'
+                placeholder='Email'
+                defaultValue='maria@email.com'
+                {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+              />
+            </div>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='lastName'>
+                Password
+              </label>
+              <input
+                className={classNames('field-input', { 'field-input--error': errors.fullName })}
+                type='text'
+                id='fullName'
+                placeholder='Full Name'
+                defaultValue='Smith'
+              />
+            </div>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='phone'>
+                Phone Number
+              </label>
               <Controller
-                name='password'
+                name='phoneNumber'
                 control={control}
-                rules={{ required: true }}
-                render={({ field: { onChange, value, ref } }) => (
-                  <PasswordInput
-                    id='profilePassword'
-                    label='Password'
-                    value={value}
-                    innerRef={ref}
-                    isInvalid={errors.password}
-                    onChange={onChange}
+                render={({ field }) => (
+                  <PatternFormat
+                    value={field.value}
+                    format='+#-###-###-####'
+                    placeholder='(123) 456-7890'
+                    className={classNames('field-input', { 'field-input--error': errors.phoneNumber })}
+                    getInputRef={field.ref}
                   />
                 )}
               />
             </div>
-            <div className='grid gap-4'>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='city'>
-                  Gender
-                </label>
-                <Select
-                  placeholder='Gender'
-                  id='gender'
-                  options={[
-                    { value: 'MALE', label: 'MALE' },
-                    { value: 'FEMALE', label: 'FEMALE' },
-                    { value: 'OTHER', label: 'OTHER' }
-                  ]}
-                  value={{ value: watch().gender, label: watch().gender }}
-                  onChange={(e: any) => {
-                    setValue('gender', e.value)
-                  }}
-                />
-              </div>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='state'>
-                  Day of birth
-                </label>
-                <input className='field-input' type='date' id='state' placeholder='State' {...register('dob')} />
-              </div>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='zip'>
-                  Status
-                </label>
-                <input
-                  readOnly
-                  className='field-input'
-                  type='text'
-                  id='Status'
-                  placeholder='Status'
-                  value={user.status}
-                />
-              </div>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='firstName'>
-                  Role
-                </label>
-                <input
-                  readOnly
-                  className={classNames('field-input')}
-                  type='text'
-                  id='role'
-                  placeholder='Role'
-                  value={user.roles.join(',')}
-                />
-              </div>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='address'>
-                  Bio
-                </label>
-                <input className='field-input' type='text' id='Bio' placeholder='Bio' {...register('bio')} />
-              </div>
+          </div>
+          <div className='grid gap-4'>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='city'>
+                Gender
+              </label>
+              <Select
+                placeholder='Gender'
+                id='gender'
+                options={[
+                  { value: 'MALE', label: 'MALE' },
+                  { value: 'FEMALE', label: 'FEMALE' },
+                  { value: 'OTHER', label: 'OTHER' }
+                ]}
+                value={{ value: watch().gender, label: watch().gender }}
+                onChange={(e: any) => {
+                  setValue('gender', e.value)
+                }}
+              />
+            </div>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='state'>
+                Day of birth
+              </label>
+              <input className='field-input' type='date' id='state' placeholder='State' {...register('dob')} />
+            </div>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='zip'>
+                Status
+              </label>
+              <input readOnly className='field-input' type='text' id='Status' placeholder='Status' value={status} />
+            </div>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='firstName'>
+                Role
+              </label>
+              <input
+                readOnly
+                className={classNames('field-input')}
+                type='text'
+                id='role'
+                placeholder='Role'
+                value={roles}
+              />
+            </div>
+            <div className='field-wrapper'>
+              <label className='field-label' htmlFor='address'>
+                Bio
+              </label>
+              <input className='field-input' type='text' id='Bio' placeholder='Bio' {...register('bio')} />
             </div>
           </div>
-          <div className='mt-2.5'>
-            <button className='text-btn' type='button'>
-              Change password
-            </button>
-            <button disabled={isLoading} className='btn btn--primary w-full mt-5 md:w-fit md:px-[70px]' type='submit'>
-              Update information
-            </button>
-          </div>
-        </form>
+        </div>
+        <div className='mt-2.5'>
+          <button className='text-btn' type='button'>
+            Change password
+          </button>
+          <button disabled={isLoading} type='submit' className='btn btn--primary w-[260px] mt-5'>
+            {isLoading ? <CircularProgress size={24} /> : 'Update information'}
+          </button>
+        </div>
       </div>
       <div>
         <h5>Admin Panel Tools</h5>

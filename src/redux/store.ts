@@ -18,6 +18,7 @@ import { apiUser } from './services/userApi'
 // Slices
 import categoryReducer, { CategorySliceKey } from './slices/categorySlice'
 import userReducer, { UserSliceKey } from './slices/userSlice'
+import eventReducer, { EventSliceKey } from './slices/eventSlice'
 
 const persistConfig = {
   key: 'root',
@@ -27,6 +28,7 @@ const persistConfig = {
 const combinedReducer = combineReducers({
   [CategorySliceKey]: categoryReducer,
   [UserSliceKey]: userReducer,
+  [EventSliceKey]: eventReducer,
 
   [apiAuth.reducerPath]: apiAuth.reducer,
   [apiCategory.reducerPath]: apiCategory.reducer,

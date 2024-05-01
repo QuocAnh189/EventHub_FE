@@ -16,6 +16,7 @@ const csvData = [
 
 const MyEvent = () => {
   const navigate = useNavigate()
+
   return (
     <ProtectedLayout>
       <div className='min-h-screen'>

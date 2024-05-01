@@ -12,12 +12,12 @@ const SearchHome = () => {
 
   return (
     <div className='w-[90%] h-[95vh] m-auto'>
-      <div className='relative w-full'>
+      <div className='relative w-full z-[999]'>
         <video autoPlay loop muted className='absolute right-0 top-0 h-auto w-full object-cover z-[-1] rounded-md'>
           <source src={NatureVid} type='video/mp4' />
         </video>
       </div>
-      <div className='relative w-full h-[90%]'>
+      <div className='relative w-full h-[90%] z-[1000]'>
         <div className='w-[500px] h-auto text-white px-[30px] pt-[30px] pb-[100px]'>
           <p className='text-white leading-10 font-extrabold text-[2em]'>
             The right desitination for you and your friends

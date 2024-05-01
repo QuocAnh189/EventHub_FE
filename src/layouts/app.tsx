@@ -18,7 +18,7 @@ const AppLayout = ({ children }: any) => {
   }
 
   return (
-    <div className='relative max-h-screen'>
+    <div className='relative min-h-screen bg-body'>
       <div className='menu' ref={scope}>
         <MessageIcon onClick={handleOpenLiveChat} />
         <ModalMessage />

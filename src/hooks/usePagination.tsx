@@ -27,7 +27,7 @@ export const usePagination = (data: any, itemsPerPage = 10) => {
     setCurrentPage((currentPage) => Math.max(currentPage - 1, 0))
   }
 
-  const goToPage = (page: any) => {
+  const goToPage = (page: number) => {
     const pageNumber = Math.max(0, page)
     setCurrentPage(() => Math.min(pageNumber, maxPage))
   }

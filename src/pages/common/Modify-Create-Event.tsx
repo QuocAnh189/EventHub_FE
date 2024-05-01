@@ -51,11 +51,11 @@ const ModifyEvent = (props: Props) => {
   const onSubmit: SubmitHandler<ICreateEventPayload> = async (data) => {
     const formData = {
       ...data,
-      startDate: data.startDate + ' ' + data.startTime,
-      endDate: data.endDate + ' ' + data.endTime
+      startTime: data.startDate + ' ' + data.startTime,
+      endTime: data.endDate + ' ' + data.endTime
     }
-    delete formData.startTime
-    delete formData.endTime
+    delete formData.startDate
+    delete formData.endDate
 
     console.log(formData)
 

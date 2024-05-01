@@ -4,7 +4,7 @@ export interface IUser {
   userName: string
   email: string
   phoneNumber: number
-  dob: Date
+  dob: any
   fullName: string
   gender: EGender
   bio: string
