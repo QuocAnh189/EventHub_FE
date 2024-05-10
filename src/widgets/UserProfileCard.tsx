@@ -1,4 +1,5 @@
 //hook
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '@hooks/useRedux'
 import { UseFormSetValue } from 'react-hook-form'
@@ -28,9 +29,11 @@ const UserProfileCard = (props: Props) => {
   const navigate = useNavigate()
 
   const [signOut, { isLoading: loadingLogout }] = useSignOutMutation()
+  const [avatarUser, setAvatarUser] = useState<string>(avatar)
 
   const handleChangeAvatar = (e: any) => {
-    const image = URL.createObjectURL(e.target.files[0])
+    const image = e.target.files[0]
+    setAvatarUser(URL.createObjectURL(image))
     setValue('avatar', image)
   }
 
@@ -44,12 +47,12 @@ const UserProfileCard = (props: Props) => {
   }
 
   return (
-    <Spring className='relative card flex flex-col items-center justify-center'>
+    <Spring className='relative card flex flex-col items-center gap-2 justify-center'>
       <div className='relative mb-3.5'>
         <img
           loading='lazy'
           className='relative rounded-full w-[110px] h-[110px]'
-          src={avatar ? avatar : useDefault}
+          src={avatarUser ? avatarUser : useDefault}
           alt=''
         />
 

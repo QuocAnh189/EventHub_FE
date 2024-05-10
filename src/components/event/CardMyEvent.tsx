@@ -17,17 +17,25 @@ import { IEvent } from 'interfaces/contents/event'
 //util
 import dayjs from 'dayjs'
 
+//assets
 import event_Default from '@assets/event/event-poster.png'
+
+//redux
+import { useDeleteEventMutation } from '@redux/services/eventApi'
+import { toast } from 'react-toastify'
 
 interface Props {
   event: IEvent
   checkedAll: boolean
   onChecked: (id: string) => void
+  handleDeleteEvents: (id: string | string[]) => void
 }
 
 const CardMyEvent = (props: Props) => {
-  const { event, checkedAll, onChecked } = props
+  const { event, checkedAll, onChecked, handleDeleteEvents } = props
   const navigate = useNavigate()
+
+  const [deleteEvent, { isLoading }] = useDeleteEventMutation()
   const [openDialog, setOpenDialog] = useState<boolean>(false)
   const [select, setSelect] = useState<boolean>(checkedAll)
 
@@ -48,9 +56,22 @@ const CardMyEvent = (props: Props) => {
     setOpenDialog(true)
   }
 
+  const handleDeleteEvent = async () => {
+    try {
+      const result = await deleteEvent(event.id).unwrap()
+      if (result) {
+        handleDeleteEvents(event.id)
+        toast.success('Delete quiz successfully')
+        setOpenDialog(false)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <>
-      <div className='flex w-full h-full rounded-lg bg-body shadow-2xl transition-transform hover:scale-[1.005] dark:bg-gray-800 sm:h-40'>
+      <div className='flex w-full h-[200px] rounded-lg bg-body shadow-2xl transition-transform hover:scale-[1.005] dark:bg-gray-800'>
         <div className='relative flex min-w-[320px] items-center justify-between max-md:hidden'>
           <img
             loading='lazy'
@@ -61,25 +82,24 @@ const CardMyEvent = (props: Props) => {
         </div>
 
         {/* Content */}
-        <div className='w-full flex-col justify-between p-5'>
+        <div className='w-full h-full flex flex-col justify-between px-5 py-4'>
           <div>
-            <Link
-              className='mb-2 line-clamp-1 text-2xl truncate font-bold tracking-tight text-gray-900 dark:text-white max-md:text-base'
-              to='/'
-            >
-              {event.name}
+            <Link className='' to='/'>
+              <p className='mb-2 line-clamp-1 text-2xl truncate text-ellipsis w-[300px] font-bold tracking-tight text-gray-900 dark:text-white max-md:text-base'>
+                {event.name}
+              </p>
             </Link>
-            <div className='flex items-center gap-2 opacity-70'>
+            <div className='flex items-center gap-2 opacity-70 text-gray'>
               <FaCalendarAlt />
-              <span>{dayjs(event.startTime).format('DD/MM/YYYY dddd - h:m A').toString()}</span>
+              <span>{dayjs(event.startTime).format('DD/MM/YYYY dddd - hh:mm A').toString()}</span>
             </div>
-            <div className='flex items-center gap-2 opacity-70'>
+            <div className='flex items-center gap-2 opacity-70 text-gray'>
               <IoLocationSharp />
-              <span>{event.locationString}</span>
+              <span>{event.location}</span>
             </div>
           </div>
           <div className='flex items-center justify-between'>
-            <Checkbox checked={select} onChange={handleChange} />
+            <Checkbox checked={select} onChange={handleChange} sx={{ color: 'var(--header)' }} />
             <div className='w-full justify-end flex gap-4 pt-2'>
               <button
                 onClick={handleEdit}
@@ -93,7 +113,7 @@ const CardMyEvent = (props: Props) => {
                 onClick={handleDelete}
                 className='flex items-center justify-center rounded-lg bg-textError px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
               >
-                <span>Delete</span>
+                <span>{event.isTrash ? 'Delete' : 'Trash'}</span>
                 <HiTrash className='ml-1 h-6 w-6 text-white' />
               </button>
             </div>
@@ -104,12 +124,14 @@ const CardMyEvent = (props: Props) => {
       {openDialog && (
         <ConfirmDialog
           title='Delete Event'
-          description='Are you sure want to delete this event'
+          description={`Are you sure want to ${event.isTrash ? 'Delete' : 'Trash'} this event`}
           open={openDialog}
           setOpen={(value) => {
             setOpenDialog(value)
           }}
-          action='Delete'
+          action={event.isTrash ? 'Delete' : 'Trash'}
+          onHandle={handleDeleteEvent}
+          disabled={isLoading}
         />
       )}
     </>

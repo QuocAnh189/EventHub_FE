@@ -39,7 +39,7 @@ const ConfirmDialog = (props: DialogProps) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancle</Button>
-          <Button onClick={onHandle}>{disabled ? <CircularProgress /> : action}</Button>
+          <Button onClick={onHandle}>{disabled ? <CircularProgress size='20px' /> : action}</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

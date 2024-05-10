@@ -23,20 +23,24 @@ import { BiImport } from 'react-icons/bi'
 //file
 import readXlsxFile from 'read-excel-file'
 
-//util
-import dayjs from 'dayjs'
-
 //redux
 import { useCreateEventMutation, useUpdateEventMutation } from '@redux/services/eventApi'
+import { IEvent } from 'interfaces/contents/event'
+import { toast } from 'react-toastify'
+import { useAppSelector } from '@hooks/useRedux'
+
+//constant
+import { stepCreateEvent } from '@constants/event'
 
 interface Props {
   title: string
   create?: boolean
+  event?: IEvent
 }
 const ModifyEvent = (props: Props) => {
-  const { title, create } = props
+  const { title, create, event } = props
 
-  const steps = ['Infomation', 'Banner Image', 'Set Ticket', 'Review']
+  const user = useAppSelector((state) => state.user.user)
 
   const [createEvent, { isLoading: loadingCreateEvent }] = useCreateEventMutation()
   const [updateEvent, { isLoading: loadingUpdateEvent }] = useUpdateEventMutation()
@@ -44,24 +48,35 @@ const ModifyEvent = (props: Props) => {
   const [active, setActive] = useState<number>(create ? -1 : 0)
 
   const { control, register, handleSubmit, watch, setValue, reset } = useForm<ICreateEventPayload>({
-    defaultValues: InitCreateEventPayload,
+    defaultValues: event
+      ? { ...event, creatorId: user?.id, eventSubImages: event.subImages }
+      : { ...InitCreateEventPayload, creatorId: user?.id },
     mode: 'onChange'
   })
 
-  const onSubmit: SubmitHandler<ICreateEventPayload> = async (data) => {
-    const formData = {
-      ...data,
-      startTime: data.startDate + ' ' + data.startTime,
-      endTime: data.endDate + ' ' + data.endTime
-    }
-    delete formData.startDate
-    delete formData.endDate
+  const onSubmit: SubmitHandler<ICreateEventPayload> = async (data: ICreateEventPayload | any) => {
+    const formData: any = new FormData()
 
-    console.log(formData)
+    for (let key in data) {
+      if (key === 'ticketTypes' || key === 'categoryIds' || key === 'eventSubImages' || key === 'reasons') {
+        if (key === 'ticketTypes') {
+          data[key].forEach((item: any) => formData.append(key, JSON.stringify(item)))
+        } else {
+          data[key].forEach((item: any) => formData.append(key, item))
+        }
+      } else {
+        formData.append(key, data[key])
+      }
+    }
 
     try {
-      const result = create ? await createEvent(formData).unwrap() : await updateEvent(data).unwrap()
+      const result = create
+        ? await createEvent(formData).unwrap()
+        : await updateEvent({ eventId: data.id!, data: formData }).unwrap()
       console.log(result)
+      if (result) {
+        toast.success(`${create ? 'Create' : 'Update'} event successfully`)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -70,20 +85,17 @@ const ModifyEvent = (props: Props) => {
   const handleFileImport = (e: any) => {
     e.preventDefault()
     readXlsxFile(e.target.files[0]).then((rows: any) => {
-      setValue('name', rows[1][0].toString())
-      setValue('categories', JSON.parse(rows[1][1].toString()))
-      setValue('eventType', rows[1][2].toString())
-      setValue('startDate', dayjs(rows[1][3].toString()).format('YYYY-MM-DD'))
-      setValue('endDate', dayjs(rows[1][4].toString()).format('YYYY-MM-DD'))
-      setValue('startTime', dayjs(rows[1][5].toString()).format('hh:mm'))
-      setValue('endTime', dayjs(rows[1][6].toString()).format('hh:mm'))
-      setValue('location', rows[1][7].toString())
-      setValue('description', rows[1][8].toString())
-      setValue('reasons', JSON.parse(rows[1][9].toString()))
-      setValue('coverImage', rows[1][10].toString())
-      setValue('subImage', JSON.parse(rows[1][11].toString()))
-      setValue('eventTicketType', rows[1][12].toString())
-      setValue('tickets', JSON.parse(rows[1][13].toString()))
+      setValue('name', rows[5][0].toString())
+      setValue('categoryIds', JSON.parse(rows[5][1].toString()))
+      setValue('eventCycleType', rows[5][2].toString())
+      setValue('startTime', rows[5][3].toString())
+      setValue('endTime', rows[5][4].toString())
+      setValue('location', rows[5][5].toString())
+      setValue('description', rows[5][6].toString())
+      setValue('reasons', JSON.parse(rows[5][7].toString()))
+      setValue('eventSubImages', JSON.parse(rows[5][8].toString()))
+      setValue('eventPaymentType', rows[5][9].toString())
+      setValue('ticketTypes', JSON.parse(rows[5][10].toString()))
     })
     setActive(0)
   }
@@ -91,12 +103,12 @@ const ModifyEvent = (props: Props) => {
   const handleDownloadFile = () => {
     const link = document.createElement('a')
     link.href = '/excel/example-event-import.xlsx'
-    link.setAttribute('download', 'example-event-import.xlsx') //or any other extension
+    link.setAttribute('download', 'example-event-import.xlsx')
     document.body.appendChild(link)
     link.click()
 
     document.body.removeChild(link)
-    URL.revokeObjectURL('/excel/example-event-import.xlsx.xlsx')
+    URL.revokeObjectURL('/excel/example-event-import.xlsx')
   }
 
   if (active === -1 && create) {
@@ -109,13 +121,13 @@ const ModifyEvent = (props: Props) => {
               setActive(0)
               reset()
             }}
-            className='w-[300px] h-[200px] border-[2px] border-solid border-textGray rounded-lg flex flex-col items-center justify-center gap-2 hover:cursor-pointer hover:bg-slate-200'
+            className='w-[300px] h-[200px] border-[2px] border-solid border-textGray rounded-lg flex flex-col items-center justify-center gap-2 hover:cursor-pointer'
           >
-            <IoCreate size={42} color='#333' />
+            <IoCreate size={42} color='var(--header)' />
             <p className={`font-bold text-textGray`}>Create Event</p>
-            <p className='text-center px-4'>You will have to create the event one way handmade</p>
+            <p className='text-center px-4 text-header'>You will have to create the event one way handmade</p>
           </button>
-          <div className='relative w-[300px] h-[200px] border-[2px] border-solid border-textGray rounded-lg flex flex-col items-center justify-center gap-2 hover:cursor-pointer hover:bg-slate-200'>
+          <div className='z-[9] relative w-[300px] h-[200px] border-[2px] border-solid border-textGray rounded-lg flex flex-col items-center justify-center gap-2 hover:cursor-pointer'>
             <input
               className='h-full w-full opacity-0 z-[1] hover:cursor-pointer'
               type='file'
@@ -123,9 +135,9 @@ const ModifyEvent = (props: Props) => {
               onChange={(e) => handleFileImport(e)}
             />
             <div className='absolute z-[0] h-full w-full rounded-lg flex flex-col items-center justify-center gap-2'>
-              <BiImport size={42} color='#333' />
+              <BiImport size={42} color='var(--header)' />
               <p className='font-bold text-textGray text-justify'>Import Event</p>
-              <p className='text-center'>Do you already have an event?</p>
+              <p className='text-center text-header z-[10]'>Do you already have an event?</p>
             </div>
             <button onClick={handleDownloadFile} className='text-primary hover:underline z-[2] pt-2'>
               Example file here
@@ -141,8 +153,8 @@ const ModifyEvent = (props: Props) => {
       <PageHeader title={title} />
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={active} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
+          {stepCreateEvent.map((label: string, index: number) => (
+            <Step key={`step-${index}`}>
               <StepLabel>
                 <p className='text-header'>{label}</p>
               </StepLabel>
@@ -168,7 +180,7 @@ const ModifyEvent = (props: Props) => {
         {active === 1 && (
           <BannerEvent
             coverImage={watch().coverImage}
-            subImage={watch().subImage}
+            subImage={watch().eventSubImages}
             setValue={setValue}
             setActive={(value) => {
               setActive(value)
@@ -179,7 +191,7 @@ const ModifyEvent = (props: Props) => {
         {active === 2 && (
           <TicketEventCreate
             register={register}
-            eventTicketType={watch().eventTicketType}
+            eventTicketType={watch().eventPaymentType}
             control={control}
             setValue={setValue}
             setActive={(value) => {
@@ -196,6 +208,7 @@ const ModifyEvent = (props: Props) => {
               setActive(value)
             }}
             disabled={create ? loadingCreateEvent : loadingUpdateEvent}
+            create={create!}
           />
         )}
       </form>

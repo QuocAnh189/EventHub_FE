@@ -1,21 +1,35 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ICreateEventPayload, IFavouriteEventPayload, IReviewEventPayload } from '@type/event'
+import { IFavouriteEventPayload, IParamsEvent, IReviewEventPayload } from '@type/event'
 import { IEvent } from 'interfaces/contents/event'
 
 export const apiEvent = createApi({
   reducerPath: 'apiEvent',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL
+    baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers) => {
+      const token = JSON.parse(localStorage.getItem('token')!).accessToken
+
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+
+      return headers
+    }
   }),
-  keepUnusedDataFor: 20,
+  keepUnusedDataFor: 60,
+
   tagTypes: ['Event', 'Review'],
   endpoints: (builder) => ({
-    getEvents: builder.query<Partial<IEvent>[], any>({
-      query: () => ({
+    getEvents: builder.query<any, IParamsEvent | any>({
+      query: (params) => ({
         url: '/events',
-        method: 'GET'
+        method: 'GET',
+        params
       }),
-      providesTags: ['Event']
+      providesTags: ['Event'],
+      transformResponse: (response: any) => {
+        return response.data
+      }
     }),
 
     getEventsByCreatorId: builder.query<Partial<IEvent>[], string>({
@@ -31,10 +45,13 @@ export const apiEvent = createApi({
         url: `/events/${eventId}`,
         method: 'GET'
       }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
       providesTags: ['Event']
     }),
 
-    createEvent: builder.mutation<IEvent, ICreateEventPayload>({
+    createEvent: builder.mutation<IEvent, FormData>({
       query: (data) => ({
         url: '/events',
         method: 'POST',
@@ -43,9 +60,9 @@ export const apiEvent = createApi({
       invalidatesTags: ['Event']
     }),
 
-    updateEvent: builder.mutation<IEvent, Partial<IEvent>>({
-      query: (data) => ({
-        url: `/events/${data.id}`,
+    updateEvent: builder.mutation<IEvent, { eventId: string; data: FormData }>({
+      query: ({ eventId, data }) => ({
+        url: `/events/${eventId}`,
         method: 'PUT',
         body: data
       }),
@@ -148,10 +165,9 @@ export const apiEvent = createApi({
     }),
 
     moveEventTrash: builder.mutation<any, string[]>({
-      query: (ids) => ({
-        url: `/events/move-trash`,
-        method: 'PATCH',
-        body: ids
+      query: (id) => ({
+        url: `${id}/events/move-trash`,
+        method: 'DELETE'
       }),
       invalidatesTags: ['Event']
     })

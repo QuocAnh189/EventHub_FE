@@ -8,7 +8,7 @@ const UserProfilePanel = () => {
         <span className='icon-wrapper text-red'>
           <i className='icon-bell-solid' />
         </span>
-        <span>
+        <span className='text-header'>
           Notifications <span className='subheading-2'>(2)</span>
         </span>
       </button>
@@ -16,7 +16,7 @@ const UserProfilePanel = () => {
         <span className='icon-wrapper text-green'>
           <i className='icon-message-solid' />
         </span>
-        <span>
+        <span className='text-header'>
           Messages <span className='subheading-2'>(7)</span>
         </span>
       </button>

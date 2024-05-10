@@ -68,7 +68,7 @@ const SessionOne = (props: SessionOneProps) => {
         case 'Email already exists':
           toast.error('Email already exists')
           break
-        case 'Phone already exists':
+        case 'Phone number already exists':
           toast.error('Phone already exists')
           break
         default:

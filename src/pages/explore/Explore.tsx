@@ -1,85 +1,107 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { usePagination } from '@hooks/usePagination'
+import { useForm } from 'react-hook-form'
 
 //components
-import Select from '@mui/material/Select'
-import ReactPaginate from 'react-paginate'
 import { PageHeader } from '@layouts/components'
 import EventCardExplore from '@components/EventCardExplore'
-import { SidebarExplore } from '@components/SidebarExplore'
+import SidebarExplore from '@components/SidebarExplore'
+import Search from '@ui/Search'
+import Select from '@ui/Select'
+import Pagination from '@ui/Pagination'
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+//redux
+import { useGetEventsQuery } from '@redux/services/eventApi'
+
+//interfaces
+import { IMetadataEventReponse, initParamsEvent } from '@type/event'
+import { IEvent } from 'interfaces/contents/event'
+import NotData from '@components/NotData'
+import { Loader } from '@components/Loader'
 
 const ExploreScreen = () => {
-  const [itemOffset, setItemOffset] = useState(0)
+  const { watch, setValue } = useForm({
+    defaultValues: initParamsEvent,
+    mode: 'onChange'
+  })
 
-  // Simulate fetching items from another resources.
-  // (This could be items from props; or items loaded in a local state
-  // from an API endpoint with useEffect and useState)
-  const endOffset = itemOffset + 1
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`)
-  // const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / 1)
+  const { data, isFetching, refetch } = useGetEventsQuery(watch())
 
-  // Invoke when user click to request another page.
-  const handlePageClick = (event: any) => {
-    const newOffset = (event.selected * 1) % items.length
-    console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`)
-    setItemOffset(newOffset)
-  }
+  const [meta, setMeta] = useState<IMetadataEventReponse>()
+  const [events, setEvents] = useState<IEvent[]>([])
+
+  useEffect(() => {
+    if (data) {
+      setMeta(data.metadata)
+      setEvents(data?.items)
+    }
+  }, [data])
+
+  useEffect(() => {
+    refetch()
+  }, [watch().type, watch().search, watch().page, watch().categoryIds, watch().order, watch().priceRange?.startRange])
+
+  const pagination = usePagination(meta?.totalPublic, initParamsEvent.size)
+
+  useEffect(() => {
+    setValue('page', pagination.currentPage)
+  }, [pagination.currentPage])
 
   return (
     <div className='w-full'>
       <PageHeader title='Explore' />
-      <div className='flex gap-8 py-8'>
-        <SidebarExplore />
-        <div className='flex flex-1 flex-col items-center'>
+      <form className='flex gap-8 py-8'>
+        <SidebarExplore watch={watch} setValue={setValue} />
+        <div className='relative flex flex-1 flex-col items-center mb-10'>
           <div className='w-full flex items-center justify-between pb-4'>
             <div className='flex items-center gap-2'>
-              <p className='text-gray500 inline-block'>Sort: </p>
-              <Select defaultValue='option1' placeholder='Select option' size='small'>
-                <option value='option1'>Option 1</option>
-                <option value='option2'>Option 2</option>
-                <option value='option3'>Option 3</option>
-              </Select>
+              <p className='text-gray500 inline-block text-header'>Sort: </p>
+              <Select
+                options={[
+                  { value: 'ASC', label: 'ASC' },
+                  { value: 'DESC', label: 'DESC' }
+                ]}
+                onChange={(value: any) => {
+                  setValue('order', value.value)
+                }}
+              />
             </div>
-            <div className='flex items-center gap-2'>
-              <p className='text-black font-semibold'>52</p>
-              <p className='text-gray500'>Result Found</p>
+
+            <Search
+              wrapperClass='lg:w-[326px]'
+              placeholder='Search Event'
+              onChange={(query: string) => {
+                setValue('search', query)
+              }}
+            />
+          </div>
+
+          {isFetching && (
+            <div className='relative w-full h-[300px] flex items-center justify-center'>
+              <Loader />
             </div>
+          )}
+
+          {!isFetching &&
+            (events.length !== 0 ? (
+              <div className='w-full grid grid-cols-2 gap-8 grid-rows-5'>
+                {events.map((event, index) => (
+                  <EventCardExplore key={`event-${index}`} event={event} />
+                ))}
+              </div>
+            ) : (
+              <div className='relative w-full h-[300px] flex items-center justify-center'>
+                <NotData text='event' />
+              </div>
+            ))}
+
+          <div className='absolute w-full -bottom-20 left-0 right-0 flex items-center justify-center'>
+            {pagination.maxPage > 1 && <Pagination pagination={pagination} />}
           </div>
-          <div className='w-full grid grid-cols-2 gap-8 grid-rows-5'>
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-            <EventCardExplore />
-          </div>
-          <ReactPaginate
-            breakLabel='...'
-            nextLabel='>'
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            previousLabel='<'
-            renderOnZeroPageCount={null}
-            className='flex items-center gap-4 pt-8'
-            activeClassName='h-[30px] w-[30px] flex items-center justify-center bg-primary text-white font-semibold rounded-full'
-            previousClassName='h-[30px] w-[30px] flex items-center justify-center bg-gray300 text-black font-semibold rounded-full'
-            nextClassName='h-[30px] w-[30px] flex items-center justify-center bg-gray300 text-black font-semibold rounded-full'
-          />
         </div>
-      </div>
+      </form>
     </div>
   )
 }

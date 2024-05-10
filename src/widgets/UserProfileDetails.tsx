@@ -46,7 +46,7 @@ const UserProfileDetails = (props: Props) => {
                 User Name
               </label>
               <input
-                className={classNames('field-input', { 'field-input--error': errors.userName })}
+                className={classNames('field-input text-header', { 'field-input--error': errors.userName })}
                 type='text'
                 id='userName'
                 placeholder='User Name'
@@ -59,7 +59,7 @@ const UserProfileDetails = (props: Props) => {
                 Full Name
               </label>
               <input
-                className={classNames('field-input', { 'field-input--error': errors.fullName })}
+                className={classNames('field-input text-header', { 'field-input--error': errors.fullName })}
                 type='text'
                 id='fullName'
                 placeholder='Full Name'
@@ -73,7 +73,7 @@ const UserProfileDetails = (props: Props) => {
                 Email
               </label>
               <input
-                className={classNames('field-input', { 'field-input--error': errors.email })}
+                className={classNames('field-input text-header', { 'field-input--error': errors.email })}
                 type='text'
                 id='email'
                 placeholder='Email'
@@ -86,7 +86,7 @@ const UserProfileDetails = (props: Props) => {
                 Password
               </label>
               <input
-                className={classNames('field-input', { 'field-input--error': errors.fullName })}
+                className={classNames('field-input text-header', { 'field-input--error': errors.fullName })}
                 type='text'
                 id='fullName'
                 placeholder='Full Name'
@@ -105,7 +105,7 @@ const UserProfileDetails = (props: Props) => {
                     value={field.value}
                     format='+#-###-###-####'
                     placeholder='(123) 456-7890'
-                    className={classNames('field-input', { 'field-input--error': errors.phoneNumber })}
+                    className={classNames('field-input text-header', { 'field-input--error': errors.phoneNumber })}
                     getInputRef={field.ref}
                   />
                 )}
@@ -132,16 +132,29 @@ const UserProfileDetails = (props: Props) => {
               />
             </div>
             <div className='field-wrapper'>
-              <label className='field-label' htmlFor='state'>
+              <label className='field-label text-header' htmlFor='state'>
                 Day of birth
               </label>
-              <input className='field-input' type='date' id='state' placeholder='State' {...register('dob')} />
+              <input
+                className='field-input text-header'
+                type='date'
+                id='state'
+                placeholder='State'
+                {...register('dob')}
+              />
             </div>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='zip'>
                 Status
               </label>
-              <input readOnly className='field-input' type='text' id='Status' placeholder='Status' value={status} />
+              <input
+                readOnly
+                className='field-input text-header'
+                type='text'
+                id='Status'
+                placeholder='Status'
+                value={status}
+              />
             </div>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='firstName'>
@@ -149,7 +162,7 @@ const UserProfileDetails = (props: Props) => {
               </label>
               <input
                 readOnly
-                className={classNames('field-input')}
+                className={classNames('field-input text-header')}
                 type='text'
                 id='role'
                 placeholder='Role'
@@ -160,7 +173,7 @@ const UserProfileDetails = (props: Props) => {
               <label className='field-label' htmlFor='address'>
                 Bio
               </label>
-              <input className='field-input' type='text' id='Bio' placeholder='Bio' {...register('bio')} />
+              <input className='field-input text-header' type='text' id='Bio' placeholder='Bio' {...register('bio')} />
             </div>
           </div>
         </div>
@@ -176,7 +189,7 @@ const UserProfileDetails = (props: Props) => {
       <div>
         <h5>Admin Panel Tools</h5>
         <div className='grid gap-4 mt-5 md:grid-cols-2 md:gap-y-8 md:gap-x-[50px] md:mt-8 lg:grid-cols-3 lg:max-w-[780px]'>
-          <NavLink className='tool-btn' to='/connected-apps'>
+          <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-window-solid' />
             </span>
@@ -184,31 +197,31 @@ const UserProfileDetails = (props: Props) => {
               Connected Apps <span className='subheading-2'>(12)</span>
             </span>
           </NavLink>
-          <NavLink className='tool-btn' to='/connected-apps'>
+          <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-money-check-dollar-pen-solid' style={{ fontSize: 16 }} />
             </span>
             Payment Methods
           </NavLink>
-          <NavLink className='tool-btn' to='/connected-apps'>
+          <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-screwdriver-wrench-solid' />
             </span>
             Appearance
           </NavLink>
-          <NavLink className='tool-btn' to='/connected-apps'>
+          <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-shield-halved-solid' />
             </span>
             Security Assets
           </NavLink>
-          <NavLink className='tool-btn' to='/connected-apps'>
+          <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-sliders-solid' />
             </span>
             Configuration Settings
           </NavLink>
-          <button className='tool-btn' aria-label='Change theme' onClick={toggleTheme}>
+          <button className='tool-btn text-header' aria-label='Change theme' onClick={toggleTheme}>
             <span className='icon-wrapper'>
               <i className={`icon icon-${theme === 'light' ? 'sun-bright' : 'moon'}-solid`} />
             </span>

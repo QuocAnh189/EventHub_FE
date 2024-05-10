@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IMessageParams } from '@type/message'
 
 export const apiMessage = createApi({
   reducerPath: 'apiMessage',
@@ -7,10 +8,11 @@ export const apiMessage = createApi({
   }),
   keepUnusedDataFor: 20,
   endpoints: (builder) => ({
-    getMessage: builder.query<any, void>({
-      query: () => ({
-        url: '/messsages',
-        method: 'GET'
+    getMessage: builder.query<any, IMessageParams>({
+      query: (params) => ({
+        url: '/messages',
+        method: 'GET',
+        params
       })
     })
   })

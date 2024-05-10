@@ -1,6 +1,6 @@
 // components
 import Spring from '@components/Spring'
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
 // utils
 import { commaFormatter, getPercentage, getTotal } from '@utils/helpers'
@@ -12,17 +12,17 @@ const data = [
   { name: 'Cart Abandoners', value: 2309, color: 'yellow' }
 ]
 
-const CustomTooltip = ({ active, payload }: any) => {
-  if (active) {
-    return (
-      <div className='chart-tooltip p-2'>
-        <span className='h6'>{commaFormatter(payload[0].value)}</span>
-      </div>
-    )
-  }
+// const CustomTooltip = ({ active, payload }: any) => {
+//   if (active) {
+//     return (
+//       <div className='chart-tooltip p-2'>
+//         <span className='h6'>{commaFormatter(payload[0].value)}</span>
+//       </div>
+//     )
+//   }
 
-  return null
-}
+//   return null
+// }
 
 const CustomerRetentionRate = () => {
   return (
@@ -37,7 +37,7 @@ const CustomerRetentionRate = () => {
                   <Cell key={`cell-${index}`} fill={`var(--${entry.color})`} />
                 ))}
               </Pie>
-              <Tooltip content={<CustomTooltip />} />
+              {/* <Tooltip content={<CustomTooltip />} /> */}
             </PieChart>
           </ResponsiveContainer>
         </div>

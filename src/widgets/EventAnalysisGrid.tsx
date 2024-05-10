@@ -23,7 +23,7 @@ const EventAnalysisGrid = () => {
   const { width } = useWindowSize()
   const [sort] = useState(SELLER_SORT_OPTIONS[0])
   const sortedSellers = sortSellers(sellers, sort.value)
-  const pagination = usePagination(sortedSellers, width >= 1280 && width < 1536 ? 20 : 18)
+  const pagination: any = usePagination(sortedSellers, width >= 1280 && width < 1536 ? 20 : 18)
   const data = pagination.currentItems()
 
   useEffect(() => {

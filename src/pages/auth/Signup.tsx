@@ -1,6 +1,7 @@
 // hooks
 import { useMemo, useState, ChangeEvent } from 'react'
 import { useWindowSize } from 'react-use'
+import { useNavigate } from 'react-router-dom'
 
 //component
 import SessionOne from './components/SessionOne-SignUp'
@@ -21,6 +22,7 @@ import { useSignUpMutation } from '@redux/services/authApi'
 import { toast } from 'react-toastify'
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const { width } = useWindowSize()
 
   const [signUp, { isLoading }] = useSignUpMutation()
@@ -59,15 +61,16 @@ const SignUp = () => {
     try {
       const result = await signUp(formData).unwrap()
       if (result) {
-        nextSession()
+        navigate('/organization')
       }
     } catch (error: any) {
       const message = error.data.message
+      console.log(message)
       switch (message) {
         case 'Email already exists':
           toast.error('Email already exists')
           break
-        case 'Phone already exists':
+        case 'Phone number already exists':
           toast.error('Phone already exists')
           break
         default:

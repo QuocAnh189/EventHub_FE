@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-redeclare */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-duplicate-case */
 // hooks
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { usePagination } from '@hooks/usePagination'
 
 // components
@@ -14,26 +15,28 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import ConfirmDialog from '@components/Dialog'
+import Search from '@ui/Search'
+import NotData from '@components/NotData'
 
 // constants
 import {
   EVENT_MANAGEMENT_OPTIONS,
   EVENT_STATUS_OPTIONS,
   EVENT_SELLER_OPTIONS,
-  EVENT_SELECT_OPTIONS
+  EVENT_SELECT_OPTIONS,
+  IOptionSelect
 } from '@constants/options'
-import { EEventAction } from '@constants/enum'
+import { EEventAction, EEventPrivacy } from '@constants/enum'
 
 // data placeholder
-import products_management from '@db/products_management'
 import { useAppSelector } from '@hooks/useRedux'
 
 // interface
 import { ICategory } from 'interfaces/contents/category'
 
 // types
-import { IFilterEvent, IMetadataEventReponse } from '@type/event'
-import { initFilterEvent } from '@type/event'
+import { IFilterEvent, IMetadataEventReponse, IParamsEvent } from '@type/event'
+import { initFilterEvent, initParamsMyEvent } from '@type/event'
 
 //redux
 import { RootState } from '@redux/store'
@@ -45,14 +48,22 @@ import {
 } from '@redux/services/eventApi'
 import { useGetEventsByUserIdQuery } from '@redux/services/userApi'
 import { IEvent } from 'interfaces/contents/event'
+import { Loader } from '@components/Loader'
 
 const EventManagement = () => {
   const categories = useAppSelector((state: RootState) => state.category.categories)
   const user = useAppSelector((state: RootState) => state.user.user)
 
-  const { data } = useGetEventsByUserIdQuery({
+  const [fetchFilter, setFetchFilter] = useState<IParamsEvent>(initParamsMyEvent)
+
+  const {
+    data,
+    isSuccess,
+    isFetching: fetchingEvents,
+    refetch
+  } = useGetEventsByUserIdQuery({
     userId: user?.id!,
-    params: { page: 1, takeAll: false, size: 4 }
+    params: fetchFilter
   })
 
   const [movePublicEvent, { isLoading: loadingPublic }] = useMoveEventPublicMutation()
@@ -62,7 +73,7 @@ const EventManagement = () => {
 
   const [metadata, setMetadata] = useState<IMetadataEventReponse>()
   const [events, setEvents] = useState<IEvent[]>([])
-  const [category, setCategory] = useState('ALL')
+  const [category, setCategory] = useState<EEventPrivacy>(EEventPrivacy.ALL)
 
   const [checkedAll, setCheckedAll] = useState<boolean>(false)
   const [openDialog, setOpenDialog] = useState<boolean>(false)
@@ -70,13 +81,25 @@ const EventManagement = () => {
   const [selectedAction, setSelectedAction] = useState<EEventAction>()
   const [eventIds, setEventIds] = useState<string[]>([])
 
+  const dataByStatus = useCallback(() => {
+    if (category === 'ALL') return metadata?.totalCount
+    if (category === 'PUBLIC') return metadata?.totalPublic
+    if (category === 'PRIVATE') return metadata?.totalPrivate
+    if (category === 'TRASH') return metadata?.totalTrash
+  }, [metadata?.totalCount, metadata?.totalPublic, metadata?.totalPrivate, metadata?.totalTrash, category])
+
   useEffect(() => {
     if (data) {
-      console.log(data.items)
-      setMetadata(data.metadata)
       setEvents(data.items)
+      setMetadata(data.metadata)
     }
   }, [data])
+
+  const pagination = usePagination(dataByStatus(), 4)
+
+  useEffect(() => {
+    setFetchFilter({ ...fetchFilter, page: pagination.currentPage, eventPrivacy: category })
+  }, [pagination.currentPage, category])
 
   const getQty = (category: string) => {
     switch (category) {
@@ -96,7 +119,7 @@ const EventManagement = () => {
     }
   }
 
-  const handleFilterSelect = ({ value, label }: any, name: any) => {
+  const handleFilterSelect = ({ value, label }: IOptionSelect, name: string) => {
     setFilters((prevState) => ({
       ...prevState,
       [name]: { value, label }
@@ -104,15 +127,8 @@ const EventManagement = () => {
   }
 
   const handleApplyFilters = () => {
-    console.log(filters)
+    setFetchFilter({ ...fetchFilter, type: filters.status?.value, categoryIds: filters.category.value })
   }
-
-  const dataByStatus = () => {
-    if (category === 'ALL') return products_management
-    return products_management.filter((product) => product.status === category)
-  }
-
-  const pagination = usePagination(dataByStatus(), 4)
 
   const handleSelectAction = (e: any) => {
     setOpenDialog(true)
@@ -188,6 +204,16 @@ const EventManagement = () => {
     }
   }
 
+  const handleDeleteEvents = (id: string | string[]) => {
+    const newEvents = events.filter((event) => event.id !== id)
+    if (!newEvents.length) {
+      setFetchFilter({ ...fetchFilter, page: pagination.maxPage - 1 })
+      pagination.prev()
+    }
+    setEvents(newEvents)
+    refetch()
+  }
+
   return (
     <div className='flex flex-col flex-1'>
       <div className='flex flex-wrap gap-2 mb-4'>
@@ -196,7 +222,7 @@ const EventManagement = () => {
           {EVENT_MANAGEMENT_OPTIONS.map((option, index: number) => (
             <FilterItem
               key={`filter-${index}`}
-              text={option.label}
+              text={option.label!}
               qty={getQty(option?.value)!}
               value={option?.value}
               active={category}
@@ -205,43 +231,52 @@ const EventManagement = () => {
           ))}
         </div>
       </div>
-      <div className='grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-x-6 xl:grid-cols-6'>
-        <Select
-          options={EVENT_STATUS_OPTIONS}
-          value={filters?.status}
-          placeholder='Status'
-          onChange={(e) => handleFilterSelect(e, 'status')}
-        />
-        <Select
-          options={categories.map((category: ICategory) => {
-            return { value: category.id, label: category.name }
-          })}
-          value={filters?.category}
-          placeholder='Category'
-          onChange={(e) => handleFilterSelect(e, 'category')}
-        />
-        <Select
-          options={EVENT_SELLER_OPTIONS}
-          value={filters.eventTicketType}
-          placeholder='Price'
-          onChange={(e) => handleFilterSelect(e, 'eventTicketType')}
-        />
-        <div className='grid grid-cols-2 gap-3'>
-          <button className='btn bg-primary flex text-white !gap-[5px]' onClick={handleApplyFilters}>
-            Filter
-          </button>
-          <button
-            className='btn btn--outline blue !h-[44px]'
-            onClick={() => {
-              setFilters(initFilterEvent)
-            }}
-          >
-            Clear
-          </button>
+      <div className='flex items-center justify-between'>
+        <div className='grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-x-6 xl:grid-cols-6'>
+          <Select
+            options={EVENT_STATUS_OPTIONS}
+            value={filters?.status}
+            placeholder='Status'
+            onChange={(e: IOptionSelect) => handleFilterSelect(e, 'status')}
+          />
+          <Select
+            options={categories.map((category: ICategory) => {
+              return { value: category.id, label: category.name }
+            })}
+            value={filters?.category}
+            placeholder='Category'
+            onChange={(e: IOptionSelect) => handleFilterSelect(e, 'category')}
+          />
+          <Select
+            options={EVENT_SELLER_OPTIONS}
+            value={filters.eventTicketType}
+            placeholder='Price'
+            onChange={(e: any) => handleFilterSelect(e, 'eventTicketType')}
+          />
+          <div className='grid grid-cols-2 gap-3'>
+            <button className='btn bg-primary flex text-white !gap-[5px]' onClick={handleApplyFilters}>
+              Filter
+            </button>
+            <button
+              className='btn btn--outline blue !h-[44px]'
+              onClick={() => {
+                setFilters(initFilterEvent)
+              }}
+            >
+              Clear
+            </button>
+          </div>
         </div>
+        <Search
+          wrapperClass='lg:w-[326px]'
+          placeholder='Search Event'
+          onChange={(query: string) => {
+            setFetchFilter({ ...fetchFilter, search: query })
+          }}
+        />
       </div>
       <div className='flex flex-col-reverse gap-4 mt-4 mb-5 md:flex-row md:justify-between md:items-end md:mt-5 md:mb-6'>
-        <p>View events: {pagination.showingOf()}</p>
+        <p className='text-header'>View events: {pagination.showingOf()}</p>
         <div className='md:min-w-[280px]'>
           <Select
             options={EVENT_SELECT_OPTIONS.filter((item) => item.value !== category)}
@@ -251,29 +286,44 @@ const EventManagement = () => {
         </div>
       </div>
 
-      <FormGroup sx={{ display: 'flex', flexDirection: 'row' }}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={checkedAll}
-              onChange={() => {
-                setCheckedAll(!checkedAll)
-              }}
-            />
-          }
-          label='Select all'
-        />
-        <FormControlLabel control={<Checkbox />} label='Select page' />
-      </FormGroup>
+      {events.length !== 0 && (
+        <FormGroup sx={{ display: 'flex', flexDirection: 'row' }}>
+          <FormControlLabel
+            sx={{ '& .MuiFormControlLabel-label': { color: 'var(--header)' } }}
+            control={
+              <Checkbox
+                sx={{ color: 'var(--header)' }}
+                checked={checkedAll}
+                onChange={() => {
+                  setCheckedAll(!checkedAll)
+                }}
+              />
+            }
+            label='Select all'
+          />
+        </FormGroup>
+      )}
 
-      <div className='flex flex-col gap-[22px]'>
-        <div className='w-full grid grid-cols-2 gap-10'>
-          {events.map((event, index) => (
-            <CardMyEvent key={`event-${index}`} event={event} checkedAll={checkedAll} onChecked={handleChecked} />
-          ))}
+      {fetchingEvents && <Loader />}
+
+      {events.length !== 0 && (
+        <div className='flex flex-col gap-[22px]'>
+          <div className='w-full grid grid-cols-2 gap-10'>
+            {events?.map((event, index) => (
+              <CardMyEvent
+                key={`event-${index}`}
+                event={event}
+                checkedAll={checkedAll}
+                onChecked={handleChecked}
+                handleDeleteEvents={handleDeleteEvents}
+              />
+            ))}
+          </div>
+          {pagination.maxPage > 1 && <Pagination pagination={pagination} />}
         </div>
-        {pagination.maxPage > 1 && <Pagination pagination={pagination} />}
-      </div>
+      )}
+
+      {isSuccess && events.length === 0 && <NotData text='No event here' />}
 
       {openDialog && (
         <ConfirmDialog

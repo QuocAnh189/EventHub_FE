@@ -1,4 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //hook
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 //component
@@ -6,9 +9,43 @@ import EventCardSearchHome from '@components/EventCardSearchHome'
 
 //assets
 import NatureVid from '@assets/event/main.mp4'
+import { EEventStatus } from '@constants/enum'
+import { useGetEventsQuery } from '@redux/services/eventApi'
+import { useAppSelector } from '@hooks/useRedux'
+
+//constant
+import { EVENT_STATUS_OPTIONS } from '@constants/options'
+import { IEvent } from 'interfaces/contents/event'
+import { Loader } from '@components/Loader'
+
+const initParam = {
+  search: '',
+  type: EEventStatus.ALL,
+  categoryIds: [],
+  takeAll: false,
+  size: 10
+}
 
 const SearchHome = () => {
   const navigate = useNavigate()
+
+  const categories = useAppSelector((state) => state.category.categories)
+
+  const { register, handleSubmit, setValue } = useForm<any>({
+    defaultValues: initParam,
+    mode: 'onSubmit'
+  })
+
+  const [filter, setFilter] = useState(initParam)
+  const { data: events, isFetching, refetch } = useGetEventsQuery(filter)
+
+  useEffect(() => {
+    refetch()
+  }, [filter])
+
+  const onSubmit = async (data: any) => {
+    setFilter(data)
+  }
 
   return (
     <div className='w-[90%] h-[95vh] m-auto'>
@@ -35,44 +72,63 @@ const SearchHome = () => {
           </button>
         </div>
         <div className='trip_bx relative w-[95%] h-auto m-auto  before:absolute before:w-full before:h-[340px] before:rounded-[10px] before:bg-bgSearchHome before:z-[-1] before:backdrop-blur-sm'>
-          <div className='flex items-center justify-center pr-[10px] bg-white rounded-md shadow-md z-[1] absolute -top-10 left-0 h-20'>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='flex items-center justify-center pr-[10px] bg-white rounded-md shadow-md z-[1] absolute -top-10 left-0 h-20'
+          >
             <div className='w-[200px] h-full shadow-none p-4'>
-              <h4 className='text-[15px] m-0 font-bold'>Location</h4>
+              <h4 className='text-[15px] m-0 font-bold'>Event</h4>
               <input
-                className='mt-1 py-1 px-0 border-none outline-none text-sm'
+                {...register('search')}
+                className='mt-1 py-2 px-0 border-none outline-none text-md'
                 type='text'
-                placeholder='Enter your destination'
+                placeholder='Enter your name event'
               />
             </div>
             <div className='w-[200px] h-full shadow-none p-4'>
-              <h4 className='text-[15px] m-0 font-bold'>Date</h4>
-              <input className='mt-1 py-1 px-0 border-none outline-none text-sm' type='date' />
+              <h4 className='text-[15px] m-0 font-bold'>Status</h4>
+              <select {...register('type')} className='mt-1 py-2 px-0 border-none outline-none text-md' aria-label='aa'>
+                {EVENT_STATUS_OPTIONS.map((item, index) => (
+                  <option key={`status-${index}`} value={item.value}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className='w-[200px] h-full shadow-none p-4'>
               <h4 className='text-[15px] m-0 font-bold'>Category</h4>
-              <select className='mt-1 py-1 px-0 border-none outline-none text-sm' aria-label='aa'>
-                <option value='volvo'>Music</option>
-                <option value='saab'>Game</option>
-                <option value='mercedes'>Sport</option>
-                <option value='audi'>Dancer</option>
+              <select
+                onChange={(e: any) => {
+                  setValue('categoryIds', [e.target.value])
+                }}
+                className='mt-1 py-2 px-0 border-none outline-none text-md'
+                defaultValue='All'
+              >
+                <option value='All'>All</option>
+                {categories.map((category, index) => (
+                  <option key={`category-${index}`} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
             <input
               className='bg-primary text-white border-none outline-none px-5 py-[10px] rounded-[20px] cursor-pointer ml-[10px] hover:bg-primary-500'
-              type='button'
+              type='submit'
               value='Search'
             />
-          </div>
+          </form>
           <div className='relative w-full h-auto m-auto top-[30px] rounded-[10px] pb-5'>
             <h4 className='m-0 pt-20 pl-[1.7%]'>Events to Explore</h4>
-            <div className='w-full h-auto my-0 mx-auto flex items-center overflow-x-auto overflow-y-hidden pb-4 scrollbar-w-none'>
-              <EventCardSearchHome />
-              <EventCardSearchHome />
-              <EventCardSearchHome />
-              <EventCardSearchHome />
-              <EventCardSearchHome />
-              <EventCardSearchHome />
-            </div>
+            {isFetching ? (
+              <Loader />
+            ) : (
+              <div className='w-full h-auto my-0 mx-auto flex items-center overflow-x-auto overflow-y-hidden pb-4 scrollbar-w-none'>
+                {events?.items?.map((event: IEvent, index: number) => (
+                  <EventCardSearchHome event={event} key={`event-${index}`} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -1,12 +1,11 @@
 // components
+import ProtectedLayout from '@layouts/protected'
 import { PageHeader } from '@layouts/components'
-import Search from '@ui/Search'
 import { CSVLink } from 'react-csv'
 import EventManagement from '@widgets/EventManagementTable'
 
 //route
 import { useNavigate } from 'react-router-dom'
-import ProtectedLayout from '@layouts/protected'
 
 const csvData = [
   ['firstname', 'lastname', 'email'],
@@ -35,7 +34,6 @@ const MyEvent = () => {
               Export CSV <i className='icon-file-export-solid' />
             </CSVLink>
           </div>
-          <Search wrapperClass='lg:w-[326px]' placeholder='Search Event' />
         </div>
         <EventManagement />
       </div>

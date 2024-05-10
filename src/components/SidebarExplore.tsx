@@ -1,135 +1,143 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
-
 //hook
 import { useEffect, useState } from 'react'
+import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
 //component
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Divider from '@mui/material/Divider'
-import Slider from '@mui/material/Slider'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import FormControl from '@mui/material/FormControl'
+import ItemCategory from './ItemCategory'
 
-//icons
-import { IoFilter } from 'react-icons/io5'
+//redux
+import { useAppSelector } from '@hooks/useRedux'
+import { IParamsEvent } from '@type/event'
 
-function valueText(value: any) {
-  return `${value}°C`
+interface Props {
+  watch: UseFormWatch<IParamsEvent>
+  setValue: UseFormSetValue<IParamsEvent>
 }
 
-interface PriceProps {
-  price: number
-  setCondition: (value: number) => void
-}
+const SidebarExplore = (props: Props) => {
+  const { watch, setValue } = props
 
-const Price = (props: PriceProps) => {
-  const { price, setCondition } = props
+  const categories = useAppSelector((state) => state.category.categories)
 
-  const [value, setValue] = useState([20, 37])
+  const [categorySelect, setCategorySelect] = useState<string[]>([])
 
-  const handleChange = (event: any, newValue: any) => {
-    console.log(event)
-    setCondition(0)
-    setValue(newValue)
+  const handleSelectCategory = (id: string) => {
+    if (categorySelect?.includes(id)) {
+      const newCategorySelect = categorySelect.filter((item) => item !== id)
+      setCategorySelect(newCategorySelect)
+    } else {
+      setCategorySelect([...categorySelect, id])
+    }
   }
 
-  return (
-    <div className='flex flex-col gap-4'>
-      <div className='flex items-center justify-between'>
-        <h1 className='text-black text-xl font-semibold'>Price</h1>
-      </div>
-      <Slider
-        getAriaLabel={() => 'Temperature range'}
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay='auto'
-        getAriaValueText={valueText}
-      />
-      <p className='text-gray500 mt-4'>
-        Price:<span className='text-black'> {price}$</span>
-      </p>
-    </div>
-  )
-}
-
-const DateFilter = () => {
-  return (
-    <div className='flex flex-col gap-2'>
-      <div className='flex items-center justify-between'>
-        <h1 className='text-black text-xl font-semibold'>Date</h1>
-      </div>
-      <div className='flex flex-col items-start'>
-        {[0, 1, 2, 3, 4, 5].map(() => (
-          <FormControlLabel
-            control={<Checkbox checked={true} onChange={() => {}} name='antoine' />}
-            label='Enter Filter'
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-const Category = () => {
-  return (
-    <div className='flex flex-col gap-2'>
-      <div className='flex items-center justify-between'>
-        <h1 className='text-black text-xl font-semibold'>Category</h1>
-      </div>
-      <div className='flex flex-col items-start'>
-        {[0, 1, 2, 3, 4, 5].map(() => (
-          <FormControlLabel
-            control={<Checkbox checked={true} onChange={() => {}} name='antoine' />}
-            label='Enter Filter'
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-const Rate = () => {
-  return (
-    <div className='flex flex-col gap-2'>
-      <div className='flex items-center justify-between'>
-        <h1 className='text-black text-xl font-semibold'>Rating</h1>
-      </div>
-      <div className='flex flex-col items-start'>
-        {[0, 1, 2, 3, 4, 5].map(() => (
-          <FormControlLabel
-            control={<Checkbox checked={true} onChange={() => {}} name='antoine' />}
-            label='Enter Filter'
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-export const SidebarExplore = () => {
-  const [condition, setCondition] = useState({
-    category: 'Fresh Fruit',
-    price: 30,
-    rate: '5.0',
-    tag: 'Health'
-  })
-
   useEffect(() => {
-    console.log(condition)
-  }, [condition.category])
+    setValue('categoryIds', categorySelect)
+  }, [categorySelect.length])
 
   return (
     <div className='w-1/5 flex flex-col gap-6'>
-      <div className='w-1/3 flex items-center justify-around py-2 bg-primary rounded-3xl'>
-        <p className='text-white'>Filter</p>
-        <IoFilter size='24px' color='white' />
+      <div className='flex flex-col gap-4'>
+        <div className='flex items-center justify-between'>
+          <h1 className='text-black text-xl font-semibold text-header'>Price</h1>
+        </div>
+        <FormControl>
+          <RadioGroup
+            value={watch().priceRange?.startRange === 0 ? 'FREE' : 'PAID'}
+            row
+            aria-labelledby='demo-row-radio-buttons-group-label'
+            name='row-radio-buttons-group'
+            onChange={(e) => {
+              e.target.value === 'PAID'
+                ? setValue('priceRange', { startRange: 1000, endRange: 2000 })
+                : setValue('priceRange', { startRange: 0, endRange: 0 })
+            }}
+          >
+            <FormControlLabel
+              sx={{ color: 'var(--header)' }}
+              value='PAID'
+              control={<Radio sx={{ color: 'var(--header)' }} />}
+              label='Paid'
+            />
+            <FormControlLabel
+              sx={{ color: 'var(--header)' }}
+              value='FREE'
+              control={<Radio sx={{ color: 'var(--header)' }} />}
+              label='Free'
+            />
+          </RadioGroup>
+        </FormControl>
       </div>
-      <Price price={condition.price} setCondition={(value) => setCondition({ ...condition, price: value })} />
-      <DateFilter />
+
+      <div className='flex flex-col gap-2'>
+        <div className='flex items-center justify-between'>
+          <h1 className='text-black text-xl font-semibold text-header'>Status</h1>
+        </div>
+        <RadioGroup
+          aria-labelledby='demo-radio-buttons-group-label'
+          defaultValue='female'
+          name='radio-buttons-group'
+          value={watch().type}
+          onChange={(e: any) => {
+            setValue('type', e.target.value)
+          }}
+        >
+          <FormControlLabel
+            sx={{ color: 'var(--header)' }}
+            value='ALL'
+            control={<Radio sx={{ color: 'var(--header)' }} />}
+            label='All'
+          />
+          <FormControlLabel
+            sx={{ color: 'var(--header)' }}
+            value='UPCOMING'
+            control={<Radio sx={{ color: 'var(--header)' }} />}
+            label='Upcoming'
+          />
+          <FormControlLabel
+            sx={{ color: 'var(--header)' }}
+            value='OPENING'
+            control={<Radio sx={{ color: 'var(--header)' }} />}
+            label='Opening'
+          />
+          <FormControlLabel
+            sx={{ color: 'var(--header)' }}
+            value='CLOSED'
+            control={<Radio sx={{ color: 'var(--header)' }} />}
+            label='Closed'
+          />
+        </RadioGroup>
+      </div>
       <Divider color='#808080' />
-      <Category />
+      <div className='flex flex-col gap-2'>
+        <div className='flex items-center justify-between'>
+          <h1 className='text-black text-xl font-semibold text-header'>Category</h1>
+        </div>
+        <div className='space-y-2'>
+          {categories.map((category, index) => (
+            <div key={`category-${index}`} className='flex flex-row items-center'>
+              <Checkbox
+                checked={categorySelect.includes(category.id!)}
+                onChange={() => {
+                  handleSelectCategory(category.id!)
+                }}
+                name='antoine'
+                sx={{ pl: '0px', color: 'var(--header)' }}
+              />
+              <ItemCategory category={category} />
+            </div>
+          ))}
+        </div>
+      </div>
       <Divider color='#808080' />
-      <Rate />
     </div>
   )
 }
+
+export default SidebarExplore

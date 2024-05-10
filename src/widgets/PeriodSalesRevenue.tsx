@@ -1,8 +1,8 @@
 // components
 import Spring from '@components/Spring'
 import InfoBtn from '@ui/InfoBtn'
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import Trend from '@ui/Trend'
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
+// import Trend from '@ui/Trend'
 
 // hooks
 import { useWindowSize } from 'react-use'
@@ -49,20 +49,20 @@ const data = [
   }
 ]
 
-const CustomTooltip = ({ active, payload, label }: any) => {
-  if (active) {
-    return (
-      <div className='chart-tooltip px-[14px] py-5 flex flex-col'>
-        <h6>Revenue by:</h6>
-        <span className='my-1'>{dayjs(label).format('DD MMM, YYYY')}</span>
-        <Trend value={payload[0].payload.trend} />
-        <span className='h3 mt-2'>{numFormatter(payload[0].value, 1, '$')}</span>
-      </div>
-    )
-  }
+// const CustomTooltip = ({ active, payload, label }: any) => {
+//   if (active) {
+//     return (
+//       <div className='chart-tooltip px-[14px] py-5 flex flex-col'>
+//         <h6>Revenue by:</h6>
+//         <span className='my-1'>{dayjs(label).format('DD MMM, YYYY')}</span>
+//         <Trend value={payload[0].payload.trend} />
+//         <span className='h3 mt-2'>{numFormatter(payload[0].value, 1, '$')}</span>
+//       </div>
+//     )
+//   }
 
-  return null
-}
+//   return null
+// }
 
 const PeriodSalesRevenue = () => {
   const { width } = useWindowSize()
@@ -108,7 +108,7 @@ const PeriodSalesRevenue = () => {
               dx={-20}
               tickFormatter={(value) => numFormatter(value, 0, '$')!}
             />
-            <Tooltip cursor={{ strokeDasharray: '4 4', stroke: 'var(--header)' }} content={<CustomTooltip />} />
+            {/* <Tooltip cursor={{ strokeDasharray: '4 4', stroke: 'var(--header)' }} content={<CustomTooltip />} /> */}
             <Area
               type='monotone'
               dataKey='value'

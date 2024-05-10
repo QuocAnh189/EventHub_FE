@@ -11,6 +11,12 @@ import bitpay from '@assets/payment/bitpay.svg'
 //enum
 import { EEventType } from './enum'
 
+export interface IOptionSelect {
+  value: string
+  label?: string
+  icon?: any
+}
+
 export const EVENT_CATEGORIES = [
   {
     name: 'Workshop',
@@ -74,14 +80,14 @@ export const EVENT_CATEGORIES = [
   }
 ]
 
-export const PRODUCT_SORT_OPTIONS = [
+export const PRODUCT_SORT_OPTIONS: IOptionSelect[] = [
   { value: 'best-selling', label: 'Best Selling' },
   { value: 'available', label: 'Available' },
   { value: 'price-low-to-high', label: 'Price: Low to High' },
   { value: 'price-high-to-low', label: 'Price: High to Low' }
 ]
 
-export const SELLER_SORT_OPTIONS = [
+export const SELLER_SORT_OPTIONS: IOptionSelect[] = [
   { value: 'best-selling', label: 'Best Selling' },
   { value: 'rating-high-to-low', label: 'Rating: High to Low' },
   { value: 'rating-low-to-high', label: 'Rating: Low to High' },
@@ -89,33 +95,33 @@ export const SELLER_SORT_OPTIONS = [
   { value: 'z-a', label: 'By name: Z-A' }
 ]
 
-export const REVIEW_SORT_OPTIONS = [
+export const REVIEW_SORT_OPTIONS: IOptionSelect[] = [
   { value: 'recent', label: 'Recent' },
   { value: 'oldest', label: 'Oldest' },
   { value: 'rating-high-to-low', label: 'Highest Rating' },
   { value: 'rating-low-to-high', label: 'Lowest Rating' }
 ]
 
-export const LOCALES = [
+export const LOCALES: IOptionSelect[] = [
   { value: 'en-EN', label: 'English (EN)', icon: eng },
   { value: 'vn-VN', label: 'VietNam (VN)', icon: vn }
 ]
 
-export const APPS_OPTIONS = [
+export const APPS_OPTIONS: IOptionSelect[] = [
   { value: 'all', label: 'All' },
   { value: 'development', label: 'Developer Tools' },
   { value: 'marketplace', label: 'Marketplace' },
   { value: 'finances', label: 'Financial Accounting' }
 ]
 
-export const EVENT_MANAGEMENT_OPTIONS = [
+export const EVENT_MANAGEMENT_OPTIONS: IOptionSelect[] = [
   { value: 'ALL', label: 'All' },
   { value: 'PUBLIC', label: 'Published' },
   { value: 'PRIVATE', label: 'Privated' },
   { value: 'TRASH', label: 'Trash' }
 ]
 
-export const ORDER_SORT_OPTIONS = [
+export const ORDER_SORT_OPTIONS: IOptionSelect[] = [
   { value: 'default', label: 'Default sorting' },
   { value: 'a-z', label: 'By name: A-Z' },
   { value: 'z-a', label: 'By name: Z-A' },
@@ -123,7 +129,7 @@ export const ORDER_SORT_OPTIONS = [
   { value: 'rating-low-to-high', label: 'Rating: Low to High' }
 ]
 
-export const PAYMENT_OPTIONS = [
+export const PAYMENT_OPTIONS: IOptionSelect[] = [
   { value: 'mastercard', icon: mc },
   { value: 'visa', icon: visa },
   { value: 'googlepay', icon: googlepay },
@@ -132,44 +138,45 @@ export const PAYMENT_OPTIONS = [
   { value: 'bitpay', icon: bitpay }
 ]
 
-export const NOTIFICATION_OPTIONS = [
+export const NOTIFICATION_OPTIONS: IOptionSelect[] = [
   { value: 'all', label: 'All' },
   { value: 'follow', label: 'Following' },
   { value: 'order', label: 'Orders' }
 ]
 
-export const MESSAGE_OPTIONS = [
+export const MESSAGE_OPTIONS: IOptionSelect[] = [
   { value: 'all', label: 'All' },
   { value: 'latest', label: 'Latest' },
   { value: 'archived', label: 'Archive' }
 ]
 
-export const EVENT_STATUS_OPTIONS = [
+export const EVENT_STATUS_OPTIONS: IOptionSelect[] = [
+  { value: EEventType.ALL, label: 'All' },
   { value: EEventType.UPCOMING, label: 'Upcoming' },
   { value: EEventType.OPENING, label: 'Openning' },
   { value: EEventType.CLOSED, label: 'Closed' }
 ]
 
-export const PRODUCT_TYPE_OPTIONS = [
+export const PRODUCT_TYPE_OPTIONS: IOptionSelect[] = [
   { value: 'simple', label: 'Simple Product' },
   { value: 'variable', label: 'Variable Product' },
   { value: 'grouped', label: 'Grouped Product' },
   { value: 'service', label: 'Services Product' }
 ]
 
-export const TRANSACTIONS_SORT_OPTIONS = [
+export const TRANSACTIONS_SORT_OPTIONS: IOptionSelect[] = [
   { value: 'recent', label: 'Recent' },
   { value: 'oldest', label: 'Oldest' },
   { value: 'amount-high-to-low', label: 'Amount: High to Low' },
   { value: 'amount-low-to-high', label: 'Amount: Low to High' }
 ]
 
-export const EVENT_SELLER_OPTIONS = [
+export const EVENT_SELLER_OPTIONS: IOptionSelect[] = [
   { value: 'FREE', label: 'Free' },
   { value: 'FEE', label: 'Buy Ticket' }
 ]
 
-export const PRODUCT_ADDITIONAL_OPTIONS = [
+export const PRODUCT_ADDITIONAL_OPTIONS: IOptionSelect[] = [
   { value: 'last-modified', label: 'Last Modified' },
   { value: 'date-added', label: 'Date Added' },
   { value: 'last-viewed', label: 'Last Viewed' },
@@ -177,14 +184,14 @@ export const PRODUCT_ADDITIONAL_OPTIONS = [
   { value: 'popularity', label: 'Popularity' }
 ]
 
-export const EVENT_SELECT_OPTIONS = [
+export const EVENT_SELECT_OPTIONS: IOptionSelect[] = [
   { value: 'publish', label: 'Move to Publics' },
   { value: 'private', label: 'Move to Privates' },
   { value: 'trash', label: 'Move to Trash' },
   { value: 'delete', label: 'Delete Permanently' }
 ]
 
-export const PROMOTIONAL_OPTIONS = [
+export const PROMOTIONAL_OPTIONS: IOptionSelect[] = [
   { value: 'category-1', label: 'Category 1' },
   { value: 'category-2', label: 'Category 2' },
   { value: 'category-3', label: 'Category 3' },
@@ -192,7 +199,7 @@ export const PROMOTIONAL_OPTIONS = [
   { value: 'category-5', label: 'Category 5' }
 ]
 
-export const UNITS_OPTIONS = [
+export const UNITS_OPTIONS: IOptionSelect[] = [
   { value: 'pcs', label: 'Pieces' },
   { value: 'box', label: 'Boxes' },
   { value: 'kg', label: 'Kilograms' }

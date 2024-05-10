@@ -1,6 +1,6 @@
 // hooks
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 // components
 import { PageHeader } from '@layouts/components'
@@ -48,9 +48,7 @@ const Profile = () => {
     }
   })
 
-  const onSubmit = async (data: any, event: any) => {
-    console.log(event)
-    event.preventDefault()
+  const onSubmit: SubmitHandler<IUser> = async (data: any) => {
     const formData = new FormData()
 
     for (let key in data) {

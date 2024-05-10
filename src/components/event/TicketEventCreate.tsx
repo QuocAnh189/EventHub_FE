@@ -1,6 +1,9 @@
 //hook
 import { Control, useFieldArray, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
+//constant
+import { EEventPaymentTicket } from '@constants/enum'
+
 //component
 import FormControl from '@mui/material/FormControl'
 import FormLabel from '@mui/material/FormLabel'
@@ -10,17 +13,16 @@ import InputAdornment from '@mui/material/InputAdornment'
 //icon
 import { IoTicketOutline } from 'react-icons/io5'
 import { IoPricetagOutline } from 'react-icons/io5'
-import freeImg from '@assets/common/free.png'
 import { IoMdAddCircleOutline } from 'react-icons/io'
+import { CiCircleRemove } from 'react-icons/ci'
+import freeImg from '@assets/common/free.png'
 
 //type
 import { ICreateEventPayload, InitCreateTicketPayload } from '@type/event'
-import { GrSubtractCircle } from 'react-icons/gr'
-import { EEventTicket } from '@constants/enum'
 
 interface Props {
   register: UseFormRegister<ICreateEventPayload>
-  eventTicketType: EEventTicket
+  eventTicketType: EEventPaymentTicket
   setValue: UseFormSetValue<ICreateEventPayload>
   control: Control<ICreateEventPayload, any>
   setActive: (value: number) => void
@@ -35,7 +37,7 @@ const TicketEventCreate = (props: Props) => {
     remove
   } = useFieldArray({
     control,
-    name: 'tickets'
+    name: 'ticketTypes'
   })
 
   const handleNextStep = () => {
@@ -45,41 +47,41 @@ const TicketEventCreate = (props: Props) => {
   return (
     <div className='relative pt-10 pb-20 px-40 space-y-10 min-h-screen'>
       <div className='space-y-4'>
-        <p className='text-xl font-bold tracking-wider'>What type of event are you running ?</p>
+        <p className='text-xl font-bold tracking-wider text-header'>What type of event are you running ?</p>
         <div className='flex items-center gap-8'>
           <div
-            onClick={() => setValue('eventTicketType', EEventTicket.FEE)}
+            onClick={() => setValue('eventPaymentType', EEventPaymentTicket.PAID)}
             className={`border-[2px] border-solid ${
-              eventTicketType === EEventTicket.FEE ? 'border-primary' : 'border-textGray'
+              eventTicketType === EEventPaymentTicket.PAID ? 'border-primary' : 'border-textGray'
             } rounded-lg py-4 px-12 flex flex-col items-center justify-center hover:cursor-pointer`}
           >
-            <IoTicketOutline size={42} color={eventTicketType === EEventTicket.FEE ? '#3D56F0' : '#333'} />
-            <p className={`font-bold text-${eventTicketType === EEventTicket.FEE ? 'primary' : 'textGray'}`}>
-              Fee Event
+            <IoTicketOutline size={42} color={eventTicketType === EEventPaymentTicket.PAID ? '#3D56F0' : '#333'} />
+            <p className={`font-bold  text-${eventTicketType === EEventPaymentTicket.PAID ? 'primary' : 'textGray'}`}>
+              PAID Event
             </p>
-            <p>My event require tickets for entry</p>
+            <p className='text-header'>My event require tickets for entry</p>
           </div>
           <div
-            onClick={() => setValue('eventTicketType', EEventTicket.FREE)}
+            onClick={() => setValue('eventPaymentType', EEventPaymentTicket.FREE)}
             className={`border-[2px] border-solid ${
-              eventTicketType === EEventTicket.FREE ? 'border-primary' : 'border-textGray'
+              eventTicketType === EEventPaymentTicket.FREE ? 'border-primary' : 'border-textGray'
             } rounded-lg py-4 px-12 flex flex-col items-center justify-center hover:cursor-pointer`}
           >
             <img loading='lazy' src={freeImg} alt='' className='w-[42px]' />
-            <p className={`font-bold text-${eventTicketType === EEventTicket.FREE ? 'primary' : 'textGray'}`}>
+            <p className={`font-bold text-${eventTicketType === EEventPaymentTicket.FREE ? 'primary' : 'textGray'}`}>
               Free Event
             </p>
-            <p>I'm running free event</p>
+            <p className='text-header'>I'm running free event</p>
           </div>
         </div>
       </div>
-      {eventTicketType === EEventTicket.FEE && (
+      {eventTicketType === EEventPaymentTicket.PAID && (
         <div className='space-y-4'>
           <div className='flex items-center gap-2'>
-            <p className='text-xl font-bold tracking-wider'>What ticket are you selling ?</p>
+            <p className='text-xl font-bold tracking-wider text-header'>What ticket are you selling ?</p>
             <IoMdAddCircleOutline
               size={30}
-              className='hover:cursor-pointer'
+              className='hover:cursor-pointer text-header'
               onClick={() => {
                 append(InitCreateTicketPayload)
               }}
@@ -88,42 +90,106 @@ const TicketEventCreate = (props: Props) => {
           {tickets.map((ticket, index) => (
             <div className='flex items-center gap-8' key={ticket.id}>
               <FormControl>
-                <FormLabel sx={{ fontWeight: 'bold', mb: '4px' }}>Ticket Name</FormLabel>
+                <FormLabel
+                  sx={{
+                    fontWeight: 'bold',
+                    mb: '4px'
+                  }}
+                >
+                  <p className='text-header'>Ticket Name</p>
+                </FormLabel>
+                <div className='text-header'>
+                  <TextField
+                    {...register(`ticketTypes.${index}.name`)}
+                    sx={{
+                      width: '300px',
+                      '& label': { color: 'var(--header)' },
+                      '& .MuiOutlinedInput-input': {
+                        color: 'var(--header)'
+                      },
+                      '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                          borderColor: 'var(--header)'
+                        },
+                        '&:hover fieldset': {
+                          borderColor: 'var(--header)'
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: 'var(--header)'
+                        }
+                      }
+                    }}
+                    id='outlined-basic'
+                    label='Enter the name of the ticket'
+                    size='small'
+                  />
+                </div>
+              </FormControl>
+              <FormControl>
+                <FormLabel sx={{ fontWeight: 'bold', mb: '4px' }}>
+                  <p className='text-header'>Ticket Quantity</p>
+                </FormLabel>
                 <TextField
-                  {...register(`tickets.${index}.name`)}
-                  sx={{ width: '300px' }}
+                  type='number'
+                  {...register(`ticketTypes.${index}.quantity`)}
+                  sx={{
+                    width: '300px',
+                    '& .MuiOutlinedInput-input': {
+                      color: 'var(--header)'
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'var(--header)'
+                      },
+                      '&:hover fieldset': {
+                        borderColor: 'var(--header)'
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: 'var(--header)'
+                      }
+                    }
+                  }}
                   id='outlined-basic'
-                  label='Enter the name of the ticket'
                   size='small'
                 />
               </FormControl>
               <FormControl>
-                <FormLabel sx={{ fontWeight: 'bold', mb: '4px' }}>Ticket Quantity</FormLabel>
+                <FormLabel sx={{ fontWeight: 'bold', mb: '4px' }}>
+                  <p className='text-header'>Ticket Price</p>
+                </FormLabel>
                 <TextField
-                  {...register(`tickets.${index}.quantity`)}
-                  sx={{ width: '300px' }}
-                  id='outlined-basic'
-                  size='small'
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel sx={{ fontWeight: 'bold', mb: '4px' }}>Ticket Price</FormLabel>
-                <TextField
-                  {...register(`tickets.${index}.price`)}
+                  type='number'
+                  {...register(`ticketTypes.${index}.price`)}
                   defaultValue='0.00'
-                  sx={{ width: '250px' }}
+                  sx={{
+                    width: '250px',
+                    '& .MuiOutlinedInput-input': {
+                      color: 'var(--header)'
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'var(--header)'
+                      },
+                      '&:hover fieldset': {
+                        borderColor: 'var(--header)'
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: 'var(--header)'
+                      }
+                    }
+                  }}
                   size='small'
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position='start'>
-                        <IoPricetagOutline />
+                        <IoPricetagOutline color='var(--header)' />
                       </InputAdornment>
                     )
                   }}
                 />
               </FormControl>
               <button>
-                <GrSubtractCircle size={32} onClick={() => remove(index)} />
+                <CiCircleRemove color='var(--header)' size={32} onClick={() => remove(index)} />
               </button>
             </div>
           ))}

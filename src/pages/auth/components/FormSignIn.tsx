@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
@@ -22,12 +22,13 @@ import facebookIcon from '@assets/icons/facebook.png'
 import { LoginPayload, InitLogin } from '@type/auth'
 
 //redux
-import { useAppDispatch } from '@hooks/useRedux'
-import { useSignInMutation, useGetProfileQuery } from '@redux/services/authApi'
-import { setUser } from '@redux/slices/userSlice'
+// import { useAppDispatch } from '@hooks/useRedux'
+import { useSignInMutation } from '@redux/services/authApi'
+// import { setUser } from '@redux/slices/userSlice'
 
 //motion
 import { motion } from 'framer-motion'
+import { useAppSelector } from '@hooks/useRedux'
 
 const formSchema = z.object({
   identity: z.string().min(1, 'Identity is not empty'),
@@ -39,21 +40,19 @@ interface SignInProps {
 }
 
 const FormSignIn = (props: SignInProps) => {
-  const dispatch = useAppDispatch()
   const { handleForgotPassword } = props
 
   const navigate = useNavigate()
+  const user = useAppSelector((state) => state.user.user)
 
   const [showPassWord, setShowPassWord] = useState<boolean>(false)
   const [signIn, { isLoading }] = useSignInMutation()
-  const { data: user, refetch } = useGetProfileQuery()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (user) {
       navigate('/organization')
-      dispatch(setUser(user))
     }
-  }, [user])
+  }, [])
 
   const {
     register,
@@ -69,7 +68,7 @@ const FormSignIn = (props: SignInProps) => {
       const result = await signIn(data).unwrap()
       if (result) {
         localStorage.setItem('token', JSON.stringify(result))
-        refetch()
+        navigate('/organization')
       }
     } catch (error: any) {
       const message = error.data.message

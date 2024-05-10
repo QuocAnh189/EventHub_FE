@@ -2,10 +2,10 @@
 
 // hooks
 import { useAppSelector } from '@hooks/useRedux'
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const ProtectedLayout = ({ children }: any) => {
+const ProtectedLayout = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
   const user = useAppSelector((state) => state.user.user)
 

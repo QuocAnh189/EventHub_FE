@@ -11,20 +11,17 @@ import Fade from '@mui/material/Fade'
 //icon
 import { FaCalendarAlt } from 'react-icons/fa'
 import { IoLocationSharp } from 'react-icons/io5'
+import { IEvent } from 'interfaces/contents/event'
+import dayjs from 'dayjs'
+import { EEventPaymentTicket } from '@constants/enum'
 
 interface ICard {
-  img: any
-  title: string
-  location: string
-  time: any
-  description: string
-  price: number
-  type: string
+  event: IEvent
   modal?: boolean
 }
 
 const EventCard = (props: ICard) => {
-  const { img, title, location, time, description, price, type, modal } = props
+  const { event, modal } = props
 
   const navigate = useNavigate()
   const [open, setOpen] = useState<boolean>(false)
@@ -45,7 +42,7 @@ const EventCard = (props: ICard) => {
         <div className='overflow-hidden'>
           <img
             loading='lazy'
-            src={img}
+            src={event?.coverImage}
             alt='No image'
             className='mx-auto h-[220px] w-full object-cover transition duration-700 hover:skew-x-2 hover:scale-110'
           />
@@ -53,23 +50,27 @@ const EventCard = (props: ICard) => {
 
         <div className='space-y-4 p-3'>
           <div className='min-h-36'>
-            <h1 className='line-clamp-1 font-bold text-xl'>{title}</h1>
+            <h1 className='line-clamp-1 font-bold text-xl'>{event.name}</h1>
             <div className='flex items-center gap-2 opacity-70'>
               <FaCalendarAlt />
-              <span>{time}</span>
+              <span>{dayjs(event.startTime).format('DD/MM/YYYY dddd hh:mm A').toString()}</span>
             </div>
             <div className='flex items-center gap-2 opacity-70'>
               <IoLocationSharp />
-              <span>{location}</span>
+              <span>{event.location}</span>
             </div>
-            <p className='line-clamp-2 pt-2'>{description}</p>
+            <p className='line-clamp-2 pt-2'>{event.description}</p>
           </div>
           <div className='flex items-center justify-between border-t-2 py-3 !mt-3'>
             <div className='opacity-70'>
-              <p>{type}</p>
+              <p>{event.status}</p>
             </div>
-            <div>
-              <p className='text-2xl font-bold'>${price}</p>
+            <div className='text-primary'>
+              {event.eventPaymentType === EEventPaymentTicket.PAID ? (
+                <p className='text-2xl font-bold'>{event.priceRange.startRange}.000 VND</p>
+              ) : (
+                <p className='text-2xl font-bold'>{event.eventPaymentType}</p>
+              )}
             </div>
           </div>
         </div>

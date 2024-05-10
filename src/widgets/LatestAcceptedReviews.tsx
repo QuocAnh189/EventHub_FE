@@ -31,7 +31,7 @@ const LatestAcceptedReviews = () => {
     return 0
   })
 
-  const pagination = usePagination(sortedData, 4)
+  const pagination: any = usePagination(sortedData, 4)
 
   return (
     <Spring className='flex flex-1 flex-col gap-[26px]'>
@@ -42,7 +42,11 @@ const LatestAcceptedReviews = () => {
         </div>
         <span className='block h-[1px] bg-input-border opacity-60' />
         <div>
-          {pagination.currentItems().map((review: any, index: number) => (
+          {/* {pagination.currentItems().map((review: any, index: number) => (
+            <Review key={`${sort}-${review.id}`} data={review} index={index} />
+          ))} */}
+
+          {[0, 1, 2, 3, 4, 5].map((review: any, index: number) => (
             <Review key={`${sort}-${review.id}`} data={review} index={index} />
           ))}
         </div>

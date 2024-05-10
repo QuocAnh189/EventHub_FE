@@ -4,7 +4,7 @@ import CalendarSelector from '@components/CalendarSelector'
 import Select from '@ui/Select'
 import OrdersAverageRate from '@widgets/OrdersAverageRate'
 import OrdersInfobox from '@components/OrdersInfobox'
-import OrdersTable from '@widgets/OrdersTable'
+// import OrdersTable from '@widgets/OrdersTable'
 import ProtectedLayout from '@layouts/protected'
 
 // hooks
@@ -44,7 +44,7 @@ const Orders = () => {
             />
           </div>
         </div>
-        <OrdersTable category={category} sort={sort} />
+        {/* <OrdersTable category={category} sort={sort} /> */}
       </div>
     </ProtectedLayout>
   )

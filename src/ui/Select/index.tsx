@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 // styled components
 import { BasicSelect, MinimalSelect } from './styles'
 
@@ -5,7 +6,7 @@ import { BasicSelect, MinimalSelect } from './styles'
 import { useState } from 'react'
 
 // utils
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { components } from 'react-select'
 import { memo } from 'react'
 
@@ -82,13 +83,6 @@ const Select = (props: Props) => {
   }
 
   return variant === 'basic' ? <BasicSelect {...selectProps} /> : <MinimalSelect {...selectProps} />
-}
-
-Select.propTypes = {
-  options: PropTypes.array.isRequired,
-  value: PropTypes.object,
-  onChange: PropTypes.func.isRequired,
-  variant: PropTypes.oneOf(['basic', 'minimal'])
 }
 
 // eslint-disable-next-line react-refresh/only-export-components

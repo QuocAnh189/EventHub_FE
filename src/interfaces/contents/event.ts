@@ -1,20 +1,24 @@
-import { EEventStatus } from '@constants/enum'
+import { EEventPaymentTicket, EEventStatus, EEventStyle } from '@constants/enum'
 import { IPriceRange } from 'interfaces/systems/price-range'
 
 export interface IEvent {
   id: string
   creatorId: string
   creatorName: string
-  coverImageId: string
   coverImage: string
+  subImages: any[]
   name: string
-  descrption: string
-  locationId: string
-  locationString: string
-  PriceRange: IPriceRange
-  startTime: Date
-  endTime: Date
-  categories: string[]
+  description: string
+  location: string
+  priceRange: IPriceRange
+  startTime: any
+  endTime: any
+  eventCycleType: EEventStyle
+  eventPaymentType?: EEventPaymentTicket
+  isPrivate: boolean
+  isTrash: boolean
+  ticketTypes: any
+  categories: string[] | any
   promotion: number
   numberOfFavourites: number
   numberOfShares: number

@@ -9,7 +9,7 @@ import TabPanel from '@mui/lab/TabPanel'
 import Divider from '@mui/material/Divider'
 import TabContext from '@mui/lab/TabContext'
 import Infomation from '@components/Infomation'
-import EventCard from '@components/event/EventCard'
+// import EventCard from '@components/event/EventCard'
 import ConfirmDialog from '@components/Dialog'
 import Comments from '@components/Comments'
 
@@ -36,16 +36,16 @@ const center = {
   text: 'University of Information Technology'
 }
 
-const mockEvent = {
-  img: 'https://res.cloudinary.com/dadvtny30/image/upload/v1712409123/eventhub/event/w3xvrrue35iu1gncudsa.jpg',
-  title: 'JobFair',
-  location: 'UIT - Linh Trung, Thu Duc, HCM City',
-  time: '01/04/2003 Wednesday - 02:00 AM',
-  description:
-    'lorem ipsum dolor sit amet consectetur adipisicing elit.lorem ipsum dolor sit amet consectetur adipisicing elit.',
-  price: 6700,
-  type: 'Job'
-}
+// const mockEvent = {
+//   img: 'https://res.cloudinary.com/dadvtny30/image/upload/v1712409123/eventhub/event/w3xvrrue35iu1gncudsa.jpg',
+//   title: 'JobFair',
+//   location: 'UIT - Linh Trung, Thu Duc, HCM City',
+//   time: '01/04/2003 Wednesday - 02:00 AM',
+//   description:
+//     'lorem ipsum dolor sit amet consectetur adipisicing elit.lorem ipsum dolor sit amet consectetur adipisicing elit.',
+//   price: 6700,
+//   type: 'Job'
+// }
 
 const EventDetail = () => {
   const { isLoaded } = useJsApiLoader({
@@ -197,14 +197,14 @@ const EventDetail = () => {
           </TabContext>
         </div>
 
-        <div className='flex flex-col items-center px-[150px] py-8 gap-6'>
+        {/* <div className='flex flex-col items-center px-[150px] py-8 gap-6'>
           <h1 className='text-header font-bold text-3xl'>Related Events</h1>
           <div className='grid grid-flow-col auto-cols-fr gap-4'>
-            {[0, 1, 2].map((item) => (
-              <EventCard key={item} {...mockEvent} />
+            {[0, 1, 2].map((event, index) => (
+              <EventCard key={`event-${index}`} event={event} />
             ))}
           </div>
-        </div>
+        </div> */}
 
         {openDialog && (
           <ConfirmDialog

@@ -18,7 +18,7 @@ export const apiUser = createApi({
     }
   }),
   keepUnusedDataFor: 20,
-  tagTypes: ['User'],
+  tagTypes: ['User', 'Events'],
   endpoints: (builder) => ({
     getUsers: builder.query<IUser[], void>({
       query: () => ({
@@ -42,7 +42,7 @@ export const apiUser = createApi({
         method: 'GET',
         params
       }),
-      providesTags: ['User'],
+      providesTags: ['Events'],
       transformResponse: (response: any) => {
         return response.data
       }

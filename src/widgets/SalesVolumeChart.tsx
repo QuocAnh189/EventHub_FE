@@ -1,7 +1,6 @@
 // components
 import Spring from '@components/Spring'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
-import Trend from '@ui/Trend'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 
 // hooks
 import { useTheme } from '@contexts/themeContext'
@@ -15,23 +14,6 @@ const data = [
   { name: 'Q3', a: 15874, b: 7000, trend: 12.88 },
   { name: 'Q4', a: 10455, b: 12584, trend: 50.14 }
 ]
-
-const CustomTooltip = ({ active, payload }: any) => {
-  if (active) {
-    return (
-      <div className='chart-tooltip py-4 px-5'>
-        <h6>Gross sales</h6>
-        <div className='flex my-4 gap-6 items-center'>
-          <p className='text-sm text-header'>16 Sep, 2023</p>
-          <Trend value={payload[0].payload.trend} />
-        </div>
-        <span className='h3'>{numFormatter(payload[0].value, 1, '$')}</span>
-      </div>
-    )
-  }
-
-  return null
-}
 
 const SalesVolumeChart = () => {
   const { theme } = useTheme()
@@ -75,7 +57,7 @@ const SalesVolumeChart = () => {
               tickLine={false}
               axisLine={false}
             />
-            <Tooltip cursor={false} content={<CustomTooltip />} />
+
             <Line
               type='monotone'
               strokeWidth={6}

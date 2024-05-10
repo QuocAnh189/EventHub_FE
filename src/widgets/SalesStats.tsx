@@ -1,6 +1,6 @@
 // components
 import Spring from '@components/Spring'
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
 
 // hooks
 import { useTheme } from '@contexts/themeContext'
@@ -21,34 +21,6 @@ const data = [
   { name: 'Nov', revenue: 7840, expense: 3000 },
   { name: 'Dec', revenue: 3490, expense: 4300 }
 ]
-
-interface Props {
-  active?: boolean
-  payload?: any
-  label?: string
-}
-
-const CustomTooltip = (props: Props) => {
-  const { active, payload, label } = props
-
-  if (active && payload && payload.length) {
-    return (
-      <div className='chart-tooltip p-4'>
-        <h6 className='mb-1'>{label}</h6>
-        <div className='flex flex-col'>
-          {payload.map((item: any, index: number) => (
-            <div className='flex gap-1.5' key={index}>
-              <span className='label-text capitalize'>{item.name}:</span>
-              <span className='h6 !text-sm'>{numFormatter(item.value, 1, '$')}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
-  return null
-}
 
 const SalesStats = () => {
   const { theme } = useTheme()
@@ -97,7 +69,6 @@ const SalesStats = () => {
               }}
               hide={width < 768}
             />
-            <Tooltip cursor={false} content={<CustomTooltip />} />
             <Bar dataKey='revenue' fill={revenueColor} maxBarSize={16} radius={10} />
             <Bar dataKey='expense' fill={expenseColor} strokeWidth={2} maxBarSize={16} radius={10} />
           </BarChart>

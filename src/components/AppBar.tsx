@@ -9,51 +9,53 @@ import { useNavigate } from 'react-router-dom'
 import Headroom from 'react-headroom'
 import Search from '@ui/Search'
 import ModalBase from '@ui/ModalBase'
-import CustomTooltip from '@ui/CustomTooltip'
 import NotificationsPanel from './navbar/NotificationsPanel'
 import MessagesPanel from './navbar/MessagesPanel'
 
 // constants
 import { LOCALES } from '@constants/options'
+import { useAppSelector } from '@hooks/useRedux'
 
-interface Props {
-  active: string
-  setActive: (value: any) => void
-}
+// interface Props {
+//   active: string
+//   setActive: (value: any) => void
+// }
 
-const LocaleMenu = (props: Props) => {
-  const { active, setActive } = props
-  return (
-    <div className='flex flex-col gap-4 p-4'>
-      {LOCALES.map((locale: any) => (
-        <button
-          key={locale.value}
-          className='group flex items-center gap-2.5 w-fit'
-          onClick={() => setActive(locale.value)}
-        >
-          <img className='rounded-full w-5' src={locale.icon} alt={locale.label} />
-          <span
-            className={`text-sm font-medium transition group-hover:text-accent ${
-              active === locale.value ? 'text-accent' : 'text-header'
-            }`}
-          >
-            {locale.label}
-          </span>
-        </button>
-      ))}
-    </div>
-  )
-}
+// const LocaleMenu = (props: Props) => {
+//   const { active, setActive } = props
+//   return (
+//     <div className='flex flex-col gap-4 p-4'>
+//       {LOCALES.map((locale: any) => (
+//         <button
+//           key={locale.value}
+//           className='group flex items-center gap-2.5 w-fit'
+//           onClick={() => setActive(locale.value)}
+//         >
+//           <img className='rounded-full w-5' src={locale.icon} alt={locale.label} />
+//           <span
+//             className={`text-sm font-medium transition group-hover:text-accent ${
+//               active === locale.value ? 'text-accent' : 'text-header'
+//             }`}
+//           >
+//             {locale.label}
+//           </span>
+//         </button>
+//       ))}
+//     </div>
+//   )
+// }
 
 const AppBar = () => {
   const navigate = useNavigate()
   const [searchModalOpen, setSearchModalOpen] = useState(false)
   const [notificationsPanelOpen, setNotificationsPanelOpen] = useState(false)
   const [messagesPanelOpen, setMessagesPanelOpen] = useState(false)
-  const [locale, setLocale] = useState('en-EN')
+  const [locale] = useState('en-EN')
   const { width } = useWindowSize()
   const { theme, toggleTheme }: any = useContext(ThemeContext)
   const { setOpen } = useSidebar()
+
+  const user = useAppSelector((state) => state.user.user)
 
   const activeLocale = LOCALES.find((l: any) => l.value === locale)
 
@@ -88,44 +90,38 @@ const AppBar = () => {
             >
               <i className={`icon-${theme === 'light' ? 'sun-bright' : 'moon'}-regular`} />
             </button>
-            <CustomTooltip title={<LocaleMenu active={locale} setActive={setLocale} />}>
-              <button className='w-6 h-6 rounded-full overflow-hidden xl:w-8 xl:h-8' aria-label='Change language'>
-                <img src={activeLocale?.icon} alt={activeLocale?.label} />
-              </button>
-            </CustomTooltip>
+            <button className='w-6 h-6 rounded-full overflow-hidden xl:w-8 xl:h-8' aria-label='Change language'>
+              <img src={activeLocale?.icon} alt={activeLocale?.label} />
+            </button>
             <div className='relative h-fit mt-1.5 xl:self-end xl:mt-0 xl:mr-1.5'>
-              <CustomTooltip title='notification'>
-                <button
-                  className='text-lg leading-none text-gray dark:text-gray-red xl:text-[20px]'
-                  onClick={() => setNotificationsPanelOpen(true)}
-                  aria-label='Notifications'
-                >
-                  <i className='icon-bell-solid' />
-                </button>
-                <span
-                  className='absolute w-3 h-3 rounded-full bg-red -top-1.5 -right-1.5 border-[2px] border-body
+              <button
+                className='text-lg leading-none text-gray dark:text-gray-red xl:text-[20px]'
+                onClick={() => setNotificationsPanelOpen(true)}
+                aria-label='Notifications'
+              >
+                <i className='icon-bell-solid' />
+              </button>
+              <span
+                className='absolute w-3 h-3 rounded-full bg-red -top-1.5 -right-1.5 border-[2px] border-body
                                   xl:w-6 xl:h-6 xl:-top-5 xl:-right-4 xl:flex xl:items-center xl:justify-center'
-                >
-                  <span className='hidden text-xs font-bold text-white dark:text-[#00193B] xl:block'>7</span>
-                </span>
-              </CustomTooltip>
+              >
+                <span className='hidden text-xs font-bold text-white dark:text-[#00193B] xl:block'>7</span>
+              </span>
             </div>
             <div className='relative h-fit mt-1.5 xl:self-end xl:mt-0 xl:mr-1.5'>
-              <CustomTooltip title='message'>
-                <button
-                  className='text-lg leading-none text-gray dark:text-gray-red xl:text-[20px]'
-                  onClick={() => setMessagesPanelOpen(true)}
-                  aria-label='Messages'
-                >
-                  <i className='icon-message-solid' />
-                </button>
-                <span
-                  className='absolute w-3 h-3 rounded-full bg-green -top-1.5 -right-1.5 border-[2px] border-body
+              <button
+                className='text-lg leading-none text-gray dark:text-gray-red xl:text-[20px]'
+                onClick={() => setMessagesPanelOpen(true)}
+                aria-label='Messages'
+              >
+                <i className='icon-message-solid' />
+              </button>
+              <span
+                className='absolute w-3 h-3 rounded-full bg-green -top-1.5 -right-1.5 border-[2px] border-body
                                   xl:w-6 xl:h-6 xl:-top-5 xl:-right-4 xl:flex xl:items-center xl:justify-center'
-                >
-                  <span className='hidden text-xs font-bold text-white dark:text-[#00193B] xl:block'>2</span>
-                </span>
-              </CustomTooltip>
+              >
+                <span className='hidden text-xs font-bold text-white dark:text-[#00193B] xl:block'>2</span>
+              </span>
             </div>
             <div className='relative'>
               <button
@@ -133,7 +129,8 @@ const AppBar = () => {
                 onClick={() => navigate('settings/profile')}
                 aria-label='Account menu'
               >
-                <i className='icon-user-solid' />
+                {/* <i className='icon-user-solid' /> */}
+                <img src={user?.avatar} className='object cover rounded-full h-full' />
               </button>
               <span className='badge-online' />
             </div>

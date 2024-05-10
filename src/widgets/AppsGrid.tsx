@@ -30,8 +30,8 @@ const AppsGrid = () => {
       .filter((app) => (category === 'all' ? true : app.categories.includes(category)))
   }
 
-  const pagination = usePagination(filteredData(), 12)
-  const data = pagination.currentItems()
+  const pagination: any = usePagination(filteredData(), 12)
+  const data = pagination?.currentItems()
 
   useEffect(() => {
     pagination.goToPage(0)
@@ -58,7 +58,7 @@ const AppsGrid = () => {
             {APPS_OPTIONS.map((option, index) => (
               <FilterItem
                 key={`filter-${index}`}
-                text={option.label}
+                text={option.label!}
                 qty={getQty(option.value)}
                 value={option.value}
                 active={category}

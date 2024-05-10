@@ -14,7 +14,6 @@ const MapLocation = (props: Props) => {
   const { width } = props
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    // eslint-disable-next-line no-undef
     googleMapsApiKey: 'AIzaSyDNUAbz1SHrSJ7M0pFlV-8xxCSg53lOVmM',
     libraries: ['places']
   })
@@ -29,15 +28,11 @@ const MapLocation = (props: Props) => {
       center={center}
       zoom={14}
       options={{
-        // zoomControlL: false,
         streetViewControl: false,
         mapTypeControl: false,
         fullscreenControl: false
       }}
-      // onLoad={onLoad}
-      // onUnmount={onUnmount}
     >
-      {/* Child components, such as markers, info windows, etc. */}
       <Marker position={center} title='UIT' />
     </GoogleMap>
   ) : (

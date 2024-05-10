@@ -10,7 +10,7 @@ interface Props {
   qty: number
   value: string
   active: string
-  onClick: (value: string) => void
+  onClick: (value: any) => void
 }
 
 const FilterItem = (props: Props) => {

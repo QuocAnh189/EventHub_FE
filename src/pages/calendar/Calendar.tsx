@@ -3,7 +3,9 @@ import { useState } from 'react'
 
 // components
 import { PageHeader } from '@layouts/components'
-import { Box, List, Typography } from '@mui/material'
+import Box from '@mui/material/Box'
+import List from '@mui/material/List'
+import Typography from '@mui/material/Typography'
 import TransactionsInfobox from '@widgets/TransactionsInfobox'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'

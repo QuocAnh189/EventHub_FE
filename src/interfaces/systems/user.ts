@@ -1,6 +1,6 @@
 import { EGender, EUserStatus } from '@constants/enum'
 export interface IUser {
-  id: string
+  id?: string
   userName: string
   email: string
   phoneNumber: number

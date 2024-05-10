@@ -5,14 +5,17 @@ import { useState } from 'react'
 interface Props {
   placeholder?: string
   wrapperClass?: string
+  onChange?: (query: string) => void
 }
 const Search = (props: Props) => {
-  const { placeholder = 'Search...', wrapperClass } = props
+  const { placeholder = 'Search...', wrapperClass, onChange } = props
 
   const [query, setQuery] = useState<string>('')
 
   const handleSearchQueryEvent = () => {
-    console.log(query)
+    if (onChange) {
+      onChange(query)
+    }
   }
 
   return (

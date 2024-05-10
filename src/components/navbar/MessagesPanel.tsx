@@ -74,7 +74,7 @@ const MessagesPanel = (props: Props) => {
           {MESSAGE_OPTIONS.map((item, index) => (
             <FilterItem
               key={index}
-              text={item.label}
+              text={item.label!}
               value={item.value}
               active={filter}
               qty={getQty(item.value)!}

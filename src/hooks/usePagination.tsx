@@ -1,48 +1,34 @@
-import { useState, useEffect } from 'react'
+//hook
+import { useState } from 'react'
 
-export const usePagination = (data: any, itemsPerPage = 10) => {
-  const [currentPage, setCurrentPage] = useState(0)
-  const maxPage = Math.ceil(data.length / itemsPerPage)
-
-  const currentItems = () => {
-    const begin = currentPage * itemsPerPage
-    const end = begin + itemsPerPage
-    return data.slice(begin, end)
-  }
-
-  useEffect(() => {
-    if (currentPage > maxPage - 1) {
-      setCurrentPage(maxPage - 1)
-    } else if (currentPage < 0 && maxPage > 0) {
-      setCurrentPage(0)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentItems()])
+export const usePagination = (totalCount: any, itemsPerPage = 10) => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const maxPage = Math.ceil(totalCount / itemsPerPage)
 
   const next = () => {
     setCurrentPage((currentPage) => Math.min(currentPage + 1, maxPage))
   }
 
   const prev = () => {
-    setCurrentPage((currentPage) => Math.max(currentPage - 1, 0))
+    setCurrentPage((currentPage) => Math.max(currentPage - 1, 1))
   }
 
   const goToPage = (page: number) => {
-    const pageNumber = Math.max(0, page)
+    const pageNumber = Math.max(1, page)
     setCurrentPage(() => Math.min(pageNumber, maxPage))
   }
 
   const showingOf = () => {
     const begin = currentPage * itemsPerPage
-    const end = data.length > itemsPerPage ? begin + itemsPerPage : data.length
-    return data.length > 0 ? (
+    const end = totalCount > itemsPerPage ? begin : totalCount
+    return totalCount > 0 ? (
       <>
-        <span className='font-semibold'>{end}</span>/{data.length}
+        <span className='font-semibold'>{end}</span>/{totalCount}
       </>
     ) : (
       ''
     )
   }
 
-  return { next, prev, goToPage, showingOf, currentItems, currentPage, setCurrentPage, maxPage }
+  return { next, prev, goToPage, showingOf, currentPage, setCurrentPage, maxPage }
 }

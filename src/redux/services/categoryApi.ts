@@ -1,11 +1,22 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { CategoryPayload } from '@type/category'
 import { ICategory } from 'interfaces/contents/category'
+import { IEvent } from 'interfaces/contents/event'
 
 export const apiCategory = createApi({
   reducerPath: 'apiCategory',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL
+    baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers) => {
+      const token = JSON.parse(localStorage.getItem('token')!).accessToken
+      headers.set('Content-Type', 'application/json')
+
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+
+      return headers
+    }
   }),
   keepUnusedDataFor: 20,
   tagTypes: ['Category'],
@@ -31,6 +42,14 @@ export const apiCategory = createApi({
     getCategoryById: builder.query<ICategory, string>({
       query: (categoryId) => ({
         url: `/categories/${categoryId}`,
+        method: 'GET'
+      }),
+      providesTags: ['Category']
+    }),
+
+    getEventsVyCategoryId: builder.query<IEvent[], string>({
+      query: (categoryId) => ({
+        url: `/categories/${categoryId}/events`,
         method: 'GET'
       }),
       providesTags: ['Category']

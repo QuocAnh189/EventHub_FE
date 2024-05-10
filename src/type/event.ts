@@ -1,4 +1,5 @@
-import { EEventAction, EEventStatus, EEventStyle, EEventTicket, EPageOrder } from '@constants/enum'
+import { EEventPrivacy, EEventStatus, EEventStyle, EEventPaymentTicket, EPageOrder } from '@constants/enum'
+import { IPriceRange } from 'interfaces/systems/price-range'
 
 export interface ICreateTicketPayload {
   name: string
@@ -13,40 +14,37 @@ export const InitCreateTicketPayload = {
 } as ICreateTicketPayload
 
 export interface ICreateEventPayload {
+  id?: string
   creatorId?: string
   name: string
-  categories: string[]
-  eventType: EEventStyle
-  startDate: any
-  endDate: any
+  categoryIds: string[]
+  eventCycleType: EEventStyle
   startTime: any
   endTime: any
   location: any
   description: string
   reasons: string[]
   coverImage: any
-  subImage: any[]
-  eventTicketType: EEventTicket
-  tickets: ICreateTicketPayload[]
-  isPublic: boolean
+  eventSubImages: any[]
+  eventPaymentType: EEventPaymentTicket
+  ticketTypes: ICreateTicketPayload[]
+  isPrivate: boolean
 }
 
 export const InitCreateEventPayload = {
   name: '',
-  categories: [],
-  eventType: 'SINGLE',
-  startDate: null,
-  endDate: null,
+  categoryIds: [],
+  eventCycleType: EEventStyle.SINGLE,
   startTime: null,
   endTime: null,
   location: '',
   description: '',
   reasons: [],
   coverImage: '',
-  subImage: ['', '', '', ''],
-  eventTicketType: 'FEE',
-  tickets: [],
-  isPublic: true
+  eventSubImages: ['', '', '', ''],
+  eventPaymentType: EEventPaymentTicket.FREE,
+  ticketTypes: [],
+  isPrivate: false
 } as ICreateEventPayload
 
 export interface IFavouriteEventPayload {
@@ -68,7 +66,7 @@ export interface IFilterEvent {
 }
 
 export const initFilterEvent = {
-  status: null,
+  status: EEventStatus.ALL,
   category: null,
   eventTicketType: null
 } as IFilterEvent
@@ -76,14 +74,37 @@ export const initFilterEvent = {
 export interface IParamsEvent {
   type?: EEventStatus
   location?: string | null
-  categoryIds?: string[] | null
-  eventPrivacy?: EEventAction
+  categoryIds: string[]
+  eventPrivacy?: EEventPrivacy
   page?: number
   size?: number
   takeAll?: boolean
   order?: EPageOrder
+  priceRange?: IPriceRange
   search?: string
 }
+
+export const initParamsMyEvent = {
+  type: EEventStatus.ALL,
+  location: '',
+  eventPrivacy: EEventPrivacy.ALL,
+  page: 1,
+  size: 4,
+  takeAll: false,
+  search: '',
+  order: 'ASC'
+} as IParamsEvent
+
+export const initParamsEvent = {
+  page: 1,
+  type: EEventStatus.ALL,
+  categoryIds: [],
+  size: 12,
+  takeAll: false,
+  search: '',
+  order: 'ASC',
+  priceRange: { startRange: 20, endRange: 1000 }
+} as IParamsEvent
 
 export interface IMetadataEventReponse {
   currentPage: number

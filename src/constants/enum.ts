@@ -1,3 +1,10 @@
+export enum EEventPrivacy {
+  ALL = 'ALL',
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE',
+  TRASH = 'TRASH'
+}
+
 export enum EEventAction {
   ALL = 'ALL',
   PUBLIC = 'PUBLIC',
@@ -25,8 +32,8 @@ export enum EEventStyle {
   RECURRING = 'RECURRING'
 }
 
-export enum EEventTicket {
-  FEE = 'FEE',
+export enum EEventPaymentTicket {
+  PAID = 'PAID',
   FREE = 'FREE'
 }
 

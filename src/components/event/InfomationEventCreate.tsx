@@ -16,15 +16,15 @@ import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormLabel from '@mui/material/FormLabel'
 import InputAdornment from '@mui/material/InputAdornment'
-import LocationEvent from '@components/Location'
+// import LocationEvent from '@components/Location'
 
 //icon
 import { MdDateRange } from 'react-icons/md'
-import { IoMdTime } from 'react-icons/io'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { ICreateEventPayload } from '@type/event'
-import { GrClose, GrSubtractCircle } from 'react-icons/gr'
+import { GrClose } from 'react-icons/gr'
 import { BiSearch } from 'react-icons/bi'
+import { CiCircleRemove } from 'react-icons/ci'
 
 //map
 import { fromAddress, setLanguage, setRegion, setKey } from 'react-geocode'
@@ -39,6 +39,7 @@ import { useAppSelector } from '@hooks/useRedux'
 
 //type
 import { toast } from 'react-toastify'
+import ItemCategory from '@components/ItemCategory'
 
 interface Props {
   create: boolean
@@ -73,7 +74,7 @@ const InfomationEvent = (props: Props) => {
     remove: removeCategory
   } = useFieldArray({
     control,
-    name: 'categories'
+    name: 'categoryIds'
   })
 
   useEffect(() => {
@@ -102,10 +103,8 @@ const InfomationEvent = (props: Props) => {
     setEnableCheckError(true)
     if (
       watch().name &&
-      watch().categories.length &&
-      watch().eventType &&
-      watch().startDate &&
-      watch().endDate &&
+      watch().categoryIds.length &&
+      watch().eventCycleType &&
       watch().startTime &&
       watch().endTime &&
       watch().location &&
@@ -117,35 +116,55 @@ const InfomationEvent = (props: Props) => {
     }
   }
 
+  console.log(position)
+
   return (
     <div className='relative pl-24 fl pt-10 pb-20 space-y-10 min-h-screen '>
       <div className='flex gap-2 items-end '>
         <div className='h-[200px] w-[200px] flex flex-col gap-4 items-end justify-between'>
-          <p className='font-semibold text-md py-2'>
+          <p className='font-semibold text-md py-2 text-header'>
             Event Title <span className='text-textError'>*</span>
           </p>
-          <p className='font-semibold text-md py-2'>
+          <p className='font-semibold text-md py-2 text-header'>
             Event Category <span className='text-textError'>*</span>
           </p>
-          <p className='font-semibold text-md py-2'>
+          <p className='font-semibold text-md py-2 text-header'>
             Event Type <span className='text-textError'>*</span>
           </p>
         </div>
         <div className='space-y-4'>
-          <p className='font-semibold text-2xl'>Event Details</p>
+          <p className='font-semibold text-2xl  text-header'>Event Details</p>
           <div className='h-[200px] flex flex-col gap-4 w-[600px] justify-between'>
-            <FormControl>
+            <FormControl sx={{ color: 'text-header' }}>
               <TextField
+                sx={{
+                  '& label': { color: 'var(--header)' },
+                  '& .MuiOutlinedInput-input': {
+                    color: 'var(--header)'
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'var(--header)'
+                    }
+                  }
+                }}
                 error={enableCheckError ? (watch().name ? false : true) : false}
                 {...register('name', { required: true })}
                 name='name'
                 label='Enter the name of the event'
                 size='small'
+                className='text-header'
               />
             </FormControl>
             <FormControl sx={{ minWidth: 120 }} size='medium'>
               <InputLabel error={enableCheckError ? (categories.length ? false : true) : false}>
-                Choose category
+                <p className='text-header'>Choose category</p>
               </InputLabel>
 
               <Select
@@ -156,11 +175,22 @@ const InfomationEvent = (props: Props) => {
                 sx={{
                   '& .MuiOutlinedInput-input': {
                     opacity: 0
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'var(--header)'
+                    }
                   }
                 }}
                 startAdornment={
                   <div className='flex items-center gap-3'>
-                    {watch().categories.map((category, index) => {
+                    {watch().categoryIds?.map((category, index) => {
                       const categorySelect = categoriesStore.find((categoryStore) => categoryStore.id === category)
                       return (
                         categorySelect && (
@@ -206,32 +236,34 @@ const InfomationEvent = (props: Props) => {
                       gap: '8px'
                     }}
                   >
-                    <div className='flex flex-row items-center gap-2'>
-                      <div
-                        style={{ backgroundColor: category.color }}
-                        className={`w-[30px] h-[30px] rounded-lg bg-[${category.color}] flex items-center justify-center`}
-                      >
-                        <img loading='lazy' className='w-[20px] h-[20px]' src={category.iconImage} />
-                      </div>
-                    </div>
-                    {category.name}
+                    <ItemCategory category={category} />
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
             <FormControl>
               <RadioGroup
-                {...register('eventType')}
+                {...register('eventCycleType')}
                 row
                 aria-labelledby='demo-row-radio-buttons-group-label'
                 name='row-radio-buttons-group'
-                value={watch().eventType}
+                value={watch().eventCycleType}
                 onChange={(e: any) => {
-                  setValue('eventType', e.target.value)
+                  setValue('eventCycleType', e.target.value)
                 }}
               >
-                <FormControlLabel value={EEventStyle.SINGLE} control={<Radio />} label='Single Event' />
-                <FormControlLabel value={EEventStyle.RECURRING} control={<Radio />} label='Recurring Event' />
+                <FormControlLabel
+                  value={EEventStyle.SINGLE}
+                  control={<Radio sx={{ color: 'var(--header)' }} />}
+                  label='Single Event'
+                  sx={{ color: 'var(--header)' }}
+                />
+                <FormControlLabel
+                  value={EEventStyle.RECURRING}
+                  control={<Radio sx={{ color: 'var(--header)' }} />}
+                  label='Recurring Event'
+                  sx={{ color: 'var(--header)' }}
+                />
               </RadioGroup>
             </FormControl>
           </div>
@@ -239,80 +271,82 @@ const InfomationEvent = (props: Props) => {
       </div>
 
       <div className='flex gap-2 items-end '>
-        <div className='w-[200px] flex flex-col gap-4 items-end justify-start'>
-          <p className='font-semibold text-md pb-20'>
+        <div className='w-[200px] h-[60px] flex flex-col gap-4 items-end justify-center'>
+          <p className='font-semibold text-md text-header'>
             Session <span className='text-textError'>*</span>
           </p>
         </div>
         <div className='flex flex-col gap-4 w-[600px]'>
-          <p className='font-semibold text-2xl'>Date & Time</p>
-          <div className='w-[600px] flex items-center justify-between flex-wrap gap-2'>
+          <p className='font-semibold text-2xl text-header'>Date & Time</p>
+          <div className='w-[600px] h-[60px] flex items-center justify-between flex-wrap gap-2'>
             <FormControl>
-              <FormLabel sx={{ fontWeight: 'bold' }}>Start Date</FormLabel>
-              <TextField
-                {...register('startDate')}
-                error={enableCheckError ? (watch().startDate ? false : true) : false}
-                sx={{ width: '250px' }}
-                size='small'
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <MdDateRange />
-                    </InputAdornment>
-                  )
-                }}
-                type='date'
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel sx={{ fontWeight: 'bold' }}>End Date</FormLabel>
-              <TextField
-                {...register('endDate')}
-                error={enableCheckError ? (watch().endDate ? false : true) : false}
-                sx={{ width: '250px' }}
-                size='small'
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <MdDateRange />
-                    </InputAdornment>
-                  )
-                }}
-                type='date'
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel sx={{ fontWeight: 'bold' }}>Start Time</FormLabel>
+              <FormLabel sx={{ fontWeight: 'bold' }}>
+                <p className='text-header'>End Date</p>
+              </FormLabel>
               <TextField
                 {...register('startTime')}
                 error={enableCheckError ? (watch().startTime ? false : true) : false}
-                sx={{ width: '250px' }}
+                sx={{
+                  width: '250px',
+                  '& .MuiOutlinedInput-input': {
+                    color: 'var(--header)'
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'var(--header)'
+                    }
+                  }
+                }}
                 size='small'
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <IoMdTime />
+                      <MdDateRange color='var(--header)' />
                     </InputAdornment>
                   )
                 }}
-                type='time'
+                type='datetime-local'
               />
             </FormControl>
             <FormControl>
-              <FormLabel sx={{ fontWeight: 'bold' }}>End Time</FormLabel>
+              <FormLabel sx={{ fontWeight: 'bold' }}>
+                <p className='text-header'>End Date</p>
+              </FormLabel>
               <TextField
+                sx={{
+                  width: '250px',
+                  '& .MuiOutlinedInput-input': {
+                    color: 'var(--header)'
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'var(--header)'
+                    }
+                  }
+                }}
                 {...register('endTime')}
                 error={enableCheckError ? (watch().endTime ? false : true) : false}
-                sx={{ width: '250px' }}
                 size='small'
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <IoMdTime />
+                      <MdDateRange color='var(--header)' />
                     </InputAdornment>
                   )
                 }}
-                type='time'
+                type='datetime-local'
               />
             </FormControl>
           </div>
@@ -321,13 +355,30 @@ const InfomationEvent = (props: Props) => {
 
       <div className='flex gap-2'>
         <div className='w-[200px] flex pt-10'>
-          <p className='font-semibold text-md pl-12 text-center'>Where will your event take place</p>
+          <p className='font-semibold text-md pl-12 text-center  text-header'>Where will your event take place</p>
           <span className='text-textError'>*</span>
         </div>
         <div className='h-50 flex flex-col gap-4 w-[600px]'>
-          <p className='font-semibold text-2xl'>Choose Location</p>
+          <p className='font-semibold text-2xl  text-header'>Choose Location</p>
           <FormControl>
             <TextField
+              sx={{
+                '& label': { color: 'var(--header)' },
+                '& .MuiOutlinedInput-input': {
+                  color: 'var(--header)'
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'var(--header)'
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'var(--header)'
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'var(--header)'
+                  }
+                }
+              }}
               {...register('location')}
               error={enableCheckError ? (watch().location ? false : true) : false}
               id='outlined-basic'
@@ -336,26 +387,43 @@ const InfomationEvent = (props: Props) => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end' className='hover:cursor-pointer'>
-                    <BiSearch size={32} onClick={handleLocation} />
+                    <BiSearch size={32} onClick={handleLocation} color='var(--header)' />
                   </InputAdornment>
                 )
               }}
             />
           </FormControl>
-          {position && <LocationEvent position={position} />}
+          {/* {position && <LocationEvent position={position} />} */}
         </div>
       </div>
 
       <div className='flex gap-2'>
         <div className='w-[200px] flex flex-col gap-4 items-end'>
-          <p className='font-semibold text-md pl-6 pt-12 text-center'>
+          <p className='font-semibold text-md pl-6 pt-12 text-center  text-header'>
             Event Description <span className='text-textError'>*</span>
           </p>
         </div>
         <div className='h-50 flex flex-col gap-4 w-[600px]'>
-          <p className='font-semibold text-2xl'>Additional Infomation</p>
+          <p className='font-semibold text-2xl text-header'>Additional Infomation</p>
           <FormControl>
             <TextField
+              sx={{
+                '& label': { color: 'var(--header)' },
+                '& .MuiOutlinedInput-input': {
+                  color: 'var(--header)'
+                },
+                '& .MuiOutlinedInput-root': {
+                  '& fieldset': {
+                    borderColor: 'var(--header)'
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'var(--header)'
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'var(--header)'
+                  }
+                }
+              }}
               error={enableCheckError ? (watch().description ? false : true) : false}
               {...register('description')}
               multiline={true}
@@ -369,12 +437,13 @@ const InfomationEvent = (props: Props) => {
 
       <div className='flex gap-2'>
         <div className='w-[200px] flex flex-col gap-4 items-end'>
-          <p className='font-semibold text-md pl-6 pt-12 text-center'>Event Reason</p>
+          <p className='font-semibold text-md pl-6 pt-12 text-center text-header'>Event Reason</p>
         </div>
         <div className='h-50 flex flex-col gap-4 w-[600px]'>
           <div className='flex items-center gap-2'>
-            <p className='font-semibold text-2xl'>Reason</p>
+            <p className='font-semibold text-2xl text-header'>Reason</p>
             <IoMdAddCircleOutline
+              color='var(--header)'
               size={30}
               className='hover:cursor-pointer'
               onClick={() => {
@@ -383,19 +452,36 @@ const InfomationEvent = (props: Props) => {
             />
           </div>
 
-          {reasons.map((field: any, index: any) => (
-            <FormControl key={field.id}>
+          {reasons?.map((field: any, index: any) => (
+            <FormControl key={field.id} sx={{ color: '#fff' }}>
               <TextField
+                sx={{
+                  '& label': { color: 'var(--header)' },
+                  '& .MuiOutlinedInput-input': {
+                    color: 'var(--header)'
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'var(--header)'
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: 'var(--header)'
+                    }
+                  }
+                }}
                 {...register(`reasons.${index}`)}
                 id='outlined-basic'
                 label={`Reason ${index + 1}`}
                 size='small'
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position='start'>
-                      <GrSubtractCircle
+                    <InputAdornment position='end' className='hover:cursor-pointer'>
+                      <CiCircleRemove
+                        color='var(--header)'
                         size={32}
-                        className='hover:cursor-pointer'
                         onClick={() => {
                           removeReasons(index)
                         }}

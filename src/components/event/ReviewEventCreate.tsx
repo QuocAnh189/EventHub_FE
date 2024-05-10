@@ -2,7 +2,6 @@
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
 //component
-import LocationEvent from '@components/Location'
 import Switch from 'react-switch'
 
 //icons
@@ -21,8 +20,8 @@ import eventDefault from '@assets/event/event-poster.png'
 import dayjs from 'dayjs'
 
 //map
-import { fromAddress, setLanguage, setRegion, setKey } from 'react-geocode'
-import { useEffect, useState } from 'react'
+import { setLanguage, setRegion, setKey } from 'react-geocode'
+import { CircularProgress } from '@mui/material'
 setKey(import.meta.env.VITE_MAP_API_KEY)
 setLanguage('en')
 setRegion('vn')
@@ -32,31 +31,32 @@ interface Props {
   setValue: UseFormSetValue<ICreateEventPayload>
   setActive: (value: number) => void
   disabled: boolean
+  create: boolean
 }
 const ReviewEventCreate = (props: Props) => {
-  const { setActive, watch, setValue, disabled } = props
+  const { setActive, watch, setValue, disabled, create } = props
 
-  const [position, setPosition] = useState(null)
+  // const [position, setPosition] = useState(null)
 
-  useEffect(() => {
-    if (watch().location) {
-      fromAddress(watch().location)
-        .then(({ results }) => {
-          const result = results[0].geometry.location
-          setPosition(result)
-        })
-        .catch(() => {
-          setPosition(null)
-        })
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (watch().location) {
+  //     fromAddress(watch().location)
+  //       .then(({ results }) => {
+  //         const result = results[0].geometry.location
+  //         setPosition(result)
+  //       })
+  //       .catch(() => {
+  //         setPosition(null)
+  //       })
+  //   }
+  // }, [])
 
   return (
     <div className='w-full px-40 mt-10'>
       <div className='flex flex-col gap-6 border-[3px] border-textGray rounded-2xl p-10'>
         <div className='h-[500px]'>
           <img
-            src={watch().coverImage ? watch().coverImage : eventDefault}
+            src={watch().coverImage ? watch().coverImage || URL.createObjectURL(watch().coverImage) : eventDefault}
             alt=''
             loading='lazy'
             className='w-full h-full object-cover rounded-xl'
@@ -65,12 +65,12 @@ const ReviewEventCreate = (props: Props) => {
         <div className='w-full flex items-center justify-between'>
           <h1>{watch().name}</h1>
           <div className='flex items-center gap-2'>
-            <p className='text-xl font-bold'>Public:</p>
+            <p className='text-xl font-bold text-header'>Public:</p>
             <Switch
               onChange={() => {
-                setValue('isPublic', !watch().isPublic)
+                setValue('isPrivate', !watch().isPrivate)
               }}
-              checked={watch().isPublic === undefined ? true : watch().isPublic}
+              checked={!watch().isPrivate}
             />
           </div>
         </div>
@@ -78,44 +78,45 @@ const ReviewEventCreate = (props: Props) => {
           <div className='w-full flex flex-col gap-4'>
             <div className='flex justify-between'>
               <div className='flex flex-col gap-y-3'>
-                <h4>Date and Time</h4>
+                <h4 className='text-header'>Date and Time</h4>
                 <div className='flex items-center gap-1'>
                   <FaRegCalendarAlt color='gray' size='24px' />
 
-                  <p>{dayjs(watch().startDate).format('dddd, DD MMMM YYYY')?.toString()}</p>
+                  <p className='text-header'>{dayjs(watch().startTime).format('dddd, DD MMMM YYYY')?.toString()}</p>
                 </div>
                 <div className='flex items-center gap-1'>
                   <IoMdTime color='gray' size='24px' />
 
-                  <p>
-                    {watch().startTime?.toString()} - {watch().endTime?.toString()}
+                  <p className='text-header'>
+                    {dayjs(watch().startTime).format('hh:mm A YYYY/MM/DD')?.toString()} -{' '}
+                    {dayjs(watch().endTime).format('hh:mm A YYYY/MM/DD')?.toString()}
                   </p>
                 </div>
               </div>
               <div className='flex flex-col gap-2'>
-                <h3 className='text-black text-xl font-bold mb-4'>Ticket Information</h3>
+                <h3 className='text-black text-xl font-bold mb-4 text-header'>Ticket Information</h3>
                 <div className='flex items-center gap-2'>
                   <IoTicketOutline />
-                  <p>Ticket type: {watch().eventTicketType}/Ticket</p>
+                  <p className='text-header'>Ticket type: {watch().eventPaymentType}/Ticket</p>
                 </div>
-                {watch().tickets.map((ticket, index) => (
-                  <p className='w-full  flex justify-between'>
-                    <span>
+                {watch().ticketTypes.map((ticket, index) => (
+                  <p key={`ticket-${index}`} className='w-full flex justify-between gap-2'>
+                    <span className='text-header'>
                       {index + 1}. <span className='font-bold'>{ticket.name}:</span>
                     </span>
-                    <span className='text-primary font-bold'>{ticket.price}</span>
+                    <span className='text-primary font-bold'>{ticket.price}.000 VND</span>
                   </p>
                 ))}
               </div>
             </div>
 
             <div className='flex flex-col gap-2'>
-              <h4>Location</h4>
+              <h4 className='text-header'>Location</h4>
               <div className='flex gap-1'>
                 <IoLocationOutline color='gray' size='24px' />
-                <p className='max-w-[500px]'>{watch().location}</p>
+                <p className='max-w-[500px] text-header'>{watch().location}</p>
               </div>
-              {position && <LocationEvent position={position} />}
+              {/* {position && <LocationEvent position={position} />} */}
             </div>
             <div className='flex flex-col gap-8'>
               <div className='space-y-2'>
@@ -127,7 +128,7 @@ const ReviewEventCreate = (props: Props) => {
                     className='w-[50px] h-[50px] object-cover rounded-full'
                   />
                   <div>
-                    <p className='font-semibold'>Anh Quoc</p>
+                    <p className='font-semibold text-header'>Anh Quoc</p>
                     <button className='flex items-center gap-1 bg-primary px-2 py-1 rounded-md'>
                       <IoMdAdd color='white' size={24} />
                       <p className='text-white'>Follow</p>
@@ -138,10 +139,10 @@ const ReviewEventCreate = (props: Props) => {
 
               <div className='space-y-1'>
                 <h5>Event Description</h5>
-                <p>{watch().description}</p>
+                <p className='text-header'>{watch().description}</p>
                 <h6>{watch().reasons.length} Reasons to attend the event:</h6>
                 {watch().reasons.map((reason, index) => (
-                  <p>
+                  <p key={`reason-${index}`} className='text-header'>
                     {index + 1}. {reason}.
                   </p>
                 ))}
@@ -149,14 +150,14 @@ const ReviewEventCreate = (props: Props) => {
             </div>
 
             <div className='w-full flex items-center gap-8 justify-center'>
-              {watch().subImage.map(
-                (image: string, index: number) =>
+              {watch().eventSubImages.map(
+                (image: any, index: number) =>
                   image && (
                     <img
                       key={`subimage-${index}`}
                       loading='lazy'
                       className='h-[200px] w-[200px] rounded-lg'
-                      src={image}
+                      src={image || URL.createObjectURL(image)}
                       alt=''
                     />
                   )
@@ -175,8 +176,8 @@ const ReviewEventCreate = (props: Props) => {
           Go back
         </button>
 
-        <button disabled={disabled} type='submit' className='btn btn--primary'>
-          Create Event
+        <button disabled={disabled} type='submit' className='btn btn--primary w-[200px]'>
+          {disabled ? <CircularProgress size={24} /> : create ? 'Create Event' : 'Update Event'}
         </button>
       </div>
     </div>

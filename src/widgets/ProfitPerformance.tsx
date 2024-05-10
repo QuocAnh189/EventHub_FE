@@ -1,10 +1,10 @@
 // components
 import Spring from '@components/Spring'
 import InfoBtn from '@ui/InfoBtn'
-import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from 'recharts'
+import { PieChart, Pie, ResponsiveContainer, Cell } from 'recharts'
 
 // utils
-import { numFormatter } from '@utils/helpers'
+// import { numFormatter } from '@utils/helpers'
 
 const data = [
   { name: '2022', value: 8400 },
@@ -12,19 +12,19 @@ const data = [
 ]
 const COLORS = ['var(--header)', 'var(--green)']
 
-const CustomTooltip = ({ active, payload }: any) => {
-  if (active) {
-    return (
-      <div className='chart-tooltip p-3'>
-        <p className='font-heading font-semibold text-header text-sm'>
-          Profit {`${payload[0].name} : ${numFormatter(payload[0].value, 1, '$')}`}
-        </p>
-      </div>
-    )
-  }
+// const CustomTooltip = ({ active, payload }: any) => {
+//   if (active) {
+//     return (
+//       <div className='chart-tooltip p-3'>
+//         <p className='font-heading font-semibold text-header text-sm'>
+//           Profit {`${payload[0].name} : ${numFormatter(payload[0].value, 1, '$')}`}
+//         </p>
+//       </div>
+//     )
+//   }
 
-  return null
-}
+//   return null
+// }
 
 const ProfitPerformance = () => {
   return (
@@ -41,7 +41,6 @@ const ProfitPerformance = () => {
                 <Cell values={entry.name} key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
-            <Tooltip content={<CustomTooltip />} />
           </PieChart>
         </ResponsiveContainer>
       </div>

@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography'
 import ContentCut from '@mui/icons-material/ContentCut'
 import ContentCopy from '@mui/icons-material/ContentCopy'
 import ContentPaste from '@mui/icons-material/ContentPaste'
-import Tooltip from '@mui/material/Tooltip'
 import TextField from '@mui/material/TextField'
 import { CardItem } from './CardTodo'
 
@@ -70,16 +69,14 @@ const ColumnTodo = () => {
           Column1
         </Typography>
         <Box>
-          <Tooltip title='More option'>
-            <ExpandMoreIcon
-              sx={{ color: 'text.primary', cursor: 'pointer' }}
-              id='basic-column-dropdown'
-              aria-controls={open ? 'basic-menu-workspaces' : undefined}
-              aria-haspopup='true'
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
-            />
-          </Tooltip>
+          <ExpandMoreIcon
+            sx={{ color: 'text.primary', cursor: 'pointer' }}
+            id='basic-column-dropdown'
+            aria-controls={open ? 'basic-menu-workspaces' : undefined}
+            aria-haspopup='true'
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+          />
 
           <Menu
             id='basic-menu-column-dropdown'
@@ -170,9 +167,8 @@ const ColumnTodo = () => {
             <Button onClick={toggleOpenNewCardForm} startIcon={<AddCardIcon />} sx={{ color: '#3D56F0' }}>
               Add new card
             </Button>
-            <Tooltip title='Drag to move'>
-              <DragHandleIcon sx={{ cursor: 'pointer' }} className='text-primary' />
-            </Tooltip>
+
+            <DragHandleIcon sx={{ cursor: 'pointer' }} className='text-primary' />
           </Box>
         ) : (
           <Box sx={{ height: '100%', display: 'flex', alignItems: 'center ', gap: 1 }}>
