@@ -15,7 +15,7 @@ const data = [
 const TopSalesByCategories = () => {
   return (
     <Spring className='card flex flex-col gap-2.5 2xl:col-span-2'>
-      <h5>Top Sales by Categories</h5>
+      <h5>Top Events by Categories</h5>
       <div className='flex flex-col gap-[17px]'>
         {data.map((item, index) => (
           <LabeledProgressBar

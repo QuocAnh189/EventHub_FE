@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //component
 import { ICreateEventPayload } from '@type/event'
 import MediaDropPlaceholder from '@ui/MediaDropPlaceholder'
@@ -18,6 +19,7 @@ const BannerEvent = (props: Props) => {
 
   const converCoverImageToBase64 = (e: any) => {
     const image = e.target.files[0]
+
     setValue('coverImage', image)
   }
 
@@ -43,7 +45,7 @@ const BannerEvent = (props: Props) => {
           <img
             loading='lazy'
             className={`absolute h-full w-full rounded-[8px] outline-none opacity-${coverImage ? '1' : '0'}`}
-            src={coverImage ? coverImage || URL.createObjectURL(coverImage) : ''}
+            src={coverImage ? URL.createObjectURL(coverImage) : ''}
           />
           <input
             aria-label=''
@@ -80,7 +82,7 @@ const BannerEvent = (props: Props) => {
               <img
                 loading='lazy'
                 className={`absolute h-full w-full rounded-[6px] outline-none opacity-${subImage[index] ? '1' : '0'}`}
-                src={subImage[index] ? subImage[index] || URL.createObjectURL(subImage[index]) : ''}
+                src={subImage[index] ? URL.createObjectURL(subImage[index]) : ''}
                 alt=''
               />
               <input

@@ -4,6 +4,7 @@ import { useSidebar } from '@contexts/sidebarContext'
 import { useWindowSize } from 'react-use'
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 // components
 import Headroom from 'react-headroom'
@@ -15,42 +16,53 @@ import MessagesPanel from './navbar/MessagesPanel'
 // constants
 import { LOCALES } from '@constants/options'
 import { useAppSelector } from '@hooks/useRedux'
+import CustomTooltip from '@ui/CustomTooltip'
 
-// interface Props {
-//   active: string
-//   setActive: (value: any) => void
-// }
+interface Props {
+  active: string
+  setActive: (value: any) => void
+}
 
-// const LocaleMenu = (props: Props) => {
-//   const { active, setActive } = props
-//   return (
-//     <div className='flex flex-col gap-4 p-4'>
-//       {LOCALES.map((locale: any) => (
-//         <button
-//           key={locale.value}
-//           className='group flex items-center gap-2.5 w-fit'
-//           onClick={() => setActive(locale.value)}
-//         >
-//           <img className='rounded-full w-5' src={locale.icon} alt={locale.label} />
-//           <span
-//             className={`text-sm font-medium transition group-hover:text-accent ${
-//               active === locale.value ? 'text-accent' : 'text-header'
-//             }`}
-//           >
-//             {locale.label}
-//           </span>
-//         </button>
-//       ))}
-//     </div>
-//   )
-// }
+const LocaleMenu = (props: Props) => {
+  const { active, setActive } = props
+  const { i18n } = useTranslation()
+
+  const handleChangeLangue = (value: any) => {
+    i18n.changeLanguage(value)
+    setActive(value)
+  }
+
+  return (
+    <div className='flex flex-col gap-4 p-4'>
+      {LOCALES.map((locale: any) => (
+        <button
+          key={locale.value}
+          className='group flex items-center gap-2.5 w-fit'
+          onClick={() => handleChangeLangue(locale.value)}
+        >
+          <img className='rounded-full w-5' src={locale.icon} alt={locale.label} />
+          <span
+            className={`text-sm font-medium transition group-hover:text-accent ${
+              active === locale.value ? 'text-accent' : 'text-header'
+            }`}
+          >
+            {locale.label}
+          </span>
+        </button>
+      ))}
+    </div>
+  )
+}
 
 const AppBar = () => {
   const navigate = useNavigate()
   const [searchModalOpen, setSearchModalOpen] = useState(false)
   const [notificationsPanelOpen, setNotificationsPanelOpen] = useState(false)
   const [messagesPanelOpen, setMessagesPanelOpen] = useState(false)
-  const [locale] = useState('en-EN')
+
+  const { i18n } = useTranslation()
+  const [locale, setLocale] = useState(i18n.language)
+
   const { width } = useWindowSize()
   const { theme, toggleTheme }: any = useContext(ThemeContext)
   const { setOpen } = useSidebar()
@@ -90,9 +102,12 @@ const AppBar = () => {
             >
               <i className={`icon-${theme === 'light' ? 'sun-bright' : 'moon'}-regular`} />
             </button>
-            <button className='w-6 h-6 rounded-full overflow-hidden xl:w-8 xl:h-8' aria-label='Change language'>
-              <img src={activeLocale?.icon} alt={activeLocale?.label} />
-            </button>
+
+            <CustomTooltip title={<LocaleMenu active={locale} setActive={setLocale} />}>
+              <button className='w-6 h-6 rounded-full overflow-hidden xl:w-8 xl:h-8' aria-label='Change language'>
+                <img src={activeLocale?.icon} alt={activeLocale?.label} />
+              </button>
+            </CustomTooltip>
             <div className='relative h-fit mt-1.5 xl:self-end xl:mt-0 xl:mr-1.5'>
               <button
                 className='text-lg leading-none text-gray dark:text-gray-red xl:text-[20px]'

@@ -103,8 +103,8 @@ export const REVIEW_SORT_OPTIONS: IOptionSelect[] = [
 ]
 
 export const LOCALES: IOptionSelect[] = [
-  { value: 'en-EN', label: 'English (EN)', icon: eng },
-  { value: 'vn-VN', label: 'VietNam (VN)', icon: vn }
+  { value: 'en', label: 'English (EN)', icon: eng },
+  { value: 'vn', label: 'VietNam (VN)', icon: vn }
 ]
 
 export const APPS_OPTIONS: IOptionSelect[] = [

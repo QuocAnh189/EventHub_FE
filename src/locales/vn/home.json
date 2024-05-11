@@ -1,0 +1,22 @@
+{
+  "search home": {
+    "title": "Điểm đến đúng đắn cho bạn và bạn bè",
+    "sub_title": "Tham gia nhiều sự kiện sẽ giúp bạn khám phá rõ hơn tính cánh bản thân",
+    "explore": "Khám phá ngay",
+    "event": "Sự kiện",
+    "event_placeholder": "Nhập tên sự kiện",
+    "status": "Trạng thái",
+    "category": "Thể loại",
+    "search": "Tìm kiếm",
+    "events_to_explore": "Khám phá sự kiện"
+  },
+  "best events": {
+    "title": "Lựa chọn tốt nhất cho bạn"
+  },
+  "upcomming events": {
+    "title": "Sự kiện sắp diễn ra"
+  },
+  "about us": {
+    "title": "Về chúng tôi"
+  }
+}

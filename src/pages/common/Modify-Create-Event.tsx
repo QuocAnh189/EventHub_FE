@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 // components
@@ -31,6 +32,7 @@ import { useAppSelector } from '@hooks/useRedux'
 
 //constant
 import { stepCreateEvent } from '@constants/event'
+import { URLtoFile } from '@utils/url_to_file'
 
 interface Props {
   title: string
@@ -47,12 +49,52 @@ const ModifyEvent = (props: Props) => {
 
   const [active, setActive] = useState<number>(create ? -1 : 0)
 
+  const getFile = (urlImage: string) => {
+    if (urlImage) {
+      let blob = new Blob([urlImage])
+      let file = new File([blob], urlImage.split('/')[5].split('?')[0], { type: 'image/jpg' })
+
+      return file
+    }
+    return ''
+  }
+
   const { control, register, handleSubmit, watch, setValue, reset } = useForm<ICreateEventPayload>({
     defaultValues: event
-      ? { ...event, creatorId: user?.id, eventSubImages: event.subImages }
+      ? {
+          ...event,
+          creatorId: user?.id,
+          coverImage: getFile(event.coverImage),
+          eventSubImages: [
+            getFile(event.subImages[0]),
+            getFile(event.subImages[1]),
+            getFile(event.subImages[2]),
+            getFile(event.subImages[3])
+          ]
+        }
       : { ...InitCreateEventPayload, creatorId: user?.id },
     mode: 'onChange'
   })
+
+  useEffect(() => {
+    if (event) {
+      const ConverToFile = async () => {
+        try {
+          const fileCoverImage = event.coverImage ? await URLtoFile(event?.coverImage) : ''
+          const fileSubImageOne = event?.subImages[0] ? await URLtoFile(event?.subImages[0]) : ''
+          const fileSubImageTwo = event?.subImages[1] ? await URLtoFile(event?.subImages[1]) : ''
+          const fileSubImageThree = event?.subImages[2] ? await URLtoFile(event?.subImages[2]) : ''
+          const fileSubImageFour = event?.subImages[3] ? await URLtoFile(event?.subImages[3]) : ''
+
+          setValue('coverImage', fileCoverImage)
+          setValue('eventSubImages', [fileSubImageOne, fileSubImageTwo, fileSubImageThree, fileSubImageFour])
+        } catch (e) {
+          console.log(e)
+        }
+      }
+      ConverToFile()
+    }
+  }, [event])
 
   const onSubmit: SubmitHandler<ICreateEventPayload> = async (data: ICreateEventPayload | any) => {
     const formData: any = new FormData()
@@ -73,7 +115,6 @@ const ModifyEvent = (props: Props) => {
       const result = create
         ? await createEvent(formData).unwrap()
         : await updateEvent({ eventId: data.id!, data: formData }).unwrap()
-      console.log(result)
       if (result) {
         toast.success(`${create ? 'Create' : 'Update'} event successfully`)
       }

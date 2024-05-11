@@ -68,7 +68,7 @@ const ROUTES: Route[] = [
     icon: <IoSettingsOutline size={20} />,
     links: [
       { name: 'Profile', path: '/organization/settings/profile' },
-      { name: 'Connected Apps', path: '/organization/settings/connect' }
+      { name: 'Permission', path: '/organization/settings/permission' }
     ]
   }
 ]

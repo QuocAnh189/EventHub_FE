@@ -25,8 +25,8 @@ const AddCartPayment = () => {
         onClick={handleOpenFormAdd}
         className='card-item flex items-center justify-center border border-dashed border-gray rounded-xl'
       >
-        <IoMdAdd size={30} />
-        <p className='text-xl font-bold'>Add Payment</p>
+        <IoMdAdd size={30} color='var(--header)' />
+        <p className='text-xl font-bold text-header'>Add Payment</p>
       </button>
       <Modal
         open={openModalAdd}

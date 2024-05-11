@@ -32,7 +32,11 @@ import { EEventAction, EEventPrivacy } from '@constants/enum'
 import { useAppSelector } from '@hooks/useRedux'
 
 // interface
+import { IEvent } from 'interfaces/contents/event'
 import { ICategory } from 'interfaces/contents/category'
+
+//component
+import { Loader } from '@components/Loader'
 
 // types
 import { IFilterEvent, IMetadataEventReponse, IParamsEvent } from '@type/event'
@@ -47,8 +51,6 @@ import {
   useDeleteEventsMutation
 } from '@redux/services/eventApi'
 import { useGetEventsByUserIdQuery } from '@redux/services/userApi'
-import { IEvent } from 'interfaces/contents/event'
-import { Loader } from '@components/Loader'
 
 const EventManagement = () => {
   const categories = useAppSelector((state: RootState) => state.category.categories)
@@ -343,31 +345,3 @@ const EventManagement = () => {
 }
 
 export default EventManagement
-
-{
-  /* {width >= 768 ? (
-          <StyledTable
-            columns={PRODUCTS_MANAGEMENT_COLUMN_DEFS}
-            dataSource={pagination.currentItems()}
-            rowKey={(record) => record.sku}
-            locale={{
-              emptyText: <Empty text='No products found' />
-            }}
-            rowSelection={{
-              type: 'checkbox'
-            }}
-            pagination={false}
-          />
-        ) : (
-          <div className='flex flex-col gap-5'>
-            {pagination.currentItems().map((product: any, index: any) => (
-              <EventManagementCollapseItem
-                key={`event-${index}`}
-                product={product}
-                handleCollapse={handleCollapse}
-                activeCollapse={activeCollapse}
-              />
-            ))}
-          </div>
-        )} */
-}

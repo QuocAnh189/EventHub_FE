@@ -66,7 +66,7 @@ const resources = {
     report: REPORT_EN,
     review: REVIEW_EN
   },
-  vi: {
+  vn: {
     landing: LANDING_VN,
     signin: SIGNIN_VN,
     signup: SIGNUP_VN,
@@ -90,11 +90,14 @@ const resources = {
   }
 }
 
+const defaultNS = 'home'
+
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'li',
-  fallbackLng: 'vi',
-
+  lng: 'en',
+  ns: ['landing', 'signin'],
+  fallbackLng: 'en',
+  defaultNS,
   interpolation: {
     escapeValue: false
   }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 //component
 import EventCardSearchHome from '@components/EventCardSearchHome'
@@ -28,6 +29,8 @@ const initParam = {
 
 const SearchHome = () => {
   const navigate = useNavigate()
+
+  const { t } = useTranslation()
 
   const categories = useAppSelector((state) => state.category.categories)
 
@@ -56,19 +59,15 @@ const SearchHome = () => {
       </div>
       <div className='relative w-full h-[90%] z-[1000]'>
         <div className='w-[500px] h-auto text-white px-[30px] pt-[30px] pb-[100px]'>
-          <p className='text-white leading-10 font-extrabold text-[2em]'>
-            The right desitination for you and your friends
-          </p>
-          <p className='text-[rgb(241, 241, 241)] font-medium text-[14px]'>
-            Creative taglines have the capability of capturing the attention of potential custumer.
-          </p>
+          <p className='text-white leading-10 font-extrabold text-[2em]'>{t('search home.title')}</p>
+          <p className='text-[rgb(241, 241, 241)] font-medium text-[14px]'>{t('search home.sub_title')}</p>
           <button
             onClick={() => {
               navigate('explore')
             }}
             className='mt-5 py-[10px] px-[20px] rounded-[20px] bg-primary text-white cursor-pointer hover:bg-primary-500'
           >
-            Explore Now
+            {t('search home.explore')}
           </button>
         </div>
         <div className='trip_bx relative w-[95%] h-auto m-auto  before:absolute before:w-full before:h-[340px] before:rounded-[10px] before:bg-bgSearchHome before:z-[-1] before:backdrop-blur-sm'>
@@ -77,16 +76,16 @@ const SearchHome = () => {
             className='flex items-center justify-center pr-[10px] bg-white rounded-md shadow-md z-[1] absolute -top-10 left-0 h-20'
           >
             <div className='w-[200px] h-full shadow-none p-4'>
-              <h4 className='text-[15px] m-0 font-bold'>Event</h4>
+              <h4 className='text-[15px] m-0 font-bold'>{t('search home.event')}</h4>
               <input
                 {...register('search')}
                 className='mt-1 py-2 px-0 border-none outline-none text-md'
                 type='text'
-                placeholder='Enter your name event'
+                placeholder={t('search home.event_placeholder')}
               />
             </div>
             <div className='w-[200px] h-full shadow-none p-4'>
-              <h4 className='text-[15px] m-0 font-bold'>Status</h4>
+              <h4 className='text-[15px] m-0 font-bold'>{t('search home.status')}</h4>
               <select {...register('type')} className='mt-1 py-2 px-0 border-none outline-none text-md' aria-label='aa'>
                 {EVENT_STATUS_OPTIONS.map((item, index) => (
                   <option key={`status-${index}`} value={item.value}>
@@ -96,7 +95,7 @@ const SearchHome = () => {
               </select>
             </div>
             <div className='w-[200px] h-full shadow-none p-4'>
-              <h4 className='text-[15px] m-0 font-bold'>Category</h4>
+              <h4 className='text-[15px] m-0 font-bold'>{t('search home.category')}</h4>
               <select
                 onChange={(e: any) => {
                   setValue('categoryIds', [e.target.value])
@@ -115,13 +114,15 @@ const SearchHome = () => {
             <input
               className='bg-primary text-white border-none outline-none px-5 py-[10px] rounded-[20px] cursor-pointer ml-[10px] hover:bg-primary-500'
               type='submit'
-              value='Search'
+              value={t('search home.search')}
             />
           </form>
           <div className='relative w-full h-auto m-auto top-[30px] rounded-[10px] pb-5'>
-            <h4 className='m-0 pt-20 pl-[1.7%]'>Events to Explore</h4>
+            <h4 className='m-0 pt-20 pl-[1.7%]'>{t('search home.events_to_explore')}</h4>
             {isFetching ? (
-              <Loader />
+              <div className='w-full h-auto flex items-center justify-center'>
+                <Loader />
+              </div>
             ) : (
               <div className='w-full h-auto my-0 mx-auto flex items-center overflow-x-auto overflow-y-hidden pb-4 scrollbar-w-none'>
                 {events?.items?.map((event: IEvent, index: number) => (
