@@ -1,10 +1,10 @@
 // components
+import Counter from '@components/Counter'
 import RatingStars from '@ui/RatingStars'
 import SubmenuTrigger from '@ui/SubmenuTrigger'
 import Timestamp from '@ui/Timestamp'
-import { NavLink } from 'react-router-dom'
 import Trend from '@ui/Trend'
-import Counter from '@components/Counter'
+import { NavLink } from 'react-router-dom'
 
 // utils
 import { getStatusColor, numFormatter } from '@utils/helpers'
@@ -59,7 +59,7 @@ export const ORDERS_COLUMN_DEFS: any = [
 
       return (
         <div className='flex flex-col'>
-          <span className='font-heading font-bold text-header'>
+          <span className='font-bold font-heading text-header'>
             {status !== 'Fully paid' && `$${payment.received} / from `}${payment.amount}
           </span>
           <span>{status}</span>
@@ -89,7 +89,7 @@ export const ORDERS_COLUMN_DEFS: any = [
     render: () => (
       <div className='flex items-center justify-end gap-11'>
         <NavLink to='/product-editor' aria-label='Edit'>
-          <i className='icon icon-pen-to-square-regular text-lg leading-none' />
+          <i className='text-lg leading-none icon icon-pen-to-square-regular' />
         </NavLink>
         <SubmenuTrigger />
       </div>
@@ -173,7 +173,7 @@ export const TRANSACTIONS_COLUMN_DEFS = [
     render: (record: any) => {
       const total = record.fee - (record.fee / 100) * record.tax
 
-      return <span className='font-heading font-semibold text-header'>${total.toFixed(2)}</span>
+      return <span className='font-semibold font-heading text-header'>${total.toFixed(2)}</span>
     }
   }
 ]
@@ -233,21 +233,21 @@ export const SELLERS_COLUMN_DEFS = [
     dataIndex: 'salesCategoriesValue',
     render: (record: any) => (
       <div className='flex flex-col gap-2.5 max-w-[220px]'>
-        <div className='flex justify-between font-heading font-bold text-sm'>
+        <div className='flex justify-between text-sm font-bold font-heading'>
           <span>Electronics</span>
-          <span className='text-header text-right'>{numFormatter(record.profit.electronics, 2, '$')}</span>
+          <span className='text-right text-header'>{numFormatter(record.profit.electronics, 2, '$')}</span>
         </div>
-        <div className='flex justify-between font-heading font-bold text-sm'>
+        <div className='flex justify-between text-sm font-bold font-heading'>
           <span>Fashion</span>
-          <span className='text-header text-right'>{numFormatter(record.profit.fashion, 2, '$')}</span>
+          <span className='text-right text-header'>{numFormatter(record.profit.fashion, 2, '$')}</span>
         </div>
-        <div className='flex justify-between font-heading font-bold text-sm'>
+        <div className='flex justify-between text-sm font-bold font-heading'>
           <span>Food & Drinks</span>
-          <span className='text-header text-right'>{numFormatter(record.profit.food, 2, '$')}</span>
+          <span className='text-right text-header'>{numFormatter(record.profit.food, 2, '$')}</span>
         </div>
-        <div className='flex justify-between font-heading font-bold text-sm'>
+        <div className='flex justify-between text-sm font-bold font-heading'>
           <span>Services</span>
-          <span className='text-header text-right'>{numFormatter(record.profit.services, 2, '$')}</span>
+          <span className='text-right text-header'>{numFormatter(record.profit.services, 2, '$')}</span>
         </div>
       </div>
     ),
@@ -259,7 +259,7 @@ export const SELLERS_COLUMN_DEFS = [
     render: () => (
       <div className='flex items-center justify-end gap-5'>
         <button aria-label='Edit'>
-          <i className='icon icon-pen-to-square-regular text-lg leading-none' />
+          <i className='text-lg leading-none icon icon-pen-to-square-regular' />
         </button>
         <SubmenuTrigger />
       </div>
@@ -315,7 +315,7 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS: any = [
   {
     title: 'Category',
     dataIndex: 'category',
-    render: (category: any) => <button className='text-accent capitalize'>{category}</button>,
+    render: (category: any) => <button className='capitalize text-accent'>{category}</button>,
     responsive: ['xxl']
   },
   {
@@ -338,7 +338,7 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS: any = [
       <div className='flex flex-wrap gap-x-0.5'>
         {tags && tags.length
           ? tags.map((tag: any, index: any) => (
-              <button className='tag text-accent capitalize' key={tag}>
+              <button className='capitalize tag text-accent' key={tag}>
                 {tag}
                 {index !== tags.length - 1 && ','}
               </button>
@@ -376,7 +376,7 @@ export const PRODUCTS_MANAGEMENT_COLUMN_DEFS: any = [
     render: () => (
       <div className='flex items-center justify-end gap-11'>
         <NavLink to='/product-editor' aria-label='Edit'>
-          <i className='icon icon-pen-to-square-regular text-lg leading-none' />
+          <i className='text-lg leading-none icon icon-pen-to-square-regular' />
         </NavLink>
         <SubmenuTrigger />
       </div>

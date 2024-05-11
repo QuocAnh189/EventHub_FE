@@ -47,7 +47,7 @@ const Reviews = lazy(() => import('@pages/review/Review'))
 const Todo = lazy(() => import('@pages/todo/Todo'))
 const FAQ = lazy(() => import('@pages/faq/Faq'))
 const Profile = lazy(() => import('@pages/setting/Profile'))
-const Permission = lazy(() => import('@pages/setting/Permission'))
+const Permission = lazy(() => import('@pages/permissions/Permission'))
 const NotFound = lazy(() => import('@pages/NotFound'))
 
 function App() {
@@ -93,7 +93,7 @@ function App() {
               <Route path='/organization/todo-list' element={<Todo />} />
               <Route path='/organization/faq' element={<FAQ />} />
               <Route path='/organization/settings/profile' element={<Profile />} />
-              <Route path='/organization/settings/permission' element={<Permission />} />
+              <Route path='/organization/permissions' element={<Permission />} />
             </Route>
             <Route path='/*' element={<NotFound />} />
           </Routes>

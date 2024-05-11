@@ -15,3 +15,10 @@ export interface LayoutProps {
 export interface NextPageWithLayout {
   Layout?: (props: LayoutProps) => ReactElement
 }
+
+export interface ApiResponse<TData> {
+  statusCode: number
+  message: string
+  data: TData
+  errors?: string[] | null
+}
