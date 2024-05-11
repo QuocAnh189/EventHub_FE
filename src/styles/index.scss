@@ -8,3 +8,11 @@
 @import 'global';
 @import 'elements';
 @import 'typo';
+
+.permissions-tabs > .ant-tabs-nav::before {
+  border-bottom: 0;
+}
+
+.permissions-tabs > .ant-tabs-nav .ant-tabs-tab {
+  border: 0 !important;
+}

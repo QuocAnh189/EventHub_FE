@@ -28,11 +28,11 @@ const Orders = () => {
             <Select value={sort} options={ORDER_SORT_OPTIONS} onChange={setSort} placeholder='Default sorting' />
           </div>
         </div>
-        <div className='w-full widgets-grid grid-cols-1 xl:grid-cols-6'>
+        <div className='w-full grid-cols-1 widgets-grid xl:grid-cols-6'>
           <div className='xl:col-span-2'>
             <OrdersAverageRate />
           </div>
-          <div className='widgets-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:col-span-4'>
+          <div className='grid-cols-1 widgets-grid md:grid-cols-2 lg:grid-cols-4 xl:col-span-4'>
             <OrdersInfobox title='Completed' count={2345} icon={<i className='icon-check-to-slot-solid' />} />
             <OrdersInfobox title='Confirmed' count={323} color='green' icon={<i className='icon-list-check-solid' />} />
             <OrdersInfobox title='Canceled' count={17} color='red' icon={<i className='icon-ban-solid' />} />
