@@ -1,5 +1,5 @@
-import styled from 'styled-components/macro';
-import {Table} from 'antd';
+import styled from 'styled-components/macro'
+import { Table } from 'antd'
 
 const StyledTable = styled(Table)`
   margin-bottom: 30px;
@@ -36,6 +36,6 @@ const StyledTable = styled(Table)`
       width: 23%;
     }
   }
-`;
+`
 
 export default StyledTable

@@ -23,11 +23,19 @@ import { Loader } from '@components/Loader'
 
 const ExploreScreen = () => {
   const { watch, setValue } = useForm({
-    defaultValues: initParamsEvent,
-    mode: 'onChange'
+    defaultValues: initParamsEvent
   })
 
   const { data, isFetching, refetch } = useGetEventsQuery(watch())
+
+  useEffect(() => {
+    setValue('page', 1)
+    // refetch()
+  }, [watch().type, watch().search, watch().categoryIds, watch().order, watch().priceRange?.startRange])
+
+  useEffect(() => {
+    refetch()
+  }, [watch().page])
 
   const [meta, setMeta] = useState<IMetadataEventReponse>()
   const [events, setEvents] = useState<IEvent[]>([])
@@ -38,10 +46,6 @@ const ExploreScreen = () => {
       setEvents(data?.items)
     }
   }, [data])
-
-  useEffect(() => {
-    refetch()
-  }, [watch().type, watch().search, watch().page, watch().categoryIds, watch().order, watch().priceRange?.startRange])
 
   const pagination = usePagination(meta?.totalPublic, initParamsEvent.size)
 

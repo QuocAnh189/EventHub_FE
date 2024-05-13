@@ -1,16 +1,20 @@
 // import { EVENT_CATEGORIES } from '@constants/options'
 
+import { ICategory } from 'interfaces/contents/category'
+
 interface Props {
-  category: string
+  category: ICategory
 }
 const CategoryHeader = (props: Props) => {
   const { category } = props
-  // const { label, icon, color }: any = EVENT_CATEGORIES.find((c) => c.value === category)
 
   return (
     <div className='flex items-center gap-4'>
-      <div className={`badge-icon badge-icon--sm bg-blue-500`}>{/* <i className={` text-base`} /> */}</div>
-      <h5>{category}</h5>
+      <div style={{ backgroundColor: category.color }} className={`badge-icon badge-icon--sm bg-blue-500`}>
+        {/* <i className={` text-base`} /> */}
+        <img className='w-4/5 h4/5' src={category.iconImage} />
+      </div>
+      <h5>{category.name}</h5>
     </div>
   )
 }

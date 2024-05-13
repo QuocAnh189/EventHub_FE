@@ -11,14 +11,11 @@ const EventCardSearchHome = (props: Props) => {
   const navigate = useNavigate()
 
   const handleViewEvent = () => {
-    navigate(`/organization/event-detail/${event.id}`)
+    navigate(`/organization/event/${event.id}`)
   }
 
   return (
-    <button
-      onClick={handleViewEvent}
-      className='p-6 min-w-[300px] h-[180px] shadow-none bg-transparent hover:cursor-pointer hover:bg-body hover:rounded-lg '
-    >
+    <div className='p-6 min-w-[300px] h-[180px] shadow-none bg-transparent hover:cursor-pointer hover:bg-body hover:rounded-lg '>
       <h3 className='mt-0 mx-0 mb-[10px] flex items-center gap-2 text-[16px] font-semibold'>
         <p className='truncate text-header'>{event?.name}</p>
         <img
@@ -54,7 +51,7 @@ const EventCardSearchHome = (props: Props) => {
           <span className='text-sm font-bold'>{event.priceRange.startRange}.000 VND</span>
         </h5>
       </div>
-    </button>
+    </div>
   )
 }
 

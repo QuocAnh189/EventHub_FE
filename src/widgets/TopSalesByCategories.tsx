@@ -3,28 +3,26 @@ import Spring from '@components/Spring'
 import LabeledProgressBar from '@components/LabeledProgressBar'
 
 // utils
-import { getPercentage, numFormatter } from '@utils/helpers'
+import { ICategory } from 'interfaces/contents/category'
 
-const data = [
-  { label: 'Game', value: 7541, color: 'accent' },
-  { label: 'Music', value: 3897, color: 'red' },
-  { label: 'Sport', value: 9874, color: 'header' },
-  { label: 'Carrer', value: 6548, color: 'yellow' }
-]
+interface IProps {
+  categories: ICategory[]
+}
 
-const TopSalesByCategories = () => {
+const TopSalesByCategories = (props: IProps) => {
+  const { categories } = props
   return (
     <Spring className='card flex flex-col gap-2.5 2xl:col-span-2'>
       <h5>Top Events by Categories</h5>
       <div className='flex flex-col gap-[17px]'>
-        {data.map((item, index) => (
+        {categories?.map((category, index) => (
           <LabeledProgressBar
-            key={index}
+            key={`category-${index}`}
             wrapperClass='!gap-0'
-            label={item.label}
-            color={item.color}
-            value={getPercentage(data, item.value)}
-            displayValue={numFormatter(item.value, 2, '$')!}
+            label={category.name}
+            color={category.color}
+            value={70}
+            displayValue={'Event'}
           />
         ))}
       </div>

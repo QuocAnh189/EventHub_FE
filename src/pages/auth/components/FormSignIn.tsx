@@ -19,11 +19,11 @@ import googleIcon from '@assets/icons/google.png'
 import facebookIcon from '@assets/icons/facebook.png'
 
 //type
-import { LoginPayload, InitLogin } from '@type/auth'
+import { LoginPayload, InitLogin, EProvider } from '@type/auth'
 
 //redux
 // import { useAppDispatch } from '@hooks/useRedux'
-import { useSignInMutation } from '@redux/services/authApi'
+import { useSignInMutation, useSignInExternalMutation } from '@redux/services/authApi'
 // import { setUser } from '@redux/slices/userSlice'
 
 //motion
@@ -46,7 +46,9 @@ const FormSignIn = (props: SignInProps) => {
   const user = useAppSelector((state) => state.user.user)
 
   const [showPassWord, setShowPassWord] = useState<boolean>(false)
-  const [signIn, { isLoading }] = useSignInMutation()
+
+  const [singInExternal, { isLoading: loadingSignInExternal }] = useSignInExternalMutation()
+  const [signIn, { isLoading: loadingSignIn }] = useSignInMutation()
 
   useEffect(() => {
     if (user) {
@@ -79,6 +81,18 @@ const FormSignIn = (props: SignInProps) => {
         default:
           break
       }
+    }
+  }
+
+  const handleSignInExternal = async (provider: EProvider) => {
+    try {
+      const result = await singInExternal({ provider, returnUrl: 'https://eventhubsolution.vercel.app/' })
+
+      if (result) {
+        console.log(result)
+      }
+    } catch (e) {
+      console.log(e)
     }
   }
 
@@ -130,75 +144,104 @@ const FormSignIn = (props: SignInProps) => {
           </button>
         </motion.div>
 
-        <motion.button
-          disabled={isLoading}
-          type='submit'
+        <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.5 }}
-          className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
         >
-          {isLoading ? <CircularProgress size={28} color='info' /> : 'Sign In'}
-        </motion.button>
+          <button
+            disabled={loadingSignIn}
+            type='submit'
+            className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
+          >
+            {loadingSignIn ? <CircularProgress size={28} color='info' /> : 'Sign In'}
+          </button>
+        </motion.div>
       </form>
       <div className='mt-3 flex w-full flex-col gap-y-2'>
-        <motion.button
+        <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          onClick={() => navigate('/signup')}
-          className='block w-full py-4 text-sm font-semibold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
         >
-          No account ? Sign up for FREE
-        </motion.button>
-        <motion.button
-          onClick={() => handleForgotPassword(true)}
+          <button
+            onClick={() => navigate('/signup')}
+            className='block w-full py-4 text-sm font-semibold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
+          >
+            No account ? Sign up for FREE
+          </button>
+        </motion.div>
+        <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.7 }}
-          className='lue block  w-full py-4 text-sm font-semibold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
         >
-          I forgot my password
-        </motion.button>
+          <button
+            onClick={() => handleForgotPassword(true)}
+            className='lue block  w-full py-4 text-sm font-semibold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
+          >
+            I forgot my password
+          </button>
+        </motion.div>
 
-        <motion.button
+        <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.8 }}
-          className='flex w-full flex-row items-center justify-around rounded-2xl border-[2px] border-textPurple bg-white py-[0.8rem] font-bold text-textGray hover:bg-textPurpleBorder hover:text-textWhite'
-          onClick={() => {}}
-        >
-          <img loading='lazy' src={googleIcon} alt='' className='block h-[20px] w-[20px]' />
-          <span className='inline-block'>Sign in with Google</span>
-          <span />
-        </motion.button>
-
-        <motion.button
-          initial={{ x: -20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.8 }}
-          className='flex w-full flex-row items-center justify-around rounded-2xl border-[2px] border-textBlue bg-white py-[0.8rem] font-bold text-textGray hover:bg-bgBlue hover:text-textWhite'
-          onClick={() => {}}
-        >
-          <img loading='lazy' src={facebookIcon} alt='' className='block h-[20px] w-[20px]' />
-          <span className='inline-block'>Sign in with Facebook</span>
-          <span />
-        </motion.button>
-
-        <button
           onClick={() => {
-            navigate('/')
+            handleSignInExternal(EProvider.GOOGLE)
           }}
         >
-          <motion.button
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.9 }}
+          <button className='flex w-full flex-row items-center justify-around rounded-2xl border-[2px] border-textPurple bg-white py-[0.8rem] font-bold text-textGray hover:bg-textPurpleBorder hover:text-textWhite'>
+            {loadingSignInExternal ? (
+              <CircularProgress size={28} color='info' />
+            ) : (
+              <>
+                <img loading='lazy' src={googleIcon} alt='' className='block h-[20px] w-[20px]' />
+                <span className='inline-block'>Sign in with Google</span>
+                <span />
+              </>
+            )}
+          </button>
+        </motion.div>
+
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.8 }}
+        >
+          <button
+            className='flex w-full flex-row items-center justify-around rounded-2xl border-[2px] border-textBlue bg-white py-[0.8rem] font-bold text-textGray hover:bg-bgBlue hover:text-textWhite'
+            onClick={() => {
+              handleSignInExternal(EProvider.FACEBOOK)
+            }}
+          >
+            {loadingSignInExternal ? (
+              <CircularProgress size={28} color='info' />
+            ) : (
+              <>
+                <img loading='lazy' src={facebookIcon} alt='' className='block h-[20px] w-[20px]' />
+                <span className='inline-block'>Sign in with Facebook</span>
+                <span />
+              </>
+            )}
+          </button>
+        </motion.div>
+
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.9 }}
+        >
+          <button
+            onClick={() => {
+              navigate('/')
+            }}
             className='mb-3 block w-full py-4 text-sm font-bold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
           >
             Back
-          </motion.button>
-        </button>
+          </button>
+        </motion.div>
       </div>
     </div>
   )

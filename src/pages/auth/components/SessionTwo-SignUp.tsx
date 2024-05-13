@@ -109,16 +109,19 @@ const SessionTwo = (props: SessionTwoProps) => {
           </span>
         </motion.div>
 
-        <motion.button
-          disabled={disabled}
+        <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.7 }}
-          className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
-          onClick={handleSubmit}
         >
-          {disabled ? <CircularProgress size={28} color='info' /> : 'Signup'}
-        </motion.button>
+          <button
+            disabled={disabled}
+            className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
+            onClick={handleSubmit}
+          >
+            {disabled ? <CircularProgress size={28} color='info' /> : 'Signup'}
+          </button>
+        </motion.div>
       </div>
 
       <motion.div

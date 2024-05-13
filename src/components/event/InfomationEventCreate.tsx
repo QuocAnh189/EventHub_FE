@@ -16,7 +16,7 @@ import RadioGroup from '@mui/material/RadioGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormLabel from '@mui/material/FormLabel'
 import InputAdornment from '@mui/material/InputAdornment'
-// import LocationEvent from '@components/Location'
+import LocationEvent from '@components/Location'
 
 //icon
 import { MdDateRange } from 'react-icons/md'
@@ -26,12 +26,8 @@ import { GrClose } from 'react-icons/gr'
 import { BiSearch } from 'react-icons/bi'
 import { CiCircleRemove } from 'react-icons/ci'
 
-//map
-import { fromAddress, setLanguage, setRegion, setKey } from 'react-geocode'
+//constant
 import { EEventStyle } from '@constants/enum'
-setKey(import.meta.env.VITE_MAP_API_KEY)
-setLanguage('en')
-setRegion('vn')
 
 //redux
 import { ICategory } from 'interfaces/contents/category'
@@ -56,7 +52,7 @@ const InfomationEvent = (props: Props) => {
 
   const categoriesStore = useAppSelector((state) => state.category.categories)
 
-  const [position, setPosition] = useState(null)
+  const [checkMap, setCheckMap] = useState(false)
   const [enableCheckError, setEnableCheckError] = useState<boolean>(false)
 
   const {
@@ -77,27 +73,13 @@ const InfomationEvent = (props: Props) => {
     name: 'categoryIds'
   })
 
-  useEffect(() => {
-    if (watch().location) {
-      fromAddress(watch().location)
-        .then(({ results }) => {
-          const result = results[0].geometry.location
-          setPosition(result)
-        })
-        .catch(() => {
-          setPosition(null)
-        })
-    }
-  }, [])
-
   const handleLocation = async () => {
-    fromAddress(watch().location)
-      .then(({ results }) => {
-        const result = results[0].geometry.location
-        setPosition(result)
-      })
-      .catch(console.error)
+    setCheckMap(true)
   }
+
+  useEffect(() => {
+    setCheckMap(false)
+  }, [watch().location])
 
   const handleNextStep = () => {
     setEnableCheckError(true)
@@ -115,8 +97,6 @@ const InfomationEvent = (props: Props) => {
       toast.error('Please enter full information')
     }
   }
-
-  console.log(position)
 
   return (
     <div className='relative pl-24 fl pt-10 pb-20 space-y-10 min-h-screen '>
@@ -393,7 +373,7 @@ const InfomationEvent = (props: Props) => {
               }}
             />
           </FormControl>
-          {/* {position && <LocationEvent position={position} />} */}
+          {checkMap && <LocationEvent location={watch().location} />}
         </div>
       </div>
 

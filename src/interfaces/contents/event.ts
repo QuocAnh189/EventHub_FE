@@ -5,6 +5,7 @@ export interface IEvent {
   id: string
   creatorId: string
   creatorName: string
+  categories: any[]
   coverImage: string
   subImages: any[]
   name: string
@@ -17,13 +18,14 @@ export interface IEvent {
   eventPaymentType?: EEventPaymentTicket
   isPrivate: boolean
   isTrash: boolean
-  ticketTypes: any
-  categories: string[] | any
+  ticketTypes: any[]
+  categoryIds: string[] | any
   promotion: number
   numberOfFavourites: number
   numberOfShares: number
   numberOfSoldTickets: number
   status: EEventStatus
+  reasons: string[]
   createdAt: Date
   updatedAt: Date
 }

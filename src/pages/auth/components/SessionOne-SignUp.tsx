@@ -104,14 +104,14 @@ const SessionOne = (props: SessionOneProps) => {
           className='relative mb-6'
         >
           <input
-            {...register('userName')}
+            {...register('fullName')}
             type='text'
             name='userName'
             className='block min-h-[auto] w-full rounded-2xl border-[2px] px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
             placeholder='Enter Name'
             onChange={setFormDataSessionOne}
           />
-          {errors.userName && <p className='mt-1 text-textError'>{errors.userName.message}</p>}
+          {errors.fullName && <p className='mt-1 text-textError'>{errors.fullName.message}</p>}
         </motion.div>
 
         <motion.div
@@ -131,16 +131,19 @@ const SessionOne = (props: SessionOneProps) => {
           {errors.phoneNumber && <p className='mt-1 text-textError'>{errors.phoneNumber.message}</p>}
         </motion.div>
 
-        <motion.button
-          disabled={isLoading}
-          type='submit'
+        <motion.div
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.6 }}
-          className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
         >
-          Submit
-        </motion.button>
+          <button
+            disabled={isLoading}
+            type='submit'
+            className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
+          >
+            Submit
+          </button>
+        </motion.div>
       </form>
 
       <motion.div

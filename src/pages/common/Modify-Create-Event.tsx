@@ -49,30 +49,8 @@ const ModifyEvent = (props: Props) => {
 
   const [active, setActive] = useState<number>(create ? -1 : 0)
 
-  const getFile = (urlImage: string) => {
-    if (urlImage) {
-      let blob = new Blob([urlImage])
-      let file = new File([blob], urlImage.split('/')[5].split('?')[0], { type: 'image/jpg' })
-
-      return file
-    }
-    return ''
-  }
-
   const { control, register, handleSubmit, watch, setValue, reset } = useForm<ICreateEventPayload>({
-    defaultValues: event
-      ? {
-          ...event,
-          creatorId: user?.id,
-          coverImage: getFile(event.coverImage),
-          eventSubImages: [
-            getFile(event.subImages[0]),
-            getFile(event.subImages[1]),
-            getFile(event.subImages[2]),
-            getFile(event.subImages[3])
-          ]
-        }
-      : { ...InitCreateEventPayload, creatorId: user?.id },
+    defaultValues: event ? { ...event, creatorId: user?.id } : { ...InitCreateEventPayload, creatorId: user?.id },
     mode: 'onChange'
   })
 
@@ -126,17 +104,17 @@ const ModifyEvent = (props: Props) => {
   const handleFileImport = (e: any) => {
     e.preventDefault()
     readXlsxFile(e.target.files[0]).then((rows: any) => {
-      setValue('name', rows[5][0].toString())
-      setValue('categoryIds', JSON.parse(rows[5][1].toString()))
-      setValue('eventCycleType', rows[5][2].toString())
-      setValue('startTime', rows[5][3].toString())
-      setValue('endTime', rows[5][4].toString())
-      setValue('location', rows[5][5].toString())
-      setValue('description', rows[5][6].toString())
-      setValue('reasons', JSON.parse(rows[5][7].toString()))
-      setValue('eventSubImages', JSON.parse(rows[5][8].toString()))
-      setValue('eventPaymentType', rows[5][9].toString())
-      setValue('ticketTypes', JSON.parse(rows[5][10].toString()))
+      setValue('name', rows[3][0].toString())
+      setValue('categoryIds', JSON.parse(rows[3][1].toString()))
+      setValue('eventCycleType', rows[3][2].toString())
+      setValue('startTime', rows[3][3].toString())
+      setValue('endTime', rows[3][4].toString())
+      setValue('location', rows[3][5].toString())
+      setValue('description', rows[3][6].toString())
+      setValue('reasons', JSON.parse(rows[3][7].toString()))
+      setValue('eventSubImages', JSON.parse(rows[3][8].toString()))
+      setValue('eventPaymentType', rows[3][9].toString())
+      setValue('ticketTypes', JSON.parse(rows[3][10].toString()))
     })
     setActive(0)
   }

@@ -48,7 +48,7 @@ const Home = () => {
       <UpComingEvents />
       <BannerPic img={PosterTwo} />
       <AboutUs />
-      <MapLocation width='90%' />
+      <MapLocation />
     </div>
   )
 }

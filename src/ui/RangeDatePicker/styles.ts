@@ -1,7 +1,7 @@
-import styled from 'styled-components/macro';
-import {DatePicker} from 'antd';
+import styled from 'styled-components/macro'
+import { DatePicker } from 'antd'
 
-const {RangePicker} = DatePicker;
+const { RangePicker } = DatePicker
 
 const StyledRangePicker = styled(RangePicker)`
   box-shadow: none !important;
@@ -10,7 +10,7 @@ const StyledRangePicker = styled(RangePicker)`
   .ant-picker-input {
     width: 85px !important;
   }
-  
+
   .ant-picker-input > input,
   .ant-picker-range-separator {
     font-family: var(--heading-font);
@@ -26,10 +26,10 @@ const StyledRangePicker = styled(RangePicker)`
   .ant-picker-active-bar {
     display: none;
   }
-  
+
   .ant-picker-suffix {
     margin-left: auto;
   }
-`;
+`
 
 export default StyledRangePicker

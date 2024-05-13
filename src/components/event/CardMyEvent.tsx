@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 //component
-import { Link } from 'react-router-dom'
 import ConfirmDialog from '@components/Dialog'
 import Checkbox from '@mui/material/Checkbox'
 
@@ -84,11 +83,9 @@ const CardMyEvent = (props: Props) => {
         {/* Content */}
         <div className='w-full h-full flex flex-col justify-between px-5 py-4'>
           <div>
-            <Link className='' to='/'>
-              <p className='mb-2 line-clamp-1 text-2xl truncate text-ellipsis w-[300px] font-bold tracking-tight text-gray-900 dark:text-white max-md:text-base'>
-                {event.name}
-              </p>
-            </Link>
+            <p className='mb-2 line-clamp-1 text-2xl truncate text-ellipsis w-[300px] font-bold tracking-tight text-gray-900 dark:text-white max-md:text-base'>
+              {event.name}
+            </p>
             <div className='flex items-center gap-2 opacity-70 text-gray'>
               <FaCalendarAlt />
               <span>{dayjs(event.startTime).format('DD/MM/YYYY dddd - hh:mm A').toString()}</span>

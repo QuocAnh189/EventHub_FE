@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { IAuth } from 'interfaces/systems/auth'
-import { LoginPayload, SignUpPayload, ForgotPassPayload } from '@type/auth'
+import { LoginPayload, SignUpPayload, ForgotPassPayload, IParamsExternalLogin } from '@type/auth'
 import { IUser } from 'interfaces/systems/user'
 
 export const apiAuth = createApi({
@@ -43,15 +43,15 @@ export const apiAuth = createApi({
       })
     }),
 
-    signInExternal: builder.mutation<IAuth, void>({
-      query: (data) => ({
+    signInExternal: builder.mutation<IAuth, IParamsExternalLogin>({
+      query: (params) => ({
         url: '/auth/external-login',
         method: 'POST',
-        body: data
+        params
       })
     }),
 
-    exterlAuthCallBack: builder.query<IAuth, void>({
+    externalAuthCallBack: builder.query<IAuth, void>({
       query: () => ({
         url: '/auth/external-auth-callback',
         method: 'GET'
@@ -99,7 +99,7 @@ export const {
   useSignInMutation,
   useSignOutMutation,
   useSignInExternalMutation,
-  useExterlAuthCallBackQuery,
+  useExternalAuthCallBackQuery,
   useRefreshTokenMutation,
   useForgotPasswrodMutation,
   useResetPasswrodMutation,

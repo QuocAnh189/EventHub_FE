@@ -12,11 +12,14 @@ import Search from '@ui/Search'
 import ModalBase from '@ui/ModalBase'
 import NotificationsPanel from './navbar/NotificationsPanel'
 import MessagesPanel from './navbar/MessagesPanel'
+import CustomTooltip from '@ui/CustomTooltip'
 
 // constants
 import { LOCALES } from '@constants/options'
 import { useAppSelector } from '@hooks/useRedux'
-import CustomTooltip from '@ui/CustomTooltip'
+
+//assets
+import useDefault from '@assets/common/user_default.png'
 
 interface Props {
   active: string
@@ -145,7 +148,7 @@ const AppBar = () => {
                 aria-label='Account menu'
               >
                 {/* <i className='icon-user-solid' /> */}
-                <img src={user?.avatar} className='object cover rounded-full h-full' />
+                <img src={user?.avatar ? user.avatar : useDefault} className='object cover rounded-full h-full' />
               </button>
               <span className='badge-online' />
             </div>

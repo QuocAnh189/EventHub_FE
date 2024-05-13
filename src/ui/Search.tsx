@@ -27,7 +27,7 @@ const Search = (props: Props) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button className='field-btn icon' aria-label='Search' onClick={handleSearchQueryEvent}>
+      <button type='button' className='field-btn icon' aria-label='Search' onClick={handleSearchQueryEvent}>
         <i className='icon-magnifying-glass-solid' />
       </button>
     </div>

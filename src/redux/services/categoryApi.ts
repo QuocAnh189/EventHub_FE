@@ -47,7 +47,7 @@ export const apiCategory = createApi({
       providesTags: ['Category']
     }),
 
-    getEventsVyCategoryId: builder.query<IEvent[], string>({
+    getEventsByCategoryId: builder.query<IEvent[], string>({
       query: (categoryId) => ({
         url: `/categories/${categoryId}/events`,
         method: 'GET'
@@ -77,6 +77,7 @@ export const apiCategory = createApi({
 export const {
   useCreateCategoryMutation,
   useGetCategoriesQuery,
+  useGetEventsByCategoryIdQuery,
   useLazyGetCategoryByIdQuery,
   useUpdateCategoryMutation,
   useDeleteCategoryMutation

@@ -8,12 +8,24 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import ProductGridItem from '@components/EventGridItem'
 import { Pagination } from 'swiper/modules'
 
+//interface
+import { ICategory } from 'interfaces/contents/category'
+
+//redux
+import { useGetEventsByCategoryIdQuery } from '@redux/services/categoryApi'
+
 interface Props {
-  category: string
+  category: ICategory
 }
 
 const TopEventsByCategories = (props: Props) => {
   const { category } = props
+
+  const { data: events } = useGetEventsByCategoryIdQuery(category.id!)
+
+  if (events) {
+    console.log(events)
+  }
 
   return (
     <Spring className='flex flex-col gap-5'>

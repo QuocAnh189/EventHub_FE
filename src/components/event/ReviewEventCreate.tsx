@@ -20,11 +20,8 @@ import eventDefault from '@assets/event/event-poster.png'
 import dayjs from 'dayjs'
 
 //map
-import { setLanguage, setRegion, setKey } from 'react-geocode'
 import { CircularProgress } from '@mui/material'
-setKey(import.meta.env.VITE_MAP_API_KEY)
-setLanguage('en')
-setRegion('vn')
+import LocationEvent from '@components/Location'
 
 interface Props {
   watch: UseFormWatch<ICreateEventPayload>
@@ -36,27 +33,12 @@ interface Props {
 const ReviewEventCreate = (props: Props) => {
   const { setActive, watch, setValue, disabled, create } = props
 
-  // const [position, setPosition] = useState(null)
-
-  // useEffect(() => {
-  //   if (watch().location) {
-  //     fromAddress(watch().location)
-  //       .then(({ results }) => {
-  //         const result = results[0].geometry.location
-  //         setPosition(result)
-  //       })
-  //       .catch(() => {
-  //         setPosition(null)
-  //       })
-  //   }
-  // }, [])
-
   return (
     <div className='w-full px-40 mt-10'>
       <div className='flex flex-col gap-6 border-[3px] border-textGray rounded-2xl p-10'>
         <div className='h-[500px]'>
           <img
-            src={watch().coverImage ? watch().coverImage || URL.createObjectURL(watch().coverImage) : eventDefault}
+            src={watch().coverImage ? URL.createObjectURL(watch().coverImage) : eventDefault}
             alt=''
             loading='lazy'
             className='w-full h-full object-cover rounded-xl'
@@ -116,7 +98,7 @@ const ReviewEventCreate = (props: Props) => {
                 <IoLocationOutline color='gray' size='24px' />
                 <p className='max-w-[500px] text-header'>{watch().location}</p>
               </div>
-              {/* {position && <LocationEvent position={position} />} */}
+              {watch().location && <LocationEvent location={watch().location} />}
             </div>
             <div className='flex flex-col gap-8'>
               <div className='space-y-2'>
@@ -157,7 +139,7 @@ const ReviewEventCreate = (props: Props) => {
                       key={`subimage-${index}`}
                       loading='lazy'
                       className='h-[200px] w-[200px] rounded-lg'
-                      src={image || URL.createObjectURL(image)}
+                      src={image ? URL.createObjectURL(image) : ''}
                       alt=''
                     />
                   )

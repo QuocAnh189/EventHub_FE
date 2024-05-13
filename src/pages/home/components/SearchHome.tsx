@@ -76,17 +76,21 @@ const SearchHome = () => {
             className='flex items-center justify-center pr-[10px] bg-white rounded-md shadow-md z-[1] absolute -top-10 left-0 h-20'
           >
             <div className='w-[200px] h-full shadow-none p-4'>
-              <h4 className='text-[15px] m-0 font-bold'>{t('search home.event')}</h4>
+              <h4 className='text-[15px] m-0 font-bold text-black'>{t('search home.event')}</h4>
               <input
                 {...register('search')}
-                className='mt-1 py-2 px-0 border-none outline-none text-md'
+                className='mt-1 py-2 px-0 border-none outline-none text-md bg-white'
                 type='text'
                 placeholder={t('search home.event_placeholder')}
               />
             </div>
             <div className='w-[200px] h-full shadow-none p-4'>
-              <h4 className='text-[15px] m-0 font-bold'>{t('search home.status')}</h4>
-              <select {...register('type')} className='mt-1 py-2 px-0 border-none outline-none text-md' aria-label='aa'>
+              <h4 className='text-[15px] m-0 font-bold text-black'>{t('search home.status')}</h4>
+              <select
+                {...register('type')}
+                className='mt-1 py-2 px-0 border-none outline-none text-md bg-white'
+                aria-label='aa'
+              >
                 {EVENT_STATUS_OPTIONS.map((item, index) => (
                   <option key={`status-${index}`} value={item.value}>
                     {item.label}
@@ -95,12 +99,12 @@ const SearchHome = () => {
               </select>
             </div>
             <div className='w-[200px] h-full shadow-none p-4'>
-              <h4 className='text-[15px] m-0 font-bold'>{t('search home.category')}</h4>
+              <h4 className='text-[15px] m-0 font-bold text-black'>{t('search home.category')}</h4>
               <select
                 onChange={(e: any) => {
                   setValue('categoryIds', [e.target.value])
                 }}
-                className='mt-1 py-2 px-0 border-none outline-none text-md'
+                className='mt-1 py-2 px-0 border-none outline-none text-md bg-white'
                 defaultValue='All'
               >
                 <option value='All'>All</option>
@@ -120,7 +124,7 @@ const SearchHome = () => {
           <div className='relative w-full h-auto m-auto top-[30px] rounded-[10px] pb-5'>
             <h4 className='m-0 pt-20 pl-[1.7%]'>{t('search home.events_to_explore')}</h4>
             {isFetching ? (
-              <div className='w-full h-auto flex items-center justify-center'>
+              <div className='w-full h-[150px] flex items-center justify-center'>
                 <Loader />
               </div>
             ) : (

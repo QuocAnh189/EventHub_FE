@@ -30,7 +30,7 @@ const EventCard = (props: ICard) => {
   const handleClose = () => setOpen(false)
 
   const handleSelectEvent = () => {
-    return modal ? handleOpen() : navigate('event/123')
+    return modal ? handleOpen() : navigate(`event/${event.id}`)
   }
 
   return (

@@ -60,12 +60,13 @@ const SignUp = () => {
 
     try {
       const result = await signUp(formData).unwrap()
+
       if (result) {
+        localStorage.setItem('token', JSON.stringify(result))
         navigate('/organization')
       }
     } catch (error: any) {
       const message = error.data.message
-      console.log(message)
       switch (message) {
         case 'Email already exists':
           toast.error('Email already exists')

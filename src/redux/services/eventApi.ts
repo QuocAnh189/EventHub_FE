@@ -1,11 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IFavouriteEventPayload, IParamsEvent, IReviewEventPayload } from '@type/event'
+import { IFavouriteEventPayload, IParamsEvent, IParamsReview, IReviewEventPayload } from '@type/event'
 import { IEvent } from 'interfaces/contents/event'
+import queryString from 'query-string'
 
 export const apiEvent = createApi({
   reducerPath: 'apiEvent',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
+    paramsSerializer: (params: Record<string, unknown>) => queryString.stringify(params, { arrayFormat: 'none' }),
     prepareHeaders: (headers) => {
       const token = JSON.parse(localStorage.getItem('token')!).accessToken
 
@@ -16,7 +18,7 @@ export const apiEvent = createApi({
       return headers
     }
   }),
-  keepUnusedDataFor: 60,
+  // keepUnusedDataFor: 2,
 
   tagTypes: ['Event', 'Review'],
   endpoints: (builder) => ({
@@ -86,21 +88,25 @@ export const apiEvent = createApi({
       invalidatesTags: ['Event']
     }),
 
-    addReview: builder.mutation<any, IReviewEventPayload>({
-      query: (data) => ({
-        url: `/events/${data.eventId}/reviews`,
+    addReview: builder.mutation<any, { eventId: string; data: IReviewEventPayload }>({
+      query: ({ eventId, data }) => ({
+        url: `/events/${eventId}/reviews`,
         method: 'POST',
         body: data
       }),
       invalidatesTags: ['Review']
     }),
 
-    getReviewsByEventId: builder.query<any, string>({
-      query: (eventId) => ({
-        url: `/events/${eventId}/reviews`,
-        method: 'GET'
+    getReviewsByEventId: builder.query<any, IParamsReview>({
+      query: (params) => ({
+        url: `/events/${params.eventId}/reviews`,
+        method: 'GET',
+        params
       }),
-      providesTags: ['Review']
+      providesTags: ['Review'],
+      transformResponse: (response: any) => {
+        return response.data
+      }
     }),
 
     getReviewById: builder.query<any, { eventId: string; reviewId: string }>({
@@ -111,9 +117,9 @@ export const apiEvent = createApi({
       providesTags: ['Review']
     }),
 
-    updateReview: builder.mutation<any, { reviewId: string; data: IReviewEventPayload }>({
-      query: ({ reviewId, data }) => ({
-        url: `/events/${data.eventId}/reviews/${reviewId}`,
+    updateReview: builder.mutation<any, { eventId: string; reviewId: string; data: IReviewEventPayload }>({
+      query: ({ eventId, reviewId, data }) => ({
+        url: `/events/${eventId}/reviews/${reviewId}`,
         method: 'PUT',
         body: data
       }),

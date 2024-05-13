@@ -87,7 +87,7 @@ const UserProfileDetails = (props: Props) => {
               </label>
               <input
                 className={classNames('field-input text-header', { 'field-input--error': errors.fullName })}
-                type='text'
+                type='password'
                 id='fullName'
                 placeholder='Full Name'
                 defaultValue='Smith'

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 // import {IUser} from '@interface/'
 
-export enum Provider {
+export enum EProvider {
   GOOGLE = 'GOOGLE',
   FACEBOOK = 'FACEBOOK'
 }
@@ -21,33 +21,33 @@ export interface OAuthLoginPayload {
   name?: string
   avatar?: string
   phoneNumber?: string
-  provider: Provider
+  provider: EProvider
   tokenExpiredDate: Date
 }
 
 export interface SignUpPayload {
   email: string
-  userName: string
+  fullName: string
   phoneNumber: string
   password: string
 }
 
 export const InitSignup = {
   email: '',
-  userName: '',
+  fullName: '',
   phoneNumber: '',
   password: ''
 } as SignUpPayload
 
 export interface SignUpPayloadOne {
   email: string
-  userName: string
+  fullName: string
   phoneNumber: string
 }
 
 export const InitSignUpOne = {
   email: '',
-  userName: '',
+  fullName: '',
   phoneNumber: ''
 } as SignUpPayloadOne
 
@@ -67,4 +67,9 @@ export interface LoginResponse {
   // user: User
   accessToken: string
   refreshToken: string
+}
+
+export interface IParamsExternalLogin {
+  provider: EProvider
+  returnUrl: string
 }

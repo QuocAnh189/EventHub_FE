@@ -56,7 +56,7 @@ export interface IReviewEventPayload {
   userId: string
   eventId: string
   content: string
-  rate: 0
+  rate: number
 }
 
 export interface IFilterEvent {
@@ -118,3 +118,28 @@ export interface IMetadataEventReponse {
   totalPublic: number
   totalTrash: number
 }
+
+export interface IParamsReview {
+  eventId?: string
+  page?: number
+  size?: number
+  takeAll?: boolean
+  order?: EPageOrder
+  search?: string
+}
+export interface IMetadataReviewResponse {
+  currentPage?: number
+  hasNext?: boolean
+  hasPrevious: boolean
+  pageSize: number
+  takeAll: boolean
+  totalCount: number
+  totalPages: number
+}
+
+export const initParamsReview = {
+  page: 1,
+  size: 5,
+  takeAll: false,
+  order: EPageOrder.DESC
+} as IParamsReview
