@@ -14,11 +14,13 @@ import { apiConversation } from './services/conversationApi'
 import { apiRole } from './services/rolesApi'
 import { apiTicket } from './services/ticketApi'
 import { apiUser } from './services/userApi'
+import { apiPermission } from './services/permissionApi'
 
 // Slices
 import categoryReducer, { CategorySliceKey } from './slices/categorySlice'
 import userReducer, { UserSliceKey } from './slices/userSlice'
 import eventReducer, { EventSliceKey } from './slices/eventSlice'
+import { apiFunction } from './services/functionApi'
 
 const persistConfig = {
   key: 'root',
@@ -39,7 +41,9 @@ const combinedReducer = combineReducers({
   [apiConversation.reducerPath]: apiConversation.reducer,
   [apiRole.reducerPath]: apiRole.reducer,
   [apiTicket.reducerPath]: apiTicket.reducer,
-  [apiUser.reducerPath]: apiUser.reducer
+  [apiUser.reducerPath]: apiUser.reducer,
+  [apiPermission.reducerPath]: apiPermission.reducer,
+  [apiFunction.reducerPath]: apiFunction.reducer
 })
 
 const rootReducer = (state: any, action: any) => {
@@ -67,7 +71,9 @@ const store = configureStore({
       apiConversation.middleware,
       apiRole.middleware,
       apiTicket.middleware,
-      apiUser.middleware
+      apiUser.middleware,
+      apiPermission.middleware,
+      apiFunction.middleware
     ])
 })
 

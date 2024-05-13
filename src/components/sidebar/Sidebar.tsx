@@ -1,16 +1,16 @@
 // hooks
 import { useSidebar } from '@contexts/sidebarContext'
-import { useState, useEffect } from 'react'
-import { useWindowSize } from 'react-use'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useWindowSize } from 'react-use'
 
 // styled components
 import Drawer from './styles'
 
 // components
-import { NavLink } from 'react-router-dom'
 import Collapse from '@mui/material/Collapse'
 import { Fragment } from 'react'
+import { NavLink } from 'react-router-dom'
 
 // constants
 import ROUTES from '@constants/routes'
@@ -19,7 +19,9 @@ import ROUTES from '@constants/routes'
 import logoText_Img from '@assets/common/logo-text.png'
 
 //interface
+import { useAppSelector } from '@hooks/useRedux'
 import { Route } from 'interfaces'
+import { AiFillSliders } from 'react-icons/ai'
 
 const Sidebar = () => {
   const navigate = useNavigate()
@@ -27,6 +29,16 @@ const Sidebar = () => {
   const { open, setOpen } = useSidebar()
   const [active, setActive] = useState<string>('')
   const isPermanent = width >= 1920
+
+  const user = useAppSelector((state) => state.user.user)
+  useLayoutEffect(() => {
+    if (user?.roles.includes('ADMIN'))
+      ROUTES.push({
+        name: 'Permissions',
+        icon: <AiFillSliders size={20} />,
+        path: '/organization/permissions'
+      })
+  }, [])
 
   useEffect(() => {
     window.addEventListener('resize', () => {
