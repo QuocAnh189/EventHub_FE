@@ -56,7 +56,7 @@ const Infomation = (props: Props) => {
 
       if (result) {
         toast.success(isFollow ? 'unFollow sucessfully' : 'follow succesfully')
-        dispatch(setUser(result.items))
+        dispatch(setUser(result))
       }
     } catch (e) {
       console.log(e)
@@ -68,7 +68,7 @@ const Infomation = (props: Props) => {
       <div className='flex justify-center bg-body'>
         <div className='min-w-[200px] flex flex-col items-center justify-center gap-2 px-8 py-4 border-b-2 border-gray300'>
           <FaRegCalendarAlt color='#3D56F0' size={50} />
-          <p className='text-header font-semibold'>Time</p>
+          <p className='font-semibold text-header'>Time</p>
           <p className='text-gray500 text-[14px] text-header'>
             {dayjs(event.startTime).format('dddd, DD/MM/YYYY hh:mm A').toString()}
           </p>
@@ -76,19 +76,19 @@ const Infomation = (props: Props) => {
 
         <div className='min-w-[200px] flex flex-col items-center justify-center gap-2 px-8 py-4 border-b-2 border-gray300'>
           <IoLocationOutline color='#3D56F0' size={50} />
-          <p className='text-header font-semibold'>Location</p>
+          <p className='font-semibold text-header'>Location</p>
           <p className='text-gray500 text-[14px] text-header'>{event.location}</p>
         </div>
 
         <div className='min-w-[200px] flex flex-col items-center justify-center gap-2 px-8 py-4 border-b-2 border-gray300'>
           <IoMdTime color='#3D56F0' size={50} />
-          <p className='text-header font-semibold'>Happen</p>
+          <p className='font-semibold text-header'>Happen</p>
           <p className='text-gray500 text-[14px] text-header'>9 day</p>
         </div>
 
         <div className='min-w-[200px] flex flex-col items-center justify-center gap-2 px-8 py-4 border-b-2 border-gray300'>
           <FaUsers color='#3D56F0' size={50} />
-          <p className='text-header font-semibold'>Participant</p>
+          <p className='font-semibold text-header'>Participant</p>
           <p className='text-gray500 text-[14px] text-header'>{event.ticketTypes.length ? totalQuatity : 0}</p>
         </div>
       </div>
@@ -104,7 +104,7 @@ const Infomation = (props: Props) => {
             />
             <div>
               <p className='font-semibold text-header'>{user?.userName}</p>
-              <button onClick={handleFollowUser} className='flex items-center gap-1 bg-primary px-2 py-1 rounded-md'>
+              <button onClick={handleFollowUser} className='flex items-center gap-1 px-2 py-1 rounded-md bg-primary'>
                 <IoMdAdd color='white' size={24} />
                 <p className='text-white'>{isFollow ? 'unfollow' : 'follow'}</p>
               </button>
@@ -125,7 +125,7 @@ const Infomation = (props: Props) => {
         </div>
       </div>
 
-      <div className='w-full flex items-center gap-8 justify-center'>
+      <div className='flex items-center justify-center w-full gap-8'>
         {event?.subImages.map(
           (image: any, index: number) =>
             image && (
@@ -141,8 +141,8 @@ const Infomation = (props: Props) => {
       </div>
 
       <div className='flex px-[100px] gap-8'>
-        <div className='flex flex-col flex-auto gap-5 p-8 bg-body shadow-xl rounded-md'>
-          <h1 className='text-header font-bold text-2xl'>Chat Room</h1>
+        <div className='flex flex-col flex-auto gap-5 p-8 rounded-md shadow-xl bg-body'>
+          <h1 className='text-2xl font-bold text-header'>Chat Room</h1>
           <p className='text-header'>
             If you have any questions or problems related to this event.
             <br />
