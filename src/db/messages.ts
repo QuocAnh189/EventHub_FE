@@ -3,77 +3,70 @@ import { faker } from '@faker-js/faker'
 const messages = [
   {
     id: 'message-1',
-    content: faker.lorem.paragraph(),
+    content: 'Sự kiện này tổ chức ở đâu vậy',
     createdAt: faker.date.recent(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Trần Phước Anh Quốc',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
   {
     id: 'message-2',
-    content: faker.lorem.paragraph(),
+    content: 'Sự kiện này có bao nhiêu người tham gia vậy',
     createdAt: faker.date.recent(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Trần Vương Duy',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
   {
     id: 'message-3',
-    content: faker.lorem.paragraph(),
+    content: 'Tôi thấy sự kiện này bán vé đắt quá, giảm giá dược không',
     createdAt: faker.date.recent(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Mai Đình Khôi',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
   {
     id: 'message-4',
-    content: faker.lorem.paragraph(),
+    content: 'Tại sao sự kiện này lại tổ chức ở đây',
     createdAt: faker.date.past(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Lê Thị Thu Hiền',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: true
   },
   {
     id: 'message-5',
-    content: faker.lorem.paragraph(),
+    content: 'Tôi rất thích sự kiện này',
     createdAt: faker.date.past(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Trương Nguyễn Phước Trí',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: true
   },
   {
     id: 'message-6',
-    content: faker.lorem.paragraph(),
+    content: 'Sự kiện này nhảy hay âm nhạc vậy',
     createdAt: faker.date.past(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Hồ Thị Thanh Thảo',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
   {
     id: 'message-7',
-    content: faker.lorem.paragraph(),
+    content: 'Trần Ngọc Nhật Vy',
     createdAt: faker.date.past(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Anh Quoc',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
@@ -83,30 +76,27 @@ const messages = [
     content: faker.lorem.paragraph(),
     createdAt: faker.date.past(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Lê Trương Ngọc Hải',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: false
   },
   {
     id: 'message-9',
-    content: faker.lorem.paragraph(),
+    content: 'Tôi lỡ mua vé rồi nhưng không muốn tham gia nữa thì phải lam sao đây',
     createdAt: faker.date.past(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Trần Minh Chính',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: true
   },
   {
     id: 'message-10',
-    content: faker.lorem.paragraph(),
+    content: 'Love you',
     createdAt: faker.date.past(),
     sender: {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      fullName: 'Võ Xuân Thảo',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     },
     archived: true

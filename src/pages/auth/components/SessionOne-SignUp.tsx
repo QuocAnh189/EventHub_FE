@@ -28,7 +28,7 @@ const formSchema = z.object({
     .min(1, { message: 'Email is not empty' })
     .max(50, { message: 'Email must not exceed 50 characters' })
     .email('Email invalid'),
-  userName: z.string().min(1, 'Name is not empty').max(32, { message: 'Name must not exceed 32 characters' }),
+  fullName: z.string().min(1, 'Name is not empty').max(32, { message: 'Name must not exceed 32 characters' }),
   phoneNumber: z
     .string()
     .min(1, 'Phone is not empty')
@@ -106,7 +106,7 @@ const SessionOne = (props: SessionOneProps) => {
           <input
             {...register('fullName')}
             type='text'
-            name='userName'
+            name='fullName'
             className='block min-h-[auto] w-full rounded-2xl border-[2px] px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
             placeholder='Enter Name'
             onChange={setFormDataSessionOne}

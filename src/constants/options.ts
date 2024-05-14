@@ -117,8 +117,7 @@ export const APPS_OPTIONS: IOptionSelect[] = [
 export const EVENT_MANAGEMENT_OPTIONS: IOptionSelect[] = [
   { value: 'ALL', label: 'All' },
   { value: 'PUBLIC', label: 'Published' },
-  { value: 'PRIVATE', label: 'Privated' },
-  { value: 'TRASH', label: 'Trash' }
+  { value: 'PRIVATE', label: 'Privated' }
 ]
 
 export const ORDER_SORT_OPTIONS: IOptionSelect[] = [
@@ -185,10 +184,9 @@ export const PRODUCT_ADDITIONAL_OPTIONS: IOptionSelect[] = [
 ]
 
 export const EVENT_SELECT_OPTIONS: IOptionSelect[] = [
-  { value: 'publish', label: 'Move to Publics' },
-  { value: 'private', label: 'Move to Privates' },
-  { value: 'trash', label: 'Move to Trash' },
-  { value: 'delete', label: 'Delete Permanently' }
+  { value: 'PUBLIC', label: 'Move to Publics' },
+  { value: 'PRIVATE', label: 'Move to Privates' },
+  { value: 'TRASH', label: 'Move to Trash' }
 ]
 
 export const PROMOTIONAL_OPTIONS: IOptionSelect[] = [

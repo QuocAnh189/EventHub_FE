@@ -24,7 +24,8 @@ export const apiAuth = createApi({
         url: '/auth/signup',
         method: 'POST',
         body: data
-      })
+      }),
+      transformResponse: (response: any) => response.data
     }),
 
     signIn: builder.mutation<IAuth, LoginPayload>({

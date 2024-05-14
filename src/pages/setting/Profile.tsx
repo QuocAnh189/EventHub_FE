@@ -62,7 +62,7 @@ const Profile = () => {
         toast.success('Profile updated successfully')
       }
     } catch (err) {
-      console.log(err)
+      toast.error('Some thing is wrong')
     }
   }
 
@@ -77,7 +77,7 @@ const Profile = () => {
           <UserProfileCard
             avatar={watch().avatar}
             setValue={setValue}
-            userName={user?.userName!}
+            fullName={user?.fullName!}
             roles={user?.roles!}
           />
           <div className='widgets-grid'>

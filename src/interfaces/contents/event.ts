@@ -22,6 +22,7 @@ export interface IEvent {
   categoryIds: string[] | any
   promotion: number
   numberOfFavourites: number
+  isFavourite?: boolean
   numberOfShares: number
   numberOfSoldTickets: number
   status: EEventStatus

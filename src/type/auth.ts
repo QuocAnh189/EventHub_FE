@@ -64,7 +64,6 @@ export interface ForgotPassPayload {
 }
 
 export interface LoginResponse {
-  // user: User
   accessToken: string
   refreshToken: string
 }

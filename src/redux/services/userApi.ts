@@ -18,7 +18,7 @@ export const apiUser = createApi({
     }
   }),
   keepUnusedDataFor: 20,
-  tagTypes: ['User', 'Events'],
+  tagTypes: ['User', 'Event'],
   endpoints: (builder) => ({
     getUsers: builder.query<IUser[], void>({
       query: () => ({
@@ -42,7 +42,7 @@ export const apiUser = createApi({
         method: 'GET',
         params
       }),
-      providesTags: ['Events'],
+      providesTags: ['Event'],
       transformResponse: (response: any) => {
         return response.data
       }
@@ -62,10 +62,6 @@ export const apiUser = createApi({
         url: `/users/${userId}`,
         method: 'PUT',
         body: data
-        // headers: {
-        //   Accept: '*/*',
-        //   'Content-Type': 'multipart/form-data;'
-        // }
       })
     }),
 
@@ -97,8 +93,12 @@ export const apiUser = createApi({
     getReviewsByUserId: builder.query<any, string>({
       query: (userId) => ({
         url: `/users/${userId}/reviews`,
-        method: 'GET'
+        method: 'GET',
+        params: { size: 5 }
       }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
       providesTags: ['User']
     }),
 
@@ -108,6 +108,18 @@ export const apiUser = createApi({
         method: 'GET'
       }),
       providesTags: ['User']
+    }),
+
+    getEventsTrashByUserId: builder.query<any, { userId: string; params: IParamsEvent }>({
+      query: ({ userId, params }) => ({
+        url: `/users/${userId}/events/trash`,
+        method: 'GET',
+        params
+      }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
+      providesTags: ['User', 'Event']
     }),
 
     followUser: builder.mutation<any, IFollowPayload>({
@@ -141,6 +153,7 @@ export const {
   useGetMenuByUserIdQuery,
   useGetReviewsByUserIdQuery,
   useGetEventsFavouriteByUserIdQuery,
+  useGetEventsTrashByUserIdQuery,
   useFollowUserMutation,
   useUnfollowUserMutation
 } = apiUser

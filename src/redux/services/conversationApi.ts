@@ -5,7 +5,17 @@ import { IMessageParams } from '@type/message'
 export const apiConversation = createApi({
   reducerPath: 'apiConversation',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL
+    baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers) => {
+      const token = JSON.parse(localStorage.getItem('token')!).accessToken
+      headers.set('Content-Type', 'application/json')
+
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+
+      return headers
+    }
   }),
   keepUnusedDataFor: 20,
   tagTypes: ['Conversation'],
@@ -16,6 +26,9 @@ export const apiConversation = createApi({
         method: 'GET',
         params
       }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
       providesTags: ['Conversation']
     }),
 

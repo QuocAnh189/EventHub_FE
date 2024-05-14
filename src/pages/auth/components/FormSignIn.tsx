@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
@@ -22,9 +22,9 @@ import facebookIcon from '@assets/icons/facebook.png'
 import { LoginPayload, InitLogin, EProvider } from '@type/auth'
 
 //redux
-// import { useAppDispatch } from '@hooks/useRedux'
+import { useAppDispatch } from '@hooks/useRedux'
 import { useSignInMutation, useSignInExternalMutation } from '@redux/services/authApi'
-// import { setUser } from '@redux/slices/userSlice'
+import { setUser } from '@redux/slices/userSlice'
 
 //motion
 import { motion } from 'framer-motion'
@@ -42,6 +42,7 @@ interface SignInProps {
 const FormSignIn = (props: SignInProps) => {
   const { handleForgotPassword } = props
 
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const user = useAppSelector((state) => state.user.user)
 
@@ -50,7 +51,7 @@ const FormSignIn = (props: SignInProps) => {
   const [singInExternal, { isLoading: loadingSignInExternal }] = useSignInExternalMutation()
   const [signIn, { isLoading: loadingSignIn }] = useSignInMutation()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (user) {
       navigate('/organization')
     }
@@ -70,7 +71,17 @@ const FormSignIn = (props: SignInProps) => {
       const result = await signIn(data).unwrap()
       if (result) {
         localStorage.setItem('token', JSON.stringify(result))
-        navigate('/organization')
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL!}/auth/profile`, {
+          headers: { Authorization: `Bearer ${result.accessToken}` }
+        })
+
+        const user = await response.json()
+
+        if (user) {
+          dispatch(setUser(user.data))
+          navigate('/organization')
+        }
       }
     } catch (error: any) {
       const message = error.data.message

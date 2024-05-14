@@ -2,7 +2,7 @@
 import Message from './Message'
 
 const Messages = () => {
-  const message = { message: 'Dung co ma sao l' }
+  const message = { message: 'Sự kiện này tổ chức gồm bao nhiêu người vậy' }
   return (
     <div className='px-4 flex-1 overflow-auto'>
       <Message message={message} />

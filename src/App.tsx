@@ -38,6 +38,7 @@ const Customer = lazy(() => import('@pages/dashboard/Customer'))
 const Payment = lazy(() => import('@pages/dashboard/Payment'))
 const TopEvent = lazy(() => import('@pages/event/Top-Event'))
 const MyEvent = lazy(() => import('@pages/event/My-Event'))
+const TrashEvent = lazy(() => import('@pages/event/Trash-Event'))
 const EventDetail = lazy(() => import('@pages/event/Event-Detail'))
 const CreateEvent = lazy(() => import('@pages/event/Create-Event'))
 const ModifyEvent = lazy(() => import('@pages/event/Modify-Event'))
@@ -84,6 +85,7 @@ function App() {
               <Route path='/organization/dashboard/payment' element={<Payment />} />
               <Route path='/organization/event/top-event' element={<TopEvent />} />
               <Route path='/organization/event/my-event' element={<MyEvent />} />
+              <Route path='/organization/event/trash-event' element={<TrashEvent />} />
               <Route path='/organization/event/:id' element={<EventDetail />} />
               <Route path='/organization/event/create-event' element={<CreateEvent />} />
               <Route path='/organization/event/my-event/modify-event/:id' element={<ModifyEvent />} />
