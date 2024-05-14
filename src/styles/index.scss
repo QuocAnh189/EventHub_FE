@@ -16,3 +16,9 @@
 .permissions-tabs > .ant-tabs-nav .ant-tabs-tab {
   border: 0 !important;
 }
+
+.qrcode-upload > .ant-upload {
+  width: 200px !important;
+  height: 200px !important;
+  overflow: hidden;
+}

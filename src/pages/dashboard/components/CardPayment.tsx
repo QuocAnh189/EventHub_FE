@@ -1,17 +1,19 @@
 //hook
-import { useState, useRef } from 'react'
+import { useRef, useState } from 'react'
 
 //component
-import Card from './card/Card'
 import Modal from '@mui/material/Modal'
+import { IBankCard } from 'interfaces/contents'
+import Card from './card/Card'
 import FormCard from './card/FormCard'
 
 interface Props {
-  card: any
+  card: IBankCard
+  cardHolderName: string
 }
 
 const CardPayment = (props: Props) => {
-  const { card } = props
+  const { card, cardHolderName } = props
 
   const refEdit = useRef()
 
@@ -25,11 +27,10 @@ const CardPayment = (props: Props) => {
     <>
       <div className='mb-3' onClick={handleOpenFormEdit}>
         <Card
-          cardNumber={card.cardNumber}
-          cardHolder={card.cardHolder}
-          cardMonth={card.cardMonth}
-          cardYear={card.cardYear}
-          cardCvv={card.cardCvv}
+          cardHolder={cardHolderName}
+          cardNumber={'**** **** **** ' + card.last4}
+          cardMonth={card.expMonth}
+          cardYear={card.expYear}
           isCardFlipped={false}
         />
       </div>
@@ -39,7 +40,7 @@ const CardPayment = (props: Props) => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <FormCard ref={refEdit} card={card} />
+        <FormCard ref={refEdit} card={card} cardHolderName={cardHolderName} />
       </Modal>
     </>
   )

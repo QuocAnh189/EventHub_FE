@@ -48,6 +48,7 @@ const Todo = lazy(() => import('@pages/todo/Todo'))
 const FAQ = lazy(() => import('@pages/faq/Faq'))
 const Profile = lazy(() => import('@pages/setting/Profile'))
 const Permission = lazy(() => import('@pages/permissions/Permission'))
+const CheckoutPage = lazy(() => import('@pages/checkout'))
 const NotFound = lazy(() => import('@pages/NotFound'))
 
 function App() {
@@ -94,6 +95,7 @@ function App() {
               <Route path='/organization/faq' element={<FAQ />} />
               <Route path='/organization/settings/profile' element={<Profile />} />
               <Route path='/organization/permissions' element={<Permission />} />
+              <Route path='/organization/event/:id/checkout' element={<CheckoutPage />} />
             </Route>
             <Route path='/*' element={<NotFound />} />
           </Routes>

@@ -1,5 +1,6 @@
 import { EEventPaymentTicket, EEventStatus, EEventStyle } from '@constants/enum'
 import { IPriceRange } from 'interfaces/systems/price-range'
+import { ITicketType } from './ticketType'
 
 export interface IEvent {
   id: string
@@ -18,7 +19,7 @@ export interface IEvent {
   eventPaymentType?: EEventPaymentTicket
   isPrivate: boolean
   isTrash: boolean
-  ticketTypes: any[]
+  ticketTypes: ITicketType[]
   categoryIds: string[] | any
   promotion: number
   numberOfFavourites: number

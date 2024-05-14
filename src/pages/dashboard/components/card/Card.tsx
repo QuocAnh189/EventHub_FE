@@ -21,13 +21,12 @@ const BACKGROUND_IMG = cardBackgroundName()
 interface CardProp {
   cardHolder: string
   cardNumber: string
-  cardMonth: string
-  cardYear: string
-  cardCvv: string
+  cardMonth: number
+  cardYear: number
   isCardFlipped: boolean
 }
 const Card = (props: CardProp) => {
-  const { cardHolder, cardNumber, cardMonth, cardYear, cardCvv, isCardFlipped } = props
+  const { cardHolder, cardNumber, cardMonth, cardYear, isCardFlipped } = props
 
   const cardType = (cardNumber: any) => {
     const number = cardNumber
@@ -95,13 +94,13 @@ const Card = (props: CardProp) => {
               <div className='card-item__holder'>Card Holder</div>
               <div className='card-item__name'>
                 <TransitionGroup component='div' className='slide-fade-up'>
-                  {cardHolder === 'FULL NAME' ? (
+                  {!cardHolder ? (
                     <CSSTransition classNames='slide-fade-up' timeout={250}>
                       <div>FULL NAME</div>
                     </CSSTransition>
                   ) : (
                     cardHolder
-                      .split('')
+                      ?.split('')
                       .map((val: boolean | string | null | undefined, index: React.Key | null | undefined) => (
                         <CSSTransition timeout={250} classNames='slide-fade-right' key={index}>
                           <span className='card-item__nameItem'>{val}</span>
@@ -138,7 +137,7 @@ const Card = (props: CardProp) => {
           <img alt='' src={`/card-background/${BACKGROUND_IMG}`} className='card-item__bg' />
         </div>
         <div className='card-item__band' />
-        <div className='card-item__cvv'>
+        {/* <div className='card-item__cvv'>
           <div className='card-item__cvvTitle'>CVV</div>
           <div className='card-item__cvvBand'>
             <TransitionGroup>
@@ -152,7 +151,7 @@ const Card = (props: CardProp) => {
           <div className='card-item__type'>
             <img alt='card-type' src={`/card-type/${useCardType}.png`} className='card-item__typeImg' />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
