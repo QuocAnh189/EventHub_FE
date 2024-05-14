@@ -128,6 +128,9 @@ export const apiUser = createApi({
         method: 'POST',
         body: data
       }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
       invalidatesTags: ['User']
     }),
 
@@ -137,6 +140,9 @@ export const apiUser = createApi({
         method: 'POST',
         body: data
       }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
       invalidatesTags: ['User']
     })
   })

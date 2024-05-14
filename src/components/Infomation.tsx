@@ -17,18 +17,24 @@ import { IoMdAdd } from 'react-icons/io'
 import classNames from 'classnames'
 import { IEvent } from 'interfaces/contents/event'
 import dayjs from 'dayjs'
-import { useAppSelector } from '@hooks/useRedux'
 
 //assets
 import userDefault from '@assets/common/user_default.png'
 
+//redux
+import { useAppDispatch, useAppSelector } from '@hooks/useRedux'
+import { useFollowUserMutation, useUnfollowUserMutation } from '@redux/services/userApi'
+import { toast } from 'react-toastify'
+import { setUser } from '@redux/slices/userSlice'
 interface Props {
   event: IEvent
 }
 
 const Infomation = (props: Props) => {
-  const user = useAppSelector((state) => state.user.user)
   const { event } = props
+
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.user.user)
 
   const totalQuatity = useMemo(() => {
     const calculation = event.ticketTypes?.reduce((total, currentValue) => {
@@ -36,6 +42,26 @@ const Infomation = (props: Props) => {
     }, 0)
     return calculation
   }, [])
+
+  const isFollow = user?.followingIds?.includes(event.creatorId)
+
+  const [followUser] = useFollowUserMutation()
+  const [unfollowUser] = useUnfollowUserMutation()
+
+  const handleFollowUser = async () => {
+    try {
+      const result = isFollow
+        ? await unfollowUser({ followerId: user?.id!, followedId: event.creatorId }).unwrap()
+        : await followUser({ followerId: user?.id!, followedId: event.creatorId }).unwrap()
+
+      if (result) {
+        toast.success(isFollow ? 'unFollow sucessfully' : 'follow succesfully')
+        dispatch(setUser(result.items))
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <div className='flex flex-col gap-4'>
@@ -78,9 +104,9 @@ const Infomation = (props: Props) => {
             />
             <div>
               <p className='font-semibold text-header'>{user?.userName}</p>
-              <button className='flex items-center gap-1 bg-primary px-2 py-1 rounded-md'>
+              <button onClick={handleFollowUser} className='flex items-center gap-1 bg-primary px-2 py-1 rounded-md'>
                 <IoMdAdd color='white' size={24} />
-                <p className='text-white'>Follow</p>
+                <p className='text-white'>{isFollow ? 'unfollow' : 'follow'}</p>
               </button>
             </div>
           </div>
