@@ -5,18 +5,16 @@ import ReviewsRateItem from '@components/ReviewsRateItem'
 // utils
 import { getPercentage } from '@utils/helpers'
 
-const data = [
-  { rate: 5, value: 2568 },
-  { rate: 4, value: 3568 },
-  { rate: 3, value: 1568 },
-  { rate: 2, value: 0 },
-  { rate: 1, value: 568 }
-]
+interface IProps {
+  data: any
+}
 
-const ReviewsRate = () => {
+const ReviewsRate = (props: IProps) => {
+  const { data } = props
+
   return (
     <Spring className='card min-h-[182px] !py-5 flex flex-col justify-between col-span-2'>
-      {data.map((item, index) => (
+      {data?.map((item: any, index: number) => (
         <ReviewsRateItem key={index} rate={item.rate} value={getPercentage(data, item.value)} />
       ))}
     </Spring>

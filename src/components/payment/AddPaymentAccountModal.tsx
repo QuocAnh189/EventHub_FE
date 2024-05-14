@@ -8,8 +8,6 @@ import { useState } from 'react'
 import { AiOutlinePlus, AiOutlineUpload } from 'react-icons/ai'
 import { PaymentMethodsList } from './PaymentMethodsList'
 
-export interface IAddPaymentAccountModalProps {}
-
 export interface CreatePaymentAccountForm {
   methodId: string
   paymentAccountNumber: string
@@ -17,7 +15,7 @@ export interface CreatePaymentAccountForm {
   checkoutContent: string
 }
 
-export function AddPaymentAccountModal(props: IAddPaymentAccountModalProps) {
+export function AddPaymentAccountModal() {
   const user = useAppSelector((state) => state.user.user)
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)

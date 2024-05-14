@@ -47,10 +47,10 @@ import { RootState } from '@redux/store'
 import {
   useMoveEventPublicMutation,
   useMoveEventPrivateMutation,
-  useMoveEventTrashMutation,
-  useDeleteEventsMutation
+  useMoveEventTrashMutation
 } from '@redux/services/eventApi'
 import { useGetEventsByUserIdQuery } from '@redux/services/userApi'
+import { toast } from 'react-toastify'
 
 const EventManagement = () => {
   const categories = useAppSelector((state: RootState) => state.category.categories)
@@ -58,20 +58,9 @@ const EventManagement = () => {
 
   const [fetchFilter, setFetchFilter] = useState<IParamsEvent>(initParamsMyEvent)
 
-  const {
-    data,
-    isSuccess,
-    isFetching: fetchingEvents,
-    refetch
-  } = useGetEventsByUserIdQuery({
-    userId: user?.id!,
-    params: fetchFilter
-  })
-
   const [movePublicEvent, { isLoading: loadingPublic }] = useMoveEventPublicMutation()
   const [movePrivateEvent, { isLoading: loadingPrivate }] = useMoveEventPrivateMutation()
   const [moveTrashEvent, { isLoading: loadingTrash }] = useMoveEventTrashMutation()
-  const [moveDeleteEvent, { isLoading: loadingDelete }] = useDeleteEventsMutation()
 
   const [metadata, setMetadata] = useState<IMetadataEventReponse>()
   const [events, setEvents] = useState<IEvent[]>([])
@@ -83,12 +72,21 @@ const EventManagement = () => {
   const [selectedAction, setSelectedAction] = useState<EEventAction>()
   const [eventIds, setEventIds] = useState<string[]>([])
 
+  const {
+    data,
+    isSuccess,
+    isFetching: fetchingEvents,
+    refetch
+  } = useGetEventsByUserIdQuery({
+    userId: user?.id!,
+    params: { ...fetchFilter, eventPrivacy: category }
+  })
+
   const dataByStatus = useCallback(() => {
     if (category === 'ALL') return metadata?.totalCount
     if (category === 'PUBLIC') return metadata?.totalPublic
     if (category === 'PRIVATE') return metadata?.totalPrivate
-    if (category === 'TRASH') return metadata?.totalTrash
-  }, [metadata?.totalCount, metadata?.totalPublic, metadata?.totalPrivate, metadata?.totalTrash, category])
+  }, [metadata?.totalCount, metadata?.totalPublic, metadata?.totalPrivate, category])
 
   useEffect(() => {
     if (data) {
@@ -100,8 +98,17 @@ const EventManagement = () => {
   const pagination = usePagination(dataByStatus(), 4)
 
   useEffect(() => {
-    setFetchFilter({ ...fetchFilter, page: pagination.currentPage, eventPrivacy: category })
-  }, [pagination.currentPage, category])
+    setFetchFilter({ ...fetchFilter, page: pagination.currentPage })
+  }, [pagination.currentPage])
+
+  useEffect(() => {
+    setCheckedAll(false)
+    refetch()
+  }, [category])
+
+  useEffect(() => {
+    setEventIds(checkedAll ? events.map((item) => item.id) : [])
+  }, [checkedAll])
 
   const getQty = (category: string) => {
     switch (category) {
@@ -114,8 +121,6 @@ const EventManagement = () => {
       case 'PRIVATE':
         return metadata?.totalPrivate
 
-      case 'TRASH':
-        return metadata?.totalTrash
       default:
         break
     }
@@ -135,11 +140,11 @@ const EventManagement = () => {
   const handleSelectAction = (e: any) => {
     setOpenDialog(true)
     switch (e.label) {
-      case 'Move to publics':
+      case 'Move to Publics':
         setSelectedAction(EEventAction.PUBLIC)
         break
 
-      case 'Move to privates':
+      case 'Move to Privates':
         setSelectedAction(EEventAction.PRIVATE)
         break
 
@@ -147,9 +152,6 @@ const EventManagement = () => {
         setSelectedAction(EEventAction.TRASH)
         break
 
-      case 'Delete Permanently':
-        setSelectedAction(EEventAction.DELETE)
-        break
       default:
         break
     }
@@ -168,51 +170,86 @@ const EventManagement = () => {
     switch (selectedAction) {
       case EEventAction.PUBLIC:
         {
-          const result = await movePublicEvent(eventIds).unwrap()
-          if (result) {
-            console.log(result)
+          try {
+            if (eventIds.length) {
+              const result = await movePublicEvent(eventIds).unwrap()
+              if (result) {
+                // setCategory(EEventPrivacy.ALL)
+                // setFetchFilter({ ...fetchFilter, page: 1 })
+                // pagination.goToPage(1)
+                refetch()
+                toast.success('Move to public successfully')
+                setOpenDialog(false)
+              }
+            }
+          } catch (e) {
+            console.log(e)
           }
         }
         break
 
       case EEventAction.PRIVATE:
         {
-          const result = await movePrivateEvent(eventIds).unwrap()
-          if (result) {
-            console.log(result)
+          try {
+            if (eventIds.length) {
+              const result = await movePrivateEvent(eventIds).unwrap()
+              if (result) {
+                // setCategory(EEventPrivacy.ALL)
+                // setFetchFilter({ ...fetchFilter, page: 1 })
+                // pagination.goToPage(1)
+                refetch()
+                toast.success('Move to private successfully')
+                setOpenDialog(false)
+              }
+            }
+          } catch (e) {
+            console.log(e)
           }
         }
         break
 
       case EEventAction.TRASH:
         {
-          const result = await moveTrashEvent(eventIds).unwrap()
-          if (result) {
-            console.log(result)
+          try {
+            if (eventIds.length) {
+              const result = await moveTrashEvent(eventIds).unwrap()
+              if (result) {
+                // setCategory(EEventPrivacy.ALL)
+                // setFetchFilter({ ...fetchFilter, page: 1 })
+                // pagination.goToPage(1)
+                refetch()
+                toast.success('Move to trash successfully')
+                setOpenDialog(false)
+              }
+            }
+          } catch (e) {
+            console.log(e)
           }
         }
         break
 
-      case EEventAction.DELETE:
-        {
-          const result = await moveDeleteEvent(eventIds).unwrap()
-          if (result) {
-            console.log(result)
-          }
-        }
-        break
       default:
         break
     }
   }
 
-  const handleDeleteEvents = (id: string | string[]) => {
-    const newEvents = events.filter((event) => event.id !== id)
-    if (!newEvents.length) {
-      setFetchFilter({ ...fetchFilter, page: pagination.maxPage - 1 })
-      pagination.prev()
-    }
-    setEvents(newEvents)
+  // const handleTrashEvents = (id: string | string[]) => {
+  //   const newEvents = events.filter((event) => event.id !== id)
+  //   if (!newEvents.length) {
+  //     setFetchFilter({ ...fetchFilter, page: pagination.maxPage - 1 })
+  //     pagination.prev()
+  //   }
+  //   setEvents(newEvents)
+  //   refetch()
+  // }
+
+  const handleChangeOption = (value: EEventPrivacy) => {
+    setFetchFilter({ ...fetchFilter, page: 1 })
+    pagination.goToPage(1)
+    setCategory(value)
+  }
+
+  const handleRefect = () => {
     refetch()
   }
 
@@ -228,7 +265,9 @@ const EventManagement = () => {
               qty={getQty(option?.value)!}
               value={option?.value}
               active={category}
-              onClick={setCategory}
+              onClick={(value) => {
+                handleChangeOption(value)
+              }}
             />
           ))}
         </div>
@@ -281,7 +320,11 @@ const EventManagement = () => {
         <p className='text-header'>View events: {pagination.showingOf()}</p>
         <div className='md:min-w-[280px]'>
           <Select
-            options={EVENT_SELECT_OPTIONS.filter((item) => item.value !== category)}
+            options={
+              category === 'ALL'
+                ? [EVENT_SELECT_OPTIONS[2]]
+                : EVENT_SELECT_OPTIONS.filter((item) => item.value !== category)
+            }
             placeholder='Select Action'
             onChange={handleSelectAction}
           />
@@ -316,8 +359,9 @@ const EventManagement = () => {
                 key={`event-${index}`}
                 event={event}
                 checkedAll={checkedAll}
+                eventIds={eventIds}
                 onChecked={handleChecked}
-                handleDeleteEvents={handleDeleteEvents}
+                refect={handleRefect}
               />
             ))}
           </div>
@@ -337,7 +381,7 @@ const EventManagement = () => {
           }}
           action='Ok'
           onHandle={handleAction}
-          disabled={loadingPublic || loadingPrivate || loadingTrash || loadingDelete}
+          disabled={loadingPublic || loadingPrivate || loadingTrash}
         />
       )}
     </div>

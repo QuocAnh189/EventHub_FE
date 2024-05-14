@@ -18,10 +18,13 @@ import { motion } from 'framer-motion'
 import { SignUpPayload, SignUpPayloadOne, SignUpPayloadTwo, InitSignUpOne, InitSignUpTwo } from '@type/auth'
 
 //redux
-import { useSignUpMutation } from '@redux/services/authApi'
 import { toast } from 'react-toastify'
+import { useAppDispatch } from '@hooks/useRedux'
+import { setUser } from '@redux/slices/userSlice'
+import { useSignUpMutation } from '@redux/services/authApi'
 
 const SignUp = () => {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { width } = useWindowSize()
 
@@ -63,7 +66,16 @@ const SignUp = () => {
 
       if (result) {
         localStorage.setItem('token', JSON.stringify(result))
-        navigate('/organization')
+        const response = await fetch(`${import.meta.env.VITE_API_URL!}/auth/profile`, {
+          headers: { Authorization: `Bearer ${result.accessToken}` }
+        })
+
+        const user = await response.json()
+
+        if (user) {
+          dispatch(setUser(user.data))
+          navigate('/organization')
+        }
       }
     } catch (error: any) {
       const message = error.data.message

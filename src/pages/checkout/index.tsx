@@ -1,6 +1,5 @@
 import { QuantityButton } from '@components/QuantityButton'
 import { useAppSelector } from '@hooks/useRedux'
-import ActionTicket from '@pages/event/components/ActionTicket'
 import { useGetEventByIdQuery } from '@redux/services/eventApi'
 import { useCheckoutMutation } from '@redux/services/paymentApi'
 import { useGetPaymentAccountsQuery } from '@redux/services/userApi'
@@ -10,8 +9,6 @@ import { Button, Divider, Form, Image, Input, Spin, notification } from 'antd'
 import { IPaymentAccount } from 'interfaces/contents/payment'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-
-export interface ICheckoutPageProps {}
 
 export interface CustomerInformationForm {
   customerName: string
@@ -27,7 +24,7 @@ export interface PaymentItem {
   maxQuantity: number
 }
 
-export default function CheckoutPage(props: ICheckoutPageProps) {
+export default function CheckoutPage() {
   const params = useParams()
 
   const [checkout, { isLoading: checkoutLoading }] = useCheckoutMutation()

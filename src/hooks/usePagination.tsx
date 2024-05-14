@@ -23,7 +23,7 @@ export const usePagination = (totalCount: any, itemsPerPage = 10) => {
     const end = totalCount > itemsPerPage ? begin : totalCount
     return totalCount > 0 ? (
       <>
-        <span className='font-semibold'>{end}</span>/{totalCount}
+        <span className='font-semibold'>{end > totalCount ? totalCount : end}</span>/{totalCount}
       </>
     ) : (
       ''

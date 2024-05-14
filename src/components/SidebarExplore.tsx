@@ -9,7 +9,7 @@ import Checkbox from '@mui/material/Checkbox'
 import Divider from '@mui/material/Divider'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
-import FormControl from '@mui/material/FormControl'
+// import FormControl from '@mui/material/FormControl'
 import ItemCategory from './ItemCategory'
 
 //redux
@@ -43,7 +43,7 @@ const SidebarExplore = (props: Props) => {
 
   return (
     <div className='w-1/5 flex flex-col gap-6'>
-      <div className='flex flex-col gap-4'>
+      {/* <div className='flex flex-col gap-4'>
         <div className='flex items-center justify-between'>
           <h1 className='text-black text-xl font-semibold text-header'>Price</h1>
         </div>
@@ -73,7 +73,7 @@ const SidebarExplore = (props: Props) => {
             />
           </RadioGroup>
         </FormControl>
-      </div>
+      </div> */}
 
       <div className='flex flex-col gap-2'>
         <div className='flex items-center justify-between'>

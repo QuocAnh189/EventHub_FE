@@ -29,7 +29,7 @@ interface Props {
 
 const MessageItem = (props: Props) => {
   const { message = placeholder, index } = props
-  const fullName = `${message.sender.firstName} ${message.sender.lastName}`
+
   const [ref, { width }] = useMeasure()
 
   return (
@@ -37,10 +37,10 @@ const MessageItem = (props: Props) => {
       <img
         className='w-[36px] h-[36px] shrink-0 rounded-md bg-body overflow-hidden'
         src={message.sender.avatar}
-        alt={fullName}
+        alt={message.sender.fullName}
       />
       <div>
-        <h6 className='text-sm truncate max-w-[210px]'>{fullName}</h6>
+        <h6 className='text-sm truncate max-w-[210px]'>{message.sender.fullName}</h6>
         <p className='flex items-center gap-1.5 mt-1 mb-2 text-xs font-medium text-gray'>
           <span>{dayjs(message.createdAt).fromNow()}</span>
           <i className='icon-circle-solid text-[4px]' />

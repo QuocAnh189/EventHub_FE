@@ -15,16 +15,16 @@ import { setUser } from '@redux/slices/userSlice'
 import { IUser } from 'interfaces/systems/user'
 
 //assets
-import useDefault from '@assets/common/user_default.png'
+import userDefault from '@assets/common/user_default.png'
 
 interface Props {
   avatar: string
-  userName: string
+  fullName: string
   setValue: UseFormSetValue<IUser>
   roles: string[]
 }
 const UserProfileCard = (props: Props) => {
-  const { avatar, setValue, userName, roles } = props
+  const { avatar, setValue, fullName, roles } = props
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -52,7 +52,7 @@ const UserProfileCard = (props: Props) => {
         <img
           loading='lazy'
           className='relative rounded-full w-[110px] h-[110px]'
-          src={avatarUser ? avatarUser : useDefault}
+          src={avatarUser ? avatarUser : userDefault}
           alt=''
         />
 
@@ -71,7 +71,7 @@ const UserProfileCard = (props: Props) => {
           onChange={handleChangeAvatar}
         />
       </div>
-      <h4>{userName}</h4>
+      <h4>{fullName}</h4>
       <span className='badge badge--square bg-red min-w-[96px] mt-2.5'>{roles?.join(',')}</span>
 
       <button disabled={loadingLogout} onClick={handleSignOut} className='btn btn--secondary w-full md:max-w-[280px]'>

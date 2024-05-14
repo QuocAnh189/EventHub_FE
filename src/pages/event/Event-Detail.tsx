@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 //component
@@ -20,27 +20,57 @@ import EventsRelate from './components/EventRelate'
 
 //redux
 import Payment from './components/Paymen'
+import { useGetEventByIdQuery, useFavouriteEventMutation, useUnfavouriteEventMutation } from '@redux/services/eventApi'
 
 //icons
-import { MdStarRate } from 'react-icons/md'
 import { IoShareSocialOutline, IoLocationOutline } from 'react-icons/io5'
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { IoMdTime } from 'react-icons/io'
-import { useGetEventByIdQuery } from '@redux/services/eventApi'
+import { FaHeart } from 'react-icons/fa6'
 
 //util
 import dayjs from 'dayjs'
+import { useAppSelector } from '@hooks/useRedux'
 
 const EventDetail = () => {
   const params = useParams()
 
-  const { data: event, isFetching } = useGetEventByIdQuery(params.id!)
+  const user = useAppSelector((state) => state.user.user)
+  const { data: event, isFetching, refetch } = useGetEventByIdQuery(params.id!)
+
+  useEffect(() => {
+    refetch()
+  }, [])
+
+  const [likeEvent] = useFavouriteEventMutation()
+  const [unlikeEvent] = useUnfavouriteEventMutation()
+
+  const [favourite, setFavourite] = useState(event?.isFavourite)
 
   const [value, setValue] = useState<string>('1')
   const [openDialog, setOpenDialog] = useState<boolean>(false)
 
   const handleChange = (_event: any, newValue: string) => {
     setValue(newValue)
+  }
+
+  useEffect(() => {
+    setFavourite(event?.isFavourite)
+  }, [event?.isFavourite])
+
+  const handleLikeEvent = async () => {
+    setFavourite(!favourite)
+    try {
+      const result = favourite
+        ? await unlikeEvent({ eventId: event?.id!, userId: user?.id! })
+        : await likeEvent({ eventId: event?.id!, userId: user?.id! })
+
+      if (result) {
+        console.log(result)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   if (isFetching) {
@@ -66,7 +96,9 @@ const EventDetail = () => {
           <div className='flex items-center justify-between w-full'>
             <h1>{event?.name}</h1>
             <div className='flex items-center gap-2'>
-              <MdStarRate color='gray' size='36px' />
+              <button onClick={handleLikeEvent}>
+                <FaHeart color={favourite ? 'red' : 'gray'} size='36px' />
+              </button>
               <IoShareSocialOutline color='gray' size='36px' />
             </div>
           </div>

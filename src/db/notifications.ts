@@ -6,10 +6,9 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'order',
     subcategory: 'Offers',
-    text: 'joined to discount program',
+    text: 'Quốc đã theo dõi bạn',
     user: {
-      firstName: 'J.',
-      lastName: 'Davidson',
+      fullName: 'Trần Phước Anh Quốc',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
@@ -18,10 +17,9 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'follow',
     subcategory: 'Referral link',
-    text: 'created new account by email',
+    text: 'Duy đã theo dõi bạn',
     user: {
-      firstName: 'Mark',
-      lastName: 'Dowers',
+      fullName: 'Trần Vương Duy',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
@@ -30,10 +28,9 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'follow',
     subcategory: 'Referral link',
-    text: 'created new account by email',
+    text: 'Hiền đã theo dõi bạn',
     user: {
-      firstName: 'Parker',
-      lastName: 'Johnson',
+      fullName: 'Lê Thị Thu Hiền',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
@@ -44,8 +41,7 @@ const notifications = [
     subcategory: 'Electronics',
     text: 'leaved a new review',
     user: {
-      firstName: 'Mary',
-      lastName: 'Wilson',
+      fullName: 'Thảo đã theo dõi bạn',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
@@ -54,10 +50,9 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'order',
     subcategory: 'Electronics',
-    text: 'sent a request for refund',
+    text: 'Khôi đã theo dõi bạn',
     user: {
-      firstName: 'Helen',
-      lastName: 'Miller',
+      fullName: 'Mai Đình Khôi',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
@@ -66,10 +61,9 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'follow',
     subcategory: 'Subscriptions',
-    text: 'started following you',
+    text: 'Tại sao đã theo dõi bạn',
     user: {
-      firstName: 'Victor',
-      lastName: 'Stevens',
+      fullName: 'Trương Nguyễn Phước Trí',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
@@ -78,10 +72,9 @@ const notifications = [
     timestamp: faker.date.past(),
     category: 'follow',
     subcategory: 'Subscriptions',
-    text: 'started following you',
+    text: 'Chính đã theo dõi bạn',
     user: {
-      firstName: 'Rita',
-      lastName: 'Fisher',
+      fullName: 'Trần Minh Chính',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   }

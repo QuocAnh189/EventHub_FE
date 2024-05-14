@@ -12,7 +12,9 @@ import { Pagination } from 'swiper/modules'
 import { ICategory } from 'interfaces/contents/category'
 
 //redux
-import { useGetEventsByCategoryIdQuery } from '@redux/services/categoryApi'
+import { useGetEventsQuery } from '@redux/services/eventApi'
+import { initParamsEvent } from '@type/event'
+import { IEvent } from 'interfaces/contents/event'
 
 interface Props {
   category: ICategory
@@ -21,7 +23,7 @@ interface Props {
 const TopEventsByCategories = (props: Props) => {
   const { category } = props
 
-  const { data: events } = useGetEventsByCategoryIdQuery(category.id!)
+  const { data: events } = useGetEventsQuery({ ...initParamsEvent, categoryIds: [category.id] })
 
   if (events) {
     console.log(events)
@@ -49,9 +51,9 @@ const TopEventsByCategories = (props: Props) => {
           rewind={false}
           loop
         >
-          {[0, 1, 2, 3, 4].map((item) => (
-            <SwiperSlide className='!h-auto' key={item}>
-              <ProductGridItem />
+          {events?.items.map((event: IEvent, index: number) => (
+            <SwiperSlide className='!h-auto' key={`event-${index}`}>
+              <ProductGridItem event={event} />
             </SwiperSlide>
           ))}
         </Swiper>

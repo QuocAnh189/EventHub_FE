@@ -19,13 +19,10 @@ import PosterTwo from '@assets/event/event-subposter.png'
 //redux
 import { useGetCategoriesQuery } from '@redux/services/categoryApi'
 import { setCategories } from '@redux/slices/categorySlice'
-import { useGetProfileQuery } from '@redux/services/authApi'
-import { setUser } from '@redux/slices/userSlice'
 
 const Home = () => {
   const dispatch = useAppDispatch()
 
-  const { data: user, isSuccess: successProfile } = useGetProfileQuery()
   const { data: categories, isSuccess } = useGetCategoriesQuery()
 
   useEffect(() => {
@@ -33,12 +30,6 @@ const Home = () => {
       dispatch(setCategories(categories))
     }
   }, [isSuccess])
-
-  useEffect(() => {
-    if (user) {
-      dispatch(setUser(user))
-    }
-  }, [successProfile])
 
   return (
     <div className='flex flex-col items-center'>

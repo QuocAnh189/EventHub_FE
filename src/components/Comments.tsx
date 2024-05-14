@@ -25,6 +25,9 @@ import { useGetReviewsByEventIdQuery, useAddReviewMutation, useDeleteReviewMutat
 //util
 import dayjs from 'dayjs'
 
+//assets
+import userDefault from '@assets/common/user_default.png'
+
 interface ItemReviewsProps {
   eventId: string
   ownerId: string
@@ -69,7 +72,11 @@ const ItemReviews = (props: ItemReviewsProps) => {
         <div key={`index${index}`} className='space-y-4'>
           <div className='flex items-center justify-between gap-2'>
             <div className='flex items-center gap-2'>
-              <img src={review.userAvatar} alt='' className='w-[40px] h-[40px] object-cover rounded-full' />
+              <img
+                src={review.userAvatar ? review.userAvatar : userDefault}
+                alt=''
+                className='w-[40px] h-[40px] object-cover rounded-full'
+              />
               <div className=''>
                 <div className='flex items-center gap-2'>
                   <p className='font-semibold text-header'>{review.fullName}</p>

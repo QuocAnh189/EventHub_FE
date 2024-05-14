@@ -14,6 +14,7 @@ export interface IUser {
   numberOfFolloweds: number
   numberOfFavourites: number
   numberOfCreatedEvents: number
+  followingIds: string[]
   roles: string[]
   createdAt: Date
   updateAp: Date

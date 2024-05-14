@@ -25,15 +25,14 @@ interface Props {
 
 const NotificationItem = (props: Props) => {
   const { notification = placeholder, index } = props
-  const fullName = `${notification.user.firstName} ${notification.user.lastName}`
 
   return (
     <Spring className='notification with-border flex gap-2.5' index={index}>
       <div className='w-[36px] h-[36px] shrink-0 rounded-md bg-body overflow-hidden'>
-        <img src={notification.user.avatar} alt={fullName} />
+        <img src={notification.user.avatar} alt={notification.user.fullName} />
       </div>
       <div>
-        <span className='h6 !text-sm truncate max-w-[210px]'>{fullName}</span>
+        <span className='h6 !text-sm truncate max-w-[210px]'>{notification.user.fullName}</span>
         <p>{notification.text}</p>
         <p className='flex items-center gap-1.5 mt-1 mb-2 text-xs font-medium text-gray'>
           <span>{dayjs(notification.timestamp).fromNow()}</span>

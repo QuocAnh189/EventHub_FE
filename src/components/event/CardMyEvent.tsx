@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 //hook
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 //component
+import CircularProgress from '@mui/material/CircularProgress'
 import ConfirmDialog from '@components/Dialog'
 import Checkbox from '@mui/material/Checkbox'
+import { toast } from 'react-toastify'
 
 //icons
 import { HiPencilAlt, HiTrash } from 'react-icons/hi'
@@ -20,47 +22,72 @@ import dayjs from 'dayjs'
 import event_Default from '@assets/event/event-poster.png'
 
 //redux
-import { useDeleteEventMutation } from '@redux/services/eventApi'
-import { toast } from 'react-toastify'
+import { useDeleteEventMutation, useMoveEventTrashMutation } from '@redux/services/eventApi'
+import { useRestoreEventMutation } from '@redux/services/eventApi'
 
 interface Props {
   event: IEvent
   checkedAll: boolean
+  eventIds: string[]
   onChecked: (id: string) => void
-  handleDeleteEvents: (id: string | string[]) => void
+  refect: any
 }
 
 const CardMyEvent = (props: Props) => {
-  const { event, checkedAll, onChecked, handleDeleteEvents } = props
+  const { event, checkedAll, onChecked, eventIds, refect } = props
   const navigate = useNavigate()
 
-  const [deleteEvent, { isLoading }] = useDeleteEventMutation()
+  const [restoreEvent, { isLoading: loadingRestore }] = useRestoreEventMutation()
+  const [trashEvent, { isLoading: loadingTrash }] = useMoveEventTrashMutation()
+  const [deleteEvent, { isLoading: loadingDelete }] = useDeleteEventMutation()
   const [openDialog, setOpenDialog] = useState<boolean>(false)
   const [select, setSelect] = useState<boolean>(checkedAll)
-
-  useEffect(() => {
-    setSelect(checkedAll)
-  }, [checkedAll])
 
   const handleChange = () => {
     setSelect(!select)
     onChecked(event.id)
   }
 
-  const handleEdit = () => {
+  const handleEditEvent = () => {
     navigate(`modify-event/${event.id}`)
+  }
+
+  const handleRestoreEvent = async () => {
+    try {
+      const result = await restoreEvent([event.id]).unwrap()
+
+      if (result) {
+        toast.success('Restore Event successfully')
+        refect()
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const handleDelete = () => {
     setOpenDialog(true)
   }
 
+  const handleTrashEvent = async () => {
+    try {
+      const result = await trashEvent([event.id]).unwrap()
+      if (result) {
+        toast.success('Move event to trash successfully')
+        refect()
+        setOpenDialog(false)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   const handleDeleteEvent = async () => {
     try {
       const result = await deleteEvent(event.id).unwrap()
       if (result) {
-        handleDeleteEvents(event.id)
-        toast.success('Delete quiz successfully')
+        toast.success('Delete event successfully')
+        refect()
         setOpenDialog(false)
       }
     } catch (e) {
@@ -96,13 +123,13 @@ const CardMyEvent = (props: Props) => {
             </div>
           </div>
           <div className='flex items-center justify-between'>
-            <Checkbox checked={select} onChange={handleChange} sx={{ color: 'var(--header)' }} />
+            <Checkbox checked={eventIds.includes(event.id)} onChange={handleChange} sx={{ color: 'var(--header)' }} />
             <div className='w-full justify-end flex gap-4 pt-2'>
               <button
-                onClick={handleEdit}
+                onClick={event.isTrash ? handleRestoreEvent : handleEditEvent}
                 className='flex items-center justify-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
-                Edit
+                {event.isTrash ? loadingRestore ? <CircularProgress size={24} /> : 'Restore' : 'Edit'}
                 <HiPencilAlt className='ml-2 h-6 w-6 text-white' />
               </button>
 
@@ -127,8 +154,8 @@ const CardMyEvent = (props: Props) => {
             setOpenDialog(value)
           }}
           action={event.isTrash ? 'Delete' : 'Trash'}
-          onHandle={handleDeleteEvent}
-          disabled={isLoading}
+          onHandle={event.isTrash ? handleDeleteEvent : handleTrashEvent}
+          disabled={event.isTrash ? loadingDelete : loadingTrash}
         />
       )}
     </>

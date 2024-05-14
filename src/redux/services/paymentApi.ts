@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { CheckoutPayload } from '@type/payment'
-import { ApiListResponse, ApiResponse } from 'interfaces'
+import { ApiListResponse } from 'interfaces'
 import { IPayment, IPaymentMethod } from 'interfaces/contents/payment'
 
 export const apiPayment = createApi({

@@ -11,7 +11,8 @@ const MessageContainer = () => {
       ) : (
         <>
           <div className='bg-primary px-4 py-2 mb-2'>
-            <span className='text-white'>To:</span> <span className='text-textOrange font-bold text-xl'> Anh Quoc</span>
+            <span className='text-white'>To:</span>{' '}
+            <span className='text-textOrange font-bold text-xl'>Trần Phước Anh Quốc</span>
           </div>
           <Messages />
           <MessageInput />

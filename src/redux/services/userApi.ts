@@ -19,8 +19,8 @@ export const apiUser = createApi({
       return headers
     }
   }),
-  // keepUnusedDataFor: 20,
-  tagTypes: ['User', 'Events'],
+  keepUnusedDataFor: 20,
+  tagTypes: ['User', 'Event'],
   endpoints: (builder) => ({
     getUsers: builder.query<IUser[], void>({
       query: () => ({
@@ -44,7 +44,7 @@ export const apiUser = createApi({
         method: 'GET',
         params
       }),
-      providesTags: ['Events'],
+      providesTags: ['Event'],
       transformResponse: (response: any) => {
         return response.data
       }
@@ -64,10 +64,6 @@ export const apiUser = createApi({
         url: `/users/${userId}`,
         method: 'PUT',
         body: data
-        // headers: {
-        //   Accept: '*/*',
-        //   'Content-Type': 'multipart/form-data;'
-        // }
       })
     }),
 
@@ -99,8 +95,12 @@ export const apiUser = createApi({
     getReviewsByUserId: builder.query<any, string>({
       query: (userId) => ({
         url: `/users/${userId}/reviews`,
-        method: 'GET'
+        method: 'GET',
+        params: { size: 5 }
       }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
       providesTags: ['User']
     }),
 
@@ -112,12 +112,27 @@ export const apiUser = createApi({
       providesTags: ['User']
     }),
 
+    getEventsTrashByUserId: builder.query<any, { userId: string; params: IParamsEvent }>({
+      query: ({ userId, params }) => ({
+        url: `/users/${userId}/events/trash`,
+        method: 'GET',
+        params
+      }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
+      providesTags: ['User', 'Event']
+    }),
+
     followUser: builder.mutation<any, IFollowPayload>({
       query: (data) => ({
         url: `/users/followers/follow`,
         method: 'POST',
         body: data
       }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
       invalidatesTags: ['User']
     }),
 
@@ -127,6 +142,9 @@ export const apiUser = createApi({
         method: 'POST',
         body: data
       }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
       invalidatesTags: ['User']
     }),
 
@@ -178,6 +196,7 @@ export const {
   useGetMenuByUserIdQuery,
   useGetReviewsByUserIdQuery,
   useGetEventsFavouriteByUserIdQuery,
+  useGetEventsTrashByUserIdQuery,
   useFollowUserMutation,
   useUnfollowUserMutation,
   useGetPaymentAccountsQuery,
