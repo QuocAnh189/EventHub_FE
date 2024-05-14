@@ -1,10 +1,22 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IPayment } from 'interfaces/contents/payment'
+import { CheckoutPayload } from '@type/payment'
+import { ApiListResponse } from 'interfaces'
+import { IPayment, IPaymentMethod } from 'interfaces/contents/payment'
 
 export const apiPayment = createApi({
   reducerPath: 'apiPayment',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL
+    baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers) => {
+      const token = JSON.parse(localStorage.getItem('token')!)?.accessToken
+      headers.set('Content-Type', 'application/json')
+
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+
+      return headers
+    }
   }),
   keepUnusedDataFor: 20,
   tagTypes: ['Payment'],
@@ -49,6 +61,26 @@ export const apiPayment = createApi({
         method: 'DELETE'
       }),
       invalidatesTags: ['Payment']
+    }),
+
+    getPaymentMethods: builder.query<IPaymentMethod[], void>({
+      query: () => ({
+        url: `/payments/payment-methods`,
+        method: 'GET'
+      }),
+      transformResponse: (response: ApiListResponse<IPaymentMethod[]>) => {
+        return response.data.items
+      },
+      providesTags: ['Payment']
+    }),
+
+    checkout: builder.mutation<{ id: string }, CheckoutPayload>({
+      query: (data) => ({
+        url: `/payments/checkout`,
+        method: 'POST',
+        body: data
+      }),
+      invalidatesTags: ['Payment']
     })
   })
 })
@@ -58,5 +90,7 @@ export const {
   useGetPaymentQuery,
   useCreatePaymentMutation,
   useUpdatePaymentMutation,
-  useDeletePaymentMutation
+  useDeletePaymentMutation,
+  useGetPaymentMethodsQuery,
+  useCheckoutMutation
 } = apiPayment

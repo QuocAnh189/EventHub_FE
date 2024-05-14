@@ -22,3 +22,25 @@ export interface ApiResponse<TData> {
   data: TData
   errors?: string[] | null
 }
+
+export interface ApiListResponse<TData> {
+  statusCode: number
+  message: string
+  data: IListData<TData>
+  errors?: string[] | null
+}
+
+export interface IListData<T> {
+  items: T
+  metadata: IMetadata
+}
+
+export interface IMetadata {
+  currentPage: number
+  totalPages: number
+  takeAll: boolean
+  pageSize: number
+  totalCount: number
+  hasPrevious: boolean
+  hasNext: boolean
+}

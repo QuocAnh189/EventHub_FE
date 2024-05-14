@@ -5,7 +5,6 @@ export async function URLtoFile(url: string) {
     const file = new File([blob], url.split('/')[5].split('?')[0], { type: blob.type })
     return file
   } catch (error) {
-    // return new File([], "");
     console.log(error)
   }
 }

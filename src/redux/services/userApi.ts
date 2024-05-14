@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { IParamsEvent } from '@type/event'
 import { IChangePasswordPayload, IFollowPayload } from '@type/user'
+import { ApiListResponse, IListData } from 'interfaces'
+import { IPaymentAccount } from 'interfaces/contents/payment'
 import { IUser } from 'interfaces/systems/user'
 
 export const apiUser = createApi({
@@ -144,6 +146,41 @@ export const apiUser = createApi({
         return response.data
       },
       invalidatesTags: ['User']
+    }),
+
+    getPaymentAccounts: builder.query<IListData<IPaymentAccount[]>, string>({
+      query: (userId) => ({
+        url: `/users/${userId}/payments/accounts`,
+        method: 'GET'
+      }),
+      transformResponse: (response: ApiListResponse<IPaymentAccount[]>) => response.data,
+      providesTags: ['User']
+    }),
+
+    createPaymentAccount: builder.mutation<{ id: string }, { userId: string; data: FormData }>({
+      query: ({ userId, data }) => ({
+        url: `/users/${userId}/payments/accounts`,
+        method: 'POST',
+        body: data
+      }),
+      invalidatesTags: ['User']
+    }),
+
+    updatePaymentAccount: builder.mutation<{ id: string }, { accountId: string; userId: string; data: FormData }>({
+      query: ({ accountId, userId, data }) => ({
+        url: `/users/${userId}/payments/accounts/${accountId}`,
+        method: 'PUT',
+        body: data
+      }),
+      invalidatesTags: ['User']
+    }),
+
+    deletePaymentAccount: builder.mutation<{ id: string }, { accountId: string; userId: string }>({
+      query: ({ accountId, userId }) => ({
+        url: `/users/${userId}/payments/accounts/${accountId}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['User']
     })
   })
 })
@@ -161,5 +198,9 @@ export const {
   useGetEventsFavouriteByUserIdQuery,
   useGetEventsTrashByUserIdQuery,
   useFollowUserMutation,
-  useUnfollowUserMutation
+  useUnfollowUserMutation,
+  useGetPaymentAccountsQuery,
+  useCreatePaymentAccountMutation,
+  useUpdatePaymentAccountMutation,
+  useDeletePaymentAccountMutation
 } = apiUser

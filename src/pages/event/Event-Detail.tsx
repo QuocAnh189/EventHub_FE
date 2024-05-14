@@ -90,10 +90,10 @@ const EventDetail = () => {
               }
               alt=''
               loading='lazy'
-              className='w-full h-full object-cover rounded-xl'
+              className='object-cover w-full h-full rounded-xl'
             />
           </div>
-          <div className='w-full flex items-center justify-between'>
+          <div className='flex items-center justify-between w-full'>
             <h1>{event?.name}</h1>
             <div className='flex items-center gap-2'>
               <button onClick={handleLikeEvent}>
@@ -103,7 +103,7 @@ const EventDetail = () => {
             </div>
           </div>
           <div className='flex justify-between'>
-            <div className='w-full flex flex-col gap-4'>
+            <div className='flex flex-col w-full gap-4'>
               <div className='flex flex-col gap-y-3'>
                 <h4 className='text-header'>Date and Time</h4>
                 <div className='flex items-center gap-1'>
@@ -131,13 +131,7 @@ const EventDetail = () => {
               </div>
             </div>
 
-            <Payment
-              promotion={event?.promotion!}
-              ticketTypes={event?.ticketTypes!}
-              setOpenDialog={(value: boolean) => {
-                setOpenDialog(value)
-              }}
-            />
+            <Payment promotion={event?.promotion!} ticketTypes={event?.ticketTypes!} />
           </div>
         </div>
 

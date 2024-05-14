@@ -15,3 +15,20 @@ export interface IPayment {
   createdAt?: Date
   updateAt?: Date
 }
+
+export interface IPaymentMethod {
+  id: string
+  methodName: string
+  methodLogo: string
+}
+
+export interface IPaymentAccount {
+  id: string
+  userId: string
+  methodId: string
+  methodName: string
+  methodLogo: string
+  paymentAccountNumber: string
+  paymentAccountQRCode?: string
+  checkoutContent?: string
+}
