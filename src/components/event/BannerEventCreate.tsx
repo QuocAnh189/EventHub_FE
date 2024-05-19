@@ -8,14 +8,18 @@ import { UseFormSetValue } from 'react-hook-form'
 import { BiTrash } from 'react-icons/bi'
 import { toast } from 'react-toastify'
 
+//i18
+import { withTranslation } from 'react-i18next'
+
 interface Props {
+  t: any
   coverImage: any
   subImage: any[]
   setActive: (value: number) => void
   setValue: UseFormSetValue<ICreateEventPayload>
 }
 const BannerEvent = (props: Props) => {
-  const { setActive, setValue, coverImage, subImage } = props
+  const { t, setActive, setValue, coverImage, subImage } = props
 
   const converCoverImageToBase64 = (e: any) => {
     const image = e.target.files[0]
@@ -39,7 +43,7 @@ const BannerEvent = (props: Props) => {
 
   return (
     <div className='relative pt-10 pb-20 px-40 space-y-10 min-h-screen'>
-      <h1 className='text-header font-semibold text-2xl '>Cover Images</h1>
+      <h1 className='text-header font-semibold text-2xl'>{t('banner.cover_image')}</h1>
       <div className='flex flex-col items-center gap-8'>
         <div className='relative w-4/5 h-[300px] flex items-center justify-center text-white rounded-xl media-dropzone  2xl:col-span-2'>
           <img
@@ -75,7 +79,7 @@ const BannerEvent = (props: Props) => {
           )}
         </div>
 
-        <h1 className='text-header font-semibold text-2xl '>Sub Image</h1>
+        <h1 className='text-header font-semibold text-2xl '>{t('banner.subs_image')}</h1>
         <div className='flex items-center gap-8'>
           {[0, 1, 2, 3].map((_, index) => (
             <div key={`subimage-${index}`} className='relative w-[200px] border-[2px] h-[100[px]] media-dropzone'>
@@ -122,14 +126,14 @@ const BannerEvent = (props: Props) => {
             setActive(0)
           }}
         >
-          Go back
+          {t('button_back')}
         </button>
         <button className=' btn btn--primary ' onClick={handleNextStep}>
-          Continue
+          {t('button_continue')}
         </button>
       </div>
     </div>
   )
 }
 
-export default BannerEvent
+export default withTranslation('create_event')(BannerEvent)

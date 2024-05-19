@@ -9,6 +9,9 @@ import TruncatedText from './TruncatedText'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
+//i18
+import { withTranslation } from 'react-i18next'
+
 dayjs.extend(relativeTime)
 
 const placeholder = {
@@ -58,4 +61,4 @@ const MessageItem = (props: Props) => {
   )
 }
 
-export default MessageItem
+export default withTranslation('common')(MessageItem)

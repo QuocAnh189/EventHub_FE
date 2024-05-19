@@ -25,7 +25,11 @@ import event_Default from '@assets/event/event-poster.png'
 import { useDeleteEventMutation, useMoveEventTrashMutation } from '@redux/services/eventApi'
 import { useRestoreEventMutation } from '@redux/services/eventApi'
 
+//i18
+import { withTranslation } from 'react-i18next'
+
 interface Props {
+  t: any
   event: IEvent
   checkedAll: boolean
   eventIds: string[]
@@ -34,7 +38,7 @@ interface Props {
 }
 
 const CardMyEvent = (props: Props) => {
-  const { event, checkedAll, onChecked, eventIds, refect } = props
+  const { t, event, checkedAll, onChecked, eventIds, refect } = props
   const navigate = useNavigate()
 
   const [restoreEvent, { isLoading: loadingRestore }] = useRestoreEventMutation()
@@ -129,7 +133,15 @@ const CardMyEvent = (props: Props) => {
                 onClick={event.isTrash ? handleRestoreEvent : handleEditEvent}
                 className='flex items-center justify-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
               >
-                {event.isTrash ? loadingRestore ? <CircularProgress size={24} /> : 'Restore' : 'Edit'}
+                {event.isTrash ? (
+                  loadingRestore ? (
+                    <CircularProgress size={24} />
+                  ) : (
+                    t('management.button_restore')
+                  )
+                ) : (
+                  t('management.button_edit')
+                )}
                 <HiPencilAlt className='ml-2 h-6 w-6 text-white' />
               </button>
 
@@ -137,7 +149,7 @@ const CardMyEvent = (props: Props) => {
                 onClick={handleDelete}
                 className='flex items-center justify-center rounded-lg bg-textError px-3 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
               >
-                <span>{event.isTrash ? 'Delete' : 'Trash'}</span>
+                <span>{event.isTrash ? t('management.button_delete') : t('management.button_trash')}</span>
                 <HiTrash className='ml-1 h-6 w-6 text-white' />
               </button>
             </div>
@@ -162,4 +174,4 @@ const CardMyEvent = (props: Props) => {
   )
 }
 
-export default CardMyEvent
+export default withTranslation('my_event')(CardMyEvent)

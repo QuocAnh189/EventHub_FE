@@ -12,6 +12,7 @@ import TextField from '@mui/material/TextField'
 //icon
 import { MdOutlineNoteAdd } from 'react-icons/md'
 import { IoMdClose } from 'react-icons/io'
+import ProtectedLayout from '@layouts/protected'
 
 const Todo = () => {
   const [openNewColumnForm, setOpenNewColumnForm] = useState<boolean>(false)
@@ -21,7 +22,7 @@ const Todo = () => {
   const handleAddNewColumn = async () => {}
 
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Todo' />
       <Spring>
         <Box className='flex w-full h-screen overflow-y-hidden overflow-x-auto bg-body'>
@@ -122,7 +123,7 @@ const Todo = () => {
           </Box>
         </Box>
       </Spring>
-    </>
+    </ProtectedLayout>
   )
 }
 

@@ -1,9 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 //hook
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 //component
 import EventCardSearchHome from '@components/EventCardSearchHome'
@@ -27,10 +26,8 @@ const initParam = {
   size: 10
 }
 
-const SearchHome = () => {
+const SearchHome = ({ t }: any) => {
   const navigate = useNavigate()
-
-  const { t } = useTranslation()
 
   const categories = useAppSelector((state) => state.category.categories)
 
@@ -105,9 +102,9 @@ const SearchHome = () => {
                   setValue('categoryIds', [e.target.value])
                 }}
                 className='mt-1 py-2 px-0 border-none outline-none text-md bg-white'
-                defaultValue='All'
+                defaultValue={[]}
               >
-                <option value='All'>All</option>
+                <option value={[]}>All</option>
                 {categories.map((category, index) => (
                   <option key={`category-${index}`} value={category.id}>
                     {category.name}
@@ -141,4 +138,4 @@ const SearchHome = () => {
   )
 }
 
-export default SearchHome
+export default withTranslation('home')(SearchHome)

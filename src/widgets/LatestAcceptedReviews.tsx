@@ -34,7 +34,7 @@ const LatestAcceptedReviews = (props: IProps) => {
             ))
           ) : (
             <div className='h-[500px]'>
-              <NotData text='reviews' />
+              <NotData />
             </div>
           )}
         </div>

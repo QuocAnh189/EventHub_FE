@@ -1,5 +1,5 @@
 //component
-import { PaymentAccountsList } from '@components/payment/PaymentAccountsList'
+import PaymentAccountsList from '@components/payment/PaymentAccountsList'
 import { useAppSelector } from '@hooks/useRedux'
 import { PageHeader } from '@layouts/components'
 import ProtectedLayout from '@layouts/protected'
@@ -7,7 +7,7 @@ import { useGetPaymentAccountsQuery } from '@redux/services/userApi'
 import { Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import Invoice from './components/Invoice'
-import { PaymentAccountModal } from '@components/payment/PaymentAccountModal'
+import PaymentAccountModal from '@components/payment/PaymentAccountModal'
 import { IPaymentAccount } from 'interfaces/contents/payment'
 
 const Payment = () => {
@@ -35,7 +35,7 @@ const Payment = () => {
                 <PaymentAccountsList
                   accounts={data?.items || []}
                   isLoading={isLoading}
-                  onClick={(method) => {
+                  onClick={(method: any) => {
                     setSelectedAccount(method)
                     setIsOpenModal(true)
                   }}

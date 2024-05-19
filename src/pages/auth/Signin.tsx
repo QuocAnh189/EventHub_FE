@@ -12,8 +12,9 @@ import logoText_Img from '@assets/common/logo-text.png'
 
 //motion
 import { motion } from 'framer-motion'
+import { withTranslation } from 'react-i18next'
 
-const SignIn = () => {
+const SignIn = ({ t }: any) => {
   const { width } = useWindowSize()
 
   const [forgotPassword, setforgotPassword] = useState<boolean>(false)
@@ -30,7 +31,7 @@ const SignIn = () => {
             <img loading='lazy' src={logoText_Img} alt='EventHub' className='w-[200px] object-cover' />
           </a>
           <p className='text-center tracking-[0.2px] font-semibold text-lg leading-6 max-w-[540px] my-7 mx-auto'>
-            Where every event finds its perfect audience, creating unforgettable moments and lasting connections
+            {t('slogan')}
           </p>
           <img loading='lazy' className='max-w-[780px]' src={authImg} alt='media' />
         </div>
@@ -49,7 +50,7 @@ const SignIn = () => {
               transition={{ duration: 0.4, delay: 0.2 }}
               className='mb-[30px] flex flex-row items-center justify-center gap-x-4'
             >
-              <h1 className='text-4xl font-semibold'>{forgotPassword ? 'Forgot password' : 'Login'}</h1>
+              <h1 className='text-4xl font-semibold'>{forgotPassword ? t('forgot_password_btn') : t('login_bth')}</h1>
             </motion.div>
             {forgotPassword ? (
               <ForgotPassword handleForgotPassword={handleForgotPassword} />
@@ -58,7 +59,7 @@ const SignIn = () => {
             )}
             <div className='absolute bottom-0 left-[50%] min-h-[70px] w-full translate-x-[-50%] text-center'>
               <p className='font-semibold text-textGray'>
-                ©2024 event Hub -<span className='font-bold text-textBlack'>Imprint & Privacy Policy</span>
+                {t('footer_one')} -<span className='font-bold text-textBlack'>{t('footer_two')}</span>
               </p>
             </div>
           </div>
@@ -68,4 +69,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default withTranslation('signin')(SignIn)

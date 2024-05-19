@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 // hooks
 import { Controller, UseFormRegister, UseFormWatch, UseFormSetValue, Control } from 'react-hook-form'
 import { useTheme } from '@contexts/themeContext'
@@ -14,8 +15,10 @@ import classNames from 'classnames'
 import { IUser } from 'interfaces/systems/user'
 import { CircularProgress } from '@mui/material'
 import { EUserStatus } from '@constants/enum'
+import { withTranslation } from 'react-i18next'
 
 interface Props {
+  t: any
   register: UseFormRegister<IUser>
   watch: UseFormWatch<IUser>
   setValue: UseFormSetValue<IUser>
@@ -27,7 +30,7 @@ interface Props {
 }
 
 const UserProfileDetails = (props: Props) => {
-  const { register, watch, setValue, control, errors, isLoading, roles, status } = props
+  const { t, register, watch, setValue, control, errors, isLoading, roles, status } = props
 
   const { theme, toggleTheme }: any = useTheme()
 
@@ -43,7 +46,7 @@ const UserProfileDetails = (props: Props) => {
           <div className='grid gap-4'>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='firstName'>
-                User Name
+                {t('profile detail.user_name')}
               </label>
               <input
                 className={classNames('field-input text-header', { 'field-input--error': errors.userName })}
@@ -56,7 +59,7 @@ const UserProfileDetails = (props: Props) => {
             </div>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='lastName'>
-                Full Name
+                {t('profile detail.full_name')}
               </label>
               <input
                 className={classNames('field-input text-header', { 'field-input--error': errors.fullName })}
@@ -70,7 +73,7 @@ const UserProfileDetails = (props: Props) => {
 
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='email'>
-                Email
+                {t('profile detail.email')}
               </label>
               <input
                 className={classNames('field-input text-header', { 'field-input--error': errors.email })}
@@ -83,7 +86,7 @@ const UserProfileDetails = (props: Props) => {
             </div>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='lastName'>
-                Password
+                {t('profile detail.password')}
               </label>
               <input
                 className={classNames('field-input text-header', { 'field-input--error': errors.fullName })}
@@ -95,7 +98,7 @@ const UserProfileDetails = (props: Props) => {
             </div>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='phone'>
-                Phone Number
+                {t('profile detail.phone_number')}
               </label>
               <Controller
                 name='phoneNumber'
@@ -115,7 +118,7 @@ const UserProfileDetails = (props: Props) => {
           <div className='grid gap-4'>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='city'>
-                Gender
+                {t('profile detail.gender')}
               </label>
               <Select
                 placeholder='Gender'
@@ -133,7 +136,7 @@ const UserProfileDetails = (props: Props) => {
             </div>
             <div className='field-wrapper'>
               <label className='field-label text-header' htmlFor='state'>
-                Day of birth
+                {t('profile detail.dob')}
               </label>
               <input
                 className='field-input text-header'
@@ -145,7 +148,7 @@ const UserProfileDetails = (props: Props) => {
             </div>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='zip'>
-                Status
+                {t('profile detail.status')}
               </label>
               <input
                 readOnly
@@ -158,7 +161,7 @@ const UserProfileDetails = (props: Props) => {
             </div>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='firstName'>
-                Role
+                {t('profile detail.role')}
               </label>
               <input
                 readOnly
@@ -171,7 +174,7 @@ const UserProfileDetails = (props: Props) => {
             </div>
             <div className='field-wrapper'>
               <label className='field-label' htmlFor='address'>
-                Bio
+                {t('profile detail.bio')}
               </label>
               <input className='field-input text-header' type='text' id='Bio' placeholder='Bio' {...register('bio')} />
             </div>
@@ -179,53 +182,54 @@ const UserProfileDetails = (props: Props) => {
         </div>
         <div className='mt-2.5'>
           <button className='text-btn' type='button'>
-            Change password
+            {t('profile detail.change_password')}
           </button>
           <button disabled={isLoading} type='submit' className='btn btn--primary w-[260px] mt-5'>
-            {isLoading ? <CircularProgress size={24} /> : 'Update information'}
+            {isLoading ? <CircularProgress size={24} /> : t('profile detail.update_information')}
           </button>
         </div>
       </div>
       <div>
-        <h5>Admin Panel Tools</h5>
+        <h5>{t('profile detail.admin_panel_tools')}</h5>
         <div className='grid gap-4 mt-5 md:grid-cols-2 md:gap-y-8 md:gap-x-[50px] md:mt-8 lg:grid-cols-3 lg:max-w-[780px]'>
           <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-window-solid' />
             </span>
             <span>
-              Connected Apps <span className='subheading-2'>(12)</span>
+              {t('profile detail.connected_apps')}
+              <span className='subheading-2'>(12)</span>
             </span>
           </NavLink>
           <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-money-check-dollar-pen-solid' style={{ fontSize: 16 }} />
             </span>
-            Payment Methods
+            {t('profile detail.payment_methods')}
           </NavLink>
           <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-screwdriver-wrench-solid' />
             </span>
-            Appearance
+            {t('profile detail.apperance')}
           </NavLink>
           <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-shield-halved-solid' />
             </span>
-            Security Assets
+            {t('profile detail.security_assets')}
           </NavLink>
           <NavLink className='tool-btn text-header' to='/connected-apps'>
             <span className='icon-wrapper'>
               <i className='icon icon-sliders-solid' />
             </span>
-            Configuration Settings
+            {t('profile detail.configuration_settings')}
           </NavLink>
-          <button className='tool-btn text-header' aria-label='Change theme' onClick={toggleTheme}>
+          <button type='button' className='tool-btn text-header' aria-label='Change theme' onClick={toggleTheme}>
             <span className='icon-wrapper'>
               <i className={`icon icon-${theme === 'light' ? 'sun-bright' : 'moon'}-solid`} />
             </span>
-            View Mode
+            {t('profile detail.view_mode')}
           </button>
         </div>
       </div>
@@ -233,4 +237,4 @@ const UserProfileDetails = (props: Props) => {
   )
 }
 
-export default UserProfileDetails
+export default withTranslation('profile')(UserProfileDetails)

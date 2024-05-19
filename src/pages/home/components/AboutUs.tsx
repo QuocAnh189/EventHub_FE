@@ -1,8 +1,7 @@
 //hook
-import { useTranslation } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
-const AboutUs = () => {
-  const { t } = useTranslation()
+const AboutUs = ({ t }: any) => {
   return (
     <div className='container pt-14 text-header'>
       <div className='py-10'>
@@ -26,4 +25,4 @@ const AboutUs = () => {
   )
 }
 
-export default AboutUs
+export default withTranslation('home')(AboutUs)

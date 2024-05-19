@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
@@ -8,7 +9,9 @@ interface Props {
   onChange?: (query: string) => void
 }
 const Search = (props: Props) => {
-  const { placeholder = 'Search...', wrapperClass, onChange } = props
+  const { t } = useTranslation()
+
+  const { placeholder = t('header.search'), wrapperClass, onChange } = props
 
   const [query, setQuery] = useState<string>('')
 

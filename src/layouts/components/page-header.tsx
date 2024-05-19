@@ -6,7 +6,6 @@ import { useWindowSize } from 'react-use'
 import { DocumentTitle } from '@components/index'
 
 // utils
-import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
 interface Props {
@@ -45,8 +44,4 @@ export const PageHeader = (props: Props) => {
       </div>
     </>
   )
-}
-
-PageHeader.propTypes = {
-  title: PropTypes.string.isRequired
 }

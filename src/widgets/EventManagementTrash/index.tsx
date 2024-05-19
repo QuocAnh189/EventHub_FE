@@ -214,7 +214,7 @@ const EventManagementTrash = () => {
         </div>
       )}
 
-      {isSuccess && events.length === 0 && <NotData text='No event here' />}
+      {isSuccess && events.length === 0 && <NotData />}
 
       {openDialog && (
         <ConfirmDialog

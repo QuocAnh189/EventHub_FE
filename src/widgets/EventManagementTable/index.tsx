@@ -51,8 +51,9 @@ import {
 } from '@redux/services/eventApi'
 import { useGetEventsByUserIdQuery } from '@redux/services/userApi'
 import { toast } from 'react-toastify'
+import { withTranslation } from 'react-i18next'
 
-const EventManagement = () => {
+const EventManagement = ({ t }: any) => {
   const categories = useAppSelector((state: RootState) => state.category.categories)
   const user = useAppSelector((state: RootState) => state.user.user)
 
@@ -256,7 +257,7 @@ const EventManagement = () => {
   return (
     <div className='flex flex-col flex-1'>
       <div className='flex flex-wrap gap-2 mb-4'>
-        <span className='text-header'>Events:</span>
+        <span className='text-header'>{t('management.label_event')}:</span>
         <div>
           {EVENT_MANAGEMENT_OPTIONS.map((option, index: number) => (
             <FilterItem
@@ -277,7 +278,7 @@ const EventManagement = () => {
           <Select
             options={EVENT_STATUS_OPTIONS}
             value={filters?.status}
-            placeholder='Status'
+            placeholder={t('management.label_status')}
             onChange={(e: IOptionSelect) => handleFilterSelect(e, 'status')}
           />
           <Select
@@ -285,18 +286,18 @@ const EventManagement = () => {
               return { value: category.id, label: category.name }
             })}
             value={filters?.category}
-            placeholder='Category'
+            placeholder={t('management.label_category')}
             onChange={(e: IOptionSelect) => handleFilterSelect(e, 'category')}
           />
           <Select
             options={EVENT_SELLER_OPTIONS}
             value={filters.eventTicketType}
-            placeholder='Price'
+            placeholder={t('management.label_price')}
             onChange={(e: any) => handleFilterSelect(e, 'eventTicketType')}
           />
           <div className='grid grid-cols-2 gap-3'>
             <button className='btn bg-primary flex text-white !gap-[5px]' onClick={handleApplyFilters}>
-              Filter
+              {t('management.filter')}
             </button>
             <button
               className='btn btn--outline blue !h-[44px]'
@@ -304,20 +305,23 @@ const EventManagement = () => {
                 setFilters(initFilterEvent)
               }}
             >
-              Clear
+              {t('management.clear')}
             </button>
           </div>
         </div>
         <Search
           wrapperClass='lg:w-[326px]'
-          placeholder='Search Event'
+          placeholder={t('management.search_event')}
           onChange={(query: string) => {
             setFetchFilter({ ...fetchFilter, search: query })
           }}
         />
       </div>
       <div className='flex flex-col-reverse gap-4 mt-4 mb-5 md:flex-row md:justify-between md:items-end md:mt-5 md:mb-6'>
-        <p className='text-header'>View events: {pagination.showingOf()}</p>
+        <p className='text-header'>
+          {' '}
+          {t('management.view_events')}: {pagination.showingOf()}
+        </p>
         <div className='md:min-w-[280px]'>
           <Select
             options={
@@ -325,7 +329,7 @@ const EventManagement = () => {
                 ? [EVENT_SELECT_OPTIONS[2]]
                 : EVENT_SELECT_OPTIONS.filter((item) => item.value !== category)
             }
-            placeholder='Select Action'
+            placeholder={t('management.select_action')}
             onChange={handleSelectAction}
           />
         </div>
@@ -344,7 +348,7 @@ const EventManagement = () => {
                 }}
               />
             }
-            label='Select all'
+            label={t('management.select_all')}
           />
         </FormGroup>
       )}
@@ -369,7 +373,7 @@ const EventManagement = () => {
         </div>
       )}
 
-      {isSuccess && events.length === 0 && <NotData text='No event here' />}
+      {isSuccess && events.length === 0 && <NotData />}
 
       {openDialog && (
         <ConfirmDialog
@@ -388,4 +392,4 @@ const EventManagement = () => {
   )
 }
 
-export default EventManagement
+export default withTranslation('my_event')(EventManagement)

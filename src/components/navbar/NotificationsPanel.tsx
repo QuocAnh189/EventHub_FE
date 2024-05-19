@@ -12,6 +12,7 @@ import { NOTIFICATION_OPTIONS } from '@constants/options'
 
 // data placeholder
 import notifications from '@db/notifications'
+import { withTranslation } from 'react-i18next'
 
 const step = 6
 
@@ -97,4 +98,4 @@ const NotificationsPanel = (props: Props) => {
   )
 }
 
-export default NotificationsPanel
+export default withTranslation('common')(NotificationsPanel)

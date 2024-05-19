@@ -19,8 +19,10 @@ import freeImg from '@assets/common/free.png'
 
 //type
 import { ICreateEventPayload, InitCreateTicketPayload } from '@type/event'
+import { withTranslation } from 'react-i18next'
 
 interface Props {
+  t: any
   register: UseFormRegister<ICreateEventPayload>
   eventTicketType: EEventPaymentTicket
   setValue: UseFormSetValue<ICreateEventPayload>
@@ -29,7 +31,7 @@ interface Props {
 }
 
 const TicketEventCreate = (props: Props) => {
-  const { setActive, control, register, eventTicketType, setValue } = props
+  const { t, setActive, control, register, eventTicketType, setValue } = props
 
   const {
     fields: tickets,
@@ -47,7 +49,7 @@ const TicketEventCreate = (props: Props) => {
   return (
     <div className='relative pt-10 pb-20 px-40 space-y-10 min-h-screen'>
       <div className='space-y-4'>
-        <p className='text-xl font-bold tracking-wider text-header'>What type of event are you running ?</p>
+        <p className='text-xl font-bold tracking-wider text-header'>{t('ticket.title')}</p>
         <div className='flex items-center gap-8'>
           <div
             onClick={() => setValue('eventPaymentType', EEventPaymentTicket.PAID)}
@@ -57,9 +59,9 @@ const TicketEventCreate = (props: Props) => {
           >
             <IoTicketOutline size={42} color={eventTicketType === EEventPaymentTicket.PAID ? '#3D56F0' : '#333'} />
             <p className={`font-bold  text-${eventTicketType === EEventPaymentTicket.PAID ? 'primary' : 'textGray'}`}>
-              PAID Event
+              {t('ticket.option_one.label')}
             </p>
-            <p className='text-header'>My event require tickets for entry</p>
+            <p className='text-header'>{t('ticket.option_one.description')}</p>
           </div>
           <div
             onClick={() => setValue('eventPaymentType', EEventPaymentTicket.FREE)}
@@ -69,16 +71,16 @@ const TicketEventCreate = (props: Props) => {
           >
             <img loading='lazy' src={freeImg} alt='' className='w-[42px]' />
             <p className={`font-bold text-${eventTicketType === EEventPaymentTicket.FREE ? 'primary' : 'textGray'}`}>
-              Free Event
+              {t('ticket.option_two.label')}
             </p>
-            <p className='text-header'>I'm running free event</p>
+            <p className='text-header'>{t('ticket.option_two.description')}</p>
           </div>
         </div>
       </div>
       {eventTicketType === EEventPaymentTicket.PAID && (
         <div className='space-y-4'>
           <div className='flex items-center gap-2'>
-            <p className='text-xl font-bold tracking-wider text-header'>What ticket are you selling ?</p>
+            <p className='text-xl font-bold tracking-wider text-header'>{t('ticket.ticket_title')}</p>
             <IoMdAddCircleOutline
               size={30}
               className='hover:cursor-pointer text-header'
@@ -96,7 +98,7 @@ const TicketEventCreate = (props: Props) => {
                     mb: '4px'
                   }}
                 >
-                  <p className='text-header'>Ticket Name</p>
+                  <p className='text-header'>{t('ticket.ticket_name')}</p>
                 </FormLabel>
                 <div className='text-header'>
                   <TextField
@@ -127,7 +129,7 @@ const TicketEventCreate = (props: Props) => {
               </FormControl>
               <FormControl>
                 <FormLabel sx={{ fontWeight: 'bold', mb: '4px' }}>
-                  <p className='text-header'>Ticket Quantity</p>
+                  <p className='text-header'>{t('ticket.ticket_quantity')}</p>
                 </FormLabel>
                 <TextField
                   type='number'
@@ -155,7 +157,7 @@ const TicketEventCreate = (props: Props) => {
               </FormControl>
               <FormControl>
                 <FormLabel sx={{ fontWeight: 'bold', mb: '4px' }}>
-                  <p className='text-header'>Ticket Price</p>
+                  <p className='text-header'>{t('ticket.ticket_price')}</p>
                 </FormLabel>
                 <TextField
                   type='number'
@@ -202,14 +204,14 @@ const TicketEventCreate = (props: Props) => {
             setActive(1)
           }}
         >
-          Go back
+          {t('button_back')}
         </button>
         <button className=' btn btn--primary ' onClick={handleNextStep}>
-          Continue
+          {t('button_continue')}
         </button>
       </div>
     </div>
   )
 }
 
-export default TicketEventCreate
+export default withTranslation('create_event')(TicketEventCreate)

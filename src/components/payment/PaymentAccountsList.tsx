@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-redeclare
 import { Image, Spin } from 'antd'
 import { IPaymentAccount } from 'interfaces/contents/payment'
-import { AddPaymentAccountModal } from './AddPaymentAccountModal'
+import AddPaymentAccountModal from './AddPaymentAccountModal'
+import { withTranslation } from 'react-i18next'
 
 export interface IPaymentAccountsListProps {
   onClick?: (account: IPaymentAccount) => void
@@ -9,7 +10,7 @@ export interface IPaymentAccountsListProps {
   isLoading: boolean
 }
 
-export function PaymentAccountsList({ isLoading, accounts, onClick }: IPaymentAccountsListProps) {
+const PaymentAccountsList = ({ isLoading, accounts, onClick }: IPaymentAccountsListProps) => {
   return (
     <div className='flex flex-row flex-wrap gap-4'>
       {isLoading ? (
@@ -48,3 +49,5 @@ export function PaymentAccountsList({ isLoading, accounts, onClick }: IPaymentAc
     </div>
   )
 }
+
+export default withTranslation('payment')(PaymentAccountsList)

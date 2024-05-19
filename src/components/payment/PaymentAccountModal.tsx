@@ -7,8 +7,9 @@ import { RcFile, UploadChangeParam, UploadFile } from 'antd/es/upload'
 import { IPaymentAccount } from 'interfaces/contents/payment'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { AiOutlineUpload } from 'react-icons/ai'
-import { PaymentMethodsList } from './PaymentMethodsList'
+import PaymentMethodsList from './PaymentMethodsList'
 import { URLtoFile } from '@utils/url-to-upload-file'
+import { withTranslation } from 'react-i18next'
 
 export interface IPaymentAccountModalProps {
   isModalOpen: boolean
@@ -23,7 +24,7 @@ export interface CreatePaymentAccountForm {
   checkoutContent: string
 }
 
-export function PaymentAccountModal({ isModalOpen, setIsModalOpen, account }: IPaymentAccountModalProps) {
+const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentAccountModalProps) => {
   const user = useAppSelector((state) => state.user.user)
 
   const { data: methods, isLoading: getMethodsLoading } = useGetPaymentMethodsQuery()
@@ -205,3 +206,5 @@ export function PaymentAccountModal({ isModalOpen, setIsModalOpen, account }: IP
     </Modal>
   )
 }
+
+export default withTranslation('payment')(PaymentAccountModal)

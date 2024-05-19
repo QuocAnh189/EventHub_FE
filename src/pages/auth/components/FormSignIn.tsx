@@ -29,6 +29,7 @@ import { setUser } from '@redux/slices/userSlice'
 //motion
 import { motion } from 'framer-motion'
 import { useAppSelector } from '@hooks/useRedux'
+import { withTranslation } from 'react-i18next'
 
 const formSchema = z.object({
   identity: z.string().min(1, 'Identity is not empty'),
@@ -36,11 +37,12 @@ const formSchema = z.object({
 })
 
 interface SignInProps {
+  t: any
   handleForgotPassword: (value: boolean) => void
 }
 
 const FormSignIn = (props: SignInProps) => {
-  const { handleForgotPassword } = props
+  const { t, handleForgotPassword } = props
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -121,7 +123,7 @@ const FormSignIn = (props: SignInProps) => {
             type='text'
             name='identity'
             className='block min-h-[auto] w-full rounded-2xl border-[2px] px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Enter account (email or username)'
+            placeholder={t('login.identify_placeholder')}
           />
           {errors.identity && <p className='mt-1 text-textError'>{errors.identity.message}</p>}
         </motion.div>
@@ -137,7 +139,7 @@ const FormSignIn = (props: SignInProps) => {
             type={showPassWord ? 'text' : 'password'}
             name='password'
             className='min-h-[auto] w-full rounded-2xl border-[2px] bg-transparent px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Password'
+            placeholder={t('login.password_placeholder')}
           />
           {errors.password && <p className='mt-1 text-textError'>{errors.password.message}</p>}
           <button
@@ -165,7 +167,7 @@ const FormSignIn = (props: SignInProps) => {
             type='submit'
             className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
           >
-            {loadingSignIn ? <CircularProgress size={28} color='info' /> : 'Sign In'}
+            {loadingSignIn ? <CircularProgress size={28} color='info' /> : t('login.signin_btn')}
           </button>
         </motion.div>
       </form>
@@ -179,7 +181,7 @@ const FormSignIn = (props: SignInProps) => {
             onClick={() => navigate('/signup')}
             className='block w-full py-4 text-sm font-semibold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
           >
-            No account ? Sign up for FREE
+            {t('login.option')}
           </button>
         </motion.div>
         <motion.div
@@ -191,7 +193,7 @@ const FormSignIn = (props: SignInProps) => {
             onClick={() => handleForgotPassword(true)}
             className='lue block  w-full py-4 text-sm font-semibold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
           >
-            I forgot my password
+            {t('login.forgot_text')}
           </button>
         </motion.div>
 
@@ -209,7 +211,7 @@ const FormSignIn = (props: SignInProps) => {
             ) : (
               <>
                 <img loading='lazy' src={googleIcon} alt='' className='block h-[20px] w-[20px]' />
-                <span className='inline-block'>Sign in with Google</span>
+                <span className='inline-block'>{t('login.signin_google')}</span>
                 <span />
               </>
             )}
@@ -232,7 +234,7 @@ const FormSignIn = (props: SignInProps) => {
             ) : (
               <>
                 <img loading='lazy' src={facebookIcon} alt='' className='block h-[20px] w-[20px]' />
-                <span className='inline-block'>Sign in with Facebook</span>
+                <span className='inline-block'>{t('login.signin_facebook')}</span>
                 <span />
               </>
             )}
@@ -250,7 +252,7 @@ const FormSignIn = (props: SignInProps) => {
             }}
             className='mb-3 block w-full py-4 text-sm font-bold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
           >
-            Back
+            {t('back_btn')}
           </button>
         </motion.div>
       </div>
@@ -258,4 +260,4 @@ const FormSignIn = (props: SignInProps) => {
   )
 }
 
-export default FormSignIn
+export default withTranslation('signin')(FormSignIn)

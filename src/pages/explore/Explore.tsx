@@ -97,7 +97,7 @@ const ExploreScreen = () => {
               </div>
             ) : (
               <div className='relative w-full h-[300px] flex items-center justify-center'>
-                <NotData text='event' />
+                <NotData />
               </div>
             ))}
 

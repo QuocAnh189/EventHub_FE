@@ -16,6 +16,9 @@ import dayjs from 'dayjs'
 // data placeholder
 import messages from '@db/messages'
 
+//i18
+import { withTranslation } from 'react-i18next'
+
 const step = 6
 
 interface Props {
@@ -102,4 +105,4 @@ const MessagesPanel = (props: Props) => {
   )
 }
 
-export default MessagesPanel
+export default withTranslation('common')(MessagesPanel)

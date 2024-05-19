@@ -6,7 +6,8 @@ import { Button, Form, Input, Modal, Typography, Upload, message, notification }
 import { RcFile, UploadChangeParam, UploadFile } from 'antd/es/upload'
 import { useState } from 'react'
 import { AiOutlinePlus, AiOutlineUpload } from 'react-icons/ai'
-import { PaymentMethodsList } from './PaymentMethodsList'
+import PaymentMethodsList from './PaymentMethodsList'
+import { withTranslation } from 'react-i18next'
 
 export interface CreatePaymentAccountForm {
   methodId: string
@@ -15,7 +16,7 @@ export interface CreatePaymentAccountForm {
   checkoutContent: string
 }
 
-export function AddPaymentAccountModal() {
+const AddPaymentAccountModal = () => {
   const user = useAppSelector((state) => state.user.user)
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -168,3 +169,5 @@ export function AddPaymentAccountModal() {
     </>
   )
 }
+
+export default withTranslation('payment')(AddPaymentAccountModal)

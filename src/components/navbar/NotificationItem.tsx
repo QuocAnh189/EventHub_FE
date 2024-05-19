@@ -4,6 +4,7 @@ import Spring from '../Spring'
 // utils
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { withTranslation } from 'react-i18next'
 
 dayjs.extend(relativeTime)
 
@@ -48,4 +49,4 @@ const NotificationItem = (props: Props) => {
   )
 }
 
-export default NotificationItem
+export default withTranslation('common')(NotificationItem)

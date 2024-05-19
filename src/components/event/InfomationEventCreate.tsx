@@ -36,8 +36,10 @@ import { useAppSelector } from '@hooks/useRedux'
 //type
 import { toast } from 'react-toastify'
 import ItemCategory from '@components/ItemCategory'
+import { withTranslation } from 'react-i18next'
 
 interface Props {
+  t: any
   create: boolean
   register: UseFormRegister<ICreateEventPayload>
   setValue: UseFormSetValue<ICreateEventPayload>
@@ -47,7 +49,7 @@ interface Props {
 }
 
 const InfomationEvent = (props: Props) => {
-  const { create, setActive, register, watch, control, setValue } = props
+  const { t, create, setActive, register, watch, control, setValue } = props
   const navigate = useNavigate()
 
   const categoriesStore = useAppSelector((state) => state.category.categories)
@@ -103,17 +105,17 @@ const InfomationEvent = (props: Props) => {
       <div className='flex gap-2 items-end '>
         <div className='h-[200px] w-[200px] flex flex-col gap-4 items-end justify-between'>
           <p className='font-semibold text-md py-2 text-header'>
-            Event Title <span className='text-textError'>*</span>
+            {t('information.event_detail.event_title')} <span className='text-textError'>*</span>
           </p>
           <p className='font-semibold text-md py-2 text-header'>
-            Event Category <span className='text-textError'>*</span>
+            {t('information.event_detail.event_category')} <span className='text-textError'>*</span>
           </p>
           <p className='font-semibold text-md py-2 text-header'>
-            Event Type <span className='text-textError'>*</span>
+            {t('information.event_detail.event_type.title')} <span className='text-textError'>*</span>
           </p>
         </div>
         <div className='space-y-4'>
-          <p className='font-semibold text-2xl  text-header'>Event Details</p>
+          <p className='font-semibold text-2xl  text-header'>{t('information.event_detail.title')}</p>
           <div className='h-[200px] flex flex-col gap-4 w-[600px] justify-between'>
             <FormControl sx={{ color: 'text-header' }}>
               <TextField
@@ -137,14 +139,14 @@ const InfomationEvent = (props: Props) => {
                 error={enableCheckError ? (watch().name ? false : true) : false}
                 {...register('name', { required: true })}
                 name='name'
-                label='Enter the name of the event'
+                label={t('information.event_detail.event_title_placeholder')}
                 size='small'
                 className='text-header'
               />
             </FormControl>
             <FormControl sx={{ minWidth: 120 }} size='medium'>
               <InputLabel error={enableCheckError ? (categories.length ? false : true) : false}>
-                <p className='text-header'>Choose category</p>
+                <p className='text-header'>{t('information.event_detail.event_category_placeholder')}</p>
               </InputLabel>
 
               <Select
@@ -235,13 +237,13 @@ const InfomationEvent = (props: Props) => {
                 <FormControlLabel
                   value={EEventStyle.SINGLE}
                   control={<Radio sx={{ color: 'var(--header)' }} />}
-                  label='Single Event'
+                  label={t('information.event_detail.event_type.label_one')}
                   sx={{ color: 'var(--header)' }}
                 />
                 <FormControlLabel
                   value={EEventStyle.RECURRING}
                   control={<Radio sx={{ color: 'var(--header)' }} />}
-                  label='Recurring Event'
+                  label={t('information.event_detail.event_type.label_two')}
                   sx={{ color: 'var(--header)' }}
                 />
               </RadioGroup>
@@ -253,15 +255,15 @@ const InfomationEvent = (props: Props) => {
       <div className='flex gap-2 items-end '>
         <div className='w-[200px] h-[60px] flex flex-col gap-4 items-end justify-center'>
           <p className='font-semibold text-md text-header'>
-            Session <span className='text-textError'>*</span>
+            {t('information.event_datetime.seesion.title')} <span className='text-textError'>*</span>
           </p>
         </div>
         <div className='flex flex-col gap-4 w-[600px]'>
-          <p className='font-semibold text-2xl text-header'>Date & Time</p>
+          <p className='font-semibold text-2xl text-header'>{t('information.event_datetime.title')}</p>
           <div className='w-[600px] h-[60px] flex items-center justify-between flex-wrap gap-2'>
             <FormControl>
               <FormLabel sx={{ fontWeight: 'bold' }}>
-                <p className='text-header'>End Date</p>
+                <p className='text-header'>{t('information.event_datetime.seesion.label_one')}</p>
               </FormLabel>
               <TextField
                 {...register('startTime')}
@@ -296,7 +298,7 @@ const InfomationEvent = (props: Props) => {
             </FormControl>
             <FormControl>
               <FormLabel sx={{ fontWeight: 'bold' }}>
-                <p className='text-header'>End Date</p>
+                <p className='text-header'>{t('information.event_datetime.seesion.label_two')}</p>
               </FormLabel>
               <TextField
                 sx={{
@@ -335,11 +337,11 @@ const InfomationEvent = (props: Props) => {
 
       <div className='flex gap-2'>
         <div className='w-[200px] flex pt-10'>
-          <p className='font-semibold text-md pl-12 text-center  text-header'>Where will your event take place</p>
+          <p className='font-semibold text-md pl-12 text-center  text-header'>{t('information.location.label')}</p>
           <span className='text-textError'>*</span>
         </div>
         <div className='h-50 flex flex-col gap-4 w-[600px]'>
-          <p className='font-semibold text-2xl  text-header'>Choose Location</p>
+          <p className='font-semibold text-2xl  text-header'>{t('information.location.title')}</p>
           <FormControl>
             <TextField
               sx={{
@@ -362,7 +364,7 @@ const InfomationEvent = (props: Props) => {
               {...register('location')}
               error={enableCheckError ? (watch().location ? false : true) : false}
               id='outlined-basic'
-              label='Enter the name of location'
+              label={t('information.location.placeholder')}
               size='small'
               InputProps={{
                 endAdornment: (
@@ -380,11 +382,11 @@ const InfomationEvent = (props: Props) => {
       <div className='flex gap-2'>
         <div className='w-[200px] flex flex-col gap-4 items-end'>
           <p className='font-semibold text-md pl-6 pt-12 text-center  text-header'>
-            Event Description <span className='text-textError'>*</span>
+            {t('information.description.label')} <span className='text-textError'>*</span>
           </p>
         </div>
         <div className='h-50 flex flex-col gap-4 w-[600px]'>
-          <p className='font-semibold text-2xl text-header'>Additional Infomation</p>
+          <p className='font-semibold text-2xl text-header'>{t('information.description.title')}</p>
           <FormControl>
             <TextField
               sx={{
@@ -409,7 +411,7 @@ const InfomationEvent = (props: Props) => {
               multiline={true}
               rows={4}
               id='outlined-basic'
-              label='Enter description of event'
+              label={t('information.description.placeholder')}
             />
           </FormControl>
         </div>
@@ -417,11 +419,11 @@ const InfomationEvent = (props: Props) => {
 
       <div className='flex gap-2'>
         <div className='w-[200px] flex flex-col gap-4 items-end'>
-          <p className='font-semibold text-md pl-6 pt-12 text-center text-header'>Event Reason</p>
+          <p className='font-semibold text-md pl-6 pt-12 text-center text-header'>{t('information.reason.label')}</p>
         </div>
         <div className='h-50 flex flex-col gap-4 w-[600px]'>
           <div className='flex items-center gap-2'>
-            <p className='font-semibold text-2xl text-header'>Reason</p>
+            <p className='font-semibold text-2xl text-header'>{t('information.reason.title')}</p>
             <IoMdAddCircleOutline
               color='var(--header)'
               size={30}
@@ -454,7 +456,7 @@ const InfomationEvent = (props: Props) => {
                 }}
                 {...register(`reasons.${index}`)}
                 id='outlined-basic'
-                label={`Reason ${index + 1}`}
+                label={`${t('information.reason.placeholder')} ${index + 1}`}
                 size='small'
                 InputProps={{
                   endAdornment: (
@@ -482,14 +484,14 @@ const InfomationEvent = (props: Props) => {
             create ? setActive(-1) : navigate(-1)
           }}
         >
-          Go back
+          {t('button_back')}
         </button>
-        <button className=' btn btn--primary ' onClick={handleNextStep}>
-          Continue
+        <button className=' btn btn--primary' onClick={handleNextStep}>
+          {t('button_continue')}
         </button>
       </div>
     </div>
   )
 }
 
-export default InfomationEvent
+export default withTranslation('create_event')(InfomationEvent)

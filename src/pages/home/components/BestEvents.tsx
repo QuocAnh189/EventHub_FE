@@ -1,5 +1,5 @@
 //hook
-import { useTranslation } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 //components
 import EventCard from '@components/event/EventCard'
@@ -14,10 +14,8 @@ import { useGetEventsQuery } from '@redux/services/eventApi'
 //interface
 import { IEvent } from 'interfaces/contents/event'
 
-const BestEvents = () => {
+const BestEvents = ({ t }: any) => {
   const { data: events, isFetching } = useGetEventsQuery({ takeAll: false, type: EEventStatus.UPCOMING, size: 6 })
-
-  const { t } = useTranslation()
 
   return (
     <>
@@ -41,4 +39,4 @@ const BestEvents = () => {
   )
 }
 
-export default BestEvents
+export default withTranslation('home')(BestEvents)

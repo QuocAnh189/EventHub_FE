@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 //hook
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -16,15 +17,18 @@ import { IUser } from 'interfaces/systems/user'
 
 //assets
 import userDefault from '@assets/common/user_default.png'
+import { withTranslation } from 'react-i18next'
 
 interface Props {
+  t: any
   avatar: string
   fullName: string
   setValue: UseFormSetValue<IUser>
   roles: string[]
 }
+
 const UserProfileCard = (props: Props) => {
-  const { avatar, setValue, fullName, roles } = props
+  const { t, avatar, setValue, fullName, roles } = props
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -75,10 +79,11 @@ const UserProfileCard = (props: Props) => {
       <span className='badge badge--square bg-red min-w-[96px] mt-2.5'>{roles?.join(',')}</span>
 
       <button disabled={loadingLogout} onClick={handleSignOut} className='btn btn--secondary w-full md:max-w-[280px]'>
-        Log Out
+        {/* Log Out */}
+        {t('profile pannel.logout')}
       </button>
     </Spring>
   )
 }
 
-export default UserProfileCard
+export default withTranslation('profile')(UserProfileCard)

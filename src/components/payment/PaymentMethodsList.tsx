@@ -1,5 +1,6 @@
 import { Spin } from 'antd'
 import { IPaymentMethod } from 'interfaces/contents/payment'
+import { withTranslation } from 'react-i18next'
 
 export interface IPaymentMethodsListProps {
   onClick?: (method: IPaymentMethod) => void
@@ -8,7 +9,7 @@ export interface IPaymentMethodsListProps {
   selectedItemId: string
 }
 
-export function PaymentMethodsList({ onClick, isLoading, methods, selectedItemId }: IPaymentMethodsListProps) {
+const PaymentMethodsList = ({ onClick, isLoading, methods, selectedItemId }: IPaymentMethodsListProps) => {
   return (
     <div className='flex flex-wrap justify-center gap-4'>
       {isLoading ? (
@@ -32,3 +33,5 @@ export function PaymentMethodsList({ onClick, isLoading, methods, selectedItemId
     </div>
   )
 }
+
+export default withTranslation('payment')(PaymentMethodsList)

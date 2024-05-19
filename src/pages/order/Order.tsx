@@ -11,6 +11,7 @@ import { useState } from 'react'
 
 // constants
 import { ORDER_SORT_OPTIONS } from '@constants/options'
+import ProtectedLayout from '@layouts/protected'
 
 const PRODUCT_CATEGORIES = [
   { value: 'all', label: 'All Products' },
@@ -25,7 +26,7 @@ const Orders = () => {
   const [sort, setSort] = useState(ORDER_SORT_OPTIONS[0])
 
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Orders' />
       <div className='flex flex-col flex-1 gap-5 md:gap-[26px]'>
         <div
@@ -61,7 +62,7 @@ const Orders = () => {
         </div>
         <OrdersTable category={category} sort={sort} />
       </div>
-    </>
+    </ProtectedLayout>
   )
 }
 

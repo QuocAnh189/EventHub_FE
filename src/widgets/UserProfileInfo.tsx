@@ -1,7 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 import Spring from '@components/Spring'
 import { useAppSelector } from '@hooks/useRedux'
+import { withTranslation } from 'react-i18next'
 
-const UserProfileInfo = () => {
+const UserProfileInfo = ({ t }: any) => {
   const user = useAppSelector((state) => state.user.user)
 
   return (
@@ -18,23 +20,23 @@ const UserProfileInfo = () => {
           <span className='icon-wrapper mt-1'>
             <i className='icon icon-mobile-solid' />
           </span>
-          +1 123-123-123
+          {t('profile pannel.number_of_events')}: {user?.numberOfCreatedEvents}
         </div>
         <div className='flex items-center gap-4 text-header'>
           <span className='icon-wrapper mt-1'>
             <i className='icon icon-whatsapp' />
           </span>
-          +1 123-123-123
+          {t('profile pannel.follwing')}: {user?.numberOfFollowers}
         </div>
-        <button className='flex items-center gap-4 w-fit text-header'>
+        <button type='button' className='flex items-center gap-4 w-fit text-header'>
           <span className='icon-wrapper mt-1'>
             <i className='icon icon-file-arrow-down-solid' />
           </span>
-          Profile Information file
+          {t('profile pannel.follower')}: {user?.numberOfFolloweds}
         </button>
       </div>
     </Spring>
   )
 }
 
-export default UserProfileInfo
+export default withTranslation('profile')(UserProfileInfo)

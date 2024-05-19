@@ -33,14 +33,16 @@ import { useAppSelector } from '@hooks/useRedux'
 //constant
 import { stepCreateEvent } from '@constants/event'
 import { URLtoFile } from '@utils/url_to_file'
+import { withTranslation } from 'react-i18next'
 
 interface Props {
+  t: any
   title: string
   create?: boolean
   event?: IEvent
 }
 const ModifyEvent = (props: Props) => {
-  const { title, create, event } = props
+  const { t, title, create, event } = props
 
   const user = useAppSelector((state) => state.user.user)
 
@@ -143,8 +145,8 @@ const ModifyEvent = (props: Props) => {
             className='w-[300px] h-[200px] border-[2px] border-solid border-textGray rounded-lg flex flex-col items-center justify-center gap-2 hover:cursor-pointer'
           >
             <IoCreate size={42} color='var(--header)' />
-            <p className={`font-bold text-textGray`}>Create Event</p>
-            <p className='text-center px-4 text-header'>You will have to create the event one way handmade</p>
+            <p className={`font-bold text-textGray`}>{t('option_one.title')}</p>
+            <p className='text-center px-4 text-header'>{t('option_one.description')}</p>
           </button>
           <div className='z-[9] relative w-[300px] h-[200px] border-[2px] border-solid border-textGray rounded-lg flex flex-col items-center justify-center gap-2 hover:cursor-pointer'>
             <input
@@ -155,11 +157,11 @@ const ModifyEvent = (props: Props) => {
             />
             <div className='absolute z-[0] h-full w-full rounded-lg flex flex-col items-center justify-center gap-2'>
               <BiImport size={42} color='var(--header)' />
-              <p className='font-bold text-textGray text-justify'>Import Event</p>
-              <p className='text-center text-header z-[10]'>Do you already have an event?</p>
+              <p className='font-bold text-textGray text-justify'>{t('option_two.title')}</p>
+              <p className='text-center text-header z-[10]'>{t('option_two.description')}</p>
             </div>
             <button onClick={handleDownloadFile} className='text-primary hover:underline z-[2] pt-2'>
-              Example file here
+              {t('option_two.example_file')}
             </button>
           </div>
         </div>
@@ -235,4 +237,4 @@ const ModifyEvent = (props: Props) => {
   )
 }
 
-export default ModifyEvent
+export default withTranslation('create_event')(ModifyEvent)

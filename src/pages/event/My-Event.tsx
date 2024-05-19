@@ -6,6 +6,7 @@ import EventManagement from '@widgets/EventManagementTable'
 
 //route
 import { useNavigate } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 const csvData = [
   ['firstname', 'lastname', 'email'],
@@ -13,13 +14,13 @@ const csvData = [
   ['Jane', 'Doe', 'janedoe@domain.com']
 ]
 
-const MyEvent = () => {
+const MyEvent = ({ t }: any) => {
   const navigate = useNavigate()
 
   return (
     <ProtectedLayout>
       <div className='min-h-screen'>
-        <PageHeader title='My Event' />
+        <PageHeader title={t('header.title')} />
         <div className='flex flex-col-reverse gap-4 mb-5 md:flex-col lg:flex-row lg:justify-between'>
           <div className='flex flex-col gap-4 md:flex-row md:gap-[14px]'>
             <button
@@ -28,10 +29,10 @@ const MyEvent = () => {
               }}
               className='btn btn--primary'
             >
-              Add new event <i className='icon-circle-plus-regular' />
+              {t('body.title')} <i className='icon-circle-plus-regular' />
             </button>
             <CSVLink className='btn btn--outline blue !h-[44px]' data={csvData}>
-              Export CSV <i className='icon-file-export-solid' />
+              {t('body.link_csv')} <i className='icon-file-export-solid' />
             </CSVLink>
           </div>
         </div>
@@ -41,4 +42,4 @@ const MyEvent = () => {
   )
 }
 
-export default MyEvent
+export default withTranslation('my_event')(MyEvent)

@@ -3,6 +3,7 @@ import { PageHeader } from '@layouts/components'
 import TopSalesByCategories from '@widgets/TopSalesByCategories'
 import TopRetail from '@widgets/TopRetail'
 import TopEventsByCategories from '@widgets/TopEventsList'
+import ProtectedLayout from '@layouts/protected'
 
 const TopEvent = () => {
   const categories = [
@@ -37,7 +38,7 @@ const TopEvent = () => {
   ]
 
   return (
-    <>
+    <ProtectedLayout>
       <PageHeader title='Top Events' />
       <div className='widgets-grid grid-cols-1 lg:!gap-10 xl:mb-[50px]'>
         <div
@@ -56,7 +57,7 @@ const TopEvent = () => {
           <TopEventsByCategories category={categories[3]} />
         </div>
       </div>
-    </>
+    </ProtectedLayout>
   )
 }
 

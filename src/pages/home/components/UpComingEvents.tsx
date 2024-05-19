@@ -1,5 +1,5 @@
 //hook
-import { useTranslation } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 //components
 import EventCard from '@components/event/EventCard'
@@ -12,10 +12,8 @@ import { EEventStatus } from '@constants/enum'
 import { useGetEventsQuery } from '@redux/services/eventApi'
 import { IEvent } from 'interfaces/contents/event'
 
-const UpComingEvents = () => {
+const UpComingEvents = ({ t }: any) => {
   const { data: events, isFetching } = useGetEventsQuery({ takeAll: false, type: EEventStatus.UPCOMING, size: 6 })
-
-  const { t } = useTranslation()
 
   return (
     <>
@@ -41,4 +39,4 @@ const UpComingEvents = () => {
   )
 }
 
-export default UpComingEvents
+export default withTranslation('home')(UpComingEvents)

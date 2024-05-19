@@ -3,15 +3,18 @@ import { PageHeader } from '@layouts/components'
 import ProtectedLayout from '@layouts/protected'
 import EventManagementTrash from '@widgets/EventManagementTrash'
 
-const TrashEvent = () => {
+//i18
+import { withTranslation } from 'react-i18next'
+
+const TrashEvent = ({ t }: any) => {
   return (
     <ProtectedLayout>
       <div className='min-h-screen'>
-        <PageHeader title='Trash Event' />
+        <PageHeader title={t('header.trash')} />
         <EventManagementTrash />
       </div>
     </ProtectedLayout>
   )
 }
 
-export default TrashEvent
+export default withTranslation('my_event')(TrashEvent)

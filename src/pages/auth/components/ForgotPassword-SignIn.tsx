@@ -3,13 +3,15 @@ import { useState } from 'react'
 
 // motion
 import { motion } from 'framer-motion'
+import { withTranslation } from 'react-i18next'
 
 interface ForgotProps {
+  t: any
   handleForgotPassword: (value: boolean) => void
 }
 
 const ForgotPassword = (props: ForgotProps) => {
-  const { handleForgotPassword } = props
+  const { t, handleForgotPassword } = props
 
   const [email, setEmail] = useState<string>('')
 
@@ -29,9 +31,9 @@ const ForgotPassword = (props: ForgotProps) => {
           <input
             type='email'
             value={email}
-            name='mail'
+            name='email'
             className='block min-h-[auto] w-full rounded-2xl border-[2px] px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Enter email'
+            placeholder={t('forgot_password.email_placeholder')}
             onChange={(e) => {
               setEmail(e.target.value)
             }}
@@ -48,7 +50,7 @@ const ForgotPassword = (props: ForgotProps) => {
             disabled={email ? false : true}
             onClick={handleSubmit}
           >
-            Submit
+            {t('submit_btn')}
           </button>
         </motion.div>
 
@@ -63,7 +65,7 @@ const ForgotPassword = (props: ForgotProps) => {
             }}
             className='mt-3 block w-full py-4 text-sm font-bold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
           >
-            Back
+            {t('back_btn')}
           </button>
         </motion.div>
       </div>
@@ -71,4 +73,4 @@ const ForgotPassword = (props: ForgotProps) => {
   )
 }
 
-export default ForgotPassword
+export default withTranslation('signin')(ForgotPassword)

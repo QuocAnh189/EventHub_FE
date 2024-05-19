@@ -10,8 +10,9 @@ import { Loader } from '@components/Loader'
 
 //redux
 import { useGetEventByIdQuery } from '@redux/services/eventApi'
+import { withTranslation } from 'react-i18next'
 
-const EditEvent = () => {
+const EditEvent = ({ t }: any) => {
   const { id } = useParams()
 
   const { data: event, isFetching } = useGetEventByIdQuery(id!)
@@ -23,10 +24,10 @@ const EditEvent = () => {
           <Loader />
         </div>
       ) : (
-        <ModifyEvent title='Modify Event' event={event!} />
+        <ModifyEvent title={t('header.update_create')} event={event!} />
       )}
     </ProtectedLayout>
   )
 }
 
-export default EditEvent
+export default withTranslation('create_event')(EditEvent)

@@ -1,12 +1,15 @@
 import ProtectedLayout from '@layouts/protected'
 import ModifyEvent from '@pages/common/Modify-Create-Event'
 
-const CreateEvent = () => {
+//i18
+import { withTranslation } from 'react-i18next'
+
+const CreateEvent = ({ t }: any) => {
   return (
     <ProtectedLayout>
-      <ModifyEvent title='Create Event' create={true} />
+      <ModifyEvent title={t('header.title_create')} create={true} />
     </ProtectedLayout>
   )
 }
 
-export default CreateEvent
+export default withTranslation('create_event')(CreateEvent)

@@ -2,6 +2,9 @@
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+//Hoc
+import { withTranslation } from 'react-i18next'
+
 // components
 import { PageHeader } from '@layouts/components'
 import UserProfileCard from '@widgets/UserProfileCard'
@@ -19,8 +22,9 @@ import dayjs from 'dayjs'
 
 //interface
 import { IUser } from 'interfaces/systems/user'
+import ProtectedLayout from '@layouts/protected'
 
-const Profile = () => {
+const Profile = ({ t }: any) => {
   const dispatch = useAppDispatch()
 
   const user = useAppSelector((state) => state.user.user)
@@ -67,8 +71,8 @@ const Profile = () => {
   }
 
   return (
-    <>
-      <PageHeader title='Settings' />
+    <ProtectedLayout>
+      <PageHeader title={t('header profile.title')} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='widgets-grid md:!grid-cols-2 xl:!grid-cols-[340px,_minmax(0,1fr)]'
@@ -96,8 +100,8 @@ const Profile = () => {
           status={user?.status!}
         />
       </form>
-    </>
+    </ProtectedLayout>
   )
 }
 
-export default Profile
+export default withTranslation('profile')(Profile)
