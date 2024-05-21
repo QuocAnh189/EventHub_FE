@@ -1,6 +1,8 @@
+import { EPaymentStatus } from '@constants/enum'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { CheckoutPayload } from '@type/payment'
-import { ApiListResponse } from 'interfaces'
+import { IParamsEvent } from '@type/event'
+import { CheckoutPayload, UpdateOrderPayload } from '@type/payment'
+import { ApiListResponse, IListData } from 'interfaces'
 import { IPayment, IPaymentMethod } from 'interfaces/contents/payment'
 
 export const apiPayment = createApi({
@@ -46,11 +48,38 @@ export const apiPayment = createApi({
       invalidatesTags: ['Payment']
     }),
 
-    updatePayment: builder.mutation<IPayment, Partial<IPayment>>({
-      query: (data) => ({
-        url: `/payments/${data.id}`,
-        method: 'PUT',
-        body: data
+    updatePayment: builder.mutation<void, UpdateOrderPayload>({
+      query: ({ paymentId, ...payload }) => ({
+        url: `/payments/${paymentId}`,
+        method: 'PATCH',
+        body: payload
+      }),
+      invalidatesTags: ['Payment']
+    }),
+
+    acceptOrder: builder.mutation<void, { paymentId: string }>({
+      query: ({ paymentId }) => ({
+        url: `/payments/${paymentId}/accept`,
+        method: 'PATCH',
+        body: {}
+      }),
+      invalidatesTags: ['Payment']
+    }),
+
+    rejectOrder: builder.mutation<void, { paymentId: string }>({
+      query: ({ paymentId }) => ({
+        url: `/payments/${paymentId}/reject`,
+        method: 'PATCH',
+        body: {}
+      }),
+      invalidatesTags: ['Payment']
+    }),
+
+    updateOrderStatus: builder.mutation<void, { paymentId: string; status: EPaymentStatus }>({
+      query: ({ paymentId, status }) => ({
+        url: `/payments/${paymentId}/status`,
+        method: 'PATCH',
+        body: { status: status }
       }),
       invalidatesTags: ['Payment']
     }),
@@ -81,6 +110,30 @@ export const apiPayment = createApi({
         body: data
       }),
       invalidatesTags: ['Payment']
+    }),
+
+    getPaymentsByUserId: builder.query<IListData<IPayment[]>, { userId: string; filter?: IParamsEvent }>({
+      query: ({ userId, filter }) => ({
+        url: `/users/${userId}/payments`,
+        method: 'GET',
+        params: filter
+      }),
+      providesTags: ['Payment'],
+      transformResponse: (response: ApiListResponse<IPayment[]>) => {
+        return response.data
+      }
+    }),
+
+    getPaymentsByCreatorId: builder.query<IListData<IPayment[]>, { creatorId: string; filter?: IParamsEvent }>({
+      query: ({ creatorId, filter }) => ({
+        url: `/users/${creatorId}/payments/creator`,
+        method: 'GET',
+        params: filter
+      }),
+      providesTags: ['Payment'],
+      transformResponse: (response: ApiListResponse<IPayment[]>) => {
+        return response.data
+      }
     })
   })
 })
@@ -92,5 +145,10 @@ export const {
   useUpdatePaymentMutation,
   useDeletePaymentMutation,
   useGetPaymentMethodsQuery,
-  useCheckoutMutation
+  useCheckoutMutation,
+  useGetPaymentsByUserIdQuery,
+  useGetPaymentsByCreatorIdQuery,
+  useAcceptOrderMutation,
+  useRejectOrderMutation,
+  useUpdateOrderStatusMutation
 } = apiPayment

@@ -28,3 +28,10 @@ export type CreatePaymentAccountPayload = {
   paymentAccountQRCode: File
   checkoutContent: string
 }
+
+export type UpdateOrderPayload = {
+  paymentId: string
+  customerName: string
+  customerEmail: string
+  customerPhone: string
+}

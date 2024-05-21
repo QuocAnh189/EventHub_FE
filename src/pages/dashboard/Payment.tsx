@@ -1,22 +1,20 @@
 //component
-import PaymentAccountsList from '@components/payment/PaymentAccountsList'
+import { EditOrderModal } from '@components/payment/EditOrderModal'
 import { useAppSelector } from '@hooks/useRedux'
 import { PageHeader } from '@layouts/components'
 import ProtectedLayout from '@layouts/protected'
-import { useGetPaymentAccountsQuery } from '@redux/services/userApi'
-import { Spin } from 'antd'
+import { useGetPaymentsByUserIdQuery } from '@redux/services/paymentApi'
+import OrdersTable from '@widgets/OrdersTable'
+import { IPayment } from 'interfaces/contents/payment'
 import { useEffect, useState } from 'react'
-import Invoice from './components/Invoice'
-import PaymentAccountModal from '@components/payment/PaymentAccountModal'
-import { IPaymentAccount } from 'interfaces/contents/payment'
 
 const Payment = () => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
 
-  const { data, isLoading, refetch } = useGetPaymentAccountsQuery(user?.id!)
+  const { data, isFetching, refetch } = useGetPaymentsByUserIdQuery({ userId: user?.id! })
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
-  const [selectedAccount, setSelectedAccount] = useState<IPaymentAccount>()
+  const [selectedOrder, setSelectedOrder] = useState<IPayment>()
 
   useEffect(() => {
     refetch()
@@ -25,31 +23,18 @@ const Payment = () => {
   return (
     <>
       <ProtectedLayout>
-        <PageHeader title='Billing' />
-        <div className='grid w-full grid-cols-3 gap-4'>
-          <div className='col-span-2'>
-            {isLoading ? (
-              <Spin spinning={isLoading} />
-            ) : (
-              data?.items && (
-                <PaymentAccountsList
-                  accounts={data?.items || []}
-                  isLoading={isLoading}
-                  onClick={(method: any) => {
-                    setSelectedAccount(method)
-                    setIsOpenModal(true)
-                  }}
-                />
-              )
-            )}
-          </div>
-          <div className='col-span-1'>
-            <Invoice />
-          </div>
-        </div>
+        <PageHeader title='My Orders' />
+        <OrdersTable
+          payments={data?.items || []}
+          isLoading={isFetching}
+          onClick={(order: any) => {
+            setSelectedOrder(order)
+            setIsOpenModal(true)
+          }}
+        />
       </ProtectedLayout>
-      {isOpenModal && selectedAccount && (
-        <PaymentAccountModal isModalOpen={isOpenModal} setIsModalOpen={setIsOpenModal} account={selectedAccount} />
+      {isOpenModal && selectedOrder && (
+        <EditOrderModal isModalOpen={isOpenModal} setIsModalOpen={setIsOpenModal} order={selectedOrder} />
       )}
     </>
   )
