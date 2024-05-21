@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { IParamsEvent } from '@type/event'
 import { IChangePasswordPayload, IFollowPayload } from '@type/user'
 import { ApiListResponse, IListData } from 'interfaces'
-import { IPayment, IPaymentAccount } from 'interfaces/contents/payment'
+import { IPaymentAccount } from 'interfaces/contents/payment'
 import { IUser } from 'interfaces/systems/user'
 
 export const apiUser = createApi({
@@ -181,30 +181,6 @@ export const apiUser = createApi({
         method: 'DELETE'
       }),
       invalidatesTags: ['User']
-    }),
-
-    getPaymentsByUserId: builder.query<IListData<IPayment[]>, { userId: string; filter?: IParamsEvent }>({
-      query: ({ userId, filter }) => ({
-        url: `/users/${userId}/payments`,
-        method: 'GET',
-        params: filter
-      }),
-      providesTags: ['User'],
-      transformResponse: (response: ApiListResponse<IPayment[]>) => {
-        return response.data
-      }
-    }),
-
-    getPaymentsByCreatorId: builder.query<IListData<IPayment[]>, { creatorId: string; filter?: IParamsEvent }>({
-      query: ({ creatorId, filter }) => ({
-        url: `/users/${creatorId}/payments/creator`,
-        method: 'GET',
-        params: filter
-      }),
-      providesTags: ['User'],
-      transformResponse: (response: ApiListResponse<IPayment[]>) => {
-        return response.data
-      }
     })
   })
 })
@@ -226,7 +202,5 @@ export const {
   useGetPaymentAccountsQuery,
   useCreatePaymentAccountMutation,
   useUpdatePaymentAccountMutation,
-  useDeletePaymentAccountMutation,
-  useGetPaymentsByUserIdQuery,
-  useGetPaymentsByCreatorIdQuery
+  useDeletePaymentAccountMutation
 } = apiUser

@@ -1,4 +1,3 @@
-import { useAppSelector } from '@hooks/useRedux'
 import { useUpdatePaymentMutation } from '@redux/services/paymentApi'
 import { UpdateOrderPayload } from '@type/payment'
 import { Button, Form, Input, Modal, notification } from 'antd'
@@ -36,9 +35,12 @@ export function EditOrderModal({ isModalOpen, setIsModalOpen, order }: IEditOrde
     ;() => handleInitializeForm.current
   }, [form, order])
 
-  async function handleUpdateOrder(values: UpdateOrderForm) {
+  async function handleUpdateOrder() {
     try {
-      var payload: UpdateOrderPayload = { ...values, paymentId: order.id }
+      await form.validateFields()
+
+      const values = form.getFieldsValue()
+      const payload: UpdateOrderPayload = { ...values, paymentId: order.id }
 
       await updatePayment(payload).unwrap()
 
@@ -63,17 +65,7 @@ export function EditOrderModal({ isModalOpen, setIsModalOpen, order }: IEditOrde
       destroyOnClose={true}
       afterClose={form.resetFields}
     >
-      <Form
-        form={form}
-        size='large'
-        autoComplete='off'
-        labelCol={{ span: 24 }}
-        wrapperCol={{ span: 24 }}
-        onFinish={handleUpdateOrder}
-        onFinishFailed={(error) => {
-          console.log('🚀 ~ EditOrderModal ~ error:', error)
-        }}
-      >
+      <Form form={form} size='large' autoComplete='off' labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
         <Form.Item
           name='customerName'
           label={<span className='font-medium'>Name</span>}
@@ -99,8 +91,10 @@ export function EditOrderModal({ isModalOpen, setIsModalOpen, order }: IEditOrde
           <Input placeholder='Enter your phone number' />
         </Form.Item>
         <div className='flex justify-end gap-3'>
-          <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
-          <Button htmlType='submit' onClick={() => form.submit()} type='primary' loading={updatePaymentLoading}>
+          <Button htmlType='button' onClick={() => setIsModalOpen(false)}>
+            Cancel
+          </Button>
+          <Button htmlType='submit' onClick={() => handleUpdateOrder()} type='primary' loading={updatePaymentLoading}>
             Update
           </Button>
         </div>

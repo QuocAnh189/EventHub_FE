@@ -64,8 +64,11 @@ const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentA
     return errs && errs.length > 0 ? false : true
   }
 
-  async function handleUpdatePaymentAccount(values: CreatePaymentAccountForm) {
+  async function handleUpdatePaymentAccount() {
     try {
+      await form.validateFields()
+
+      const values = form.getFieldsValue()
       const { checkoutContent, methodId, paymentAccountNumber, paymentAccountQRCode } = values
 
       const payloadForm = new FormData()
@@ -119,17 +122,7 @@ const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentA
       destroyOnClose={true}
       afterClose={form.resetFields}
     >
-      <Form
-        form={form}
-        size='large'
-        autoComplete='off'
-        labelCol={{ span: 24 }}
-        wrapperCol={{ span: 24 }}
-        onFinish={handleUpdatePaymentAccount}
-        onFinishFailed={(error) => {
-          console.log('🚀 ~ PaymentAccountModal ~ error:', error)
-        }}
-      >
+      <Form form={form} size='large' autoComplete='off' labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
         <Form.Item
           name='methodId'
           label={<span className='font-medium'>Payment Method</span>}
@@ -194,7 +187,7 @@ const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentA
             <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
             <Button
               htmlType='submit'
-              onClick={() => form.submit()}
+              onClick={handleUpdatePaymentAccount}
               type='primary'
               loading={updatePaymentAccountLoading}
             >

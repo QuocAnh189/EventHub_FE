@@ -1,17 +1,19 @@
 // eslint-disable-next-line no-redeclare
-import SubmenuTrigger from '@ui/SubmenuTrigger'
 import { getStatusColor } from '@utils/helpers'
 // eslint-disable-next-line no-redeclare
 import { Image } from 'antd'
 import { AnyObject } from 'antd/es/_util/type'
 import type { ColumnsType } from 'antd/es/table/interface'
 import { IPayment, IPaymentEvent, IPaymentMethod } from 'interfaces/contents/payment'
+import { AiFillCalendar, AiFillCarryOut } from 'react-icons/ai'
+import { MdOutlineEditCalendar } from 'react-icons/md'
 
 export interface IOrdersTableHook {
   onClick?: (order: IPayment) => void
+  onChangeStatus?: (order: IPayment) => void
 }
 
-export default function useOrdersTable({ onClick }: IOrdersTableHook) {
+export default function useOrdersTable({ onClick, onChangeStatus }: IOrdersTableHook) {
   const columns: ColumnsType<IPayment | AnyObject> = [
     {
       title: 'Event',
@@ -120,8 +122,15 @@ export default function useOrdersTable({ onClick }: IOrdersTableHook) {
       dataIndex: 'actions',
       align: 'center',
       render: (_, order) => (
-        <div className='cursor-pointer' onClick={() => onClick && onClick(order as IPayment)}>
-          <i className='text-lg leading-none icon icon-pen-to-square-regular' />
+        <div className='flex justify-center gap-4'>
+          <div className='cursor-pointer' onClick={() => onClick && onClick(order as IPayment)}>
+            <i className='text-lg leading-none icon icon-pen-to-square-regular' />
+          </div>
+          {onChangeStatus && (
+            <div className='cursor-pointer' onClick={() => onChangeStatus(order as IPayment)}>
+              <MdOutlineEditCalendar className='text-lg leading-none icon' />
+            </div>
+          )}
         </div>
       )
     }

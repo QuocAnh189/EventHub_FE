@@ -10,10 +10,11 @@ interface OrdersTableProps {
   payments: IPayment[]
   isLoading: boolean
   onClick?: (order: IPayment) => void
+  onChangeStatus?: (order: IPayment) => void
 }
 
-const OrdersTable = ({ payments, isLoading, onClick }: OrdersTableProps) => {
-  const [columns] = useOrdersTable({ onClick })
+const OrdersTable = ({ payments, isLoading, onClick, onChangeStatus }: OrdersTableProps) => {
+  const [columns] = useOrdersTable({ onClick, onChangeStatus })
 
   return (
     <Spring className='flex flex-col flex-1 w-full'>

@@ -1,3 +1,5 @@
+import { EPaymentStatus } from '@constants/enum'
+
 export interface IPayment {
   id: string
   eventId: string
@@ -32,13 +34,6 @@ export interface IPaymentEvent {
   coverImage: string
   name: string
   creatorId: string
-}
-
-export enum EPaymentStatus {
-  PAID = 'PAID',
-  PENDING = 'PENDING',
-  FAILED = 'FAILED',
-  REJECTED = 'REJECTED'
 }
 
 export interface IPaymentMethod {
