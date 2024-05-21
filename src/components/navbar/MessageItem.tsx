@@ -26,12 +26,13 @@ const placeholder = {
 }
 
 interface Props {
+  t: any
   message: any
   index: number
 }
 
 const MessageItem = (props: Props) => {
-  const { message = placeholder, index } = props
+  const { t, message = placeholder, index } = props
 
   const [ref, { width }] = useMeasure()
 
@@ -53,8 +54,8 @@ const MessageItem = (props: Props) => {
           <TruncatedText text={message.content} width={width} />
         </div>
         <div className='flex gap-2.5'>
-          <button className='btn btn--outline size-xs green w-[70px]'>Reply</button>
-          <button className='btn btn--outline size-xs red w-[120px]'>Mark as read</button>
+          <button className='btn btn--outline size-xs green w-[80px]'>{t('message.reply_btn')}</button>
+          <button className='btn btn--outline size-xs red w-[120px]'>{t('message.mark_btn')}</button>
         </div>
       </div>
     </Spring>

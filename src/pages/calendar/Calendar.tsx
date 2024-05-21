@@ -1,4 +1,5 @@
 //hook
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // components
@@ -20,7 +21,6 @@ import { useGetEventsQuery } from '@redux/services/eventApi'
 //constant
 import { EEventStatus } from '@constants/enum'
 import dayjs from 'dayjs'
-import { useEffect, useState } from 'react'
 
 const Calendar = ({ t }: any) => {
   const navigate = useNavigate()
@@ -72,6 +72,22 @@ const Calendar = ({ t }: any) => {
             />
           </Box>
         </Box>
+        <div className='flex items-center gap-8 mt-8 px-'>
+          <div className='flex items-center gap-2'>
+            <span className='w-3 h-3 bg-bgBorderError rounded-lg'></span>
+            <p>Closed</p>
+          </div>
+
+          <div className='flex items-center gap-2'>
+            <span className='w-3 h-3 bg-amber-400 rounded-lg'></span>
+            <p>Happening</p>
+          </div>
+
+          <div className='flex items-center gap-2'>
+            <span className='w-3 h-3 bg-emerald-400 rounded-lg'></span>
+            <p>Upcoming</p>
+          </div>
+        </div>
       </Box>
     </ProtectedLayout>
   )

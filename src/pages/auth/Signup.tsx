@@ -23,7 +23,10 @@ import { useAppDispatch } from '@hooks/useRedux'
 import { setUser } from '@redux/slices/userSlice'
 import { useSignUpMutation } from '@redux/services/authApi'
 
-const SignUp = () => {
+//i18
+import { withTranslation } from 'react-i18next'
+
+const SignUp = ({ t }: any) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { width } = useWindowSize()
@@ -100,7 +103,7 @@ const SignUp = () => {
             <img loading='lazy' src={logoText_Img} alt='EventHub' className='w-[200px] object-cover' />
           </a>
           <p className='text-center tracking-[0.2px] font-semibold text-lg leading-6 max-w-[540px] my-7 mx-auto'>
-            Where every event finds its perfect audience, creating unforgettable moments and lasting connections
+            {t('slogan')}
           </p>
           <img loading='lazy' className='max-w-[780px]' src={authImg} alt='media' />
         </div>
@@ -119,7 +122,7 @@ const SignUp = () => {
               transition={{ duration: 0.4, delay: 0.2 }}
               className='mb-[30px] flex flex-row items-center justify-center gap-x-4'
             >
-              <h1 className='text-4xl font-semibold'>Register</h1>
+              <h1 className='text-4xl font-semibold'>{t('title')}</h1>
             </motion.div>
             <div className='block h-full'>
               {showFormSessionOne && (
@@ -141,7 +144,7 @@ const SignUp = () => {
             </div>
             <div className='absolute bottom-0 left-[50%] min-h-[40px] w-full translate-x-[-50%] text-center'>
               <p className='font-semibold text-textGray'>
-                ©2024 event Hub -<span className='font-bold text-textBlack'>Imprint & Privacy Policy</span>
+                {t('footer_one')} -<span className='font-bold text-textBlack'>{t('footer_two')}</span>
               </p>
             </div>
           </div>
@@ -151,4 +154,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default withTranslation('signup')(SignUp)

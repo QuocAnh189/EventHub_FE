@@ -17,13 +17,14 @@ import { withTranslation } from 'react-i18next'
 const step = 6
 
 interface Props {
+  t: any
   open: boolean
   onOpen: () => void
   onClose: () => void
 }
 
 const NotificationsPanel = (props: Props) => {
-  const { open, onOpen, onClose } = props
+  const { t, open, onOpen, onClose } = props
 
   const [headerRef, { height: headerHeight }] = useMeasure()
   const [footerRef, { height: footerHeight }] = useMeasure()
@@ -52,7 +53,7 @@ const NotificationsPanel = (props: Props) => {
     <DrawerBase anchor='right' open={open} onClose={onClose} onOpen={onOpen}>
       <div className='pt-[30px] px-[30px] pb-4' ref={headerRef}>
         <div className='flex justify-between items-center'>
-          <h5>Notifications</h5>
+          <h5>{t('notification.title')}</h5>
           <button
             className='text-accent text-lg transition hover:text-red'
             onClick={onClose}
@@ -64,6 +65,7 @@ const NotificationsPanel = (props: Props) => {
         <div className='flex mt-5'>
           {NOTIFICATION_OPTIONS.map((item: any, index: any) => (
             <FilterItem
+              type='notification'
               key={index}
               text={item.label}
               value={item.value}

@@ -21,6 +21,7 @@ import { SignUpPayloadOne } from '@type/auth'
 
 //redux
 import { useValidateUserMutation } from '@redux/services/authApi'
+import { withTranslation } from 'react-i18next'
 
 const formSchema = z.object({
   email: z
@@ -37,12 +38,13 @@ const formSchema = z.object({
 })
 
 interface SessionOneProps {
+  t: any
   formDataSessionOne: SignUpPayloadOne
   setFormDataSessionOne: (e: ChangeEvent<HTMLInputElement>) => void
   nextSession: () => void
 }
 const SessionOne = (props: SessionOneProps) => {
-  const { formDataSessionOne, setFormDataSessionOne, nextSession } = props
+  const { t, formDataSessionOne, setFormDataSessionOne, nextSession } = props
 
   const navigate = useNavigate()
 
@@ -91,7 +93,7 @@ const SessionOne = (props: SessionOneProps) => {
             type='email'
             name='email'
             className='block min-h-[auto] w-full rounded-2xl border-[2px] px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Enter email'
+            placeholder={t('seesion_one.email_placeholder')}
             onChange={setFormDataSessionOne}
           />
           {errors.email && <p className='mt-1 text-textError'>{errors.email.message}</p>}
@@ -108,7 +110,7 @@ const SessionOne = (props: SessionOneProps) => {
             type='text'
             name='fullName'
             className='block min-h-[auto] w-full rounded-2xl border-[2px] px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Enter Name'
+            placeholder={t('seesion_one.fullname_placeholder')}
             onChange={setFormDataSessionOne}
           />
           {errors.fullName && <p className='mt-1 text-textError'>{errors.fullName.message}</p>}
@@ -125,7 +127,7 @@ const SessionOne = (props: SessionOneProps) => {
             type='text'
             name='phoneNumber'
             className='block min-h-[auto] w-full rounded-2xl border-[2px] px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Enter Phone'
+            placeholder={t('seesion_one.phone_placeholder')}
             onChange={setFormDataSessionOne}
           />
           {errors.phoneNumber && <p className='mt-1 text-textError'>{errors.phoneNumber.message}</p>}
@@ -141,7 +143,7 @@ const SessionOne = (props: SessionOneProps) => {
             type='submit'
             className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
           >
-            Submit
+            {t('seesion_one.submit_btn')}
           </button>
         </motion.div>
       </form>
@@ -156,7 +158,7 @@ const SessionOne = (props: SessionOneProps) => {
           onClick={() => navigate('/signin')}
           className='block w-full py-4 text-sm font-semibold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
         >
-          Already have an account? Sign In
+          {t('seesion_one.option')}
         </button>
 
         <button
@@ -165,11 +167,11 @@ const SessionOne = (props: SessionOneProps) => {
             navigate(-1)
           }}
         >
-          Back
+          {t('seesion_one.back_btn')}
         </button>
       </motion.div>
     </div>
   )
 }
 
-export default SessionOne
+export default withTranslation('signup')(SessionOne)

@@ -11,7 +11,8 @@
     "status": "Status",
     "category": "Category",
     "search": "Search",
-    "events_to_explore": "Events to Explore"
+    "events_to_explore": "Events to Explore",
+    "view_event_btn": "View"
   },
   "best events": {
     "title": "Best Events to Visit"

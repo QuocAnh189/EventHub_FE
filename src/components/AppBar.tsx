@@ -193,4 +193,4 @@ const AppBar = ({ t }: any) => {
   )
 }
 
-export default withTranslation('comon')(AppBar)
+export default withTranslation('common')(AppBar)

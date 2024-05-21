@@ -1,13 +1,15 @@
 //hook
 import { IEvent } from 'interfaces/contents/event'
+import { withTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 interface Props {
+  t: any
   event: IEvent
 }
 
 const EventCardSearchHome = (props: Props) => {
-  const { event } = props
+  const { t, event } = props
   const navigate = useNavigate()
 
   const handleViewEvent = () => {
@@ -44,7 +46,7 @@ const EventCardSearchHome = (props: Props) => {
           onClick={handleViewEvent}
           className='bg-black text-white rounded-[20px] py-[6px] px-[20px] text-[12px] hover:bg-gray'
         >
-          View
+          {t('search home.view_event_btn')}
         </button>
         <h5 className='text-[12px] font-medium m-0 mt-1 leading-4'>
           {event?.categories[0]?.name} <br />{' '}
@@ -55,4 +57,4 @@ const EventCardSearchHome = (props: Props) => {
   )
 }
 
-export default EventCardSearchHome
+export default withTranslation('home')(EventCardSearchHome)

@@ -16,28 +16,25 @@ import AppLayout from '@layouts/app.tsx'
 
 //redux
 import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
-import store, { persistor } from '@redux/store.ts'
+import store from '@redux/store.ts'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider>
-          <ConfirmProvider
-            defaultOptions={{
-              allowClose: true,
-              dialogProps: { maxWidth: 'xs' },
-              cancellationButtonProps: { color: 'inherit' },
-              confirmationButtonProps: { color: 'secondary' }
-            }}
-          >
-            <AppLayout>
-              <App />
-            </AppLayout>
-          </ConfirmProvider>
-        </ThemeProvider>
-      </PersistGate>
+      <ThemeProvider>
+        <ConfirmProvider
+          defaultOptions={{
+            allowClose: true,
+            dialogProps: { maxWidth: 'xs' },
+            cancellationButtonProps: { color: 'inherit' },
+            confirmationButtonProps: { color: 'secondary' }
+          }}
+        >
+          <AppLayout>
+            <App />
+          </AppLayout>
+        </ConfirmProvider>
+      </ThemeProvider>
     </Provider>
   </BrowserRouter>
 )

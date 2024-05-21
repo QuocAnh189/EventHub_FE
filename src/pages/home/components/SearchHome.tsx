@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //hook
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'

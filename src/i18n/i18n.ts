@@ -22,6 +22,7 @@ import ORDER_EN from '@locales/en/order.json'
 import REPORT_EN from '@locales/en/report.json'
 import REVIEW_EN from '@locales/en/review.json'
 import PROFILE_EN from '@locales/en/profile.json'
+import COMMON_EN from '@locales/en/common.json'
 
 import SIGNIN_VN from '@locales/vn/auth/signin.json'
 import SIGNUP_VN from '@locales/vn/auth/signup.json'
@@ -44,6 +45,7 @@ import ORDER_VN from '@locales/vn/order.json'
 import REPORT_VN from '@locales/vn/report.json'
 import REVIEW_VN from '@locales/vn/review.json'
 import PROFILE_VN from '@locales/vn/profile.json'
+import COMMON_VN from '@locales/vn/common.json'
 
 const resources = {
   en: {
@@ -67,7 +69,8 @@ const resources = {
     order: ORDER_EN,
     report: REPORT_EN,
     review: REVIEW_EN,
-    profile: PROFILE_EN
+    profile: PROFILE_EN,
+    common: COMMON_EN
   },
   vn: {
     landing: LANDING_VN,
@@ -90,7 +93,8 @@ const resources = {
     order: ORDER_VN,
     report: REPORT_VN,
     review: REVIEW_VN,
-    profile: PROFILE_VN
+    profile: PROFILE_VN,
+    common: COMMON_VN
   }
 }
 

@@ -22,13 +22,14 @@ import { withTranslation } from 'react-i18next'
 const step = 6
 
 interface Props {
+  t: any
   open: boolean
   onOpen: () => void
   onClose: () => void
 }
 
 const MessagesPanel = (props: Props) => {
-  const { open, onOpen, onClose } = props
+  const { t, open, onOpen, onClose } = props
   const [headerRef, { height: headerHeight }] = useMeasure()
   const [footerRef, { height: footerHeight }] = useMeasure()
   const [filter, setFilter] = useState('all')
@@ -64,7 +65,7 @@ const MessagesPanel = (props: Props) => {
     <DrawerBase open={open} onOpen={onOpen} onClose={onClose} anchor='right'>
       <div className='py-8 px-[30px] pb-4' ref={headerRef}>
         <div className='flex justify-between items-center'>
-          <h5>Messages</h5>
+          <h5>{t('message.title')}</h5>
           <button
             className='text-accent text-lg transition hover:text-red'
             onClick={onClose}
@@ -77,6 +78,7 @@ const MessagesPanel = (props: Props) => {
           {MESSAGE_OPTIONS.map((item, index) => (
             <FilterItem
               key={index}
+              type='message'
               text={item.label!}
               value={item.value}
               active={filter}

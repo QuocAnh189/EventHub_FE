@@ -11,7 +11,8 @@
     "status": "Trạng thái",
     "category": "Thể loại",
     "search": "Tìm kiếm",
-    "events_to_explore": "Khám phá sự kiện"
+    "events_to_explore": "Khám phá sự kiện",
+    "view_event_btn": "Xem"
   },
   "best events": {
     "title": "Lựa chọn tốt nhất cho bạn"

@@ -20,12 +20,13 @@ const placeholder = {
 }
 
 interface Props {
+  t: any
   notification: any
   index: number
 }
 
 const NotificationItem = (props: Props) => {
-  const { notification = placeholder, index } = props
+  const { t, notification = placeholder, index } = props
 
   return (
     <Spring className='notification with-border flex gap-2.5' index={index}>
@@ -41,8 +42,8 @@ const NotificationItem = (props: Props) => {
           <span>{notification.subcategory}</span>
         </p>
         <div className='flex gap-2.5'>
-          <button className='btn btn--outline size-xs blue'>Accept</button>
-          <button className='btn btn--outline size-xs red'>Decline</button>
+          <button className='btn btn--outline size-xs blue'>{t('notification.accept_btn')}</button>
+          <button className='btn btn--outline size-xs red'>{t('notification.decline_btn')}</button>
         </div>
       </div>
     </Spring>

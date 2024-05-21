@@ -1,7 +1,5 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/dist/query'
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
 
 //service
 import { apiAuth } from './services/authApi'
@@ -22,40 +20,25 @@ import userReducer, { UserSliceKey } from './slices/userSlice'
 import eventReducer, { EventSliceKey } from './slices/eventSlice'
 import { apiFunction } from './services/functionApi'
 
-const persistConfig = {
-  key: 'root',
-  storage: storage
-}
-
-const combinedReducer = combineReducers({
-  [CategorySliceKey]: categoryReducer,
-  [UserSliceKey]: userReducer,
-  [EventSliceKey]: eventReducer,
-
-  [apiAuth.reducerPath]: apiAuth.reducer,
-  [apiCategory.reducerPath]: apiCategory.reducer,
-  [apiCommand.reducerPath]: apiCommand.reducer,
-  [apiEvent.reducerPath]: apiEvent.reducer,
-  [apiMessage.reducerPath]: apiMessage.reducer,
-  [apiPayment.reducerPath]: apiPayment.reducer,
-  [apiConversation.reducerPath]: apiConversation.reducer,
-  [apiRole.reducerPath]: apiRole.reducer,
-  [apiTicket.reducerPath]: apiTicket.reducer,
-  [apiUser.reducerPath]: apiUser.reducer,
-  [apiPermission.reducerPath]: apiPermission.reducer,
-  [apiFunction.reducerPath]: apiFunction.reducer
-})
-
-const rootReducer = (state: any, action: any) => {
-  // if (action.type === 'auth/logOut') {
-  //   state.auth = undefined
-  // }
-  return combinedReducer(state, action)
-}
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    [CategorySliceKey]: categoryReducer,
+    [UserSliceKey]: userReducer,
+    [EventSliceKey]: eventReducer,
+
+    [apiAuth.reducerPath]: apiAuth.reducer,
+    [apiCategory.reducerPath]: apiCategory.reducer,
+    [apiCommand.reducerPath]: apiCommand.reducer,
+    [apiEvent.reducerPath]: apiEvent.reducer,
+    [apiMessage.reducerPath]: apiMessage.reducer,
+    [apiPayment.reducerPath]: apiPayment.reducer,
+    [apiConversation.reducerPath]: apiConversation.reducer,
+    [apiRole.reducerPath]: apiRole.reducer,
+    [apiTicket.reducerPath]: apiTicket.reducer,
+    [apiUser.reducerPath]: apiUser.reducer,
+    [apiPermission.reducerPath]: apiPermission.reducer,
+    [apiFunction.reducerPath]: apiFunction.reducer
+  },
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -82,5 +65,3 @@ export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
 export default store
-
-export const persistor = persistStore(store)

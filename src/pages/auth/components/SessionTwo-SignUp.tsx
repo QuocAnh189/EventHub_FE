@@ -15,8 +15,10 @@ import { AiFillEyeInvisible } from 'react-icons/ai'
 
 // type
 import { SignUpPayloadTwo } from '@type/auth'
+import { withTranslation } from 'react-i18next'
 
 interface SessionTwoProps {
+  t: any
   formDataSessionTwo: SignUpPayloadTwo
   setFormDataSessionTwo: (e: ChangeEvent<HTMLInputElement>) => void
   handleSubmit: () => void
@@ -24,7 +26,7 @@ interface SessionTwoProps {
   disabled: boolean
 }
 const SessionTwo = (props: SessionTwoProps) => {
-  const { formDataSessionTwo, handleSubmit, setFormDataSessionTwo, backSession, disabled } = props
+  const { t, formDataSessionTwo, handleSubmit, setFormDataSessionTwo, backSession, disabled } = props
   const navigate = useNavigate()
 
   const [check, setCheck] = useState<boolean>(false)
@@ -45,7 +47,7 @@ const SessionTwo = (props: SessionTwoProps) => {
             value={formDataSessionTwo.password}
             name='password'
             className='min-h-[auto] w-full rounded-2xl border bg-transparent px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Set password'
+            placeholder={t('seesion_two.passwrod_placeholder')}
             onChange={setFormDataSessionTwo}
           />
           <button
@@ -73,7 +75,7 @@ const SessionTwo = (props: SessionTwoProps) => {
             type={showConfirmPassWord ? 'text' : 'password'}
             name='confirmPassword'
             className='min-h-[auto] w-full rounded-2xl border bg-transparent px-3 py-[0.8rem] font-semibold placeholder-gray-400 outline-none placeholder:italic focus:border-[2px] focus:border-bgBlue'
-            placeholder='Confirm password'
+            placeholder={t('seesion_two.confirm_passwrod_placeholder')}
           />
           <button
             className='absolute right-4 top-[50%] translate-y-[-50%] cursor-pointer'
@@ -119,7 +121,7 @@ const SessionTwo = (props: SessionTwoProps) => {
             className='flex w-full items-center justify-center rounded-2xl py-[0.6rem] font-bold leading-7 text-textWhite cursor-pointer bg-bgBlue'
             onClick={handleSubmit}
           >
-            {disabled ? <CircularProgress size={28} color='info' /> : 'Signup'}
+            {disabled ? <CircularProgress size={28} color='info' /> : t('seesion_two.signup_btn')}
           </button>
         </motion.div>
       </div>
@@ -134,18 +136,18 @@ const SessionTwo = (props: SessionTwoProps) => {
           onClick={() => navigate('/signin')}
           className='block w-full py-4 text-sm font-semibold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
         >
-          Already have an account? Sign In
+          {t('seesion_two.option')}
         </button>
 
         <button
           className='block w-full py-4 text-sm font-bold hover:rounded-[18px] hover:bg-bgGrayLight hover:text-[15px]'
           onClick={backSession}
         >
-          Back
+          {t('seesion_two.back_btn')}
         </button>
       </motion.div>
     </div>
   )
 }
 
-export default SessionTwo
+export default withTranslation('signup')(SessionTwo)
