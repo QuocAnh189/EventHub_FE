@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { CheckoutPayload } from '@type/payment'
+import { IParamsEvent } from '@type/event'
+import { CheckoutPayload, UpdateOrderPayload } from '@type/payment'
 import { ApiListResponse } from 'interfaces'
 import { IPayment, IPaymentMethod } from 'interfaces/contents/payment'
 
@@ -46,11 +47,11 @@ export const apiPayment = createApi({
       invalidatesTags: ['Payment']
     }),
 
-    updatePayment: builder.mutation<IPayment, Partial<IPayment>>({
-      query: (data) => ({
-        url: `/payments/${data.id}`,
-        method: 'PUT',
-        body: data
+    updatePayment: builder.mutation<void, UpdateOrderPayload>({
+      query: ({ paymentId, ...payload }) => ({
+        url: `/payments/${paymentId}`,
+        method: 'PATCH',
+        body: payload
       }),
       invalidatesTags: ['Payment']
     }),
