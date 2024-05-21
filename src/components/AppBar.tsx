@@ -75,7 +75,7 @@ const AppBar = ({ t }: any) => {
   const { theme, toggleTheme }: any = useContext(ThemeContext)
   const { setOpen } = useSidebar()
 
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const activeLocale = LOCALES.find((l: any) => l.value === locale)
 

@@ -27,7 +27,7 @@ import ProtectedLayout from '@layouts/protected'
 const Profile = ({ t }: any) => {
   const dispatch = useAppDispatch()
 
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const [updateUser, { isLoading }] = useUpdateUserMutation()
 

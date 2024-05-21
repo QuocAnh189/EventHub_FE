@@ -25,7 +25,7 @@ export interface CreatePaymentAccountForm {
 }
 
 const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentAccountModalProps) => {
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data: methods, isLoading: getMethodsLoading } = useGetPaymentMethodsQuery()
   const [updatePaymentAccount, { isLoading: updatePaymentAccountLoading }] = useUpdatePaymentAccountMutation()

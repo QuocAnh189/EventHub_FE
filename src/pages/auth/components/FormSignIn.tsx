@@ -46,7 +46,7 @@ const FormSignIn = (props: SignInProps) => {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const [showPassWord, setShowPassWord] = useState<boolean>(false)
 

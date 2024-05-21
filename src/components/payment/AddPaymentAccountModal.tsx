@@ -17,7 +17,7 @@ export interface CreatePaymentAccountForm {
 }
 
 const AddPaymentAccountModal = () => {
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 

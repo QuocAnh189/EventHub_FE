@@ -1,7 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-redeclare */
-/* eslint-disable no-case-declarations */
-/* eslint-disable no-duplicate-case */
 // hooks
 import { useCallback, useEffect, useState } from 'react'
 import { usePagination } from '@hooks/usePagination'
@@ -54,8 +50,8 @@ import { toast } from 'react-toastify'
 import { withTranslation } from 'react-i18next'
 
 const EventManagement = ({ t }: any) => {
-  const categories = useAppSelector((state: RootState) => state.category.categories)
-  const user = useAppSelector((state: RootState) => state.user.user)
+  const categories = useAppSelector((state: RootState) => state.persistedReducer.category.categories)
+  const user = useAppSelector((state: RootState) => state.persistedReducer.user.user)
 
   const [fetchFilter, setFetchFilter] = useState<IParamsEvent>(initParamsMyEvent)
 
@@ -261,6 +257,7 @@ const EventManagement = ({ t }: any) => {
         <div>
           {EVENT_MANAGEMENT_OPTIONS.map((option, index: number) => (
             <FilterItem
+              type='filter'
               key={`filter-${index}`}
               text={option.label!}
               qty={getQty(option?.value)!}

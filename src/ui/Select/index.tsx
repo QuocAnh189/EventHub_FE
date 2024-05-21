@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 // styled components
 import { BasicSelect, MinimalSelect } from './styles'
 
@@ -85,5 +84,4 @@ const Select = (props: Props) => {
   return variant === 'basic' ? <BasicSelect {...selectProps} /> : <MinimalSelect {...selectProps} />
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export default memo(Select)

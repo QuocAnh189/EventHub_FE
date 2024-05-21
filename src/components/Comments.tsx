@@ -35,7 +35,7 @@ interface ItemReviewsProps {
 const ItemReviews = (props: ItemReviewsProps) => {
   const { eventId, ownerId } = props
 
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const [openDialog, setOpenDialog] = useState<boolean>(false)
   const [reviewIdSlected, setReviewIdSelected] = useState<string>('')
@@ -140,7 +140,7 @@ interface Props {
 const Comments = (props: Props) => {
   const { eventId, ownerId } = props
 
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const [addReview, { isLoading }] = useAddReviewMutation()
 

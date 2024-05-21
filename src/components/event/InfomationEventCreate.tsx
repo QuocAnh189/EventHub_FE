@@ -52,7 +52,7 @@ const InfomationEvent = (props: Props) => {
   const { t, create, setActive, register, watch, control, setValue } = props
   const navigate = useNavigate()
 
-  const categoriesStore = useAppSelector((state) => state.category.categories)
+  const categoriesStore = useAppSelector((state) => state.persistedReducer.category.categories)
 
   const [checkMap, setCheckMap] = useState(false)
   const [enableCheckError, setEnableCheckError] = useState<boolean>(false)

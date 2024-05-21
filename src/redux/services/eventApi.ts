@@ -9,7 +9,7 @@ export const apiEvent = createApi({
     baseUrl: import.meta.env.VITE_API_URL,
     paramsSerializer: (params: Record<string, unknown>) => queryString.stringify(params, { arrayFormat: 'none' }),
     prepareHeaders: (headers) => {
-      const token = JSON.parse(localStorage.getItem('token')!).accessToken
+      const token = JSON.parse(localStorage.getItem('token')!)?.accessToken
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)

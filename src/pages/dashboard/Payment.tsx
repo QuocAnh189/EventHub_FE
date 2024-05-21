@@ -11,7 +11,7 @@ import PaymentAccountModal from '@components/payment/PaymentAccountModal'
 import { IPaymentAccount } from 'interfaces/contents/payment'
 
 const Payment = () => {
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data, isLoading, refetch } = useGetPaymentAccountsQuery(user?.id!)
 

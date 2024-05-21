@@ -20,6 +20,7 @@
     "@googlemaps/react-wrapper": "^1.1.35",
     "@hookform/resolvers": "^3.3.4",
     "@loadable/component": "^5.15.3",
+    "@microsoft/signalr": "^8.0.0",
     "@mui/base": "^5.0.0-alpha.114",
     "@mui/icons-material": "^5.15.14",
     "@mui/lab": "^5.0.0-alpha.169",

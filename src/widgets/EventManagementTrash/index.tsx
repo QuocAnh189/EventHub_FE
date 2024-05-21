@@ -41,8 +41,8 @@ import { useRestoreEventMutation } from '@redux/services/eventApi'
 import { toast } from 'react-toastify'
 
 const EventManagementTrash = () => {
-  const categories = useAppSelector((state: RootState) => state.category.categories)
-  const user = useAppSelector((state: RootState) => state.user.user)
+  const categories = useAppSelector((state: RootState) => state.persistedReducer.category.categories)
+  const user = useAppSelector((state: RootState) => state.persistedReducer.user.user)
 
   const [fetchFilter, setFetchFilter] = useState<IParamsEvent>(initParamsMyEvent)
 

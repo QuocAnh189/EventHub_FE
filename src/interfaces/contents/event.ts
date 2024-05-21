@@ -1,10 +1,12 @@
 import { EEventPaymentTicket, EEventStatus, EEventStyle } from '@constants/enum'
 import { IPriceRange } from 'interfaces/systems/price-range'
 import { ITicketType } from './ticketType'
+import { IUser } from 'interfaces/systems/user'
 
 export interface IEvent {
   id: string
   creatorId: string
+  creator: Partial<IUser>
   creatorName: string
   categories: any[]
   coverImage: string
@@ -26,6 +28,7 @@ export interface IEvent {
   isFavourite?: boolean
   numberOfShares: number
   numberOfSoldTickets: number
+  averageRating: number
   status: EEventStatus
   reasons: string[]
   createdAt: Date

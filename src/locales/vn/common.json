@@ -21,5 +21,33 @@
     "archived": "Bỏ lỡ",
     "reply_btn": "Phản hồi",
     "mark_btn": "Đánh dấu"
+  },
+  "category": {
+    "label": "Danh mục",
+    "Visual Arts": "Nghệ thuật",
+    "Sports & Active Life": "Thể thao cuộc sống",
+    "Politics": "Chính trị",
+    "Performing Arts": "Thể hiện nghệ thuật",
+    "Other": "Khác",
+    "Nightlife": "Cuộc sống về đêm",
+    "Music": "Âm nhạc",
+    "Lectures & Books": "Bài giảng và sách",
+    "Kids & Family": "Gia đình",
+    "Holidays": "Kỳ nghĩ",
+    "Food & Drink": "Âm thực",
+    "Film": "Phim",
+    "Festivals & Fairs": "Lễ hội",
+    "Fashion": "Thời trang",
+    "Concerts": "Hòa nhạc",
+    "Conferences": "Hội nghị",
+    "Community": "Cộng đồng",
+    "Charities": "Từ thiện",
+    "Anniversary": "Kỉ niệm",
+    "Academic": "Học vấn"
+  },
+  "filter": {
+    "ALL": "Tất cả",
+    "PUBLIC": "Công khai",
+    "PRIVATE": "Cá nhân"
   }
 }

@@ -20,8 +20,9 @@ import { IMetadataEventReponse, initParamsEvent } from '@type/event'
 import { IEvent } from 'interfaces/contents/event'
 import NotData from '@components/NotData'
 import { Loader } from '@components/Loader'
+import { withTranslation } from 'react-i18next'
 
-const ExploreScreen = () => {
+const ExploreScreen = ({ t }: any) => {
   const { watch, setValue } = useForm({
     defaultValues: initParamsEvent
   })
@@ -31,7 +32,14 @@ const ExploreScreen = () => {
   useEffect(() => {
     setValue('page', 1)
     // refetch()
-  }, [watch().type, watch().search, watch().categoryIds, watch().order, watch().priceRange?.startRange])
+  }, [
+    watch().type,
+    watch().search,
+    watch().categoryIds,
+    watch().order,
+    watch().priceRange?.startRange,
+    watch().averageRating
+  ])
 
   useEffect(() => {
     refetch()
@@ -55,17 +63,18 @@ const ExploreScreen = () => {
 
   return (
     <div className='w-full'>
-      <PageHeader title='Explore' />
+      <PageHeader title={t('header.title')} />
       <form className='flex gap-8 py-8'>
         <SidebarExplore watch={watch} setValue={setValue} />
         <div className='relative flex flex-1 flex-col items-center mb-10'>
           <div className='w-full flex items-center justify-between pb-4'>
             <div className='flex items-center gap-2'>
-              <p className='text-gray500 inline-block text-header'>Sort: </p>
+              <p className='text-gray500 inline-block text-header'>{t('sort')}: </p>
               <Select
+                placeholder={t('asc')}
                 options={[
-                  { value: 'ASC', label: 'ASC' },
-                  { value: 'DESC', label: 'DESC' }
+                  { value: 'ASC', label: t('asc') },
+                  { value: 'DESC', label: t('desc') }
                 ]}
                 onChange={(value: any) => {
                   setValue('order', value.value)
@@ -75,7 +84,7 @@ const ExploreScreen = () => {
 
             <Search
               wrapperClass='lg:w-[326px]'
-              placeholder='Search Event'
+              placeholder={t('search')}
               onChange={(query: string) => {
                 setValue('search', query)
               }}
@@ -110,4 +119,4 @@ const ExploreScreen = () => {
   )
 }
 
-export default ExploreScreen
+export default withTranslation('explore')(ExploreScreen)

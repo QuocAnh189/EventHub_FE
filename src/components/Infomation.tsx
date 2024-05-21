@@ -2,6 +2,7 @@
 
 //hook
 import { useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //component
 import FormControl from '@mui/material/FormControl'
@@ -33,8 +34,10 @@ interface Props {
 const Infomation = (props: Props) => {
   const { event } = props
 
+  const navigate = useNavigate()
+
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const totalQuatity = useMemo(() => {
     const calculation = event.ticketTypes?.reduce((total, currentValue) => {
@@ -49,6 +52,10 @@ const Infomation = (props: Props) => {
   const [unfollowUser] = useUnfollowUserMutation()
 
   const handleFollowUser = async () => {
+    if (!user) {
+      navigate('/signin')
+      return
+    }
     try {
       const result = isFollow
         ? await unfollowUser({ followerId: user?.id!, followedId: event.creatorId }).unwrap()
@@ -98,12 +105,12 @@ const Infomation = (props: Props) => {
           <h5>Organization By</h5>
           <div className='flex items-center gap-3'>
             <img
-              src={user?.avatar ? user.avatar : userDefault}
+              src={event?.creator.avatar ? event?.creator.avatar : userDefault}
               alt=''
               className='w-[50px] h-[50px] object-cover rounded-full'
             />
             <div>
-              <p className='font-semibold text-header'>{user?.userName}</p>
+              <p className='font-semibold text-header'>{event?.creator.fullName}</p>
               <button onClick={handleFollowUser} className='flex items-center gap-1 px-2 py-1 rounded-md bg-primary'>
                 <IoMdAdd color='white' size={24} />
                 <p className='text-white'>{isFollow ? 'unfollow' : 'follow'}</p>
@@ -160,14 +167,20 @@ const Infomation = (props: Props) => {
                     className={classNames('field-input')}
                     id='qty'
                     placeholder='0'
-                    value={user?.userName}
+                    value={event?.creator.fullName}
                   />
                 </div>
                 <div className='field-wrapper'>
                   <label className='field-label' htmlFor='qty'>
                     Email
                   </label>
-                  <input readOnly className={classNames('field-input')} id='qty' placeholder='0' value={user?.email} />
+                  <input
+                    readOnly
+                    className={classNames('field-input')}
+                    id='qty'
+                    placeholder='0'
+                    value={event?.creator.email}
+                  />
                 </div>
               </div>
               <div className='field-wrapper'>

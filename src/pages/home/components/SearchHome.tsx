@@ -30,7 +30,7 @@ const initParam = {
 const SearchHome = ({ t }: any) => {
   const navigate = useNavigate()
 
-  const categories = useAppSelector((state) => state.category.categories)
+  const categories = useAppSelector((state) => state.persistedReducer.category.categories)
 
   const { register, handleSubmit, setValue } = useForm<any>({
     defaultValues: initParam,
@@ -88,10 +88,11 @@ const SearchHome = ({ t }: any) => {
                 {...register('type')}
                 className='mt-1 py-2 px-0 border-none outline-none text-md bg-white'
                 aria-label='aa'
+                defaultValue='ALL'
               >
                 {EVENT_STATUS_OPTIONS.map((item, index) => (
                   <option key={`status-${index}`} value={item.value}>
-                    {item.label}
+                    {t(`search home.${item.label}`)}
                   </option>
                 ))}
               </select>
@@ -105,10 +106,10 @@ const SearchHome = ({ t }: any) => {
                 className='mt-1 py-2 px-0 border-none outline-none text-md bg-white'
                 defaultValue={[]}
               >
-                <option value={[]}>All</option>
+                <option value={[]}>{t('search home.All')}</option>
                 {categories.map((category, index) => (
                   <option key={`category-${index}`} value={category.id}>
-                    {category.name}
+                    {t(`search home.categories.${category.name}`)}
                   </option>
                 ))}
               </select>

@@ -17,6 +17,7 @@ import TOP_EVENT_EN from '@locales/en/events/top-event.json'
 import CALENDAR_EN from '@locales/en/calendar.json'
 import HELP_EN from '@locales/en/help.json'
 import HOME_EN from '@locales/en/home.json'
+import EXPLORE_EN from '@locales/en/explore.json'
 import LANDING_EN from '@locales/en/landing.json'
 import ORDER_EN from '@locales/en/order.json'
 import REPORT_EN from '@locales/en/report.json'
@@ -40,6 +41,7 @@ import TOP_EVENT_VN from '@locales/vn/events/top-event.json'
 import CALENDAR_VN from '@locales/vn/calendar.json'
 import HELP_VN from '@locales/vn/help.json'
 import HOME_VN from '@locales/vn/home.json'
+import EXPLORE_VN from '@locales/vn/explore.json'
 import LANDING_VN from '@locales/vn/landing.json'
 import ORDER_VN from '@locales/vn/order.json'
 import REPORT_VN from '@locales/vn/report.json'
@@ -66,6 +68,7 @@ const resources = {
     calendar: CALENDAR_EN,
     help: HELP_EN,
     home: HOME_EN,
+    explore: EXPLORE_EN,
     order: ORDER_EN,
     report: REPORT_EN,
     review: REVIEW_EN,
@@ -90,6 +93,7 @@ const resources = {
     calendar: CALENDAR_VN,
     help: HELP_VN,
     home: HOME_VN,
+    explore: EXPLORE_VN,
     order: ORDER_VN,
     report: REPORT_VN,
     review: REVIEW_VN,
@@ -123,6 +127,7 @@ i18n.use(initReactI18next).init({
     'calendar',
     'help',
     'home',
+    'explore',
     'order',
     'report',
     'review',

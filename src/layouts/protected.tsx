@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ProtectedLayout = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate()
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   useLayoutEffect(() => {
     if (user === null) {

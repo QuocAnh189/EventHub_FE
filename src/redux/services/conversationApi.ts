@@ -7,7 +7,7 @@ export const apiConversation = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
     prepareHeaders: (headers) => {
-      const token = JSON.parse(localStorage.getItem('token')!).accessToken
+      const token = JSON.parse(localStorage.getItem('token')!)?.accessToken
       headers.set('Content-Type', 'application/json')
 
       if (token) {

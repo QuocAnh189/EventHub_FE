@@ -19,7 +19,7 @@ import { useGetReviewsByUserIdQuery } from '@redux/services/userApi'
 import { useAppSelector } from '@hooks/useRedux'
 
 const Review = () => {
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data } = useGetReviewsByUserIdQuery(user?.id!)
 

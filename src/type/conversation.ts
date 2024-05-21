@@ -14,3 +14,15 @@ export const initConversationParams = {
   takeAll: false,
   search: ''
 } as IConversationParams
+
+export type JoinChatRoomRequest = {
+  eventId: string
+  hostId: string
+  userId: string
+}
+
+export type SendMessageRequest = {
+  userId: string
+  conversationId: string
+  content: string
+}

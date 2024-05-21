@@ -30,7 +30,7 @@ const Sidebar = () => {
   const [active, setActive] = useState<string>('')
   const isPermanent = width >= 1920
 
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
   useLayoutEffect(() => {
     if (user?.roles.includes('ADMIN'))
       ROUTES.push({

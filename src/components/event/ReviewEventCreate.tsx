@@ -39,7 +39,7 @@ interface Props {
 const ReviewEventCreate = (props: Props) => {
   const { t, setActive, watch, setValue, disabled, create } = props
 
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   return (
     <div className='w-full px-40 mt-10'>

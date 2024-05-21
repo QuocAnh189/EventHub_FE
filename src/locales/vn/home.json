@@ -12,7 +12,33 @@
     "category": "Thể loại",
     "search": "Tìm kiếm",
     "events_to_explore": "Khám phá sự kiện",
-    "view_event_btn": "Xem"
+    "view_event_btn": "Xem",
+    "All": "Tất cả",
+    "Upcoming": "Sắp diễn ra",
+    "Openning": "Đang diễn ra",
+    "Closed": "Đã kết thúc",
+    "categories": {
+      "Visual Arts": "Nghệ thuật",
+      "Sports & Active Life": "Thể thao cuộc sống",
+      "Politics": "Chính trị",
+      "Performing Arts": "Thể hiện nghệ thuật",
+      "Other": "Khác",
+      "Nightlife": "Cuộc sống về đêm",
+      "Music": "Âm nhạc",
+      "Lectures & Books": "Bài giảng và sách",
+      "Kids & Family": "Gia đình",
+      "Holidays": "Kỳ nghĩ",
+      "Food & Drink": "Âm thực",
+      "Film": "Phim",
+      "Festivals & Fairs": "Lễ hội",
+      "Fashion": "Thời trang",
+      "Concerts": "Hòa nhạc",
+      "Conferences": "Hội nghị",
+      "Community": "Cộng đồng",
+      "Charities": "Từ thiện",
+      "Anniversary": "Kỉ niệm",
+      "Academic": "Học vấn"
+    }
   },
   "best events": {
     "title": "Lựa chọn tốt nhất cho bạn"

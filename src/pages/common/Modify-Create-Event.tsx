@@ -44,7 +44,7 @@ interface Props {
 const ModifyEvent = (props: Props) => {
   const { t, title, create, event } = props
 
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const [createEvent, { isLoading: loadingCreateEvent }] = useCreateEventMutation()
   const [updateEvent, { isLoading: loadingUpdateEvent }] = useUpdateEventMutation()

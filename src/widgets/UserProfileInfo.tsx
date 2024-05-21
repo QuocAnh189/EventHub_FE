@@ -4,7 +4,7 @@ import { useAppSelector } from '@hooks/useRedux'
 import { withTranslation } from 'react-i18next'
 
 const UserProfileInfo = ({ t }: any) => {
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   return (
     <Spring className='card flex items-center'>

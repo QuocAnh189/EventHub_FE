@@ -36,7 +36,7 @@ export default function CheckoutPage() {
     refetch
   } = useGetPaymentAccountsQuery(event?.creatorId!)
 
-  const user = useAppSelector((state) => state.user.user)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const [selectedAccount, setSelectedAccount] = useState<IPaymentAccount>()
   const [paymentItems, setPaymentItems] = useState<PaymentItem[]>([])

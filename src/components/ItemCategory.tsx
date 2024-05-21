@@ -1,10 +1,13 @@
 import { ICategory } from 'interfaces/contents/category'
+import { withTranslation } from 'react-i18next'
 
 interface Props {
+  t: any
   category: ICategory
 }
+
 const ItemCategory = (props: Props) => {
-  const { category } = props
+  const { t, category } = props
 
   return (
     <div className='flex flex-row items-center gap-2'>
@@ -14,9 +17,9 @@ const ItemCategory = (props: Props) => {
       >
         <img loading='lazy' className='w-[20px] h-[20px]' src={category.iconImage} />
       </div>
-      <p className='text-header'>{category.name}</p>
+      <p className='text-header'>{t(`category.${category.name}`)}</p>
     </div>
   )
 }
 
-export default ItemCategory
+export default withTranslation('common')(ItemCategory)
