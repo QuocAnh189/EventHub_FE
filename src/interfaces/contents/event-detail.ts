@@ -23,6 +23,7 @@ export interface IEventDetail {
   numberOfFavourites: number
   numberOfShares: number
   numberOfSoldTickets: number
+  averageRating: number
   status: EEventStatus
   createdAt: Date
   updatedAt: Date

@@ -1,14 +1,13 @@
+// hooks
+import { useWindowSize } from 'react-use'
+
 // components
 import Collapse from '@mui/material/Collapse'
 import RatingStars from '@ui/RatingStars'
 import SubmenuTrigger from '@ui/SubmenuTrigger'
 import { NavLink } from 'react-router-dom'
 
-// hooks
-import { useWindowSize } from 'react-use'
-
 // utils
-import PropTypes from 'prop-types'
 import { getStatusColor } from '@utils/helpers'
 
 interface Props {
@@ -123,12 +122,6 @@ const OrderCollapseItem = (props: Props) => {
       </Collapse>
     </div>
   )
-}
-
-OrderCollapseItem.propTypes = {
-  order: PropTypes.object.isRequired,
-  activeCollapse: PropTypes.string.isRequired,
-  handleCollapse: PropTypes.func.isRequired
 }
 
 export default OrderCollapseItem

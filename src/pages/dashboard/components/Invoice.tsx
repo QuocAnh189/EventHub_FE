@@ -5,6 +5,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
+import { withTranslation } from 'react-i18next'
 
 const rows = [
   { date: 'March, 01, 2020', code: '#MS-415646', VAT: '10%', total: '100$' },
@@ -20,16 +21,16 @@ const rows = [
   { date: 'March, 01, 2020', code: '#MS-4156411', VAT: '11%', total: '190$' }
 ]
 
-const Invoice = () => {
+const Invoice = ({ t }: any) => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: 'bold', fontSize: '24px' }}>INVOICE</TableCell>
-            <TableCell align='center'>CODE</TableCell>
-            <TableCell align='center'>VAT&nbsp;(g)</TableCell>
-            <TableCell align='center'>TOTAL&nbsp;(g)</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', fontSize: '24px' }}>{t('table.invoice')}</TableCell>
+            <TableCell align='center'>{t('table.code')}</TableCell>
+            <TableCell align='center'>{t('table.vat')}&nbsp;(g)</TableCell>
+            <TableCell align='center'>{t('table.total')}&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -49,4 +50,4 @@ const Invoice = () => {
   )
 }
 
-export default Invoice
+export default withTranslation('payment')(Invoice)

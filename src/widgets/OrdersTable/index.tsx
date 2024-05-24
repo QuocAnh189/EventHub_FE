@@ -17,7 +17,7 @@ import { ORDERS_COLUMN_DEFS } from '@constants/columnDefs'
 import orders from '@db/orders'
 import { usePagination } from '@hooks/usePagination'
 
-const OrdersTable = ({ category, sort }: any) => {
+const OrdersTable = ({ category }: any) => {
   const { width } = useWindowSize()
   const [activeCollapse, setActiveCollapse] = useState('')
 
@@ -45,7 +45,7 @@ const OrdersTable = ({ category, sort }: any) => {
     pagination.goToPage(1)
     setActiveCollapse('')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, sort])
+  }, [category])
 
   // reset active collapse when page or window width changes
   useEffect(() => {

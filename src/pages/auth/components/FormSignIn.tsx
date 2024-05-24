@@ -30,6 +30,7 @@ import { setUser } from '@redux/slices/userSlice'
 import { motion } from 'framer-motion'
 import { useAppSelector } from '@hooks/useRedux'
 import { withTranslation } from 'react-i18next'
+import { RootState } from '@redux/store'
 
 const formSchema = z.object({
   identity: z.string().min(1, 'Identity is not empty'),
@@ -46,11 +47,11 @@ const FormSignIn = (props: SignInProps) => {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const user = useAppSelector((state) => state.persistedReducer.user.user)
+  const user = useAppSelector((state: RootState) => state.persistedReducer.user.user)
 
   const [showPassWord, setShowPassWord] = useState<boolean>(false)
 
-  const [singInExternal, { isLoading: loadingSignInExternal }] = useSignInExternalMutation()
+  const [SignInExternal] = useSignInExternalMutation()
   const [signIn, { isLoading: loadingSignIn }] = useSignInMutation()
 
   useLayoutEffect(() => {
@@ -98,8 +99,9 @@ const FormSignIn = (props: SignInProps) => {
   }
 
   const handleSignInExternal = async (provider: EProvider) => {
+    // { provider, returnUrl: import.meta.env.VITE_URL_SOCIAL_DEV }
     try {
-      const result = await singInExternal({ provider, returnUrl: 'https://eventhubsolution.vercel.app/' })
+      const result = await SignInExternal({ provider, returnUrl: 'http://localhost:3000/organization' }).unwrap()
 
       if (result) {
         console.log(result)
@@ -205,17 +207,21 @@ const FormSignIn = (props: SignInProps) => {
             handleSignInExternal(EProvider.GOOGLE)
           }}
         >
-          <button className='flex w-full flex-row items-center justify-around rounded-2xl border-[2px] border-textPurple bg-white py-[0.8rem] font-bold text-textGray hover:bg-textPurpleBorder hover:text-textWhite'>
-            {loadingSignInExternal ? (
-              <CircularProgress size={28} color='info' />
-            ) : (
-              <>
-                <img loading='lazy' src={googleIcon} alt='' className='block h-[20px] w-[20px]' />
-                <span className='inline-block'>{t('login.signin_google')}</span>
-                <span />
-              </>
-            )}
-          </button>
+          <form
+            method='POST'
+            action='https://eventhubsolutionbackendserverplan.azurewebsites.net/api/auth/external-login?provider=Google&returnUrl=http://localhost:3000/organization'
+          >
+            <button
+              // onClick={() => {
+              //   handleSignInExternal(EProvider.GOOGLE)
+              // }}
+              className='flex w-full flex-row items-center justify-around rounded-2xl border-[2px] border-textPurple bg-white py-[0.8rem] font-bold text-textGray hover:bg-textPurpleBorder hover:text-textWhite'
+            >
+              <img loading='lazy' src={googleIcon} alt='' className='block h-[20px] w-[20px]' />
+              <span className='inline-block'>{t('login.signin_google')}</span>
+              <span />
+            </button>
+          </form>
         </motion.div>
 
         <motion.div
@@ -223,22 +229,21 @@ const FormSignIn = (props: SignInProps) => {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.8 }}
         >
-          <button
-            className='flex w-full flex-row items-center justify-around rounded-2xl border-[2px] border-textBlue bg-white py-[0.8rem] font-bold text-textGray hover:bg-bgBlue hover:text-textWhite'
-            onClick={() => {
-              handleSignInExternal(EProvider.FACEBOOK)
-            }}
+          <form
+            method='POST'
+            action='https://eventhubsolutionbackendserverplan.azurewebsites.net/api/auth/external-login?provider=Facebook&returnUrl=http://localhost:3000/organization'
           >
-            {loadingSignInExternal ? (
-              <CircularProgress size={28} color='info' />
-            ) : (
-              <>
-                <img loading='lazy' src={facebookIcon} alt='' className='block h-[20px] w-[20px]' />
-                <span className='inline-block'>{t('login.signin_facebook')}</span>
-                <span />
-              </>
-            )}
-          </button>
+            <button
+              className='flex w-full flex-row items-center justify-around rounded-2xl border-[2px] border-textBlue bg-white py-[0.8rem] font-bold text-textGray hover:bg-bgBlue hover:text-textWhite'
+              onClick={() => {
+                handleSignInExternal(EProvider.FACEBOOK)
+              }}
+            >
+              <img loading='lazy' src={facebookIcon} alt='' className='block h-[20px] w-[20px]' />
+              <span className='inline-block'>{t('login.signin_facebook')}</span>
+              <span />
+            </button>
+          </form>
         </motion.div>
 
         <motion.div

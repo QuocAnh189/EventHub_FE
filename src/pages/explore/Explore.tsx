@@ -31,14 +31,13 @@ const ExploreScreen = ({ t }: any) => {
 
   useEffect(() => {
     setValue('page', 1)
-    // refetch()
   }, [
     watch().type,
     watch().search,
     watch().categoryIds,
     watch().order,
     watch().priceRange?.startRange,
-    watch().averageRating
+    watch().rates?.length
   ])
 
   useEffect(() => {
@@ -55,7 +54,7 @@ const ExploreScreen = ({ t }: any) => {
     }
   }, [data])
 
-  const pagination = usePagination(meta?.totalPublic, initParamsEvent.size)
+  const pagination = usePagination(meta?.totalCount, initParamsEvent.size)
 
   useEffect(() => {
     setValue('page', pagination.currentPage)

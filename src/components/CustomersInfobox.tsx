@@ -1,11 +1,10 @@
 // components
 import Spring from './Spring'
 import Counter from './Counter'
-
-// utils
-import PropTypes from 'prop-types'
+import { withTranslation } from 'react-i18next'
 
 interface Props {
+  t: any
   iconClass?: string
   color?: string
   label?: string
@@ -14,7 +13,7 @@ interface Props {
 }
 
 const CustomersInfobox = (props: Props) => {
-  const { iconClass = 'users-solid', color = 'accent', label = 'All', suffix, count = 0 } = props
+  const { t, iconClass = 'users-solid', color = 'accent', label = 'All', suffix, count = 0 } = props
 
   return (
     <Spring className='card flex flex-col justify-center md:items-center'>
@@ -26,17 +25,10 @@ const CustomersInfobox = (props: Props) => {
       </div>
       <h6>
         {label}
-        <span className='xl:hidden 4xl:inline'> Customers</span>
+        <span className='xl:hidden 4xl:inline'> {t('middle.customers')}</span>
       </h6>
     </Spring>
   )
 }
 
-CustomersInfobox.propTypes = {
-  iconClass: PropTypes.string,
-  color: PropTypes.string,
-  label: PropTypes.string,
-  count: PropTypes.number
-}
-
-export default CustomersInfobox
+export default withTranslation('review')(CustomersInfobox)

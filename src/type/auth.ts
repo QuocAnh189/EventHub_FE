@@ -2,8 +2,8 @@
 // import {IUser} from '@interface/'
 
 export enum EProvider {
-  GOOGLE = 'GOOGLE',
-  FACEBOOK = 'FACEBOOK'
+  GOOGLE = 'Google',
+  FACEBOOK = 'Facebook'
 }
 
 export interface LoginPayload {

@@ -10,13 +10,15 @@ import Pagination from '@ui/Pagination'
 // import reviews from '@db/reviews'
 import { IReview } from 'interfaces/contents/review'
 import NotData from '@components/NotData'
+import { withTranslation } from 'react-i18next'
 
 interface IProps {
+  t: any
   reviews: IReview[]
   total: number
 }
 const LatestAcceptedReviews = (props: IProps) => {
-  const { reviews, total } = props
+  const { t, reviews, total } = props
 
   const pagination: any = usePagination(total, 4)
 
@@ -24,7 +26,7 @@ const LatestAcceptedReviews = (props: IProps) => {
     <Spring className='flex flex-1 flex-col gap-[26px]'>
       <div className='card !p-0 flex-1'>
         <div className='flex flex-col p-5 gap-2.5 md:flex-row md:justify-between md:items-center md:px-[26px]'>
-          <h5>Latest Accepted Reviews</h5>
+          <h5>{t('main.title')}</h5>
         </div>
         <span className='block h-[1px] bg-input-border opacity-60' />
         <div>
@@ -44,4 +46,4 @@ const LatestAcceptedReviews = (props: IProps) => {
   )
 }
 
-export default LatestAcceptedReviews
+export default withTranslation('review')(LatestAcceptedReviews)

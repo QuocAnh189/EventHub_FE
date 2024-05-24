@@ -6,6 +6,7 @@ import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
 //component
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import FormGroup from '@mui/material/FormGroup'
 import Divider from '@mui/material/Divider'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
@@ -81,13 +82,17 @@ const SidebarExplore = (props: Props) => {
         <div className='flex items-center justify-between'>
           <h1 className='text-black text-xl font-semibold text-header'>{t('sidebar.rate.label')}</h1>
         </div>
-        <RadioGroup
+        <FormGroup
           aria-labelledby='demo-radio-buttons-group-label'
           defaultValue='female'
-          name='radio-buttons-group'
-          value={watch().averageRating}
           onChange={(e: any) => {
-            setValue('averageRating', e.target.value)
+            // setValue('rates', e.target.value)
+            if (watch().rates?.includes(e.target.value)) {
+              const newAverage = watch().rates?.filter((item) => item !== e.target.value)
+              setValue('rates', newAverage)
+            } else {
+              setValue('rates', [...watch().rates!, e.target.value])
+            }
           }}
         >
           {[5, 4, 3, 2, 1].map((rate, index) => (
@@ -95,7 +100,7 @@ const SidebarExplore = (props: Props) => {
               key={`rate-${index}`}
               sx={{ color: 'var(--header)' }}
               value={rate}
-              control={<Radio sx={{ color: 'var(--header)' }} />}
+              control={<Checkbox sx={{ color: 'var(--header)' }} />}
               label={
                 <div className='flex items-center gap-1'>
                   {[1, 2, 3, 4, 5].map((item, index) => (
@@ -108,7 +113,7 @@ const SidebarExplore = (props: Props) => {
               }
             />
           ))}
-        </RadioGroup>
+        </FormGroup>
       </div>
 
       <div className='flex flex-col gap-2'>

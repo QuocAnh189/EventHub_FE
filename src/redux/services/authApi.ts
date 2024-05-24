@@ -46,9 +46,13 @@ export const apiAuth = createApi({
 
     signInExternal: builder.mutation<IAuth, IParamsExternalLogin>({
       query: (params) => ({
-        url: '/auth/external-login',
+        url: `/auth/external-login`,
         method: 'POST',
-        params
+        params,
+        body: {}
+        // headers: {
+        //   'Content-Type': 'application/x-www-form-urlencoded'
+        // }
       })
     }),
 

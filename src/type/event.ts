@@ -82,7 +82,7 @@ export interface IParamsEvent {
   order?: EPageOrder
   priceRange?: IPriceRange
   search?: string
-  averageRating?: number | null
+  rates?: number[]
 }
 
 export const initParamsMyEvent = {
@@ -105,7 +105,7 @@ export const initParamsEvent = {
   search: '',
   order: 'ASC',
   priceRange: { startRange: 20, endRange: 1000 },
-  averageRating: null
+  rates: []
 } as IParamsEvent
 
 export interface IMetadataEventReponse {

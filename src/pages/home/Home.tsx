@@ -16,12 +16,17 @@ import MapLocation from './components/Location'
 import PosterOne from '@assets/event/event-poster.png'
 import PosterTwo from '@assets/event/event-subposter.png'
 
+//cookies
+import Cookies from 'js-cookie'
+
 //redux
 import { useGetCategoriesQuery } from '@redux/services/categoryApi'
 import { setCategories } from '@redux/slices/categorySlice'
 
 const Home = () => {
   const dispatch = useAppDispatch()
+
+  const cookies = Cookies.get('anhquoc')
 
   const { data: categories, isSuccess } = useGetCategoriesQuery()
 
@@ -30,6 +35,10 @@ const Home = () => {
       dispatch(setCategories(categories))
     }
   }, [isSuccess])
+
+  useEffect(() => {
+    console.log(cookies)
+  }, [])
 
   return (
     <div className='flex flex-col items-center'>

@@ -4,11 +4,10 @@ import { ReactElement } from 'react'
 import Spring from './Spring'
 import Counter from './Counter'
 import SubmenuTrigger from '@ui/SubmenuTrigger'
-
-// utils
-import PropTypes from 'prop-types'
+import { withTranslation } from 'react-i18next'
 
 interface Props {
+  t: any
   icon: ReactElement
   color?: string
   title?: string
@@ -16,7 +15,7 @@ interface Props {
 }
 
 const OrdersInfobox = (props: Props) => {
-  const { icon, color = 'accent', title = 'Lorem ipsum', count = 0 } = props
+  const { t, icon, color = 'accent', title = 'Lorem ipsum', count = 0 } = props
 
   return (
     <Spring className='card !pb-5'>
@@ -27,7 +26,7 @@ const OrdersInfobox = (props: Props) => {
         <SubmenuTrigger />
       </div>
       <h6 className='mt-[28px] mb-2.5'>
-        <span className='xl:hidden 2xl:inline'>Orders </span>
+        <span className='xl:hidden 2xl:inline'>{t('middle.order')} </span>
         {title}
       </h6>
       <Counter className='h3' num={count} />
@@ -35,11 +34,4 @@ const OrdersInfobox = (props: Props) => {
   )
 }
 
-OrdersInfobox.propTypes = {
-  icon: PropTypes.node,
-  color: PropTypes.oneOf(['accent', 'green', 'red', 'badge-status-bg']),
-  title: PropTypes.string,
-  count: PropTypes.number
-}
-
-export default OrdersInfobox
+export default withTranslation('order')(OrdersInfobox)

@@ -16,7 +16,7 @@ export interface CreatePaymentAccountForm {
   checkoutContent: string
 }
 
-const AddPaymentAccountModal = () => {
+const AddPaymentAccountModal = ({ t }: any) => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
@@ -78,7 +78,7 @@ const AddPaymentAccountModal = () => {
         className='flex flex-col items-center justify-center px-6 border-2 border-dashed rounded-lg cursor-pointer hover:bg-neutral-100 text-neutral-500'
       >
         <AiOutlinePlus size={70} />
-        <span className='font-medium'>Add new payment account</span>
+        <span className='font-medium'>{t('btn_add')}</span>
       </div>
       <Modal
         title='Add new payment account'
@@ -101,7 +101,7 @@ const AddPaymentAccountModal = () => {
         >
           <Form.Item
             name='methodId'
-            label={<span className='font-medium'>Payment Method</span>}
+            label={<span className='font-medium'>{t('modal.payment_method')}</span>}
             rules={[{ required: true, message: 'PaymentMethod is required' }]}
           >
             <PaymentMethodsList
@@ -113,14 +113,14 @@ const AddPaymentAccountModal = () => {
           </Form.Item>
           <Form.Item
             name='paymentAccountNumber'
-            label={<span className='font-medium'>Account Number</span>}
+            label={<span className='font-medium'>{t('modal.account_number')}</span>}
             rules={[{ required: true, message: 'PaymentAccountNumber is required' }]}
           >
             <Input placeholder='Enter your payment account number' />
           </Form.Item>
           <Form.Item
             name='checkoutContent'
-            label={<span className='font-medium'>Transfer Content</span>}
+            label={<span className='font-medium'>{t('modal.transfer_content')}</span>}
             rules={[{ required: true, message: 'TransferContent is required' }]}
           >
             <Input placeholder="Enter your account's required transfer content" />
@@ -147,21 +147,21 @@ const AddPaymentAccountModal = () => {
                 ) : (
                   <div className='flex flex-col items-center'>
                     <AiOutlineUpload />
-                    <Typography.Text>Upload QR Code</Typography.Text>
+                    <Typography.Text>{t('modal.image_qrcode')}</Typography.Text>
                   </div>
                 )}
               </Upload>
             </div>
           </Form.Item>
           <div className='flex justify-end gap-3'>
-            <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+            <Button onClick={() => setIsModalOpen(false)}>{t('modal.btn_cancle')}</Button>
             <Button
               htmlType='submit'
               onClick={() => form.submit()}
               type='primary'
               loading={createPaymentAccountLoading}
             >
-              Create
+              {t('modal.btn_create')}
             </Button>
           </div>
         </Form>

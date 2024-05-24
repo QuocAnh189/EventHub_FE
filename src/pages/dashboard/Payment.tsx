@@ -1,16 +1,23 @@
+//hook
+import { useEffect, useState } from 'react'
+
 //component
 import PaymentAccountsList from '@components/payment/PaymentAccountsList'
 import { useAppSelector } from '@hooks/useRedux'
 import { PageHeader } from '@layouts/components'
 import ProtectedLayout from '@layouts/protected'
-import { useGetPaymentAccountsQuery } from '@redux/services/userApi'
 import { Spin } from 'antd'
-import { useEffect, useState } from 'react'
 import Invoice from './components/Invoice'
 import PaymentAccountModal from '@components/payment/PaymentAccountModal'
 import { IPaymentAccount } from 'interfaces/contents/payment'
 
-const Payment = () => {
+//redux
+import { useGetPaymentAccountsQuery } from '@redux/services/userApi'
+
+//i18
+import { withTranslation } from 'react-i18next'
+
+const Payment = ({ t }: any) => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data, isLoading, refetch } = useGetPaymentAccountsQuery(user?.id!)
@@ -25,7 +32,7 @@ const Payment = () => {
   return (
     <>
       <ProtectedLayout>
-        <PageHeader title='Billing' />
+        <PageHeader title={t('header.title')} />
         <div className='grid w-full grid-cols-3 gap-4'>
           <div className='col-span-2'>
             {isLoading ? (
@@ -55,4 +62,4 @@ const Payment = () => {
   )
 }
 
-export default Payment
+export default withTranslation('payment')(Payment)

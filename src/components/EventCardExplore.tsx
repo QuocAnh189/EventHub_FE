@@ -26,6 +26,7 @@ const EventCardExplore = (props: Props) => {
 
   return (
     <button
+      type='button'
       onClick={handleViewEvent}
       className='flex gap-2 h-[200px] items-center rounded-md shadow-lg hover:cursor-pointer'
     >
@@ -61,6 +62,14 @@ const EventCardExplore = (props: Props) => {
         <div className='flex items-center gap-1'>
           <BiPurchaseTagAlt color='#3D56F0' size='24px' />
           <p className='text-primary text-xl'>{event.priceRange.startRange}.000 VND</p>
+        </div>
+        <div className='flex items-center gap-1 label-text leading-none w-[30px] hover:cursor-pointer pb-2'>
+          {[1, 2, 3, 4, 5].map((item, index) => (
+            <i
+              key={`rate-${index}`}
+              className={`icon-star-solid text-${item <= event.averageRating ? 'yellow' : 'gray'}`}
+            />
+          ))}
         </div>
       </div>
     </button>

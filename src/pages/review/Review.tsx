@@ -17,8 +17,9 @@ import { IReview } from 'interfaces/contents/review'
 //redux
 import { useGetReviewsByUserIdQuery } from '@redux/services/userApi'
 import { useAppSelector } from '@hooks/useRedux'
+import { withTranslation } from 'react-i18next'
 
-const Review = () => {
+const Review = ({ t }: any) => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data } = useGetReviewsByUserIdQuery(user?.id!)
@@ -62,14 +63,20 @@ const Review = () => {
 
   return (
     <ProtectedLayout>
-      <PageHeader title='Reviews' />
+      <PageHeader title={t('header.title')} />
       <div className='flex flex-col flex-1 gap-5 md:gap-[26px]'>
         <div className='grid grid-cols-1 gap-y-5 md:gap-y-[26px] xl:grid-cols-6 xl:gap-x-[26px]'>
           <div className='widgets-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:col-span-4'>
             <ReviewsScore score={averageRate} />
-            <CustomersInfobox label='Total' count={metaData?.totalCount} color='green' suffix='' />
-            <CustomersInfobox label='New' count={25} suffix='%' iconClass='user-plus-solid' />
-            <CustomersInfobox label='Regular' count={75} suffix='%' color='red' iconClass='user-group-crown-solid' />
+            <CustomersInfobox label={t('middle.total')} count={metaData?.totalCount} color='green' suffix='' />
+            <CustomersInfobox label={t('middle.new')} count={25} suffix='%' iconClass='user-plus-solid' />
+            <CustomersInfobox
+              label={t('middle.regular')}
+              count={75}
+              suffix='%'
+              color='red'
+              iconClass='user-group-crown-solid'
+            />
           </div>
           <ReviewsRate data={dataPercent} />
         </div>
@@ -79,4 +86,4 @@ const Review = () => {
   )
 }
 
-export default Review
+export default withTranslation('review')(Review)
