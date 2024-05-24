@@ -17,7 +17,7 @@ const PaymentMethodsList = ({ onClick, isLoading, methods, selectedItemId }: IPa
       ) : (
         methods &&
         methods.length &&
-        methods.map((method) => (
+        methods.map((method: any) => (
           <div
             className='flex items-center justify-center w-32 h-20 px-8 bg-white rounded-md shadow-lg cursor-pointer hover:!bg-slate-100'
             key={method.id}

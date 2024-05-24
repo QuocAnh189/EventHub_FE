@@ -1,3 +1,4 @@
+import { EPaymentStatus } from '@constants/enum'
 import { EVENT_CATEGORIES } from '@constants/options'
 
 /**
@@ -104,11 +105,14 @@ export const getStatusColor = (status: any) => {
     default:
     case 'approved':
     case 'completed':
+    case EPaymentStatus.PAID:
       return 'accent'
     case 'waiting':
     case 'confirmed':
+    case EPaymentStatus.PENDING:
       return 'green'
     case 'cancelled':
+    case EPaymentStatus.FAILED:
       return 'red'
     case 'rejected':
     case 'refunded':

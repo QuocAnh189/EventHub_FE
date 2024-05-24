@@ -1,6 +1,9 @@
+import { EPaymentStatus } from '@constants/enum'
+
 export interface IPayment {
-  id?: string
+  id: string
   eventId: string
+  event: IPaymentEvent
   ticketQuantity: number
   userId: string
   customerName: string
@@ -8,18 +11,11 @@ export interface IPayment {
   customerEmail: string
   totalPrice: number
   discount: number
-  status: string
-  paymentMethod: string
-  paymentIntentId: string
-  paymentSession: string
-  createdAt?: Date
-  updateAt?: Date
-}
-
-export interface IPaymentMethod {
-  id: string
-  methodName: string
-  methodLogo: string
+  status: EPaymentStatus
+  userPaymentMethodId: string
+  paymentMethod: IPaymentMethod
+  createdAt: Date
+  updatedAt: Date
 }
 
 export interface IPaymentAccount {
@@ -31,4 +27,23 @@ export interface IPaymentAccount {
   paymentAccountNumber: string
   paymentAccountQRCode?: string
   checkoutContent?: string
+}
+
+export interface IPaymentEvent {
+  id: string
+  coverImage: string
+  name: string
+  creatorId: string
+}
+
+export interface IPaymentMethod {
+  id: string
+  userId: string
+  methodId: string
+  method: {
+    id: string
+    methodName: string
+    methodLogo: string
+  }
+  paymentAccountNumber: string
 }

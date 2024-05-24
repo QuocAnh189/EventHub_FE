@@ -55,8 +55,9 @@ export enum EPaymentMethod {
 
 export enum EPaymentStatus {
   PAID = 'PAID',
-  PENDING = 'PEDING',
-  FAILED = 'FAILED'
+  PENDING = 'PENDING',
+  FAILED = 'FAILED',
+  REJECTED = 'REJECTED'
 }
 
 export enum ETicketStatus {

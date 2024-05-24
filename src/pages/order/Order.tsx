@@ -43,7 +43,7 @@ const Orders = ({ t }: any) => {
             />
           </div>
         </div>
-        <OrdersTable category='Love you' />
+        <OrdersTable />
       </div>
     </ProtectedLayout>
   )

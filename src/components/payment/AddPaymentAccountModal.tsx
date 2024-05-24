@@ -41,8 +41,11 @@ const AddPaymentAccountModal = ({ t }: any) => {
     return errs && errs.length > 0 ? false : true
   }
 
-  async function handleCreatePaymentAccount(values: CreatePaymentAccountForm) {
+  async function handleCreatePaymentAccount() {
     try {
+      await form.validateFields()
+
+      const values = form.getFieldsValue()
       const { checkoutContent, methodId, paymentAccountNumber, paymentAccountQRCode } = values
 
       const payloadForm = new FormData()
@@ -88,17 +91,7 @@ const AddPaymentAccountModal = ({ t }: any) => {
         destroyOnClose={true}
         afterClose={form.resetFields}
       >
-        <Form
-          form={form}
-          size='large'
-          autoComplete='off'
-          labelCol={{ span: 24 }}
-          wrapperCol={{ span: 24 }}
-          onFinish={handleCreatePaymentAccount}
-          onFinishFailed={(error) => {
-            console.log('🚀 ~ AddPaymentAccountModal ~ error:', error)
-          }}
-        >
+        <Form form={form} size='large' autoComplete='off' labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
           <Form.Item
             name='methodId'
             label={<span className='font-medium'>{t('modal.payment_method')}</span>}
@@ -157,7 +150,7 @@ const AddPaymentAccountModal = ({ t }: any) => {
             <Button onClick={() => setIsModalOpen(false)}>{t('modal.btn_cancle')}</Button>
             <Button
               htmlType='submit'
-              onClick={() => form.submit()}
+              onClick={() => handleCreatePaymentAccount()}
               type='primary'
               loading={createPaymentAccountLoading}
             >
