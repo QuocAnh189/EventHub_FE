@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { IParamsConservationHost, IParamsConservationUser } from '@type/conversation'
 import { IParamsEvent } from '@type/event'
 import { IChangePasswordPayload, IFollowPayload } from '@type/user'
 import { ApiListResponse, IListData } from 'interfaces'
@@ -124,6 +125,28 @@ export const apiUser = createApi({
       providesTags: ['User', 'Event']
     }),
 
+    getConversationByUser: builder.query<any, { userId: string; params: IParamsConservationUser }>({
+      query: ({ userId, params }) => ({
+        url: `/users/${userId}/conversations-by-user`,
+        method: 'GET',
+        params
+      }),
+      transformResponse: (response: any) => {
+        return response.data
+      }
+    }),
+
+    getConversationByHost: builder.query<any, { userId: string; params: IParamsConservationHost }>({
+      query: ({ userId, params }) => ({
+        url: `/users/${userId}/conversations-by-host`,
+        method: 'GET',
+        params
+      }),
+      transformResponse: (response: any) => {
+        return response.data
+      }
+    }),
+
     followUser: builder.mutation<any, IFollowPayload>({
       query: (data) => ({
         url: `/users/followers/follow`,
@@ -197,6 +220,8 @@ export const {
   useGetReviewsByUserIdQuery,
   useGetEventsFavouriteByUserIdQuery,
   useGetEventsTrashByUserIdQuery,
+  useGetConversationByUserQuery,
+  useGetConversationByHostQuery,
   useFollowUserMutation,
   useUnfollowUserMutation,
   useGetPaymentAccountsQuery,

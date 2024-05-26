@@ -17,6 +17,7 @@ import AppLayout from '@layouts/app.tsx'
 //redux
 import { Provider } from 'react-redux'
 import store from '@redux/store.ts'
+import AppSocket from '@layouts/socket.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -30,9 +31,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             confirmationButtonProps: { color: 'secondary' }
           }}
         >
-          <AppLayout>
-            <App />
-          </AppLayout>
+          <AppSocket>
+            <AppLayout>
+              <App />
+            </AppLayout>
+          </AppSocket>
         </ConfirmProvider>
       </ThemeProvider>
     </Provider>

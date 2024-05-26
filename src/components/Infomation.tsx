@@ -4,9 +4,6 @@
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-//component
-import FormControl from '@mui/material/FormControl'
-
 //icons
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import { IoLocationOutline } from 'react-icons/io5'
@@ -15,7 +12,6 @@ import { FaUsers } from 'react-icons/fa'
 import { IoMdAdd } from 'react-icons/io'
 
 //style
-import classNames from 'classnames'
 import { IEvent } from 'interfaces/contents/event'
 import dayjs from 'dayjs'
 
@@ -27,6 +23,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/useRedux'
 import { useFollowUserMutation, useUnfollowUserMutation } from '@redux/services/userApi'
 import { toast } from 'react-toastify'
 import { setUser } from '@redux/slices/userSlice'
+import FormToChat from './FormToChat'
 interface Props {
   event: IEvent
 }
@@ -147,55 +144,16 @@ const Infomation = (props: Props) => {
         )}
       </div>
 
-      <div className='flex px-[100px] gap-8'>
-        <div className='flex flex-col flex-auto gap-5 p-8 rounded-md shadow-xl bg-body'>
-          <h1 className='text-2xl font-bold text-header'>Chat Room</h1>
-          <p className='text-header'>
-            If you have any questions or problems related to this event.
-            <br />
-            Do not hesitate to contact me.
-          </p>
-          <FormControl>
-            <div className='flex flex-col gap-3'>
-              <div className='flex items-center gap-4 text-header'>
-                <div className='field-wrapper'>
-                  <label className='field-label' htmlFor='qty'>
-                    Name
-                  </label>
-                  <input
-                    readOnly
-                    className={classNames('field-input')}
-                    id='qty'
-                    placeholder='0'
-                    value={event?.creator.fullName}
-                  />
-                </div>
-                <div className='field-wrapper'>
-                  <label className='field-label' htmlFor='qty'>
-                    Email
-                  </label>
-                  <input
-                    readOnly
-                    className={classNames('field-input')}
-                    id='qty'
-                    placeholder='0'
-                    value={event?.creator.email}
-                  />
-                </div>
-              </div>
-              <div className='field-wrapper'>
-                <label className='field-label' htmlFor='qty'>
-                  Event
-                </label>
-                <input readOnly className={classNames('field-input')} id='qty' value={event.name} />
-              </div>
-            </div>
-          </FormControl>
-          <button className='px-4 py-3 rounded-3xl bg-primary font-semibold text-white w-[200px] hover:bg-primary-500'>
-            Start Chat
-          </button>
-        </div>
-      </div>
+      {user?.id !== event?.creator?.id && (
+        <FormToChat
+          eventId={event.id}
+          hostId={event.creatorId}
+          userId={user?.id!}
+          eventName={event.name}
+          userEmail={event?.creator?.email!}
+          userFullName={event?.creator?.fullName!}
+        />
+      )}
     </div>
   )
 }

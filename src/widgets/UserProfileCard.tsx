@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 //hook
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -18,6 +17,7 @@ import { IUser } from 'interfaces/systems/user'
 //assets
 import userDefault from '@assets/common/user_default.png'
 import { withTranslation } from 'react-i18next'
+import { setConservation } from '@redux/slices/conservationSlice'
 
 interface Props {
   t: any
@@ -46,6 +46,8 @@ const UserProfileCard = (props: Props) => {
     if (result) {
       localStorage.removeItem('token')
       dispatch(setUser(null))
+      dispatch(setConservation(null))
+      // dispatch(setSocket(null))
       navigate('/')
     }
   }

@@ -12,6 +12,7 @@ import { URLtoFile } from '@utils/url-to-upload-file'
 import { withTranslation } from 'react-i18next'
 
 export interface IPaymentAccountModalProps {
+  t: any
   isModalOpen: boolean
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
   account: IPaymentAccount
@@ -24,7 +25,7 @@ export interface CreatePaymentAccountForm {
   checkoutContent: string
 }
 
-const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentAccountModalProps) => {
+const PaymentAccountModal = ({ t, isModalOpen, setIsModalOpen, account }: IPaymentAccountModalProps) => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data: methods, isLoading: getMethodsLoading } = useGetPaymentMethodsQuery()
@@ -115,7 +116,7 @@ const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentA
 
   return (
     <Modal
-      title='Update payment account'
+      title={t('modal.title_modal_update')}
       onCancel={() => setIsModalOpen(false)}
       open={isModalOpen}
       footer={[null, null]}
@@ -125,7 +126,7 @@ const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentA
       <Form form={form} size='large' autoComplete='off' labelCol={{ span: 24 }} wrapperCol={{ span: 24 }}>
         <Form.Item
           name='methodId'
-          label={<span className='font-medium'>Payment Method</span>}
+          label={<span className='font-medium'>{t('modal.payment_method')}</span>}
           rules={[{ required: true, message: 'PaymentMethod is required' }]}
         >
           <PaymentMethodsList
@@ -137,19 +138,23 @@ const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentA
         </Form.Item>
         <Form.Item
           name='paymentAccountNumber'
-          label={<span className='font-medium'>Account Number</span>}
+          label={<span className='font-medium'>{t('modal.account_number')}</span>}
           rules={[{ required: true, message: 'PaymentAccountNumber is required' }]}
         >
           <Input placeholder='Enter your payment account number' />
         </Form.Item>
         <Form.Item
           name='checkoutContent'
-          label={<span className='font-medium'>Transfer Content</span>}
+          label={<span className='font-medium'>{t('modal.transfer_content')}</span>}
           rules={[{ required: true, message: 'TransferContent is required' }]}
         >
           <Input placeholder="Enter your account's required transfer content" />
         </Form.Item>
-        <Form.Item name='paymentAccountQRCode' required={false} label={<span className='font-medium'>QR Code</span>}>
+        <Form.Item
+          name='paymentAccountQRCode'
+          required={false}
+          label={<span className='font-medium'>{t('modal.qr_code')}</span>}
+        >
           <div className='flex items-center justify-center'>
             <Upload
               beforeUpload={beforeUploadFile}
@@ -171,7 +176,7 @@ const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentA
               ) : (
                 <div className='flex flex-col items-center'>
                   <AiOutlineUpload />
-                  <Typography.Text>Upload QR Code</Typography.Text>
+                  <Typography.Text> {t('modal.image_qrcode')}</Typography.Text>
                 </div>
               )}
             </Upload>
@@ -180,18 +185,18 @@ const PaymentAccountModal = ({ isModalOpen, setIsModalOpen, account }: IPaymentA
         <div className='flex justify-between'>
           <div>
             <Button type='primary' danger onClick={handleDeletePaymentAccount} loading={deletePaymentAccountLoading}>
-              Delete
+              {t('modal.btn_delete')}
             </Button>
           </div>
           <div className='flex gap-3'>
-            <Button onClick={() => setIsModalOpen(false)}>Cancel</Button>
+            <Button onClick={() => setIsModalOpen(false)}>{t('modal.btn_cancel')}</Button>
             <Button
               htmlType='submit'
               onClick={handleUpdatePaymentAccount}
               type='primary'
               loading={updatePaymentAccountLoading}
             >
-              Update
+              {t('modal.btn_update')}
             </Button>
           </div>
         </div>

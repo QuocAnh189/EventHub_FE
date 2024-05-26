@@ -7,8 +7,9 @@ import OrdersAverageRate from '@widgets/OrdersAverageRate'
 import OrdersTable from '@widgets/OrdersTable'
 import { IPayment } from 'interfaces/contents/payment'
 import { useState } from 'react'
+import { withTranslation } from 'react-i18next'
 
-export function Orders() {
+const Orders = ({ t }: any) => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data, isFetching } = useGetPaymentsByCreatorIdQuery({ creatorId: user?.id! })
@@ -25,11 +26,25 @@ export function Orders() {
             <OrdersAverageRate />
           </div>
           <div className='grid-cols-1 widgets-grid md:grid-cols-2 lg:grid-cols-4 xl:col-span-4'>
-            <OrdersInfobox title='Completed' count={2345} icon={<i className='icon-check-to-slot-solid' />} />
-            <OrdersInfobox title='Confirmed' count={323} color='green' icon={<i className='icon-list-check-solid' />} />
-            <OrdersInfobox title='Canceled' count={17} color='red' icon={<i className='icon-ban-solid' />} />
             <OrdersInfobox
-              title='Refunded'
+              title={t('middle.box_completed.completed')}
+              count={2345}
+              icon={<i className='icon-check-to-slot-solid' />}
+            />
+            <OrdersInfobox
+              title={t('middle.box_confirmed.confirmed')}
+              count={323}
+              color='green'
+              icon={<i className='icon-list-check-solid' />}
+            />
+            <OrdersInfobox
+              title={t('middle.box_canceled.canceled')}
+              count={17}
+              color='red'
+              icon={<i className='icon-ban-solid' />}
+            />
+            <OrdersInfobox
+              title={t('middle.box_refunded.refunded')}
               count={2}
               color='badge-status-bg'
               icon={<i className='icon-rotate-left-solid' />}
@@ -58,3 +73,5 @@ export function Orders() {
     </>
   )
 }
+
+export default withTranslation('order')(Orders)

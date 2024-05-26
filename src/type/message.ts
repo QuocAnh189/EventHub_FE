@@ -14,3 +14,9 @@ export const initMessageParams = {
   takeAll: false,
   search: ''
 } as IMessageParams
+
+export interface IMessagePayload {
+  userId: string
+  conversationId: string
+  content: string
+}

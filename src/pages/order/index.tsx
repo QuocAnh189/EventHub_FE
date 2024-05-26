@@ -1,8 +1,9 @@
 import { PageHeader } from '@layouts/components'
 import ProtectedLayout from '@layouts/protected'
 import { Tabs } from 'antd'
-import { Orders } from './components'
-import { PaymentAccounts } from './components/PaymentAcconts'
+import Orders from './components/Orders'
+import PaymentAccounts from './components/PaymentAcconts'
+import { withTranslation } from 'react-i18next'
 
 const TAB_ITEMS = [
   {
@@ -17,10 +18,10 @@ const TAB_ITEMS = [
   }
 ]
 
-const OrdersPage = () => {
+const OrdersPage = ({ t }: any) => {
   return (
     <ProtectedLayout>
-      <PageHeader title='Orders' />
+      <PageHeader title={t('header.title')} />
       <div className='flex flex-col flex-1 gap-5 md:gap-[26px]'>
         {/* <div
           className='w-full grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-[26px] lg:grid-cols-4 lg:items-end
@@ -34,4 +35,4 @@ const OrdersPage = () => {
   )
 }
 
-export default OrdersPage
+export default withTranslation('payment')(OrdersPage)

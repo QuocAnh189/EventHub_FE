@@ -10,16 +10,16 @@
     },
     "order": "Đơn hàng",
     "box_completed": {
-      "completed": "Hoàn thành"
+      "completed": "hoàn thành"
     },
     "box_confirmed": {
-      "confirmed": "Xác nhận"
+      "confirmed": "xác nhận"
     },
     "box_canceled": {
-      "canceled": "Hủy bỏ"
+      "canceled": "hủy bỏ"
     },
     "box_refunded": {
-      "refunded": "Hoàn tiền"
+      "refunded": "hoàn tiền"
     }
   },
   "table_header": {

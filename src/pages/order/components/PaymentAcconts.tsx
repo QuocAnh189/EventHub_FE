@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 
 export interface IPaymentAccountsProps {}
 
-export function PaymentAccounts() {
+const PaymentAccounts = () => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data, isLoading, refetch } = useGetPaymentAccountsQuery(user?.id!)
@@ -44,3 +44,5 @@ export function PaymentAccounts() {
     </>
   )
 }
+
+export default PaymentAccounts

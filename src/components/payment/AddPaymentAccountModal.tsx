@@ -84,7 +84,7 @@ const AddPaymentAccountModal = ({ t }: any) => {
         <span className='font-medium'>{t('btn_add')}</span>
       </div>
       <Modal
-        title='Add new payment account'
+        title={t('modal.title_modal_create')}
         onCancel={() => setIsModalOpen(false)}
         open={isModalOpen}
         footer={[null, null]}

@@ -1,6 +1,4 @@
-//hook
-import { useEffect, useState } from 'react'
-
+/* eslint-disable react-hooks/exhaustive-deps */
 //component
 import { EditOrderModal } from '@components/payment/EditOrderModal'
 import { useAppSelector } from '@hooks/useRedux'
@@ -9,9 +7,7 @@ import ProtectedLayout from '@layouts/protected'
 import { useGetPaymentsByUserIdQuery } from '@redux/services/paymentApi'
 import OrdersTable from '@widgets/OrdersTable'
 import { IPayment } from 'interfaces/contents/payment'
-
-//i18
-import { withTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
 
 const Payment = () => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
@@ -24,6 +20,8 @@ const Payment = () => {
   useEffect(() => {
     refetch()
   }, [])
+
+  console.log(data?.items)
 
   return (
     <>
@@ -45,4 +43,4 @@ const Payment = () => {
   )
 }
 
-export default withTranslation('payment')(Payment)
+export default Payment

@@ -20,6 +20,8 @@ import { apiPermission } from './services/permissionApi'
 import categoryReducer, { CategorySliceKey } from './slices/categorySlice'
 import userReducer, { UserSliceKey } from './slices/userSlice'
 import eventReducer, { EventSliceKey } from './slices/eventSlice'
+import socketReducer, { SocketSliceKey } from './slices/socketSlice'
+import conservationReducer, { ConservationSliceKey } from './slices/conservationSlice'
 import { apiFunction } from './services/functionApi'
 
 const persistConfig = {
@@ -30,7 +32,9 @@ const persistConfig = {
 const combinedReducer = combineReducers({
   [CategorySliceKey]: categoryReducer,
   [UserSliceKey]: userReducer,
-  [EventSliceKey]: eventReducer
+  [EventSliceKey]: eventReducer,
+  [SocketSliceKey]: socketReducer,
+  [ConservationSliceKey]: conservationReducer
 })
 
 const rootReducer = (state: any, action: any) => {

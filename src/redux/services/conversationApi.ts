@@ -18,7 +18,7 @@ export const apiConversation = createApi({
     }
   }),
   keepUnusedDataFor: 20,
-  tagTypes: ['Conversation'],
+  tagTypes: ['Conversation', 'Message'],
   endpoints: (builder) => ({
     getConversations: builder.query<any, IConversationParams>({
       query: (params) => ({
@@ -38,7 +38,34 @@ export const apiConversation = createApi({
         method: 'GET',
         params
       }),
+      transformResponse: (response: any) => {
+        return response?.data
+      },
       providesTags: ['Conversation']
+    }),
+
+    addMessageToConversation: builder.mutation<any, any>({
+      query: (data) => ({
+        url: ``,
+        method: 'POST',
+        body: data
+      }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
+      invalidatesTags: ['Conversation', 'Message']
+    }),
+
+    recallMessageToConversation: builder.mutation<any, any>({
+      query: (data) => ({
+        url: ``,
+        method: 'POST',
+        body: data
+      }),
+      transformResponse: (response: any) => {
+        return response.data
+      },
+      invalidatesTags: ['Conversation', 'Message']
     })
   })
 })
