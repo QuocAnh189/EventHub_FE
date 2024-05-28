@@ -28,10 +28,12 @@ const FormToChat = (props: IPropsFormToChat) => {
   }
 
   useEffect(() => {
-    conn?.on('JoinChatRoom', (conversation: IConservationResponse) => {
-      dispatch(updateConversationUser(conversation))
-      toast.success('Open Dialog to chat')
-    })
+    if (conn) {
+      conn?.on('JoinChatRoom', (conversation: IConservationResponse) => {
+        dispatch(updateConversationUser(conversation))
+        toast.success('Open Dialog to chat')
+      })
+    }
 
     return () => {
       conn?.off('JoinChatRoom')

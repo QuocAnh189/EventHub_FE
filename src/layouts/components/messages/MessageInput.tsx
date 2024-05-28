@@ -33,15 +33,14 @@ const MessageInput = () => {
   }
 
   useEffect(() => {
-    if (conn) {
+    if (conn?.on) {
       conn?.on('ReceiveMessage', (result: IMessageResponse) => {
         console.log(result)
         dispatch(updateMessagesCurrent(result))
       })
-
-      return () => {
-        conn?.off('ReciveMessage')
-      }
+    }
+    return () => {
+      conn?.off('ReceiveMessage')
     }
   }, [conn, dispatch])
 

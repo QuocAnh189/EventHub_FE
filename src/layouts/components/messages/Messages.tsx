@@ -12,6 +12,7 @@ const Messages = () => {
 
   const conservation = useAppSelector((state) => state.persistedReducer.conservation.conservation)
   const messagesCurrent = useAppSelector((state) => state.persistedReducer.conservation.messagesCurrent)
+  const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   const { data: messages } = useGetMessageByConversationIdQuery({ conversationId: conservation?.id!, params: {} })
 
@@ -23,12 +24,13 @@ const Messages = () => {
 
   return (
     <div className='px-4 flex flex-col flex-1 overflow-auto py-4 gap-2'>
-      {messagesCurrent?.map((message: any, index: number) => (
-        <Message key={`message-${index}`} message={message} index={index} />
-      ))}
-
-      {/* {loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)} */}
-      {/* <p className='text-center'>Send a message to start the conversation</p> */}
+      {messagesCurrent?.length !== 0 ? (
+        messagesCurrent?.map((message: any, index: number) => (
+          <Message key={`message-${index}`} message={message} userId={user?.id!} />
+        ))
+      ) : (
+        <p className='text-center'>Send a message to start the conversation</p>
+      )}
     </div>
   )
 }

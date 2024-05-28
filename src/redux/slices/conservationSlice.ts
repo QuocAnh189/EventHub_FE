@@ -38,7 +38,9 @@ const conservationSlice = createSlice({
     },
 
     updateConversationUser: (state, action: PayloadAction<IConservationResponse>) => {
-      state.conservationsUser?.unshift(action.payload!)
+      if (!state.conservationsUser?.find((item) => item.id === action.payload.id)) {
+        state.conservationsUser?.unshift(action.payload!)
+      }
     },
 
     setMessagesCurrent: (state, action: PayloadAction<IMessageResponse[]>) => {

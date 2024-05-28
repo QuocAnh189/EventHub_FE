@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // hooks
 import { useState } from 'react'
 import useOpenLiveChatAnimation from '@hooks/useOpenLiveChat'
