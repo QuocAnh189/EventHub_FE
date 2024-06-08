@@ -1,24 +1,24 @@
 import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App.tsx'
 import './i18n/i18n.ts'
-import { BrowserRouter } from 'react-router-dom'
 import './style.css'
 
 //context
 import { ThemeProvider } from '@contexts/themeContext.tsx'
+import AppSocketProvider from '@contexts/socketContext.tsx'
 
 //slick
-import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css'
 
 //component
-import { ConfirmProvider } from 'material-ui-confirm'
 import AppLayout from '@layouts/app.tsx'
+import { ConfirmProvider } from 'material-ui-confirm'
 
 //redux
-import { Provider } from 'react-redux'
 import store from '@redux/store.ts'
-import AppSocket from '@layouts/socket.tsx'
+import { Provider } from 'react-redux'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -32,11 +32,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             confirmationButtonProps: { color: 'secondary' }
           }}
         >
-          <AppSocket>
+          <AppSocketProvider>
             <AppLayout>
               <App />
             </AppLayout>
-          </AppSocket>
+          </AppSocketProvider>
         </ConfirmProvider>
       </ThemeProvider>
     </Provider>

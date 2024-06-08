@@ -1,12 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 //component
-import { useAppDispatch, useAppSelector } from '@hooks/useRedux'
+import { AppSocketContext } from '@contexts/socketContext'
 import FormControl from '@mui/material/FormControl'
-import { updateConversationUser } from '@redux/slices/conservationSlice'
-import { IConservationResponse } from '@type/conversation'
 import classNames from 'classnames'
-import { useEffect } from 'react'
-import { toast } from 'react-toastify'
+import { useContext } from 'react'
 
 interface IPropsFormToChat {
   userId: string
@@ -18,29 +15,9 @@ interface IPropsFormToChat {
 }
 
 const FormToChat = (props: IPropsFormToChat) => {
-  const dispatch = useAppDispatch()
   const { userId, eventId, hostId, eventName, userEmail, userFullName } = props
 
-  const conn = useAppSelector((state) => state.persistedReducer.socket.socket!)
-
-  const handleStartChat = async () => {
-    console.log({ eventId, hostId, userId })
-    await conn?.invoke('JoinChatRoom', { eventId, hostId, userId })
-  }
-
-  useEffect(() => {
-    if (conn && typeof conn.on === 'function') {
-      conn?.on('JoinChatRoom', (conversation: IConservationResponse) => {
-        console.log(conversation)
-        dispatch(updateConversationUser(conversation))
-        toast.success('Open Dialog to chat')
-      })
-    }
-
-    return () => {
-      conn?.off('JoinChatRoom')
-    }
-  }, [conn, dispatch])
+  const { handleJoinChatRoom } = useContext(AppSocketContext)
 
   return (
     <div className='flex px-[100px] gap-8'>
@@ -76,7 +53,7 @@ const FormToChat = (props: IPropsFormToChat) => {
           </div>
         </FormControl>
         <button
-          onClick={handleStartChat}
+          onClick={() => handleJoinChatRoom && handleJoinChatRoom({ eventId, hostId, userId })}
           className='px-4 py-3 rounded-3xl bg-primary font-semibold text-white w-[200px] hover:bg-primary-500'
         >
           Start Chat

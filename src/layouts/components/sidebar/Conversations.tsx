@@ -12,7 +12,7 @@ const Conversations = (props: IConversationsProps) => {
   const conversationActive = useAppSelector((state) => state.persistedReducer.conservation.conservation)
 
   return (
-    <div className='py-2 flex flex-col overflow-auto gap-3'>
+    <div className='flex flex-col gap-3 py-2 overflow-auto'>
       {conversations.map((conversation: IConservationResponse, index: number) => (
         <Conversation
           key={`conservation-${index}`}
