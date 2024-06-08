@@ -73,7 +73,7 @@ export const initParamsConversationHost = {
 
 export interface IMessageResponse {
   id?: string
-  convservationId: string
+  conversationId: string
   userId: string
   content: string
 }

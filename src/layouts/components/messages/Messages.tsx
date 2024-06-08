@@ -23,7 +23,7 @@ const Messages = () => {
   }, [messages, dispatch])
 
   return (
-    <div className='px-4 flex flex-col flex-1 overflow-auto py-4 gap-2'>
+    <div className='flex flex-col flex-1 gap-2 px-4 py-4 overflow-auto'>
       {messagesCurrent?.length !== 0 ? (
         messagesCurrent?.map((message: any, index: number) => (
           <Message key={`message-${index}`} message={message} userId={user?.id!} />

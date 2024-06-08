@@ -7,11 +7,13 @@ import { useAppSelector } from '@hooks/useRedux'
 
 //assets
 import { BiMessageDetail } from 'react-icons/bi'
+import { useContext } from 'react'
+import { AppSocketContext } from '@contexts/socketContext'
 
 const MessageContainer = ({ t }: any) => {
   const conversationActive = useAppSelector((state) => state.persistedReducer.conservation.conservation)
   const user = useAppSelector((state) => state.persistedReducer.user.user)
-  const conn = useAppSelector((state) => state.persistedReducer.socket.socket)
+  const { connection } = useContext(AppSocketContext)
 
   return (
     <div className='md:min-w-[450px] flex flex-col'>
@@ -19,7 +21,7 @@ const MessageContainer = ({ t }: any) => {
         <NoChatSelected t={t} />
       ) : (
         <>
-          <div className='bg-primary px-4 py-2 mb-2 flex items-center gap-1'>
+          <div className='flex items-center gap-1 px-4 py-2 mb-2 bg-primary'>
             <span className='text-white'>{t('box_message.right.to')}:</span>{' '}
             <div className='flex items-center gap-1'>
               {conversationActive.hostId === user?.id ? (
@@ -28,9 +30,9 @@ const MessageContainer = ({ t }: any) => {
                     src={conversationActive?.user?.avatar}
                     loading='lazy'
                     alt=''
-                    className='w-10 h-10 rounded-full object-cover'
+                    className='object-cover w-10 h-10 rounded-full'
                   />
-                  <span className='text-textOrange font-bold text-xl'>{conversationActive?.user?.fullName}</span>
+                  <span className='text-xl font-bold text-textOrange'>{conversationActive?.user?.fullName}</span>
                 </>
               ) : (
                 <>
@@ -38,14 +40,14 @@ const MessageContainer = ({ t }: any) => {
                     src={conversationActive?.host?.avatar}
                     loading='lazy'
                     alt=''
-                    className='w-10 h-10 rounded-full object-cover'
+                    className='object-cover w-10 h-10 rounded-full'
                   />
-                  <span className='text-textOrange font-bold text-xl'>{conversationActive?.host?.fullName}</span>
+                  <span className='text-xl font-bold text-textOrange'>{conversationActive?.host?.fullName}</span>
                 </>
               )}
             </div>
           </div>
-          {conn && (
+          {connection && (
             <>
               <Messages />
               <MessageInput t={t} />
@@ -63,14 +65,14 @@ const NoChatSelected = ({ t }: any) => {
 
   return (
     <div className='flex items-center justify-center w-full h-full'>
-      <div className='px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2'>
+      <div className='flex flex-col items-center gap-2 px-4 font-semibold text-center text-gray-200 sm:text-lg md:text-xl'>
         {user ? (
           <>
             <p>
               {t('box_message.right.nochat_text_one')} 👋 {user?.fullName} ❄
             </p>
             <p>{t('box_message.right.nochat_text_two')}</p>
-            <BiMessageDetail className='text-3xl md:text-6xl text-center' />
+            <BiMessageDetail className='text-3xl text-center md:text-6xl' />
           </>
         ) : (
           <>

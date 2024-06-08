@@ -12,7 +12,7 @@ const MessageIcon = (props: Props) => {
       onClick={onClick}
       className='fixed bg-primary rounded-full p-3 flex right-8 bottom-8 z-[2000] hover:cursor-pointer hover:bg-primary-500'
     >
-      <img src={messageIcon} className='h-10 w-10 ' />
+      <img src={messageIcon} className='w-10 h-10 ' />
     </button>
   )
 }
