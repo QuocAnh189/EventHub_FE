@@ -1,7 +1,7 @@
 //components
 import { Header } from './Header'
 import { Middle } from './Middle'
-import { Bottom } from '@components/Bottom'
+import Bottom from '@components/Bottom'
 
 //animation
 import { motion } from 'framer-motion'

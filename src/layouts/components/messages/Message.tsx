@@ -10,8 +10,6 @@ interface IMessageProps {
 const Message = (props: IMessageProps) => {
   const { message, userId } = props
 
-  console.log(userId, message.userId)
-
   return (
     <div className={`chat ${userId === message.userId ? 'chat-end' : 'chat-start'}`}>
       <div className='chat-image avatar'>
@@ -20,9 +18,9 @@ const Message = (props: IMessageProps) => {
         </div>
       </div>
       <div
-        className={`chat-bubble text-white bg-${
-          userId !== message.userId ? 'blue-500' : 'gray'
-        } shake pb-2 chat-buble-info`}
+        className={`chat-bubble text-white bg-${userId !== message.userId ? 'blue-500' : 'gray'} shake pb-2 ${
+          userId === message.userId ? 'chat-buble' : 'chat-buble-info'
+        }`}
       >
         {message.content}
       </div>

@@ -6,7 +6,7 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'order',
     subcategory: 'Offers',
-    text: 'Quốc đã theo dõi bạn',
+    text: 'Quốc đã đặt vé của bạn',
     user: {
       fullName: 'Trần Phước Anh Quốc',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
@@ -39,9 +39,9 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'order',
     subcategory: 'Electronics',
-    text: 'leaved a new review',
+    text: 'Trí đã đặt vé của bạn',
     user: {
-      fullName: 'Thảo đã theo dõi bạn',
+      fullName: 'Trương Nguyễn Phước Trí',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
     }
   },
@@ -50,7 +50,7 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'order',
     subcategory: 'Electronics',
-    text: 'Khôi đã theo dõi bạn',
+    text: 'Khôi đã đặt vé của bạn',
     user: {
       fullName: 'Mai Đình Khôi',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'
@@ -61,7 +61,7 @@ const notifications = [
     timestamp: faker.date.recent(),
     category: 'follow',
     subcategory: 'Subscriptions',
-    text: 'Tại sao đã theo dõi bạn',
+    text: 'Trí đã theo dõi bạn',
     user: {
       fullName: 'Trương Nguyễn Phước Trí',
       avatar: 'https://res.cloudinary.com/dadvtny30/image/upload/v1710062870/portfolio/frj9fscqteb90eumokqj.jpg'

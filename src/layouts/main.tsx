@@ -10,7 +10,7 @@ import { SidebarProvider } from '@contexts/sidebarContext'
 import Sidebar from '@components/sidebar/Sidebar'
 import AppBar from '@components/AppBar'
 import ScrollToTop from '@components/ScrollToTop'
-import { Bottom } from '@components/Bottom'
+import Bottom from '@components/Bottom'
 
 // GA
 import ReactGA from 'react-ga4'

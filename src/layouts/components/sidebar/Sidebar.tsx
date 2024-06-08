@@ -17,8 +17,9 @@ import { initParamsConversationHost, initParamsConversationUser } from '@type/co
 import { useGetConversationByUserQuery, useGetConversationByHostQuery } from '@redux/services/userApi'
 import { useAppDispatch, useAppSelector } from '@hooks/useRedux'
 import { setConservation, setConservationHost, setConservationUser } from '@redux/slices/conservationSlice'
+import { withTranslation } from 'react-i18next'
 
-const Sidebar = () => {
+const Sidebar = ({ t }: any) => {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.persistedReducer.user.user)
   const conversation_host = useAppSelector((state) => state.persistedReducer.conservation.conservationsHost)
@@ -58,11 +59,11 @@ const Sidebar = () => {
       <SearchInput />
       <div className='divider' />
       {user && (
-        <div className='w-full overflow-scroll'>
+        <div className='w-full overflow-scroll no-scrollbar'>
           <TabContext value={value}>
             <Tabs textColor='inherit' value={value} onChange={handleChange} aria-label='lab API tabs example'>
-              <Tab label='My Event' value='1' sx={{ color: 'var(--header)' }} />
-              <Tab label='Chat Event' value='2' sx={{ color: 'var(--header)' }} />
+              <Tab label={t('box_message.left.my_event')} value='1' sx={{ color: 'var(--header)' }} />
+              <Tab label={t('box_message.left.chat_event')} value='2' sx={{ color: 'var(--header)' }} />
             </Tabs>
 
             <TabPanel value='1' sx={{ width: '100%' }}>
@@ -78,4 +79,4 @@ const Sidebar = () => {
     </div>
   )
 }
-export default Sidebar
+export default withTranslation('common')(Sidebar)

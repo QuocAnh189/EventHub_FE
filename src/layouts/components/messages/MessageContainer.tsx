@@ -1,3 +1,4 @@
+import { withTranslation } from 'react-i18next'
 import MessageInput from './MessageInput'
 import Messages from './Messages'
 
@@ -7,7 +8,7 @@ import { useAppSelector } from '@hooks/useRedux'
 //assets
 import { BiMessageDetail } from 'react-icons/bi'
 
-const MessageContainer = () => {
+const MessageContainer = ({ t }: any) => {
   const conversationActive = useAppSelector((state) => state.persistedReducer.conservation.conservation)
   const user = useAppSelector((state) => state.persistedReducer.user.user)
   const conn = useAppSelector((state) => state.persistedReducer.socket.socket)
@@ -15,11 +16,11 @@ const MessageContainer = () => {
   return (
     <div className='md:min-w-[450px] flex flex-col'>
       {!conversationActive ? (
-        <NoChatSelected />
+        <NoChatSelected t={t} />
       ) : (
         <>
           <div className='bg-primary px-4 py-2 mb-2 flex items-center gap-1'>
-            <span className='text-white'>To:</span>{' '}
+            <span className='text-white'>{t('box_message.right.to')}:</span>{' '}
             <div className='flex items-center gap-1'>
               {conversationActive.hostId === user?.id ? (
                 <>
@@ -47,7 +48,7 @@ const MessageContainer = () => {
           {conn && (
             <>
               <Messages />
-              <MessageInput />
+              <MessageInput t={t} />
             </>
           )}
         </>
@@ -55,9 +56,9 @@ const MessageContainer = () => {
     </div>
   )
 }
-export default MessageContainer
+export default withTranslation('common')(MessageContainer)
 
-const NoChatSelected = () => {
+const NoChatSelected = ({ t }: any) => {
   const user = useAppSelector((state) => state.persistedReducer.user.user)
 
   return (
@@ -65,14 +66,16 @@ const NoChatSelected = () => {
       <div className='px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2'>
         {user ? (
           <>
-            <p>Welcome 👋 {user?.fullName} ❄</p>
-            <p>Select a chat to start messaging</p>
+            <p>
+              {t('box_message.right.nochat_text_one')} 👋 {user?.fullName} ❄
+            </p>
+            <p>{t('box_message.right.nochat_text_two')}</p>
             <BiMessageDetail className='text-3xl md:text-6xl text-center' />
           </>
         ) : (
           <>
-            <p>Hello guy</p>
-            <p>Login to chat</p>
+            <p>{t('box_message.right.nologin_text_one')}</p>
+            <p>{t('box_message.right.nologin_text_two')}</p>
           </>
         )}
       </div>

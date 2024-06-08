@@ -17,18 +17,22 @@ const AppSocket = ({ children }: any) => {
   const connection = useRef<HubConnection | null>(null)
 
   useEffect(() => {
-    if (user) {
+    if (user && connection.current === null) {
       const connectSocket = async () => {
         connection.current = new HubConnectionBuilder()
           .withUrl(`${import.meta.env.VITE_API_URL_SOCKET}/chat`, {
             withCredentials: false,
-            transport: HttpTransportType.WebSockets
+            transport: HttpTransportType.WebSockets | HttpTransportType.LongPolling
           })
           .withAutomaticReconnect()
           .configureLogging(LogLevel.Debug)
           .build()
 
-        await connection.current.start()
+        try {
+          await connection.current.start()
+        } catch (err) {
+          console.error('Connection failed: ', err)
+        }
         dispatch(setSocket(connection.current))
       }
       connectSocket()
@@ -37,10 +41,14 @@ const AppSocket = ({ children }: any) => {
     return () => {
       connection.current
         ?.stop()
-        .then(() => console.log('Disconnected from SignalR'))
+        .then(() => {
+          connection.current = null
+          dispatch(setSocket(null))
+          console.log('Disconnected from SignalR')
+        })
         .catch((err) => console.error('Disconnection failed: ', err))
     }
-  }, [user])
+  }, [user, dispatch])
 
   return <div>{children}</div>
 }

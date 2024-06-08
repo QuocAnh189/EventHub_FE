@@ -1,7 +1,8 @@
 //images
 import logoText_Img from '@assets/common/logo-text.png'
+import { withTranslation } from 'react-i18next'
 
-export const Bottom = () => {
+const Bottom = ({ t }: any) => {
   return (
     <footer className='px-4 py-8 text-white bg-bgBlack'>
       <div className='w-full flex flex-col items-center gap-4 mdl:flex-row justify-between'>
@@ -9,15 +10,13 @@ export const Bottom = () => {
           <div className='flex items-center gap-2'>
             <img loading='lazy' src={logoText_Img} alt='Logo' className='w-[140px] h-[60px] object-contain' />
           </div>
-          <p className='text-gray500 text-sm max-w-80'>
-            Where every event , Connecting moments , easily and effciently
-          </p>
+          <p className='text-gray500 text-sm max-w-80'>{t('footer.left.description')}</p>
           <div className='flex items-center gap-3'>
             <button>
               <p className='text-white text-sm font-semibold'>(219) 555-014</p>
               <div className='w-full bg-primary h-[2px]' />
             </button>
-            <span className='text-gray500'>or</span>
+            <span className='text-gray500'>{t('footer.left.or')}</span>
             <button>
               <p className='text-white  text-sm font-semibold'>eventhub @gm.uit.edu.vn</p>
               <div className='w-full bg-primary h-[2px]' />
@@ -26,35 +25,37 @@ export const Bottom = () => {
         </div>
         <div className='flex flex-col gap-4 mdl:flex-row mdl:gap-20'>
           <div className='flex flex-col text-gray500 gap-1'>
-            <p className='text-special pb-2 font-semibold'>My Account</p>
-            <p className='hover:underline hover:cursor-pointer'>My Account</p>
-            <p className='hover:underline hover:cursor-pointer'>Reviews</p>
-            <p className='hover:underline hover:cursor-pointer'>Status</p>
-            <p className='hover:underline hover:cursor-pointer'>Wishlist</p>
+            <p className='text-special pb-2 font-semibold'>{t('footer.right.box_one.title')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_one.sub_one')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_one.sub_two')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_one.sub_three')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_one.sub_four')}</p>
           </div>
           <div className='flex flex-col text-gray500 gap-1'>
-            <p className='text-special pb-2 font-semibold'>Helps</p>
-            <p className='hover:underline hover:cursor-pointer'>Contact</p>
-            <p className='hover:underline hover:cursor-pointer'>Faqs</p>
-            <p className='hover:underline hover:cursor-pointer'>Terms & Condition</p>
-            <p className='hover:underline hover:cursor-pointer'>Privacy Policy</p>
+            <p className='text-special pb-2 font-semibold'>{t('footer.right.box_two.title')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_two.sub_one')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_two.sub_two')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_two.sub_three')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_two.sub_four')}</p>
           </div>
           <div className='flex flex-col text-gray500 gap-1'>
-            <p className='text-special pb-2 font-semibold'>FEATURES</p>
-            <p className='hover:underline hover:cursor-pointer'>Gantt Chart</p>
-            <p className='hover:underline hover:cursor-pointer'>Dashboards</p>
-            <p className='hover:underline hover:cursor-pointer'>Mind Maps</p>
-            <p className='hover:underline hover:cursor-pointer'>Automations</p>
+            <p className='text-special pb-2 font-semibold'>{t('footer.right.box_three.title')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_three.sub_one')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_three.sub_two')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_three.sub_three')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_three.sub_four')}</p>
           </div>
           <div className='flex flex-col text-gray500 gap-1'>
-            <p className='text-special pb-2 font-semibold'>Compare</p>
-            <p className='hover:underline hover:cursor-pointer'>vs Jira</p>
-            <p className='hover:underline hover:cursor-pointer'>vs Notion</p>
-            <p className='hover:underline hover:cursor-pointer'>vs Trello</p>
-            <p className='hover:underline hover:cursor-pointer'>vs Smartsheet</p>
+            <p className='text-special pb-2 font-semibold'>{t('footer.right.box_four.title')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_four.sub_one')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_four.sub_two')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_four.sub_three')}</p>
+            <p className='hover:underline hover:cursor-pointer'>{t('footer.right.box_four.sub_four')}</p>
           </div>
         </div>
       </div>
     </footer>
   )
 }
+
+export default withTranslation('common')(Bottom)

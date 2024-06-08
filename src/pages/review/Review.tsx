@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 //hooj
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // components
 import { PageHeader } from '@layouts/components'
@@ -24,6 +24,7 @@ const Review = ({ t }: any) => {
 
   const { data } = useGetReviewsByUserIdQuery(user?.id!)
 
+  const [average, setAverage] = useState<number>(0)
   const [reviews, setReviews] = useState<IReview[]>()
   const [dataPercent, setDataPercent] = useState<any>([])
   const [metaData, setMetaData] = useState<IMetadataReviewResponse>()
@@ -54,12 +55,12 @@ const Review = ({ t }: any) => {
     setDataPercent(data)
   }, [reviews?.length])
 
-  const averageRate = useMemo(() => {
+  useEffect(() => {
     const calculation = reviews?.reduce((total, currentValue) => {
       return total + currentValue.rate
     }, 0)
-    return Math.floor(calculation! / metaData?.totalCount!)
-  }, [])
+    setAverage(Math.floor(calculation! / metaData?.totalCount!))
+  }, [reviews?.length])
 
   return (
     <ProtectedLayout>
@@ -67,7 +68,7 @@ const Review = ({ t }: any) => {
       <div className='flex flex-col flex-1 gap-5 md:gap-[26px]'>
         <div className='grid grid-cols-1 gap-y-5 md:gap-y-[26px] xl:grid-cols-6 xl:gap-x-[26px]'>
           <div className='widgets-grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:col-span-4'>
-            <ReviewsScore score={averageRate} />
+            <ReviewsScore score={average} />
             <CustomersInfobox label={t('middle.total')} count={metaData?.totalCount} color='green' suffix='' />
             <CustomersInfobox label={t('middle.new')} count={25} suffix='%' iconClass='user-plus-solid' />
             <CustomersInfobox

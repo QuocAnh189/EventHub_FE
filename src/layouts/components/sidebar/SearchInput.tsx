@@ -1,14 +1,15 @@
 import { useState } from 'react'
+import { withTranslation } from 'react-i18next'
 import { IoSearch } from 'react-icons/io5'
 
-const SearchInput = () => {
+const SearchInput = ({ t }: any) => {
   const [search, setSearch] = useState('')
 
   return (
     <form className='flex items-center gap-2'>
       <input
         type='text'
-        placeholder='Search…'
+        placeholder={t('box_message.left.placeholder')}
         className='input input-bordered rounded-full'
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -19,4 +20,4 @@ const SearchInput = () => {
     </form>
   )
 }
-export default SearchInput
+export default withTranslation('common')(SearchInput)
