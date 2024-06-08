@@ -104,7 +104,7 @@ const SearchHome = ({ t }: any) => {
                   setValue('categoryIds', [e.target.value])
                 }}
                 className='mt-1 py-2 px-0 border-none outline-none text-md bg-white'
-                defaultValue={[]}
+                // defaultValue={[]}
               >
                 <option value={[]}>{t('search home.All')}</option>
                 {categories.map((category, index) => (

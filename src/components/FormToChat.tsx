@@ -24,12 +24,14 @@ const FormToChat = (props: IPropsFormToChat) => {
   const conn = useAppSelector((state) => state.persistedReducer.socket.socket!)
 
   const handleStartChat = async () => {
+    console.log({ eventId, hostId, userId })
     await conn?.invoke('JoinChatRoom', { eventId, hostId, userId })
   }
 
   useEffect(() => {
-    if (conn) {
+    if (conn && typeof conn.on === 'function') {
       conn?.on('JoinChatRoom', (conversation: IConservationResponse) => {
+        console.log(conversation)
         dispatch(updateConversationUser(conversation))
         toast.success('Open Dialog to chat')
       })

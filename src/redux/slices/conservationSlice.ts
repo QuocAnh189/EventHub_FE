@@ -48,7 +48,7 @@ const conservationSlice = createSlice({
     },
 
     updateMessagesCurrent: (state, action: PayloadAction<IMessageResponse>) => {
-      state.messagesCurrent?.unshift(action.payload!)
+      state.messagesCurrent?.push(action.payload!)
     }
   }
 })

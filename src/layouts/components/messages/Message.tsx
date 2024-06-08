@@ -19,7 +19,7 @@ const Message = (props: IMessageProps) => {
       </div>
       <div
         className={`chat-bubble text-white bg-${userId !== message.userId ? 'blue-500' : 'gray'} shake pb-2 ${
-          userId === message.userId ? 'chat-buble' : 'chat-buble-info'
+          userId === message.userId ? 'chat-bubble-info' : 'chat-bubble'
         }`}
       >
         {message.content}

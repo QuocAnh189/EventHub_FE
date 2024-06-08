@@ -20,6 +20,8 @@ const Conversations = (props: IConversationsProps) => {
           lastIdx={true}
           active={conversationActive?.id === conversation.id}
           host={host}
+          hostId={conversation.hostId}
+          eventId={conversation.eventId}
         />
       ))}
     </div>
