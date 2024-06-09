@@ -49,6 +49,13 @@ const conservationSlice = createSlice({
 
     updateMessagesCurrent: (state, action: PayloadAction<IMessageResponse>) => {
       state.messagesCurrent?.push(action.payload!)
+    },
+
+    clearDataConversation: (state) => {
+      state.conservation = null
+      state.conservationsHost = null
+      state.conservationsUser = null
+      state.messagesCurrent = null
     }
   }
 })
@@ -60,7 +67,8 @@ export const {
   setConservationUser,
   updateConversationUser,
   setMessagesCurrent,
-  updateMessagesCurrent
+  updateMessagesCurrent,
+  clearDataConversation
 } = conservationSlice.actions
 
 const conservationReducer = conservationSlice.reducer

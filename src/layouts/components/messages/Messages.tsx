@@ -18,12 +18,13 @@ const Messages = () => {
 
   useEffect(() => {
     if (messages) {
+      console.log('update')
       dispatch(setMessagesCurrent(messages.items))
     }
   }, [messages, dispatch])
 
   return (
-    <div className='flex flex-col flex-1 gap-2 px-4 py-4 overflow-auto'>
+    <div className='flex flex-col flex-1 gap-2 px-4 py-4 overflow-scroll no-scrollbar'>
       {messagesCurrent?.length !== 0 ? (
         messagesCurrent?.map((message: any, index: number) => (
           <Message key={`message-${index}`} message={message} userId={user?.id!} />

@@ -61,16 +61,28 @@ const Sidebar = ({ t }: any) => {
       {user && (
         <div className='w-full overflow-scroll no-scrollbar'>
           <TabContext value={value}>
-            <Tabs textColor='inherit' value={value} onChange={handleChange} aria-label='lab API tabs example'>
+            <Tabs
+              sx={{
+                width: '100%',
+                display: 'flex',
+                '& .MuiTabs-flexContainer': {
+                  justifyContent: 'center'
+                }
+              }}
+              textColor='inherit'
+              value={value}
+              onChange={handleChange}
+              aria-label='lab API tabs example'
+            >
               <Tab label={t('box_message.left.my_event')} value='1' sx={{ color: 'var(--header)' }} />
               <Tab label={t('box_message.left.chat_event')} value='2' sx={{ color: 'var(--header)' }} />
             </Tabs>
 
-            <TabPanel value='1' sx={{ width: '100%' }}>
+            <TabPanel value='1' sx={{ width: '100%', minWidth: '320px' }}>
               {conversation_host && <Conversations host={true} conversations={conversation_host!} />}
             </TabPanel>
 
-            <TabPanel value='2' sx={{ width: '100%' }}>
+            <TabPanel value='2' sx={{ width: '100%', minWidth: '320px' }}>
               {conversation_user && <Conversations host={false} conversations={conversation_user} />}
             </TabPanel>
           </TabContext>

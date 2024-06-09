@@ -1,5 +1,5 @@
 // assets
-import messageIcon from '@assets/common/message-icon.png'
+import { useAppSelector } from '@hooks/useRedux'
 import { IMessageResponse } from '@type/conversation'
 import dayjs from 'dayjs'
 
@@ -9,12 +9,18 @@ interface IMessageProps {
 }
 const Message = (props: IMessageProps) => {
   const { message, userId } = props
+  const conservationActive = useAppSelector((state) => state.persistedReducer.conservation.conservation)
 
   return (
     <div className={`chat ${userId === message.userId ? 'chat-end' : 'chat-start'}`}>
       <div className='chat-image avatar'>
         <div className='w-10 rounded-full'>
-          <img alt='image' src={messageIcon} />
+          <img
+            alt='image'
+            src={
+              userId === conservationActive?.userId ? conservationActive.user.avatar : conservationActive?.host.avatar
+            }
+          />
         </div>
       </div>
       <div

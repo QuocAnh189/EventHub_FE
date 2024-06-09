@@ -70,7 +70,7 @@ function App() {
       <ThemeStyles />
       <ToastContainer theme={theme} autoClose={2000} style={{ padding: '20px' }} />
       <Suspense fallback={<Loader />}>
-        <div className='main'>
+        <div className='main overflow-scroll no-scrollbar'>
           <Routes>
             <Route path='/' element={<Landing />} />
             <Route path='/signin' element={<SignIn />} />

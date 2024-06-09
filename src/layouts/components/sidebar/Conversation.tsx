@@ -42,7 +42,7 @@ const Conversation = (props: IConservationProps) => {
       <div
         onClick={handleActive}
         style={{ backgroundColor: active ? '#3D56F0' : 'gray' }}
-        className={`flex gap-2 items-center  rounded p-2 py-1 cursor-pointer`}
+        className={`flex gap-2 items-center rounded p-1 cursor-pointer`}
       >
         <div className='avatar online'>
           <div className='w-12 rounded-full'>
@@ -58,7 +58,7 @@ const Conversation = (props: IConservationProps) => {
             {host ? (
               <>
                 <p>Client: </p>
-                <p>{conversation?.user?.fullName}</p>
+                <p className='truncate'>{conversation?.user?.fullName}</p>
               </>
             ) : (
               <>

@@ -17,7 +17,7 @@ import { IUser } from 'interfaces/systems/user'
 //assets
 import userDefault from '@assets/common/user_default.png'
 import { withTranslation } from 'react-i18next'
-import { setConservation } from '@redux/slices/conservationSlice'
+import { clearDataConversation, setConservation } from '@redux/slices/conservationSlice'
 
 interface Props {
   t: any
@@ -48,6 +48,7 @@ const UserProfileCard = (props: Props) => {
       dispatch(setUser(null))
       dispatch(setConservation(null))
       // dispatch(setSocket(null))
+      dispatch(clearDataConversation())
       navigate('/')
     }
   }
@@ -81,7 +82,6 @@ const UserProfileCard = (props: Props) => {
       <span className='badge badge--square bg-red min-w-[96px] mt-2.5'>{roles?.join(',')}</span>
 
       <button disabled={loadingLogout} onClick={handleSignOut} className='btn btn--secondary w-full md:max-w-[280px]'>
-        {/* Log Out */}
         {t('profile pannel.logout')}
       </button>
     </Spring>

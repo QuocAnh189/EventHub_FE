@@ -22,6 +22,8 @@ export interface SendMessageParams {
   userId: string
   conversationId: string
   content: string
+  image: any
+  audio: any
 }
 
 export interface AppSocketContextProps {
@@ -91,14 +93,16 @@ const AppSocketProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
-  const handleSendMessage = async ({ userId, conversationId, content }: SendMessageParams) => {
+  const handleSendMessage = async ({ userId, conversationId, image, audio, content }: SendMessageParams) => {
     try {
       await connection?.invoke('SendMessage', {
         userId,
         conversationId,
-        content
+        content,
+        image,
+        audio
       })
-      dispatch(updateMessagesCurrent({ userId, content, conversationId }))
+      // dispatch(updateMessagesCurrent({ userId, content, conversationId }))
     } catch (error: any) {
       console.error('Error sending message: ', error)
       toast.error(error)
