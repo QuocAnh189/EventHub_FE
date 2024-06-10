@@ -1,6 +1,9 @@
+/* eslint-disable no-redeclare */
 // assets
 import { useAppSelector } from '@hooks/useRedux'
 import { IMessageResponse } from '@type/conversation'
+import { isNullOrEmpty } from '@utils/stringBuilder'
+import { Image } from 'antd'
 import dayjs from 'dayjs'
 
 interface IMessageProps {
@@ -28,9 +31,15 @@ const Message = (props: IMessageProps) => {
           userId === message.userId ? 'chat-bubble-info' : 'chat-bubble'
         }`}
       >
-        {message.content}
+        {(() => {
+          if (!isNullOrEmpty(message.content)) return <>{message.content}</>
+          else if (!isNullOrEmpty(message.image)) {
+            return <Image src={message.image} alt='message-image' width={200} className='object-cover' />
+          }
+          return <></>
+        })()}
       </div>
-      <div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>{dayjs(new Date()).toString()}</div>
+      <div className='flex items-center gap-1 text-xs opacity-50 chat-footer'>{dayjs(new Date()).toString()}</div>
     </div>
   )
 }

@@ -70,3 +70,12 @@ export enum EUserStatus {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE'
 }
+
+export enum EFileContainer {
+  USERS = 'users',
+  EVENTS = 'events',
+  CATEGORIES = 'categories',
+  BANKS = 'banks',
+  PAYMENTS = 'payments',
+  MESSAGES = 'messages'
+}
