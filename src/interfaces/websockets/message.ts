@@ -10,9 +10,9 @@ export interface Message {
   conversationId: string
   type: EEnumMessageType
   content?: string
-  audio: any
-  imageId?: string
-  videoId?: string
+  audio?: any
+  image?: string
+  video?: string
   createdAt: Date
   updatedAt?: Date
 }

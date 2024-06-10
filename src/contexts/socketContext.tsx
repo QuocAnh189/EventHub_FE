@@ -21,9 +21,13 @@ export interface JoinChatRoomParams {
 export interface SendMessageParams {
   userId: string
   conversationId: string
-  content: string
-  image: any
-  audio: any
+  content?: string
+  imageId?: string
+  imageUrl?: string
+  videoId?: string
+  videoUrl?: string
+  audioId?: string
+  audioUrl?: string
 }
 
 export interface AppSocketContextProps {
@@ -93,14 +97,28 @@ const AppSocketProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
-  const handleSendMessage = async ({ userId, conversationId, image, audio, content }: SendMessageParams) => {
+  const handleSendMessage = async ({
+    userId,
+    conversationId,
+    content,
+    imageId,
+    imageUrl,
+    videoId,
+    videoUrl,
+    audioId,
+    audioUrl
+  }: SendMessageParams) => {
     try {
       await connection?.invoke('SendMessage', {
         userId,
         conversationId,
         content,
-        image,
-        audio
+        imageId,
+        imageUrl,
+        videoId,
+        videoUrl,
+        audioId,
+        audioUrl
       })
       // dispatch(updateMessagesCurrent({ userId, content, conversationId }))
     } catch (error: any) {

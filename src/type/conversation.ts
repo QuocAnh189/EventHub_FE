@@ -73,7 +73,12 @@ export const initParamsConversationHost = {
 
 export interface IMessageResponse {
   id?: string
-  conversationId: string
   userId: string
-  content: string
+  conversationId: string
+  content?: string
+  audio?: any
+  image?: string
+  video?: string
+  createdAt: Date
+  updatedAt?: Date
 }
