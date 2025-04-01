@@ -13,7 +13,7 @@ import ScrollToTop from '@components/ScrollToTop'
 import Bottom from '@components/Bottom'
 
 // GA
-import ReactGA from 'react-ga4'
+import ReactGA from 'react-ga4' 
 
 const MainLayout = () => {
   const { width } = useWindowSize()
